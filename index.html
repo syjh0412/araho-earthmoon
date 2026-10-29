@@ -548,6 +548,9 @@ table.sstab select{min-height:44px;padding:6px 8px;font-size:1rem}
 .ovcard.drag{cursor:grabbing;box-shadow:0 14px 34px #000c}
 .ovcard.ok{box-shadow:0 0 0 3px var(--green),0 0 24px #3fe6a655}
 .ovarrow{position:absolute;inset:0;pointer-events:none;z-index:999}
+.spin3dbox{padding:8px}
+.spinctl{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:8px}
+.spinctl>.btn-p{flex:0 0 auto;min-height:46px}
 
 </style>
 </head>
@@ -954,8 +957,8 @@ const EV_ISO="2026-11-23T19:00:00+09:00";
    act 슬라이드 = 교과서 탐구를 종이에 하기 전에 앱에서 먼저 해 보는 '도우미' (시즌 1의 반지름 그래프 그리기처럼) */
 const CH=[
 {id:"c1",cover:"trail_n",title:"별은 왜 원을 그릴까?",no:"MISSION 01",sub:"지구 자전과 일주 운동 · 244~247쪽",slides:[
- {t:"hero",log:"통신 로그 · S2-D1 · 지구 궤도 진입",h:"별은 왜 원을 그릴까?",sub:"태양계 탐사를 마친 아라호가 지구 궤도로 돌아왔다. 지상 관측소가 보내온 밤하늘 사진에 이상한 선들이 가득하다 — 별들이 계속 움직여 선을 그린 것처럼 보이는 까닭은 무엇일까? — 센터장",img:"trail_n",art:ROT_FIG},
- {t:"learn",h:"바람개비 위의 꿀벌",art:ROT_FIG,b:`<p>돌고 있는 바람개비 위의 꿀벌에게는 가만히 있는 꽃밭이 빙빙 <em>도는 것처럼</em> 보여요. 실제로 도는 건 바람개비인데 말이죠.</p><p>지구는 자전축을 중심으로 <b>하루에 한 바퀴</b>씩 일정한 속도로 회전해요. 이것이 지구의 <b>자전</b>이에요. 북극성 쪽 우주에서 내려다보면 지구는 <em>시계 반대 방향</em>(서→동)으로 돌아요.</p><div class="key"><span class="kt">한 줄 정리</span>실제로 도는 것은 <b>지구</b>(서→동), 반대로 도는 것처럼 보이는 것은 <b>하늘</b>(동→서)!</div>`},
+ {t:"hero",log:"통신 로그 · S2-D1 · 지구 궤도 진입",h:"별은 왜 원을 그릴까?",sub:"태양계 탐사를 마친 아라호가 지구 궤도로 돌아왔다. 지상 관측소가 보내온 밤하늘 사진에 이상한 선들이 가득하다 — 별들이 계속 움직여 선을 그린 것처럼 보이는 까닭은 무엇일까? — 센터장",img:"trail_n",art:"spin3d"},
+ {t:"learn",h:"바람개비 위의 꿀벌",art:"spin3d",b:`<p>돌고 있는 바람개비 위의 꿀벌에게는 가만히 있는 꽃밭이 빙빙 <em>도는 것처럼</em> 보여요. 실제로 도는 건 바람개비인데 말이죠.</p><p>지구는 자전축을 중심으로 <b>하루에 한 바퀴</b>씩 일정한 속도로 회전해요. 이것이 지구의 <b>자전</b>이에요. 북극성 쪽 우주에서 내려다보면 지구는 <em>시계 반대 방향</em>(서→동)으로 돌아요.</p><div class="key"><span class="kt">한 줄 정리</span>실제로 도는 것은 <b>지구</b>(서→동), 반대로 도는 것처럼 보이는 것은 <b>하늘</b>(동→서)!</div>`},
  {t:"learn",h:"천구와 북극성",art:DOME_FIG,b:`<p>지구에서 하늘을 보았을 때 천체가 붙어 있는 것처럼 보이는 가상의 구를 <b>천구</b>라고 해요.</p><p>지구의 자전축 방향에 있는 <b>북극성</b>이 별들이 도는 원의 중심으로 보여요.</p><p class="small">북극성은 천구 북극에 <b class="tb">가까이</b> 있지만 정확히 일치하지는 않아요.</p>`},
  {t:"act",m:"dipper",h:"북두칠성의 운동 분석하기 — 각도기 도우미",kick:"📐 교과서 탐구 244쪽",lock:"각도와 시간을 모두 구해야 다음으로 갈 수 있어요"},
  {t:"learn",h:"별의 일주 운동",img:"trail_n",cap:"<b>별의 일주 운동(북쪽 하늘)</b> — 북극성을 중심으로 한 시간에 15°씩",b:`<p>북쪽 밤하늘을 몇 시간 동안 사진으로 찍으면 별들이 북극성을 중심으로 <b>한 시간에 15°</b>씩 도는 것처럼 보여요.</p><p>이렇게 별들이 하루에 한 바퀴씩 <em>시계 반대 방향</em>으로 도는 것처럼 보이는 겉보기 운동을 <b>별의 일주 운동</b>이라고 해요.</p><p>일주 운동은 별뿐만 아니라 태양, 달 등 <em>모든 천체</em>에서 일어나요. 매일 아침 태양이 떠올라 저녁에 지는 것도 지구가 자전하기 때문이에요.</p>`},
@@ -1615,6 +1618,99 @@ ACT.fullmoon=(root,k,done)=>{
  draw(); if(S.quiz[k])done&&done();
 };
 
+/* ═══════ 3D 지구 자전 — 우주에서 보기 / 관측자 기준으로 보기 ═══════
+   직교 투영. z = 북극 방향, 태양은 +x 방향(오른쪽 멀리). 지구는 북극 위에서 볼 때 시계 반대 방향(서→동)으로 자전. */
+SCENES.spin3d=()=>`<div class="figure spin3dbox"><div class="spin3d"></div></div>`;
+const SPIN_STARS=(()=>{let seed=7;const r=()=>{seed=(seed*16807)%2147483647;return seed/2147483647;};const a=[];
+ for(let i=0;i<240;i++){const ra=r()*24,dec=Math.asin(r()*2-1)*R2D;a.push([ra,dec,r()]);}return a;})();
+const SPIN_NAMED=[["직녀성",18.62,38.78],["견우성",19.85,8.87],["베텔게우스",5.92,7.41],["시리우스",6.75,-16.72],["알데바란",4.6,16.5],["아르크투루스",14.26,19.18],["레굴루스",10.14,11.97],["스피카",13.42,-11.16]];
+function mountSpin3d(el){
+ if(el.dataset.on)return; el.dataset.on="1";
+ const st={phi:0,run:true,mode:"space",az:-18,el:20,speed:1};
+ el.innerHTML=`<canvas style="display:block;width:100%;touch-action:none;cursor:grab"></canvas>
+  <div class="spinctl"><button class="btn-p" data-a="run">⏸ 멈추기</button>
+   <div class="dirbtn" style="grid-template-columns:1fr 1fr;flex:2;margin:0"><button data-m="space" class="on">🛰️ 우주에서 보기 — 지구가 돈다</button><button data-m="obs">🧍 관측자 기준 — 하늘이 돈다</button></div>
+   <span class="small" style="flex:1 1 100%">💡 그림을 끌면 보는 각도가 바뀌어요 · 오른쪽 아래 = 관측자가 보는 남쪽 하늘</span></div>`;
+ const cv=el.querySelector("canvas"), ctx=cv.getContext("2d"); let W=0,H=0,dpr=1, off=document.createElement("canvas"), octx=off.getContext("2d");
+ const L0=127, LAT=37.4;
+ function size(){dpr=Math.min(2,window.devicePixelRatio||1); const w=cv.clientWidth||600; W=Math.round(w*dpr); H=Math.round(w*0.62*dpr); cv.width=W; cv.height=H;}
+ /* 보기 변환 */
+ function view(p){const a=st.az*D2R,e=st.el*D2R; const x1=p[0]*Math.cos(a)+p[1]*Math.sin(a), y1=-p[0]*Math.sin(a)+p[1]*Math.cos(a), z1=p[2];
+  return [x1, y1*Math.sin(e)+z1*Math.cos(e), -y1*Math.cos(e)+z1*Math.sin(e)];} /* [화면 x, 화면 y(위+), 깊이(관찰자 쪽+)] */
+ function unview(X,Y,D){const a=st.az*D2R,e=st.el*D2R; const x1=X, y1=Y*Math.sin(e)-D*Math.cos(e), z1=Y*Math.cos(e)+D*Math.sin(e);
+  return [x1*Math.cos(a)-y1*Math.sin(a), x1*Math.sin(a)+y1*Math.cos(a), z1];}
+ const surf=(lat,lon,r)=>{const la=lat*D2R,lo=lon*D2R;return [r*Math.cos(la)*Math.cos(lo),r*Math.cos(la)*Math.sin(lo),r*Math.sin(la)];};
+ /* 지구 그리기 (픽셀 단위 음영 + 위·경선 + 한반도 표시) */
+ function earthImg(Rpx,phiE,sa){const S=Math.round(Rpx*2); if(off.width!==S){off.width=S;off.height=S;} const img=octx.createImageData(S,S), d=img.data;
+  const sun=[Math.cos(sa*D2R),Math.sin(sa*D2R),0];
+  for(let j=0;j<S;j++){const Y=1-2*(j+0.5)/S; for(let i=0;i<S;i++){const X=2*(i+0.5)/S-1; const q=X*X+Y*Y; if(q>1)continue; const D=Math.sqrt(1-q);
+    const n=unview(X,Y,D); /* 세계 좌표 법선 */ const lit=n[0]*sun[0]+n[1]*sun[1]+n[2]*sun[2];
+    const lat=Math.asin(n[2])*R2D, lon=wrap360(Math.atan2(n[1],n[0])*R2D-phiE);
+    let r=40,g=110,b=210; /* 바다 */
+    const kr=Math.hypot(wrap180(lon-L0)*Math.cos(lat*D2R),lat-LAT); if(kr<9){r=80;g=200;b=110;} /* 한반도 근처 */
+    const grid=(Math.abs(((lon+15)%30)-15)<0.7)||(Math.abs(((lat+90)%30)-0)<0.7&&Math.abs(lat)<89);
+    if(Math.abs(lat)<0.8){r=255;g=210;b=110;} else if(grid){r=r*0.55+120;g=g*0.55+130;b=b*0.55+150;}
+    const sh=lit>0?0.6+0.55*lit:0.2+0.2*(1+lit); const rim=0.75+0.25*D;
+    const k=4*(j*S+i); d[k]=r*sh*rim; d[k+1]=g*sh*rim; d[k+2]=b*sh*rim; d[k+3]=255;}}
+  octx.putImageData(img,0,0); return off;}
+ function arrowArc(cx,cy,R,a0,a1,z,col,lw,dir,label,lx,ly,dash){ /* 적도면 위 원호 (세계 각 a0→a1), 앞쪽만 진하게 */
+  const pts=[]; const N=60; for(let i=0;i<=N;i++){const a=(a0+(a1-a0)*i/N)*D2R; const v=view([R*Math.cos(a),R*Math.sin(a),z]); pts.push([cx+v[0]*SC,cy-v[1]*SC,v[2]]);}
+  ctx.lineWidth=lw*dpr; ctx.strokeStyle=col; ctx.lineCap="round"; if(dash){ctx.setLineDash([10*dpr,8*dpr]);ctx.lineDashOffset=dash;}
+  ctx.beginPath(); pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1])); ctx.stroke(); ctx.setLineDash([]);
+  const p1=pts[N],p0=pts[N-3]; const an=Math.atan2(p1[1]-p0[1],p1[0]-p0[0]); const hs=14*dpr;
+  ctx.fillStyle=col; ctx.beginPath(); ctx.moveTo(p1[0]+Math.cos(an)*hs*0.6,p1[1]+Math.sin(an)*hs*0.6); ctx.lineTo(p1[0]+Math.cos(an+2.5)*hs,p1[1]+Math.sin(an+2.5)*hs); ctx.lineTo(p1[0]+Math.cos(an-2.5)*hs,p1[1]+Math.sin(an-2.5)*hs); ctx.fill();
+  if(label){ctx.font=`800 ${15*dpr}px 'Noto Sans KR',sans-serif`; ctx.textAlign="center"; ctx.fillStyle=col; ctx.fillText(label,lx,ly);}}
+ let SC=1, dashT=0;
+ function draw(){ const FRONT=wrap360(270+st.az+20); /* 관측자 기준 보기에서 관측자를 앞쪽에 세운다 */
+  const phiE=st.mode==="space"?st.phi:FRONT-L0, skyRot=st.mode==="space"?0:(FRONT-L0-st.phi), sa=st.mode==="space"?0:skyRot;
+  ctx.fillStyle="#050a1e"; ctx.fillRect(0,0,W,H);
+  const cx=W*0.36, cy=H*0.54; SC=Math.min(W*0.15,H*0.25); const Rs=2.35; /* 천구 반지름(지구=1) */
+  /* 별 (천구에 고정 — 관측자 기준이면 반대로 돈다) */
+  SPIN_STARS.forEach(([ra,dec,b])=>{const v=view(surf(dec,ra*15+skyRot,Rs)); const x=cx+v[0]*SC,y=cy-v[1]*SC; if(x<0||x>W*0.72)return;
+   ctx.fillStyle=`rgba(255,255,255,${(v[2]>0?0.85:0.35)*(0.4+0.6*b)})`; ctx.beginPath(); ctx.arc(x,y,(v[2]>0?1.8:1.1)*dpr*(0.6+b*0.7),0,7); ctx.fill();});
+  /* 천구 적도 원 + 하늘이 '도는 것처럼 보이는' 방향 */
+  dashT+=st.run?(st.mode==="space"?0.6:-1.4)*st.speed:0;
+  if(st.mode==="obs")arrowArc(cx,cy,Rs*0.98,320,200,0,"#ffb13b",4,0,"하늘이 도는 것처럼 보이는 방향 (동→서)",cx,cy+SC*1.55,dashT);
+  /* 자전축 + 북극성 */
+  const np=view([0,0,1.0]), sp=view([0,0,-1.0]), pol=view([0,0,Rs*0.86]);
+  ctx.strokeStyle="#ffd16699"; ctx.lineWidth=1.6*dpr; ctx.setLineDash([6*dpr,5*dpr]); ctx.beginPath(); ctx.moveTo(cx+sp[0]*SC*1.35,cy-sp[1]*SC*1.35); ctx.lineTo(cx+pol[0]*SC,cy-pol[1]*SC); ctx.stroke(); ctx.setLineDash([]);
+  ctx.fillStyle="#ffd166"; ctx.beginPath(); ctx.arc(cx+pol[0]*SC,cy-pol[1]*SC,6*dpr,0,7); ctx.fill(); ctx.font=`800 ${15*dpr}px 'Noto Sans KR',sans-serif`; ctx.textAlign="left"; ctx.fillText("북극성",cx+pol[0]*SC+10*dpr,cy-pol[1]*SC+5*dpr);
+  /* 뒤쪽 자전 화살표 → 지구 → 앞쪽 */
+  const img=earthImg(Math.round(SC),phiE,sa); ctx.drawImage(img,cx-SC,cy-SC,SC*2,SC*2);
+  ctx.fillStyle="#fff"; ctx.beginPath(); ctx.arc(cx+np[0]*SC,cy-np[1]*SC,3.5*dpr,0,7); ctx.fill(); if(np[2]>0){ctx.font=`700 ${12*dpr}px 'Noto Sans KR',sans-serif`; ctx.fillText("북극",cx+np[0]*SC+6*dpr,cy-np[1]*SC-4*dpr);}
+  if(st.mode==="space")arrowArc(cx,cy,1.28,250,320,0,"#3fe6a6",5,0,"지구의 자전 (서→동)",cx+SC*0.2,cy+SC*1.55,-dashT*2);
+  /* 관측자 (군포) */
+  const ob=surf(LAT,L0+phiE,1), ot=surf(LAT,L0+phiE,1.32), vb=view(ob), vt=view(ot);
+  if(vb[2]>-0.05){const bx=cx+vb[0]*SC,by=cy-vb[1]*SC,tx=cx+vt[0]*SC,ty=cy-vt[1]*SC; ctx.strokeStyle="#ffe3c9"; ctx.lineWidth=3*dpr; ctx.beginPath(); ctx.moveTo(bx,by); ctx.lineTo(tx,ty); ctx.stroke(); ctx.fillStyle="#ffe3c9"; ctx.beginPath(); ctx.arc(tx,ty,5*dpr,0,7); ctx.fill();
+   ctx.fillStyle="#ffe3c9"; ctx.font=`800 ${13*dpr}px 'Noto Sans KR',sans-serif`; ctx.textAlign="left"; ctx.fillText("관측자(군포)",tx+8*dpr,ty);}
+  /* 시각 */
+  const wl=wrap360(L0+st.phi), hr=((12+wl/15)%24); const night=Math.cos(wl*D2R)<0;
+  ctx.textAlign="left"; ctx.font=`800 ${16*dpr}px 'Noto Sans KR',sans-serif`; ctx.fillStyle="#ffe0a8"; ctx.fillText(`🕗 군포 약 ${Math.floor(hr)}시 ${night?"(밤)":"(낮)"}`,14*dpr,26*dpr);
+  ctx.font=`500 ${12.5*dpr}px 'Noto Sans KR',sans-serif`; ctx.fillStyle="#ffd166"; ctx.fillText("햇빛 →→ 오른쪽에서",14*dpr,46*dpr);
+  ctx.fillStyle="#a3adda"; ctx.fillText(st.mode==="space"?"우주에서 보면 — 별은 그대로, 지구가 돈다":"지구를 멈추고 보면 — 하늘(별)이 반대로 돈다",14*dpr,H-14*dpr);
+  /* 오른쪽: 관측자가 본 남쪽 하늘 */
+  const bx0=W*0.73, by0=H*0.08, bw=W*0.25, bh=H*0.84; ctx.fillStyle="#0b1638"; ctx.strokeStyle="#3b4a9a"; ctx.lineWidth=1.5*dpr; ctx.beginPath(); ctx.roundRect?ctx.roundRect(bx0,by0,bw,bh,14*dpr):ctx.rect(bx0,by0,bw,bh); ctx.fill(); ctx.stroke();
+  const skyBright=night?0:1; if(skyBright){ctx.fillStyle="#2a4f9a55";ctx.fillRect(bx0+2,by0+30*dpr,bw-4,bh*0.72-30*dpr);}
+  ctx.fillStyle="#e9ecff"; ctx.textAlign="center"; ctx.font=`800 ${13.5*dpr}px 'Noto Sans KR',sans-serif`; ctx.fillText("관측자가 본 남쪽 하늘",bx0+bw/2,by0+20*dpr);
+  const hy=by0+bh*0.78; ctx.strokeStyle="#3fe6a6"; ctx.beginPath(); ctx.moveTo(bx0+8*dpr,hy); ctx.lineTo(bx0+bw-8*dpr,hy); ctx.stroke(); ctx.fillStyle="#07140f"; ctx.fillRect(bx0+2,hy,bw-4,by0+bh-hy-2);
+  ctx.fillStyle="#e9ecff"; ctx.font=`800 ${14*dpr}px 'Noto Sans KR',sans-serif`; ctx.fillText("동",bx0+16*dpr,hy+22*dpr); ctx.fillText("남",bx0+bw/2,hy+22*dpr); ctx.fillText("서",bx0+bw-16*dpr,hy+22*dpr);
+  const LSTd=wrap360(L0+st.phi); /* 두 보기 모두 실제 관계는 같다 */
+  [...SPIN_NAMED.map(s=>[s[0],s[1],s[2],1]),...SPIN_STARS.slice(0,90).map(s=>["",s[0],s[1],s[2]])].forEach(([n,ra,dec,b])=>{const [alt,azm]=altaz(ra,dec,LSTd); if(alt<0||azm<90||azm>270)return;
+   const x=bx0+bw*(azm-90)/180, y=hy-(bh*0.72-34*dpr)*alt/75; if(y<by0+30*dpr)return;
+   const da=night?1:0.25; ctx.fillStyle=n?`rgba(255,244,201,${da})`:`rgba(255,255,255,${(0.4+0.5*b)*da})`; ctx.beginPath(); ctx.arc(x,y,(n?3:1.4)*dpr,0,7); ctx.fill();
+   if(n){ctx.fillStyle="#ffe0a8"; ctx.font=`700 ${11*dpr}px 'Noto Sans KR',sans-serif`; ctx.textAlign="left"; ctx.fillText(n,x+5*dpr,y-4*dpr);}});
+  ctx.strokeStyle="#ffb13b"; ctx.fillStyle="#ffb13b"; ctx.lineWidth=2.5*dpr; const ay=by0+bh*0.86+10*dpr; ctx.beginPath(); ctx.moveTo(bx0+bw*0.25,ay); ctx.lineTo(bx0+bw*0.75,ay); ctx.stroke(); ctx.beginPath(); ctx.moveTo(bx0+bw*0.75+8*dpr,ay); ctx.lineTo(bx0+bw*0.75-4*dpr,ay-6*dpr); ctx.lineTo(bx0+bw*0.75-4*dpr,ay+6*dpr); ctx.fill();
+  ctx.font=`700 ${12*dpr}px 'Noto Sans KR',sans-serif`; ctx.textAlign="center"; ctx.fillText("별은 동 → 서로",bx0+bw/2,ay+18*dpr);
+ }
+ let last=0; const loop=ts=>{ if(!document.body.contains(cv))return; if(st.run&&ts-last>33){ st.phi=wrap360(st.phi+0.9*st.speed); last=ts; draw(); } requestAnimationFrame(loop); };
+ el.querySelector('[data-a="run"]').onclick=e=>{st.run=!st.run;e.target.textContent=st.run?"⏸ 멈추기":"▶ 돌리기"; draw();};
+ el.querySelectorAll("[data-m]").forEach(b=>b.onclick=()=>{st.mode=b.dataset.m; el.querySelectorAll("[data-m]").forEach(x=>x.classList.toggle("on",x===b)); draw();});
+ let dr=null; cv.onpointerdown=e=>{dr={x:e.clientX,y:e.clientY,az:st.az,el:st.el}; try{cv.setPointerCapture(e.pointerId);}catch(_){} cv.style.cursor="grabbing";};
+ cv.onpointermove=e=>{if(!dr)return; st.az=dr.az-(e.clientX-dr.x)*0.4; st.el=clamp(dr.el+(e.clientY-dr.y)*0.3,-10,75); draw();};
+ cv.onpointerup=cv.onpointercancel=()=>{dr=null;cv.style.cursor="grab";};
+ size(); draw(); new ResizeObserver(()=>{size();draw();}).observe(cv); requestAnimationFrame(loop);
+}
+
 /* ═══════ 공통 ═══════ */
 const app=document.getElementById("app"), stage=document.getElementById("stage"), gate=document.getElementById("gate");
 let view="home", deck=null, examPage=0;
@@ -1886,6 +1982,7 @@ function renderSlide(){
    if(j===sl.a){b.classList.add("ok");stage.querySelector("#qfb").innerHTML=`<div class="fb ok"><b>🎯 정답!</b> ${esc(sl.ex)}</div>`;if(!S.quiz[k]){S.quiz[k]=1;addPts(2);}else save();unlock();}
    else{b.classList.add("no");S.tries=S.tries||{};S.tries[k]=(S.tries[k]||0)+1;stage.querySelector("#qfb").innerHTML=`<div class="fb no"><b>🛰️ 다시 생각!</b> 힌트: ${esc(sl.ex)}${S.tries[k]>=2?'<br><span class="small">🤝 헷갈리면 옆 승무원과 의논하거나 센터장을 부르세요.</span>':''}</div>`;}});}
  if(sl.t==="act"&&ACT[sl.m]){ ACT[sl.m](stage.querySelector("#act"),k,()=>{ if(sl.lock&&S.quiz[k])unlock(); }); }
+ stage.querySelectorAll(".spin3d").forEach(mountSpin3d);
  if(sl.t==="write"){const out=stage.querySelector("#wout");
    stage.querySelector("#wchk").onclick=()=>{const t=stage.querySelector("#wt").value;const r=checkWrite(t,sl.spec);out.innerHTML=fbHTML(r);
      const first=!(S.writes[sl.key]&&S.writes[sl.key].ok); S.writes[sl.key]={t,ok:r.pass||((S.writes[sl.key]||{}).ok),g:r.got+"/"+r.need,ts:Date.now()};
