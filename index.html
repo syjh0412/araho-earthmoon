@@ -959,7 +959,7 @@ const CH=[
 {id:"c1",cover:"trail_n",title:"별은 왜 원을 그릴까?",no:"MISSION 01",sub:"지구 자전과 일주 운동 · 244~247쪽",slides:[
  {t:"hero",log:"통신 로그 · S2-D1 · 지구 궤도 진입",h:"별은 왜 원을 그릴까?",sub:"태양계 탐사를 마친 아라호가 지구 궤도로 돌아왔다. 지상 관측소가 보내온 밤하늘 사진에 이상한 선들이 가득하다 — 별들이 계속 움직여 선을 그린 것처럼 보이는 까닭은 무엇일까? — 센터장",img:"trail_n",art:"spin3d"},
  {t:"learn",h:"바람개비 위의 꿀벌",art:"spin3d",b:`<p>돌고 있는 바람개비 위의 꿀벌에게는 가만히 있는 꽃밭이 빙빙 <em>도는 것처럼</em> 보여요. 실제로 도는 건 바람개비인데 말이죠.</p><p>지구는 자전축을 중심으로 <b>하루에 한 바퀴</b>씩 일정한 속도로 회전해요. 이것이 지구의 <b>자전</b>이에요. 북극성 쪽 우주에서 내려다보면 지구는 <em>시계 반대 방향</em>(서→동)으로 돌아요.</p><div class="key"><span class="kt">한 줄 정리</span>실제로 도는 것은 <b>지구</b>(서→동), 반대로 도는 것처럼 보이는 것은 <b>하늘</b>(동→서)!</div>`},
- {t:"learn",h:"천구와 북극성",art:DOME_FIG,b:`<p>지구에서 하늘을 보았을 때 천체가 붙어 있는 것처럼 보이는 가상의 구를 <b>천구</b>라고 해요.</p><p>지구의 자전축 방향에 있는 <b>북극성</b>이 별들이 도는 원의 중심으로 보여요.</p><p class="small">북극성은 천구 북극에 <b class="tb">가까이</b> 있지만 정확히 일치하지는 않아요.</p>`},
+ {t:"learn",h:"천구와 북극성",art:"dome",b:`<p>지구에서 하늘을 보았을 때 천체가 붙어 있는 것처럼 보이는 가상의 구를 <b>천구</b>라고 해요.</p><p>지구의 자전축 방향에 있는 <b>북극성</b>이 별들이 도는 원의 중심으로 보여요.</p><p class="small">북극성은 천구 북극에 <b class="tb">가까이</b> 있지만 정확히 일치하지는 않아요.</p>`},
  {t:"act",m:"dipper",h:"북두칠성의 운동 분석하기 — 각도기 도우미",kick:"📐 교과서 탐구 244쪽",lock:"각도와 시간을 모두 구해야 다음으로 갈 수 있어요"},
  {t:"learn",h:"별의 일주 운동",img:"trail_n",cap:"<b>별의 일주 운동(북쪽 하늘)</b> — 북극성을 중심으로 한 시간에 15°씩",b:`<p>북쪽 밤하늘을 몇 시간 동안 사진으로 찍으면 별들이 북극성을 중심으로 <b>한 시간에 15°</b>씩 도는 것처럼 보여요.</p><p>이렇게 별들이 하루에 한 바퀴씩 <em>시계 반대 방향</em>으로 도는 것처럼 보이는 겉보기 운동을 <b>별의 일주 운동</b>이라고 해요.</p><p>일주 운동은 별뿐만 아니라 태양, 달 등 <em>모든 천체</em>에서 일어나요. 매일 아침 태양이 떠올라 저녁에 지는 것도 지구가 자전하기 때문이에요.</p>`},
  {t:"act",m:"sky",h:"천체 관측 프로그램처럼 — 하늘 시계",kick:"🕰️ 교과서 탐구 246쪽",sky:[{t:"Stellarium으로 직접 (북쪽)",az:0,alt:35,h:18},{t:"Stellarium (남쪽)",az:180,h:18}]},
@@ -971,7 +971,7 @@ const CH=[
  {t:"write",key:"r_c1",h:"관측 보고 · 한두 문장",img:"trail_n",prompt:`<b>궁금해</b> — 밤하늘을 여러 시간 찍은 사진에 별들이 계속 움직여 선을 그린 것처럼 보이는 까닭은 무엇일까요? <b>지구의 운동</b>과 관련지어 한두 문장으로 보고하세요.`,frame:"지구가 자전축을 중심으로 <b>하루에 한 바퀴</b>씩 ___하기 때문에, 별들이 ___쪽에서 ___쪽으로 움직이는 것처럼 보이는 <b>일주 운동</b>이 사진에 선으로 찍힌다.",
   spec:{min:25,groups:[{name:"'자전'",words:["자전"]},{name:"일주 운동 또는 별이 움직이는 것처럼 보임",words:["일주","움직이는 것처럼","도는 것처럼","보이"]},{name:"하루에 한 바퀴 또는 방향(동→서)",words:["하루","한 바퀴","동쪽에서 서쪽","동에서 서"]}]},
   ai:"[관측 보고 ① 별의 일주 운동 사진] 정답 요소: (1) 지구가 자전축을 중심으로 (하루에 한 바퀴, 서→동) 자전한다 (2) 그래서 별이 (북극성을 중심으로/동→서로) 움직이는 것처럼 보이는 일주 운동이 나타난다 (3) 별이 실제로 움직인 것이 아니라 겉보기 운동이다. 상=세 요소 / 중=자전과 일주 운동은 썼으나 '겉보기' 또는 방향·주기가 없음 / 하=공전 때문이라고 쓰거나(오개념) 별이 실제로 움직인다고 씀."},
- {t:"clear",pts:["지구 자전: 자전축 중심, 하루에 한 바퀴, 서→동 (북극성 쪽에서 보면 시계 반대 방향)","천구: 천체가 붙어 있는 것처럼 보이는 가상의 구 · 북극성 = 일주 운동의 중심","별의 일주 운동: 1시간에 15°, 하루 한 바퀴, 동→서 (겉보기 운동)","동쪽 ↗ 떠오름 · 남쪽 → 동에서 서 · 서쪽 ↘ 짐 · 북쪽 ↺ 시계 반대","도는 각도는 북극성에서 가깝든 멀든 같다"]}
+ {t:"clear",vids:[0],pts:["지구 자전: 자전축 중심, 하루에 한 바퀴, 서→동 (북극성 쪽에서 보면 시계 반대 방향)","천구: 천체가 붙어 있는 것처럼 보이는 가상의 구 · 북극성 = 일주 운동의 중심","별의 일주 운동: 1시간에 15°, 하루 한 바퀴, 동→서 (겉보기 운동)","동쪽 ↗ 떠오름 · 남쪽 → 동에서 서 · 서쪽 ↘ 짐 · 북쪽 ↺ 시계 반대","도는 각도는 북극성에서 가깝든 멀든 같다"]}
 ]},
 {id:"c2",cover:"stars",title:"계절마다 바뀌는 밤하늘",no:"MISSION 02",sub:"지구 공전과 별자리 변화 · 248~251쪽",slides:[
  {t:"hero",log:"통신 로그 · S2-D30 · 고대 이집트 기록 판독",h:"시리우스와 태양이 함께 뜨는 날",sub:"고대 이집트 사람들은 일 년에 한 번, 새벽에 시리우스가 태양과 함께 떠오르면 곧 나일강이 범람한다는 것을 알았다. 왜 하필 일 년에 한 번일까? 지구가 일 년 동안 하는 일을 밝혀라. — 센터장",scene:"orbitMini"},
@@ -987,7 +987,7 @@ const CH=[
  {t:"write",key:"r_c2",h:"관측 보고 · 한두 문장",img:"stars",prompt:`지구에서 관측할 때 별자리가 <b>1년을 주기로</b> 변하는 까닭은 무엇일까요? 한두 문장으로 보고하세요.`,frame:"지구가 태양 주위를 <b>1년</b>에 한 바퀴씩 ___하면서 태양이 보이는 위치가 달라지고, 태양 ___쪽 별자리도 달라지기 때문이다.",
   spec:{min:25,groups:[{name:"'공전'",words:["공전"]},{name:"1년(일 년)",words:["1년","일 년","일년","한 해"]},{name:"태양의 위치 또는 태양 반대쪽 별자리",words:["반대","태양이 보이는","태양의 위치","태양 위치"]}]},
   ai:"[관측 보고 ② 별자리의 1년 주기] 정답 요소: (1) 지구가 태양 주위를 1년에 한 바퀴 공전한다 (2) 그래서 태양이 보이는 위치(별자리 사이의 위치)가 달라진다 (3) 태양 반대쪽(한밤중에 보이는) 별자리도 달라져 1년 주기로 변한다. 상=세 요소 / 중=공전과 1년은 썼으나 태양 위치·반대쪽 연결이 없음 / 하=자전 때문이라고 쓰거나(오개념) 공전 언급 없음."},
- {t:"clear",pts:["지구 공전: 태양 중심, 1년에 한 바퀴, 서→동","투명 종이: 태양 기준 → 별자리 동→서 / 별자리 기준 → 태양 서→동","태양의 연주 운동: 별자리 사이를 서→동, 1년 후 제자리 (우주에서 보면 시계 반대 방향)","황도 · 황도 12궁 — 태양 쪽 별자리는 볼 수 없고, 태양 반대쪽 별자리가 한밤중 남쪽 하늘에","3월: 태양 쪽 물병자리, 한밤중 사자자리 / 9월: 태양 쪽 사자자리, 한밤중 물병자리"]}
+ {t:"clear",vids:[1],pts:["지구 공전: 태양 중심, 1년에 한 바퀴, 서→동","투명 종이: 태양 기준 → 별자리 동→서 / 별자리 기준 → 태양 서→동","태양의 연주 운동: 별자리 사이를 서→동, 1년 후 제자리 (우주에서 보면 시계 반대 방향)","황도 · 황도 12궁 — 태양 쪽 별자리는 볼 수 없고, 태양 반대쪽 별자리가 한밤중 남쪽 하늘에","3월: 태양 쪽 물병자리, 한밤중 사자자리 / 9월: 태양 쪽 사자자리, 한밤중 물병자리"]}
 ]},
 {id:"c3",cover:"cov_moon",title:"달은 변신하지 않는다",no:"MISSION 03",sub:"달의 위상 변화 · 252~255쪽",slides:[
  {t:"hero",log:"통신 로그 · S2-D45 · 달 궤도 접근",h:"달은 변신하지 않는다",sub:"별이 달을 부러워했다. \"넌 초승달, 반달, 보름달로 모양을 바꿀 수 있잖아.\" 달이 대답했다. \"내가 변신하는 게 아니야. 나를 어디서 보느냐에 따라 다르게 보이는 것뿐이야!\" — 무슨 뜻인지 증명하라. — 센터장",scene:"moonHero"},
@@ -1003,7 +1003,7 @@ const CH=[
  {t:"write",key:"r_c3",h:"관측 보고 · 한두 문장",img:"cov_moon",prompt:`"내가 변신하는 게 아니야." — 달의 위상이 <b>약 한 달 주기</b>로 반복되는 까닭을 태양·지구·달의 위치와 관련지어 한두 문장으로 보고하세요.`,frame:"달이 지구 주위를 약 <b>한 달</b>에 한 바퀴씩 ___하면서 태양, 지구, 달의 상대적 ___가 달라지고, 지구에서 볼 때 ___이/가 비치는 부분이 달라지기 때문이다.",
   spec:{min:25,groups:[{name:"달의 '공전'",words:["공전"]},{name:"태양·지구·달의 위치(배열)",words:["위치","배열"]},{name:"햇빛이 비치는(밝은) 부분",words:["햇빛","밝은","비치"]}]},
   ai:"[관측 보고 ③ 위상 변화의 주기] 정답 요소: (1) 달이 지구 주위를 약 한 달에 한 바퀴 공전한다 (2) 태양·지구·달의 상대적 위치가 달라진다 (3) 지구에서 볼 때 햇빛이 비치는(밝게 보이는) 부분이 달라져 모양이 변한다 / 달은 스스로 빛을 내지 못하고 햇빛을 반사한다. 상=세 요소 / 중=두 요소 / 하=지구 그림자가 달을 가려서라고 씀(월식과 혼동하는 대표 오개념 — 반드시 먼저 짚을 것) 또는 달이 스스로 빛난다고 씀."},
- {t:"clear",pts:["달은 햇빛을 반사 — 공전하면서 햇빛이 비치는 부분이 달라져 보인다","북극 하늘에서 보면 달은 지구 주위를 시계 반대 방향으로, 약 한 달 주기로 공전","삭(1일경) → 초승달 → 상현(7~8일경, 오른쪽이 둥근 반달) → 망(15일경) → 하현(22~23일경, 왼쪽이 둥근 반달) → 그믐달","지구에서 보이는 반쪽 ∩ 햇빛 받는 반쪽 = 우리가 보는 밝은 부분","다누리에서 보면 지구도 위상이 변한다"]}
+ {t:"clear",vids:[2],pts:["달은 햇빛을 반사 — 공전하면서 햇빛이 비치는 부분이 달라져 보인다","북극 하늘에서 보면 달은 지구 주위를 시계 반대 방향으로, 약 한 달 주기로 공전","삭(1일경) → 초승달 → 상현(7~8일경, 오른쪽이 둥근 반달) → 망(15일경) → 하현(22~23일경, 왼쪽이 둥근 반달) → 그믐달","지구에서 보이는 반쪽 ∩ 햇빛 받는 반쪽 = 우리가 보는 밝은 부분","다누리에서 보면 지구도 위상이 변한다"]}
 ]},
 {id:"c4",cover:"cov_ecl",title:"가려지는 태양, 그림자 속의 달",no:"MISSION 04",sub:"일식과 월식 · 256~259쪽",slides:[
  {t:"hero",log:"통신 로그 · S2-D60 · 숨바꼭질 작전",h:"가려지거나, 그림자 속에 숨거나",sub:"숨바꼭질 — 한 아이는 소파 뒤에 숨고(가려짐), 한 아이는 깜깜한 곳에 숨었다(그림자 속). 하늘에서도 똑같은 일이 벌어진다. 태양이 가려지는 날과, 달이 그림자 속에 숨는 밤 — 둘의 정체를 밝혀라. — 센터장",scene:"eclHero"},
@@ -1019,7 +1019,7 @@ const CH=[
  {t:"write",key:"r_c4",h:"관측 보고 · 한두 문장",img:"cov_ecl",prompt:`<b>사고력</b> — 만약 지구에 <b>대기가 없다면</b> 개기 월식 때 달은 어떻게 보일까요? 까닭과 함께 한두 문장으로 보고하세요.`,frame:"지구에 대기가 없다면 지구 그림자 속으로 ___색 빛이 비치지 않으므로, 개기 월식 때 달은 붉게 보이지 않고 ___.",
   spec:{min:25,groups:[{name:"달이 (거의) 보이지 않음 / 검게 보임",words:["보이지","안 보","검","어둡","까맣","사라"]},{name:"'대기'",words:["대기"]},{name:"붉은 빛이 달에 닿지 못함",words:["붉은","빛"]}]},
   ai:"[관측 보고 ④ 대기가 없다면] 정답 요소: (1) 개기 월식 때 달이 붉게 보이는 것은 지구 대기 때문에 햇빛의 붉은색 빛이 달에 비치기 때문이다 (2) 대기가 없다면 지구 그림자 속의 달에 빛이 비치지 않는다 (3) 그래서 달이 (거의) 보이지 않거나 검게 보일 것이다. 상=세 요소 / 중=결과(보이지 않음)는 맞으나 까닭이 약함 / 하=더 밝아진다, 그대로 붉다 등 틀린 결과. 굴절·산란 같은 고등 용어는 요구하지 말 것."},
- {t:"clear",pts:["일식: 달이 태양을 가림 · 태양–달–지구 · 삭 · 개기 일식/부분 일식","월식: 달이 지구 그림자 속으로 · 태양–지구–달 · 망 · 부분 월식/개기 월식(붉은 달)","달은 하늘에서 서→동(오른쪽→왼쪽)으로 옮겨 간다 → 일식은 태양의 오른쪽부터, 월식은 달의 왼쪽부터","붉은 달: 지구 대기 때문에 붉은색 빛만 달에 비친다","위상 변화(타원 경계·매일) ≠ 부분 월식(둥근 그림자·망일 때만)"]}
+ {t:"clear",vids:[3],pts:["일식: 달이 태양을 가림 · 태양–달–지구 · 삭 · 개기 일식/부분 일식","월식: 달이 지구 그림자 속으로 · 태양–지구–달 · 망 · 부분 월식/개기 월식(붉은 달)","달은 하늘에서 서→동(오른쪽→왼쪽)으로 옮겨 간다 → 일식은 태양의 오른쪽부터, 월식은 달의 왼쪽부터","붉은 달: 지구 대기 때문에 붉은색 빛만 달에 비친다","위상 변화(타원 경계·매일) ≠ 부분 월식(둥근 그림자·망일 때만)"]}
 ]},
 {id:"c5",cover:"telescope_girl",title:"고천 천체관측의 밤",no:"BONUS",sub:"11월 23일 관측 행사 대비 · 6분",slides:[
  {t:"hero",log:"통신 로그 · 지상 관제 · 특별 임무",h:"고천 천체관측의 밤",sub:"11월 23일 저녁, 운동장에 망원경이 선다. 그날 밤 하늘에 무엇이 어디쯤 떠 있을지 오늘 배운 것으로 먼저 예보하라. — 센터장",img:"telescope_girl"},
@@ -1711,6 +1711,56 @@ function mountSpin3d(el){
  size(); draw(); new ResizeObserver(()=>{size();draw();}).observe(cv); requestAnimationFrame(loop);
 }
 
+/* ═══════ 천구 위 일주 운동 (교과서 그림 9처럼) ═══════
+   관측자 기준 지평 좌표: N(북), E(동), U(위). 화면: 오른쪽 = 북, 앞(아래) = 동, 뒤(위) = 서.
+   별은 천구에 그린 일주권(보라 점선) 위를 동→서로 움직인다. */
+SCENES.dome=()=>`<div class="figure"><div class="domeanim"></div><p class="figcap">천구 — 별들은 거대한 구의 안쪽에 붙어 있는 것처럼 보이고, 그 중심에 관측자(지구)가 있다. 보라색 점선 = 별이 하루 동안 천구 위에 그리는 길(일주 운동)</p></div>`;
+function mountDome(el){
+ if(el.dataset.on)return; el.dataset.on="1";
+ const W=520,H=380,cx=260,cy=262,R=215,EL=28*D2R,AZ=55*D2R,PHI=37.4*D2R;
+ const st={h:0,run:true};
+ const P=[Math.cos(PHI),0,Math.sin(PHI)], M=[-Math.sin(PHI),0,Math.cos(PHI)], Wd=[0,-1,0];
+ const vec=(dec,H)=>{const c=Math.cos(dec*D2R),s=Math.sin(dec*D2R),ch=Math.cos(H*D2R),sh=Math.sin(H*D2R);
+  return [c*ch*M[0]+c*sh*Wd[0]+s*P[0], c*ch*M[1]+c*sh*Wd[1]+s*P[1], c*ch*M[2]+c*sh*Wd[2]+s*P[2]];};
+ const scr=v=>{const x=v[0]*Math.cos(AZ)+v[1]*Math.sin(AZ), dp=-v[0]*Math.sin(AZ)+v[1]*Math.cos(AZ); return [cx+R*x, cy-R*(v[2]*Math.cos(EL)-dp*Math.sin(EL)), dp];}; /* 카메라: 동남동 쪽 위에서 */
+ const DECS=[70,50,25,0,-20];
+ const STARS=[[70,40],[70,160],[70,280],[50,0],[50,120],[50,240],[25,30],[25,150],[25,270],[0,60],[0,180],[0,300],[-20,10],[-20,130],[-20,250]];
+ el.innerHTML=`<div class="domesvg"></div><div style="display:flex;gap:8px;align-items:center;margin-top:6px;flex-wrap:wrap"><button class="btn-s" data-a="run" style="min-height:40px">⏸ 멈추기</button><span class="small">별은 점선을 따라 <b style="color:var(--sun)">동 → 서</b>로 · 북극성 둘레에서는 <b style="color:var(--sun)">시계 반대 방향</b></span></div>`;
+ const box=el.querySelector(".domesvg");
+ function path(dec,front){ /* front=true: 앞쪽(동쪽 반구) 부분만, false: 뒤쪽 */
+  let d="",pen=false; for(let H=0;H<=360;H+=3){const v=vec(dec,H); const ok=v[2]>=-0.002&&((scr(v)[2]>=0)===front); const p=scr(v);
+   if(ok){d+=(pen?"L":"M")+p[0].toFixed(1)+" "+p[1].toFixed(1);pen=true;}else pen=false;} return d;}
+ const backPaths=DECS.map(d=>path(d,false)).join(""), frontPaths=DECS.map(d=>path(d,true)).join("");
+ const pol=scr(P);
+ function arrowAt(dec,H){const a=scr(vec(dec,H)),b=scr(vec(dec,H+6));const an=Math.atan2(b[1]-a[1],b[0]-a[0]);
+  return `<path d="M${(b[0]+Math.cos(an)*7).toFixed(1)} ${(b[1]+Math.sin(an)*7).toFixed(1)} L${(b[0]+Math.cos(an+2.5)*9).toFixed(1)} ${(b[1]+Math.sin(an+2.5)*9).toFixed(1)} L${(b[0]+Math.cos(an-2.5)*9).toFixed(1)} ${(b[1]+Math.sin(an-2.5)*9).toFixed(1)}Z" fill="#c9bfff"/>`;}
+ function draw(){
+  let g=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;display:block">
+  <defs><radialGradient id="dmG2" cx=".5" cy="1"><stop offset="0" stop-color="#1b2a6e"/><stop offset="1" stop-color="#080c24"/></radialGradient></defs>
+  <path d="M${cx-R} ${cy} A${R} ${R} 0 0 1 ${cx+R} ${cy} Z" fill="url(#dmG2)"/>
+  <path d="${backPaths}" fill="none" stroke="#a497ff" stroke-width="1.6" stroke-dasharray="3 5" opacity=".55"/>
+  <ellipse cx="${cx}" cy="${cy}" rx="${R}" ry="${(R*Math.sin(EL)).toFixed(1)}" fill="#0f2a1e" fill-opacity=".9" stroke="#3fe6a6" stroke-width="1.5"/>
+  <line x1="${cx}" y1="${cy}" x2="${pol[0].toFixed(1)}" y2="${pol[1].toFixed(1)}" stroke="#ffd166" stroke-width="1.5" stroke-dasharray="5 4"/>`;
+  /* 별 — 뒤쪽 */
+  const stars=STARS.map(([d,h0])=>{const v=vec(d,h0+st.h);return [v,scr(v)];});
+  stars.forEach(([v,p])=>{if(v[2]>0&&p[2]<0)g+=`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="3.2" fill="#fff" opacity=".75"/>`;});
+  g+=`<path d="M${cx-R} ${cy} A${R} ${R} 0 0 1 ${cx+R} ${cy}" fill="none" stroke="#5fe3ff" stroke-width="1.5"/>
+  <path d="${frontPaths}" fill="none" stroke="#a497ff" stroke-width="2" stroke-dasharray="4 5"/>
+  ${arrowAt(0,-12)}${arrowAt(25,-30)}${arrowAt(50,-60)}${arrowAt(70,-80)}`;
+  stars.forEach(([v,p])=>{if(v[2]>0&&p[2]>=0)g+=`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="4" fill="#fff"/><circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="8" fill="#fff" opacity=".18"/>`;});
+  g+=`<circle cx="${pol[0].toFixed(1)}" cy="${pol[1].toFixed(1)}" r="6" fill="#ffd166"/><text x="${(pol[0]+10).toFixed(1)}" y="${(pol[1]-10).toFixed(1)}" fill="#ffd166" font-size="15" font-weight="800">북극성</text>
+  <g transform="translate(${cx} ${cy-6})"><circle cy="-14" r="5" fill="#ffe3c9"/><path d="M0 -9 v12 M-6 -3 h12 M0 3 l-5 8 M0 3 l5 8" stroke="#ffe3c9" stroke-width="2.4" stroke-linecap="round"/></g>
+  ${[["남",[-1,0,0],1],["북",[1,0,0],1],["동",[0,1,0],1],["서",[0,-1,0],0]].map(([n,v,big])=>{const q=scr(v);const dx=(q[0]-cx),dy=(q[1]-cy),L=Math.hypot(dx,dy)||1;return `<text x="${(q[0]+dx/L*20).toFixed(1)}" y="${(q[1]+dy/L*20+6).toFixed(1)}" fill="${big?'#e9ecff':'#a3adda'}" font-size="${big?16:14}" font-weight="800" text-anchor="middle">${n}</text>`;}).join("")}
+  <text x="14" y="24" fill="#5fe3ff" font-size="15">천구 (가상의 둥근 하늘)</text><text x="${cx+14}" y="${cy+16}" fill="#3fe6a6" font-size="12.5">관측자 (천구의 중심 = 지구)</text></svg>`;
+  box.innerHTML=g;}
+ let last=0; const loop=ts=>{if(!document.body.contains(el))return; if(st.run&&ts-last>40){st.h=(st.h+0.6)%360;last=ts;draw();} requestAnimationFrame(loop);};
+ el.querySelector('[data-a="run"]').onclick=e=>{st.run=!st.run;e.target.textContent=st.run?"⏸ 멈추기":"▶ 움직이기";};
+ draw(); requestAnimationFrame(loop);
+}
+/* 미션 끝 영상 (센터장 영상) */
+const VIDEOS=[["0OYaerQtJnk","센터장 영상 · 별의 일주 운동"],["qLPMj7bCy00","센터장 영상 · 태양의 연주 운동"],["WGtBExfq1sc","센터장 영상 · 달의 위상 변화"],["QP17Yp09QrE","센터장 영상 · 일식과 월식"]];
+const videoBlock=(ids)=>`<div class="figs c${ids.length}">${ids.map(i=>`<div><div class="vid"><iframe src="https://www.youtube.com/embed/${VIDEOS[i][0]}?rel=0" title="${VIDEOS[i][1]}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div><p class="figcap">${VIDEOS[i][1]}</p></div>`).join("")}</div>`;
+
 /* ═══════ 공통 ═══════ */
 const app=document.getElementById("app"), stage=document.getElementById("stage"), gate=document.getElementById("gate");
 let view="home", deck=null, examPage=0;
@@ -1982,7 +2032,7 @@ function renderSlide(){
    if(j===sl.a){b.classList.add("ok");stage.querySelector("#qfb").innerHTML=`<div class="fb ok"><b>🎯 정답!</b> ${esc(sl.ex)}</div>`;if(!S.quiz[k]){S.quiz[k]=1;addPts(2);}else save();unlock();}
    else{b.classList.add("no");S.tries=S.tries||{};S.tries[k]=(S.tries[k]||0)+1;stage.querySelector("#qfb").innerHTML=`<div class="fb no"><b>🛰️ 다시 생각!</b> 힌트: ${esc(sl.ex)}${S.tries[k]>=2?'<br><span class="small">🤝 헷갈리면 옆 승무원과 의논하거나 센터장을 부르세요.</span>':''}</div>`;}});}
  if(sl.t==="act"&&ACT[sl.m]){ ACT[sl.m](stage.querySelector("#act"),k,()=>{ if(sl.lock&&S.quiz[k])unlock(); }); }
- stage.querySelectorAll(".spin3d").forEach(mountSpin3d);
+ stage.querySelectorAll(".spin3d").forEach(mountSpin3d); stage.querySelectorAll(".domeanim").forEach(mountDome);
  if(sl.t==="write"){const out=stage.querySelector("#wout");
    stage.querySelector("#wchk").onclick=()=>{const t=stage.querySelector("#wt").value;const r=checkWrite(t,sl.spec);out.innerHTML=fbHTML(r);
      const first=!(S.writes[sl.key]&&S.writes[sl.key].ok); S.writes[sl.key]={t,ok:r.pass||((S.writes[sl.key]||{}).ok),g:r.got+"/"+r.need,ts:Date.now()};
