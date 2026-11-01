@@ -584,6 +584,9 @@ const SCHOOL_EN = 'GOCHEON';            // 첫 화면 영문 표기 (예: 'GOCHE
 /* ③ 참관(공개수업) — 참관 선생님이 둘러볼 수 있는 반. 쓰기·저장은 안 되고 보기만. 끄려면 [] */
 const GUEST_CLS = [];   // 시즌 2는 기본으로 끔. 예: ['1']
 const SCHOOL_STORY = '고천(古川), 오래된 냇물은 흘러 바다에 닿는다 — 그리고 별들의 바다, 우주로. ';  // 첫 화면 이야기(학교 이름 풀이). 비워 둬도 된다.
+/* ④ 관측 장소 — 하늘 시계·3D 지구에 나오는 이름. 위도·경도는 아래 OBS_LAT, OBS_LON (기본: 군포) */
+const PLACE = '군포';
+const SCHOOL_TAG = SCHOOL && SCHOOL!=='우리' ? SCHOOL+' ' : '';   // 보너스 미션 제목 앞에 붙는 학교 이름
 
 /* ───────── 서버 통신 (힘탐정과 같은 방식: 읽기 JSONP, 쓰기 POST) ───────── */
 let seq=0;
@@ -950,7 +953,7 @@ const MOONP_N=["삭","초승달","상현달","상현망간의 달","보름달(�
 function skyAt(o){const p=n=>String(n).padStart(2,"0");const d=o.date||new Date();
  const ds=o.iso||`${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}T${p(o.h==null?21:o.h)}:00:00+09:00`;
  return "https://stellarium-web.org/"+(o.src?"skysource/"+o.src:"")+`?fov=${o.fov||100}&lat=${OBS_LAT}&lng=${OBS_LON}&date=${encodeURIComponent(ds)}`+(o.src?"":`&az=${o.az||180}&alt=${o.alt==null?25:o.alt}`);}
-const skyLinks=(arr,note)=>`<div class="skybar"><span class="skyh">🔭 하늘에서 직접 보기</span>${arr.map(x=>`<a class="skybtn" href="${skyAt(x)}" target="_blank" rel="noopener">${x.t} ↗</a>`).join("")}<span class="small skyn">${note||"Stellarium Web · 군포 하늘 · 안 보이면 ‘땅’ 끄기"}</span></div>`;
+const skyLinks=(arr,note)=>`<div class="skybar"><span class="skyh">🔭 하늘에서 직접 보기</span>${arr.map(x=>`<a class="skybtn" href="${skyAt(x)}" target="_blank" rel="noopener">${x.t} ↗</a>`).join("")}<span class="small skyn">${note||`Stellarium Web · ${PLACE} 하늘 · 안 보이면 ‘땅’ 끄기`}</span></div>`;
 const EV_ISO="2026-11-23T19:00:00+09:00";
 
 /* ═══════ 학습 콘텐츠 (시즌 2 · 천재교육(정) 중학 과학1 Ⅶ-2 「지구와 달의 운동」 242~262쪽 기준) ═══════
@@ -1021,8 +1024,8 @@ const CH=[
   ai:"[관측 보고 ④ 대기가 없다면] 정답 요소: (1) 개기 월식 때 달이 붉게 보이는 것은 지구 대기 때문에 햇빛의 붉은색 빛이 달에 비치기 때문이다 (2) 대기가 없다면 지구 그림자 속의 달에 빛이 비치지 않는다 (3) 그래서 달이 (거의) 보이지 않거나 검게 보일 것이다. 상=세 요소 / 중=결과(보이지 않음)는 맞으나 까닭이 약함 / 하=더 밝아진다, 그대로 붉다 등 틀린 결과. 굴절·산란 같은 고등 용어는 요구하지 말 것."},
  {t:"clear",vids:[3],pts:["일식: 달이 태양을 가림 · 태양–달–지구 · 삭 · 개기 일식/부분 일식","월식: 달이 지구 그림자 속으로 · 태양–지구–달 · 망 · 부분 월식/개기 월식(붉은 달)","달은 하늘에서 서→동(오른쪽→왼쪽)으로 옮겨 간다 → 일식은 태양의 오른쪽부터, 월식은 달의 왼쪽부터","붉은 달: 지구 대기 때문에 붉은색 빛만 달에 비친다","위상 변화(타원 경계·매일) ≠ 부분 월식(둥근 그림자·망일 때만)"]}
 ]},
-{id:"c5",cover:"telescope_girl",title:"고천 천체관측의 밤",no:"BONUS",sub:"11월 23일 관측 행사 대비 · 6분",slides:[
- {t:"hero",log:"통신 로그 · 지상 관제 · 특별 임무",h:"고천 천체관측의 밤",sub:"11월 23일 저녁, 운동장에 망원경이 선다. 그날 밤 하늘에 무엇이 어디쯤 떠 있을지 오늘 배운 것으로 먼저 예보하라. — 센터장",img:"telescope_girl"},
+{id:"c5",cover:"telescope_girl",title:SCHOOL_TAG+"천체관측의 밤",no:"BONUS",sub:"11월 23일 관측 행사 대비 · 6분",slides:[
+ {t:"hero",log:"통신 로그 · 지상 관제 · 특별 임무",h:SCHOOL_TAG+"천체관측의 밤",sub:"11월 23일 저녁, 운동장에 망원경이 선다. 그날 밤 하늘에 무엇이 어디쯤 떠 있을지 오늘 배운 것으로 먼저 예보하라. — 센터장",img:"telescope_girl"},
  {t:"quiz",q:"2026년 <b>11월 9일</b>이 삭이었다면, <b>11월 23일</b> 저녁(약 14일 뒤)의 달은?",o:["초승달","상현달","거의 보름달","그믐달"],a:2,ex:"삭(음력 1일경)에서 약 7일 뒤 상현, 약 14일 뒤 망. 14일 뒤면 거의 보름달! (가장 둥근 때는 24일 밤)"},
  {t:"learn",h:"11월 23일 밤하늘 예보",sky:[{t:"그날 19시 동쪽 하늘 (달)",iso:EV_ISO,az:95,alt:30},{t:"그날 19시 남쪽 하늘 (토성)",iso:EV_ISO,az:160,alt:40},{t:"그날 19시 북쪽 하늘",iso:EV_ISO,az:0,alt:35}],art:"evMoon",b:`<ul><li>해 지는 시각 약 <b>17시 20분</b></li><li><b>달</b> — 거의 보름달. 해 질 무렵 이미 <em>동쪽</em> 하늘에 떠 있고, 18시 높이 약 23° → 20시 30분 약 52°로 올라간다</li><li><b>토성</b> — 남동쪽에서 남쪽 하늘로, 20시 무렵 높이 약 50°. 망원경으로 고리를 볼 기회!</li><li>목성은 밤 11시 반이 넘어야 떠요 — 행사 시간엔 못 봐요</li></ul><p class="small">※ 아라호 관제센터가 천문 계산으로 낸 값이에요. 행사 전에 한국천문연구원이나 Stellarium으로 한 번 더 확인하세요.</p>`},
  {t:"learn",h:"관측 팁 — 보름달 밤의 작전",img:"telescope_girl",cap:"어둡고 사방이 트인 곳에서, 선생님과 함께",b:`<ul><li>보름달은 아주 밝아서 희미한 별은 잘 안 보여요. 대신 <b>달</b>과 <b>토성</b>이 주인공!</li><li>망원경으로 달의 밝고 울퉁불퉁한 <em>고지</em>, 어둡고 평평한 <em>바다</em>, <em>운석 충돌구</em>를 찾아보세요 (7-1 천체 관측).</li><li>북쪽의 <em>북극성</em>을 찾고, 행사 동안 별이 시계 반대 방향으로 도는지 확인 (MISSION 01).</li><li><b>관측 일지</b>: 관측 일시 · 장소 · 대상 · 스케치 · 특징. 달이 시간이 지날수록 어느 쪽으로 옮겨 가는지도 적어 보세요.</li></ul>`},
@@ -1128,7 +1131,7 @@ ACT.sky=(root,k,done)=>{
    <label class="small" style="display:flex;gap:6px;align-items:center;margin-top:8px"><input type="checkbox" id="skL" checked style="width:20px;height:20px"> 별자리 선·이름 보기</label>
    <div class="skyread" id="skRd"></div>
    <div class="skyglobe" id="skG"></div>
-  </div></div><p class="figcap">2026년 11월 23일(관측 행사 날) 군포의 하늘을 계산해 그렸어요 · 방향을 바꿔 가며 <b>시간 흐르게</b>와 <b>궤적 남기기</b>를 눌러 보세요</p>`;
+  </div></div><p class="figcap">2026년 11월 23일(관측 행사 날) ${PLACE}의 하늘을 계산해 그렸어요 · 방향을 바꿔 가며 <b>시간 흐르게</b>와 <b>궤적 남기기</b>를 눌러 보세요</p>`;
  const cv=root.querySelector("canvas"), ctx=cv.getContext("2d"); let W=0,H=0,dpr=1;
  const ALL=[...STARS_NAMED.map((s,i)=>({n:s[0],ra:s[1],dec:s[2],m:s[3],id:i})),...STARS_FIELD.map(s=>({n:"",ra:s[1],dec:s[2],m:s[3]}))];
  const fmt=t=>{let h=Math.floor(t/60)%24,m=t%60;const ap=h<12?"오전":"오후";const hh=h%12===0?12:h%12;return `${ap} ${hh}:${String(m).padStart(2,"0")}`;};
@@ -1186,7 +1189,7 @@ ACT.sky=(root,k,done)=>{
    <path d="M 102 78 A 46 46 0 0 1 78 102" fill="none" stroke="#3fe6a6" stroke-width="3" marker-end="url(#sgA)"/>
    <circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="6" fill="#ffb13b" stroke="#fff" stroke-width="2"/>
    ${[0,1,2].map(i=>`<line x1="216" y1="${36+i*24}" x2="176" y2="${36+i*24}" stroke="#ffd166" stroke-width="2"/>`).join("")}<text x="214" y="22" text-anchor="end" font-size="11" fill="#ffd166">햇빛</text>
-   <text x="118" y="112" font-size="11" fill="#3fe6a6">지구 자전 (서→동)</text><text x="4" y="12" font-size="11" fill="#a3adda">우주에서 본 지구 · ● 군포</text></svg>`;}
+   <text x="118" y="112" font-size="11" fill="#3fe6a6">지구 자전 (서→동)</text><text x="4" y="12" font-size="11" fill="#a3adda">우주에서 본 지구 · ● ${PLACE}</text></svg>`;}
  const R=root.querySelector("#skR");
  const setDir=a=>{ST.dir=a;S.skyDir=a;root.querySelectorAll(".dirbtn button").forEach(b=>b.classList.toggle("on",+b.dataset.az===a));draw();};
  root.querySelectorAll(".dirbtn button").forEach(b=>b.onclick=()=>setDir(+b.dataset.az));
@@ -1682,10 +1685,10 @@ function mountSpin3d(el){
   /* 관측자 (군포) */
   const ob=surf(LAT,L0+phiE,1), ot=surf(LAT,L0+phiE,1.32), vb=view(ob), vt=view(ot);
   if(vb[2]>-0.05){const bx=cx+vb[0]*SC,by=cy-vb[1]*SC,tx=cx+vt[0]*SC,ty=cy-vt[1]*SC; ctx.strokeStyle="#ffe3c9"; ctx.lineWidth=3*dpr; ctx.beginPath(); ctx.moveTo(bx,by); ctx.lineTo(tx,ty); ctx.stroke(); ctx.fillStyle="#ffe3c9"; ctx.beginPath(); ctx.arc(tx,ty,5*dpr,0,7); ctx.fill();
-   ctx.fillStyle="#ffe3c9"; ctx.font=`800 ${13*dpr}px 'Noto Sans KR',sans-serif`; ctx.textAlign="left"; ctx.fillText("관측자(군포)",tx+8*dpr,ty);}
+   ctx.fillStyle="#ffe3c9"; ctx.font=`800 ${13*dpr}px 'Noto Sans KR',sans-serif`; ctx.textAlign="left"; ctx.fillText(`관측자(${PLACE})`,tx+8*dpr,ty);}
   /* 시각 */
   const wl=wrap360(L0+st.phi), hr=((12+wl/15)%24); const night=Math.cos(wl*D2R)<0;
-  ctx.textAlign="left"; ctx.font=`800 ${16*dpr}px 'Noto Sans KR',sans-serif`; ctx.fillStyle="#ffe0a8"; ctx.fillText(`🕗 군포 약 ${Math.floor(hr)}시 ${night?"(밤)":"(낮)"}`,14*dpr,26*dpr);
+  ctx.textAlign="left"; ctx.font=`800 ${16*dpr}px 'Noto Sans KR',sans-serif`; ctx.fillStyle="#ffe0a8"; ctx.fillText(`🕗 ${PLACE} 약 ${Math.floor(hr)}시 ${night?"(밤)":"(낮)"}`,14*dpr,26*dpr);
   ctx.font=`500 ${12.5*dpr}px 'Noto Sans KR',sans-serif`; ctx.fillStyle="#ffd166"; ctx.fillText("햇빛 →→ 오른쪽에서",14*dpr,46*dpr);
   ctx.fillStyle="#a3adda"; ctx.fillText(st.mode==="space"?"우주에서 보면 — 별은 그대로, 지구가 돈다":"지구를 멈추고 보면 — 하늘(별)이 반대로 돈다",14*dpr,H-14*dpr);
   /* 오른쪽: 관측자가 본 남쪽 하늘 */

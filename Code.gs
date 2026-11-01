@@ -121,15 +121,23 @@ function findRow(s, k){
 /* ───────── 명단(학생 명부) ─────────
    시트 아무 탭이든 첫 3줄 안에 '반' '번호' '이름' 머리글이 있으면 명단으로 인식합니다.
    '콜사인' 열이 없으면 자동으로 만들어 학생이 처음 입장할 때 정한 콜사인(비밀번호)을 저장합니다. */
+/* 앱이 스스로 만드는 탭(학생·기록·교신·응답·쿠폰·설정, 문항별 탭)은 명단으로 착각하지 않는다 */
+function isAppSheet(name){
+  name = String(name);
+  if(/^(학생|기록|교신|응답|쿠폰|설정)( S2)?$/.test(name)) return true;
+  if(/^(한줄논술|시험 문항|수배파일|S2 )/.test(name)) return true;
+  return false;
+}
 function findRoster(){
   var sheets = ss().getSheets();
   for(var i=0;i<sheets.length;i++){
-    var sh = sheets[i]; if(sh.getLastRow()<1) continue;
+    var sh = sheets[i]; if(sh.getLastRow()<1 || isAppSheet(sh.getName())) continue;
     var top = sh.getRange(1,1,Math.min(3,sh.getLastRow()),Math.max(1,sh.getLastColumn())).getValues();
     for(var r=0;r<top.length;r++){
       var row = top[r].map(function(x){return String(x).replace(/\s/g,'');});
       var ci=row.indexOf('반'), ni=row.indexOf('번호'), mi=row.indexOf('이름');
       if(ci>=0 && ni>=0 && mi>=0){
+        if(sh.getLastRow()<=r+1) continue;   // 머리글만 있고 학생이 없는 탭은 명단이 아님
         var ki = row.indexOf('콜사인'); if(ki<0) ki = row.indexOf('비밀번호');
         if(ki<0){ ki = row.length; sh.getRange(r+1, ki+1).setValue('콜사인'); }
         return {sh:sh, head:r+1, ci:ci, ni:ni, mi:mi, ki:ki};
