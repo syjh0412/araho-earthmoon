@@ -555,6 +555,7 @@ table.sstab select{min-height:44px;padding:6px 8px;font-size:1rem}
 .spin3dbox{padding:8px}
 .spinctl{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:8px}
 .spinctl>.btn-p{flex:0 0 auto;min-height:46px}
+.vidlink{display:block;position:relative;background-size:cover;background-position:center;text-decoration:none}.vidlink span{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:76px;height:54px;border-radius:14px;background:#e00;color:#fff;font-size:1.7rem;display:grid;place-items:center}.vidlink em{position:absolute;left:0;right:0;bottom:0;padding:8px 12px;background:#000b;color:#fff;font-style:normal;font-weight:700}
 
 .dkov{position:fixed;inset:0;z-index:9999;background:#03050ef2;display:flex;flex-direction:column}
 .dktop{display:flex;align-items:center;gap:10px;padding:calc(10px + env(safe-area-inset-top,0px)) 16px 8px;flex-wrap:wrap}
@@ -1812,7 +1813,12 @@ function mountDome(el){
 }
 /* 미션 끝 영상 (센터장 영상) */
 const VIDEOS=[["0OYaerQtJnk","센터장 영상 · 별의 일주 운동"],["qLPMj7bCy00","센터장 영상 · 태양의 연주 운동"],["WGtBExfq1sc","센터장 영상 · 달의 위상 변화"],["QP17Yp09QrE","센터장 영상 · 일식과 월식"]];
-const videoBlock=(ids)=>`<div class="figs c${ids.length}">${ids.map(i=>`<div><div class="vid"><iframe src="https://www.youtube.com/embed/${VIDEOS[i][0]}?rel=0" title="${VIDEOS[i][1]}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div><p class="figcap">${VIDEOS[i][1]}</p></div>`).join("")}</div>`;
+const videoBlock=(ids)=>`<div class="figs c${ids.length}">${ids.map(i=>{const [id,cap]=VIDEOS[i];
+ /* 파일을 직접 연(file://) 경우 유튜브가 재생을 막으므로(오류 153) 썸네일을 눌러 유튜브에서 보게 한다 */
+ const v=location.protocol==="file:"
+  ?`<a class="vid vidlink" href="https://www.youtube.com/watch?v=${id}" target="_blank" rel="noopener" style="background-image:url(https://i.ytimg.com/vi/${id}/hqdefault.jpg)"><span>▶</span><em>유튜브에서 보기</em></a>`
+  :`<iframe src="https://www.youtube.com/embed/${id}?rel=0" title="${cap}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>`;
+ return `<div>${v.startsWith("<a")?v:`<div class="vid">${v}</div>`}<p class="figcap">${cap} · <a href="https://www.youtube.com/watch?v=${id}" target="_blank" rel="noopener">유튜브에서 열기 ↗</a></p></div>`;}).join("")}</div>`;
 
 /* ═══════ 공통 ═══════ */
 const app=document.getElementById("app"), stage=document.getElementById("stage"), gate=document.getElementById("gate");
