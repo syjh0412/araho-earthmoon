@@ -556,6 +556,24 @@ table.sstab select{min-height:44px;padding:6px 8px;font-size:1rem}
 .spinctl{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:8px}
 .spinctl>.btn-p{flex:0 0 auto;min-height:46px}
 
+.dkov{position:fixed;inset:0;z-index:9999;background:#03050ef2;display:flex;flex-direction:column}
+.dktop{display:flex;align-items:center;gap:10px;padding:calc(10px + env(safe-area-inset-top,0px)) 16px 8px;flex-wrap:wrap}
+.dktop button{min-height:44px;padding:6px 14px}
+.dkttl{font-family:var(--disp);color:var(--mut);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dknum{color:var(--cyan);font-weight:700;font-variant-numeric:tabular-nums}
+.dkbody{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;position:relative;padding:0 8px}
+.dkbody img{max-width:100%;max-height:100%;object-fit:contain;border-radius:10px;box-shadow:0 10px 40px #000a;cursor:pointer;user-select:none}
+.dkarw{position:absolute;top:50%;transform:translateY(-50%);width:52px;height:72px;border-radius:14px;background:#0b1330cc;border:1.5px solid var(--line);color:#fff;font-size:1.4rem;z-index:2;cursor:pointer}
+.dkarw.l{left:12px}.dkarw.r{right:12px}
+.dkthumbs{display:flex;gap:8px;overflow-x:auto;padding:10px 16px calc(12px + env(safe-area-inset-bottom,0px))}
+.dkthumbs img{height:62px;aspect-ratio:16/9;border-radius:6px;opacity:.5;border:2px solid transparent;cursor:pointer;flex:none}
+.dkthumbs img.on{opacity:1;border-color:var(--cyan)}
+.dkov:fullscreen .dktop,.dkov:fullscreen .dkthumbs{display:none}.dkov:fullscreen .dkbody{padding:0}.dkov:fullscreen .dkbody img{border-radius:0;box-shadow:none}
+.dkov:fullscreen .dkarw{opacity:.25}.dkov:fullscreen .dkarw:hover{opacity:1}
+.dkmini{display:inline-block;margin:6px 0 2px;padding:4px 12px;border-radius:999px;border:1.5px solid var(--cyan);color:var(--cyan);font-size:.9rem;background:#05081acc;cursor:pointer}
+.dkmini:hover{background:#0b2238}
+.stg-top .dkbtn{white-space:nowrap}
+@media (max-width:700px){.stg-top .dkbtn{font-size:.8rem;padding:2px 8px}.dkarw{width:40px;height:56px}.dkthumbs img{height:44px}}
 </style>
 </head>
 <body class="gate">
@@ -776,6 +794,33 @@ function checkUnlock(before,after){ITEMS.forEach(it=>{if(before<it.at&&after>=it
 /* 화면 보호용: 학생 이름 가운데 글자 가리기 (서버도 같은 규칙으로 가려서 보낸다) */
 function maskName(n){n=String(n||"").trim();const c=[...n];if(c.length<=1||n.includes("○"))return n;if(c.length===2)return c[0]+"○";return c[0]+"○".repeat(c.length-2)+c[c.length-1];}
 function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+const DECKS={c1:10,c2:10,c3:10,c4:10};
+function openDeck(cid,start){const n=DECKS[cid];if(!n)return;const c=CH.find(x=>x.id===cid);let i=start||0;
+ const src=j=>`img/slides/${cid}/${String(j+1).padStart(2,"0")}.jpg`;
+ const ov=document.createElement("div");ov.className="dkov";ov.setAttribute("role","dialog");ov.setAttribute("aria-label","수업 슬라이드");
+ ov.innerHTML=`<div class="dktop"><span class="dkttl">📽 ${c.no} · ${esc(c.title)}</span><span class="dknum"></span><button class="btn-g" data-k="fs" title="전체 화면">⛶ 전체 화면</button><button class="btn-g" data-k="x">✕ 닫기</button></div>
+ <div class="dkbody"><button class="dkarw l" data-k="p" aria-label="이전">◀</button><img alt=""><button class="dkarw r" data-k="n" aria-label="다음">▶</button></div>
+ <div class="dkthumbs">${Array.from({length:n},(_,j)=>`<img src="${src(j)}" data-j="${j}" loading="lazy" alt="${j+1}쪽">`).join("")}</div>`;
+ document.body.appendChild(ov);document.body.style.overflow="hidden";
+ const im=ov.querySelector(".dkbody img"),num=ov.querySelector(".dknum");
+ const show=()=>{im.src=src(i);im.alt=`${c.no} 슬라이드 ${i+1}쪽`;num.textContent=`${i+1} / ${n}`;
+  ov.querySelectorAll(".dkthumbs img").forEach((t,j)=>t.classList.toggle("on",j===i));
+  const t=ov.querySelector(".dkthumbs img.on");if(t)t.scrollIntoView({block:"nearest",inline:"center"});
+  if(i+1<n){const pre=new Image();pre.src=src(i+1);}};
+ const go=d=>{i=Math.max(0,Math.min(n-1,i+d));show();};
+ const close=()=>{document.removeEventListener("keydown",kh,true);if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});ov.remove();document.body.style.overflow="";};
+ const kh=e=>{if(["ArrowRight"," ","PageDown","Enter"].includes(e.key)){e.preventDefault();e.stopPropagation();go(1);}
+  else if(["ArrowLeft","PageUp","Backspace"].includes(e.key)){e.preventDefault();e.stopPropagation();go(-1);}
+  else if(e.key==="Escape"){e.preventDefault();e.stopPropagation();if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});else close();}};
+ document.addEventListener("keydown",kh,true);
+ ov.addEventListener("click",e=>{const t=e.target.closest(".dkthumbs img");if(t){i=+t.dataset.j;show();return;}
+  const b=e.target.closest("[data-k]");
+  if(!b){if(e.target===im){const r=im.getBoundingClientRect();go(e.clientX<r.left+r.width/3?-1:1);}return;}
+  const k=b.dataset.k;if(k==="x")close();else if(k==="p")go(-1);else if(k==="n")go(1);
+  else if(k==="fs"){if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});else if(ov.requestFullscreen)ov.requestFullscreen().catch(()=>{});}});
+ let tx=0;ov.addEventListener("touchstart",e=>{tx=e.touches[0].clientX;},{passive:true});
+ ov.addEventListener("touchend",e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)go(dx<0?1:-1);},{passive:true});
+ show();}
 const IMG=(n,cap,cls)=>`<div class="fig ${cls||'tall'} ${n.endsWith(".png")?"png":""}"><img src="img/${n.includes(".")?n:n+".jpg"}" alt="${esc(String(cap||n).replace(/<[^>]+>/g,""))}" loading="lazy">${cap?`<div class="cap">${cap}</div>`:""}</div>`;
 
 /* ───────── 서술 점검 ───────── */
@@ -1957,9 +2002,10 @@ function renderLearn(){
  <p class="small" style="margin:0 4px 12px">교과서(천재 Ⅶ-2) 쪽수 순서대로. 교과서 탐구를 앱에서 먼저 해 보고, 마지막 '관측 보고' 한두 문장으로 마무리!</p>
  <div class="grid">${CH.map((c,i)=>{const p=chapProg(c);return `<button class="chap ${p.d>=p.total?'doneAll':''}" data-ch="${i}" style="background-image:url(img/${c.cover}.jpg)"><div class="in">
    <div class="k">${c.no}</div><h3>${c.title}</h3><span class="small">${c.sub}</span>
-   <span class="dots">${c.slides.map((sl,j)=>`<i class="${slideDone(c,sl,j)?'on':''}"></i>`).join("")}</span>
+   ${DECKS[c.id]?`<span class="dkmini" data-dk="${c.id}" role="button" tabindex="0" title="수업 슬라이드 보기">📽 수업 슬라이드</span>`:""}<span class="dots">${c.slides.map((sl,j)=>`<i class="${slideDone(c,sl,j)?'on':''}"></i>`).join("")}</span>
    ${p.d>=p.total?'<span class="stamp" style="margin-top:8px">MISSION CLEAR</span>':`<span class="small" style="color:var(--cyan)">진행 ${p.d}/${p.total} ${p.d>0?"· 이어서 하기 ▶":"· 시작 ▶"}</span>`}</div></button>`;}).join("")}</div>`;
  drawHud();
+ app.querySelectorAll(".dkmini").forEach(b=>{const f=e=>{e.stopPropagation();e.preventDefault();openDeck(b.dataset.dk);};b.addEventListener("click",f,true);b.onkeydown=e=>{if(e.key==="Enter"||e.key===" ")f(e);};});
  const rvl=document.getElementById("rvwL"); if(rvl)rvl.onclick=()=>{S.review=!S.review;save();render();};
  document.querySelectorAll(".chap").forEach(b=>b.onclick=()=>{const ci=+b.dataset.ch;const c=CH[ci];deck={ch:ci,i:Math.min(S.slide[c.id]||0,c.slides.length-1)};render();});
 }
@@ -2007,7 +2053,7 @@ function renderSlide(){
    <textarea id="wt" style="min-height:120px" placeholder="오늘 배운 말로, 원인 → 결과가 이어지게 한두 문장.">${esc(w.t||"")}</textarea>
    <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap"><button class="btn-p" id="wchk" style="flex:1">관측 보고 점검받기</button><button class="btn-s aibtn" id="wai" style="flex:1" hidden>🤖 AI 코치 피드백</button></div>
    <div id="wout">${w.ok?'<div class="fb ok"><b>✅ 통과한 논술이에요. 더 다듬어 다시 점검해도 좋아요!</b></div>':""}</div></div></div>`;}
- stage.innerHTML=`<div class="stg-top"><button class="btn-g" id="exit">✕ 나가기</button><span class="ttl">${c.no} · ${c.title}</span>${isT()||isG()?"":`<button class="btn-g rvbtn ${S.review?"on":""}" id="rvw" title="이미 공부한 카드도 빈칸을 다시 가려서 복습해요">🔁 복습 모드 ${S.review?"켜짐":"꺼짐"}</button>`}<span class="num">${i+1} / ${c.slides.length}</span></div>
+ stage.innerHTML=`<div class="stg-top"><button class="btn-g" id="exit">✕ 나가기</button><span class="ttl">${c.no} · ${c.title}</span>${isT()||isG()?"":`<button class="btn-g rvbtn ${S.review?"on":""}" id="rvw" title="이미 공부한 카드도 빈칸을 다시 가려서 복습해요">🔁 복습 모드 ${S.review?"켜짐":"꺼짐"}</button>`}${DECKS[c.id]?`<button class="btn-g dkbtn" id="dkopen" title="이 미션의 수업 슬라이드(PPT)를 봐요">📽 슬라이드</button>`:""}<span class="num">${i+1} / ${c.slides.length}</span></div>
   <div class="pbar"><i style="width:${((i+1)/c.slides.length*100).toFixed(1)}%"></i></div>
   <div class="stg-body" id="stgbody"><div class="slide">${body}</div></div>
   <div class="stg-nav"><button class="btn-s prev" id="prev" ${i===0?"disabled":""}>◀ 이전</button><span class="hintkey">← → 키 · 스페이스 · 밀어서 넘기기</span><button class="btn-p next" id="next">${i===c.slides.length-1?"목록으로 🏁":"다음 ▶"}</button></div>`;
@@ -2036,6 +2082,7 @@ function renderSlide(){
  }
  const go=(d)=>{if(d>0&&locked){toast("🔒 "+lockWhy+" · 막히면 옆 승무원이나 센터장에게!");return;}const ni=deck.i+d;if(ni<0)return;if(ni>=c.slides.length){deck=null;view="learn";render();return;}deck.i=ni;render();};
  stage.querySelector("#exit").onclick=()=>{deck=null;view="learn";render();};
+ const dko=stage.querySelector("#dkopen"); if(dko)dko.onclick=()=>openDeck(c.id);
  const rvw=stage.querySelector("#rvw"); if(rvw)rvw.onclick=()=>{S.review=!S.review;save();toast(S.review?"🔁 복습 모드 — 공부한 카드도 빈칸이 다시 가려져요":"복습 모드 끔");render();};
  stage.querySelector("#prev").onclick=()=>go(-1); stage.querySelector("#next").onclick=()=>go(1);
  const bodyEl=stage.querySelector("#stgbody"); let tx=null,ty=null;
