@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#05081a">
+<meta name="theme-color" content="#03130f">
 <title>아라호 관제센터 · 시즌 2</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;900&family=Noto+Sans+KR:wght@400;500;700;900&display=swap">
@@ -14,8 +14,8 @@
    레이아웃: 16:9 전자칠판 기준 1600px 폭, 학습 슬라이드는 좌 글·우 사진 2단
    ───────────────────────────────────────────────────────── */
 :root{
-  --space0:#05081a; --space1:#0a0f2c; --panel:#10173a; --panel2:#182052; --line:#273270; --line2:#3b4a9a;
-  --fg:#f3f5ff; --mut:#a3adda; --dim:#6d78b3;
+  --space0:#03130f; --space1:#06201a; --panel:#0d2a24; --panel2:#143a32; --line:#1f5247; --line2:#2f7a68;
+  --fg:#f3f5ff; --mut:#a3cfc4; --dim:#6aa396;
   --sun:#ffb13b; --sun2:#ff7a1a; --cyan:#5fe3ff; --green:#3fe6a6; --red:#ff6b6b; --violet:#a497ff;
   --disp:'Noto Serif KR','Nanum Myeongjo',serif; --body:'Noto Sans KR','Apple SD Gothic Neo',sans-serif;
   color-scheme:dark;
@@ -23,8 +23,8 @@
 *{box-sizing:border-box} html,body{height:100%}
 body{margin:0;background:var(--space0);color:var(--fg);font-family:var(--body);font-size:18px;line-height:1.75;
   background-image:
-   radial-gradient(1400px 800px at 85% -10%,#1a2a6e55,transparent 60%),
-   radial-gradient(1000px 700px at -10% 110%,#3b145f44,transparent 60%),
+   radial-gradient(1400px 800px at 85% -10%,#0f6b5a55,transparent 60%),
+   radial-gradient(1000px 700px at -10% 110%,#0b3d4a44,transparent 60%),
    radial-gradient(1.6px 1.6px at 12% 22%,#fff8 50%,transparent 51%),radial-gradient(1px 1px at 68% 12%,#fff6 50%,transparent 51%),
    radial-gradient(1.4px 1.4px at 86% 48%,#fff5 50%,transparent 51%),radial-gradient(1px 1px at 38% 78%,#fff6 50%,transparent 51%),
    radial-gradient(1.2px 1.2px at 8% 64%,#fff4 50%,transparent 51%),radial-gradient(1px 1px at 52% 38%,#fff5 50%,transparent 51%),
@@ -38,13 +38,13 @@ button:focus-visible,a:focus-visible,textarea:focus-visible,input:focus-visible,
 .btn-p{background:linear-gradient(135deg,var(--sun),var(--sun2));color:#2a1500;font-weight:900;font-size:1.12rem;box-shadow:0 4px 18px #ff9c2a44}
 .btn-s{background:var(--panel2);border:1.5px solid var(--line2)}
 .btn-g{background:transparent;border:1.5px solid var(--line);color:var(--mut)}
-textarea,input[type=text],input[type=password],select{width:100%;background:#080c24;color:var(--fg);border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;font-size:1.12rem;font-family:var(--body);line-height:1.8}
+textarea,input[type=text],input[type=password],select{width:100%;background:#04140f;color:var(--fg);border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;font-size:1.12rem;font-family:var(--body);line-height:1.8}
 textarea{min-height:150px;resize:vertical}
 textarea::placeholder,input::placeholder{color:var(--dim)}
 a{color:var(--cyan)}
 .wrap{max-width:1600px;margin:0 auto;padding:18px 24px 112px}
-.card{background:linear-gradient(180deg,var(--panel),#0c1233);border:1.5px solid var(--line);border-radius:22px;padding:24px 26px;margin:16px 0}
-.tag{display:inline-flex;align-items:center;gap:6px;background:#080c24;border:1px solid var(--line);color:var(--mut);border-radius:999px;padding:3px 14px;font-size:.9rem}
+.card{background:linear-gradient(180deg,var(--panel),#09201b);border:1.5px solid var(--line);border-radius:22px;padding:24px 26px;margin:16px 0}
+.tag{display:inline-flex;align-items:center;gap:6px;background:#04140f;border:1px solid var(--line);color:var(--mut);border-radius:999px;padding:3px 14px;font-size:.9rem}
 .small{font-size:.95rem;color:var(--mut)}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .crew3{display:grid;grid-template-columns:.8fr 1.1fr 1.1fr;gap:16px;align-items:start;margin-bottom:16px}
@@ -53,17 +53,17 @@ a{color:var(--cyan)}
 @media (max-width:860px){.row2{grid-template-columns:1fr}}
 
 /* HUD */
-.hud{display:flex;align-items:center;gap:16px;flex-wrap:wrap;background:#0b1133cc;border:1.5px solid var(--line);border-radius:18px;padding:12px 20px;backdrop-filter:blur(8px)}
+.hud{display:flex;align-items:center;gap:16px;flex-wrap:wrap;background:#08201bcc;border:1.5px solid var(--line);border-radius:18px;padding:12px 20px;backdrop-filter:blur(8px)}
 .hud .rk{font-family:var(--disp);font-size:1.2rem;color:var(--sun)}
 .hud .pt{font-variant-numeric:tabular-nums;color:var(--cyan);font-weight:700}
 .hud .sync{margin-left:auto;font-size:.88rem;color:var(--dim)}
 .hud #hudOut{margin-left:4px}
 .hud .sync.on{color:var(--green)}
-.bar{height:10px;background:#080c24;border-radius:99px;overflow:hidden;flex:1;min-width:120px}
+.bar{height:10px;background:#04140f;border-radius:99px;overflow:hidden;flex:1;min-width:120px}
 .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--sun),var(--cyan));border-radius:99px;transition:width .4s}
 
 /* 하단 탭 */
-nav#tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;background:#070b22ee;border-top:1.5px solid var(--line);backdrop-filter:blur(10px);display:flex;justify-content:center;gap:6px;padding:8px 6px calc(8px + env(safe-area-inset-bottom,0px))}
+nav#tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;background:#05170fee;border-top:1.5px solid var(--line);backdrop-filter:blur(10px);display:flex;justify-content:center;gap:6px;padding:8px 6px calc(8px + env(safe-area-inset-bottom,0px))}
 nav#tabs button{background:transparent;min-height:62px;min-width:44px;flex:0 1 140px;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.95rem;color:var(--mut);border-radius:14px;padding:6px 4px}
 nav#tabs button .ic{font-size:1.5rem}
 @media (max-width:560px){nav#tabs{gap:0}nav#tabs button{font-size:.72rem;padding:6px 1px}nav#tabs button .ic{font-size:1.25rem}}
@@ -72,33 +72,33 @@ body.deckmode nav#tabs,body.gate nav#tabs{display:none}
 
 /* 로그인 게이트 */
 #gate{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:20px;background:var(--space0);
- background-image:radial-gradient(900px 600px at 70% 20%,#1a2a6e66,transparent 60%),url(img/trail_n.jpg);background-size:cover;background-position:center}
-#gate::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#05081acc,#05081af2)}
-.gatebox{position:relative;width:min(560px,100%);background:#0b1133ee;border:1.5px solid var(--line2);border-radius:26px;padding:34px 30px;box-shadow:0 30px 80px #000a}
+ background-image:radial-gradient(900px 600px at 70% 20%,#0f6b5a66,transparent 60%),url(img/trail_n.jpg);background-size:cover;background-position:center}
+#gate::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#03130fcc,#03130ff2)}
+.gatebox{position:relative;width:min(560px,100%);background:#08201bee;border:1.5px solid var(--line2);border-radius:26px;padding:34px 30px;box-shadow:0 30px 80px #000a}
 .gatebox h1{font-size:2.1rem;margin-bottom:4px}
 .gatebox .sub{color:var(--mut);margin:0 0 18px}
 .gatebox label{display:block;font-size:.95rem;color:var(--mut);margin:10px 0 4px}
-.idcard{display:flex;gap:14px;align-items:center;background:linear-gradient(135deg,#182052,#0b1133);border:1.5px solid var(--line2);border-radius:18px;padding:14px 18px}
+.idcard{display:flex;gap:14px;align-items:center;background:linear-gradient(135deg,#143a32,#08201b);border:1.5px solid var(--line2);border-radius:18px;padding:14px 18px}
 .idcard .av{width:58px;height:58px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff6,var(--sun));display:grid;place-items:center;font-size:1.7rem}
 .idcard .nm{font-family:var(--disp);font-size:1.3rem}
 
 /* 홈 */
 .hero{position:relative;overflow:hidden;border-radius:26px;border:1.5px solid var(--line);min-height:360px;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;
- background:#0a0f2c url(img/danuri_earth.jpg) center/cover}
-.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#05081af5 0%,#05081ad9 48%,#05081a55 100%)}
+ background:#06201a url(img/danuri_earth.jpg) center/cover}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#03130ff5 0%,#03130fd9 48%,#03130f55 100%)}
 .hero>div{position:relative;padding:44px 40px}
 .hero h1{font-size:clamp(2.2rem,4.6vw,3.6rem);line-height:1.2;text-shadow:0 0 30px #ffb13b33}
 .hero .lead{color:var(--mut);font-size:1.12rem;max-width:36em;margin-top:10px}
 .hero .log{font-family:var(--disp);color:var(--cyan);font-size:1rem;letter-spacing:.1em;margin-bottom:8px}
 .flow{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
-.flow span{background:#080c24cc;border:1.5px solid var(--line);border-radius:12px;padding:8px 14px;font-size:.98rem}
+.flow span{background:#04140fcc;border:1.5px solid var(--line);border-radius:12px;padding:8px 14px;font-size:.98rem}
 .flow b{color:var(--sun)}
 @media (max-width:860px){.hero{grid-template-columns:1fr;min-height:0}.hero>div{padding:28px 22px}}
 
 /* 장 카드 */
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
-.chap{position:relative;overflow:hidden;border:1.5px solid var(--line);border-radius:22px;padding:0;cursor:pointer;text-align:left;min-height:240px;display:flex;flex-direction:column;justify-content:flex-end;background:#0a0f2c center/cover no-repeat;transition:transform .15s,border-color .15s}
-.chap::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#05081a11 20%,#05081af0 75%)}
+.chap{position:relative;overflow:hidden;border:1.5px solid var(--line);border-radius:22px;padding:0;cursor:pointer;text-align:left;min-height:240px;display:flex;flex-direction:column;justify-content:flex-end;background:#06201a center/cover no-repeat;transition:transform .15s,border-color .15s}
+.chap::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#03130f11 20%,#03130ff0 75%)}
 .chap>*{position:relative}
 .chap .in{padding:18px 20px}
 .chap:active{transform:scale(.98)}
@@ -106,13 +106,13 @@ body.deckmode nav#tabs,body.gate nav#tabs{display:none}
 .chap h3{font-size:1.4rem;margin:4px 0 2px}
 .chap .k{font-family:var(--disp);color:var(--cyan);font-size:.92rem;letter-spacing:.12em}
 .dots{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
-.dots i{width:12px;height:12px;border-radius:99px;background:#080c24;border:1px solid var(--line)}
+.dots i{width:12px;height:12px;border-radius:99px;background:#04140f;border:1px solid var(--line)}
 .dots i.on{background:var(--sun);border-color:var(--sun)}
 .stamp{font-family:var(--disp);color:var(--green);border:2.5px solid var(--green);border-radius:10px;display:inline-block;padding:2px 14px;transform:rotate(-6deg);background:#06301d88}
 
 /* ═════ 슬라이드 무대 ═════ */
 #stage{position:fixed;inset:0;z-index:40;display:flex;flex-direction:column;background:var(--space0);
- background-image:radial-gradient(1200px 600px at 80% -10%,#1a2a6e55,transparent 60%),radial-gradient(1.4px 1.4px at 16% 26%,#fff7 50%,transparent 51%),radial-gradient(1px 1px at 72% 16%,#fff5 50%,transparent 51%),radial-gradient(1.3px 1.3px at 88% 56%,#fff5 50%,transparent 51%),radial-gradient(1px 1px at 34% 82%,#fff5 50%,transparent 51%)}
+ background-image:radial-gradient(1200px 600px at 80% -10%,#0f6b5a55,transparent 60%),radial-gradient(1.4px 1.4px at 16% 26%,#fff7 50%,transparent 51%),radial-gradient(1px 1px at 72% 16%,#fff5 50%,transparent 51%),radial-gradient(1.3px 1.3px at 88% 56%,#fff5 50%,transparent 51%),radial-gradient(1px 1px at 34% 82%,#fff5 50%,transparent 51%)}
 .stg-top{display:flex;align-items:center;gap:12px;padding:calc(10px + env(safe-area-inset-top,0px)) 20px 8px}
 .stg-top .ttl{font-family:var(--disp);font-size:1.1rem;color:var(--mut);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .stg-top .num{font-variant-numeric:tabular-nums;color:var(--cyan);font-weight:700;font-size:1.05rem}
@@ -121,7 +121,7 @@ body.deckmode nav#tabs,body.gate nav#tabs{display:none}
 .stg-top .rvbtn{margin-left:auto}.stg-top .rvbtn+.num{margin-left:0}
 .hintkey.rvmsg{color:var(--sun)}
 @media (max-width:700px){.stg-top .rvbtn{font-size:.8rem;padding:2px 8px}}
-.pbar{height:5px;background:#080c24}
+.pbar{height:5px;background:#04140f}
 .pbar i{display:block;height:100%;background:linear-gradient(90deg,var(--sun),var(--cyan));transition:width .35s}
 .stg-body{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:16px 28px 10px;display:flex}
 .slide{margin:auto;width:100%;max-width:1560px}
@@ -140,7 +140,7 @@ body.deckmode nav#tabs,body.gate nav#tabs{display:none}
 .s-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:36px;align-items:center}
 .s-grid.rev{grid-template-columns:.95fr 1.05fr}
 @media (max-width:900px){.s-grid,.s-grid.rev{grid-template-columns:1fr;gap:16px}}
-.key{background:#080c24;border:1.5px solid var(--line);border-left:6px solid var(--sun);border-radius:14px;padding:14px 20px;margin:16px 0;font-size:clamp(1.08rem,1.4vw,1.3rem)}
+.key{background:#04140f;border:1.5px solid var(--line);border-left:6px solid var(--sun);border-radius:14px;padding:14px 20px;margin:16px 0;font-size:clamp(1.08rem,1.4vw,1.3rem)}
 .key .kt{font-family:var(--disp);color:var(--sun);display:block;margin-bottom:2px;font-size:1.05em}
 /* 빈칸 — 핵심어는 눌러야 보인다 */
 .blank{cursor:pointer;border-radius:6px;transition:background .2s}
@@ -157,14 +157,14 @@ body.deckmode nav#tabs,body.gate nav#tabs{display:none}
 .figs{display:grid;gap:12px}
 .figs.c2{grid-template-columns:1fr 1fr}.figs.c3{grid-template-columns:1fr 1fr 1fr}.figs.c4{grid-template-columns:repeat(4,1fr)}
 @media (max-width:700px){.figs.c3,.figs.c4{grid-template-columns:1fr 1fr}}
-.figure{background:#080c24cc;border:1.5px solid var(--line);border-radius:20px;padding:16px;margin:14px 0}
+.figure{background:#04140fcc;border:1.5px solid var(--line);border-radius:20px;padding:16px;margin:14px 0}
 .figcap{color:var(--mut);font-size:.95rem;text-align:center;margin-top:8px}
 svg text{font-family:var(--body)}
 
 /* 행성 갤러리 */
 .pgal{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 @media (max-width:900px){.pgal{grid-template-columns:1fr 1fr}}
-.pcard{background:#080c24;border:1.5px solid var(--line);border-radius:18px;overflow:hidden;text-align:left;padding:0;min-height:0;display:block;transition:border-color .15s}
+.pcard{background:#04140f;border:1.5px solid var(--line);border-radius:18px;overflow:hidden;text-align:left;padding:0;min-height:0;display:block;transition:border-color .15s}
 .pcard.on{border-color:var(--sun)}
 .pcard .ph{aspect-ratio:1;background:#000 center/cover no-repeat}
 .pcard .nm{font-family:var(--disp);font-size:clamp(1.1rem,1.5vw,1.4rem);padding:10px 14px 2px}
@@ -175,7 +175,7 @@ svg text{font-family:var(--body)}
 .s-hero{text-align:center}
 .s-hero .s-title{font-size:clamp(2.2rem,4.6vw,3.8rem)}
 .s-hero .s-sub{color:var(--mut);font-size:clamp(1.05rem,1.4vw,1.3rem);max-width:34em;margin:0 auto 10px}
-.comms{display:inline-block;font-family:var(--disp);color:var(--cyan);border:1px solid var(--line2);border-radius:999px;padding:4px 16px;font-size:.95rem;letter-spacing:.08em;margin-bottom:8px;background:#080c24aa}
+.comms{display:inline-block;font-family:var(--disp);color:var(--cyan);border:1px solid var(--line2);border-radius:999px;padding:4px 16px;font-size:.95rem;letter-spacing:.08em;margin-bottom:8px;background:#04140faa}
 .herogrid{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center;text-align:left}
 @media (max-width:900px){.herogrid{grid-template-columns:1fr}}
 
@@ -213,19 +213,19 @@ table.sumtab .tb{display:inline-block;min-width:5.5em;font-weight:700}
 .gcls button.gon{grid-column:1/-1;border-color:var(--violet);color:var(--fg);font-weight:900;font-size:1.1rem;min-height:56px;background:#a497ff22}
 .greet{position:fixed;left:50%;top:18px;z-index:80;transform:translate(-50%,-20px);opacity:0;transition:all .4s;display:flex;gap:14px;align-items:center;max-width:min(680px,92vw);background:#121a46f2;border:1.5px solid var(--violet);border-radius:18px;padding:14px 20px;box-shadow:0 18px 50px #000a;cursor:pointer;line-height:1.55}
 .greet.on{transform:translate(-50%,0);opacity:1}.greet.out{opacity:0;transform:translate(-50%,-20px)}
-.volmeta{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:center;background:#080c24;border:1.5px solid var(--line);border-radius:14px;padding:8px 16px;margin:0 0 12px}
+.volmeta{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:center;background:#04140f;border:1.5px solid var(--line);border-radius:14px;padding:8px 16px;margin:0 0 12px}
 .volmeta .vm{display:flex;align-items:center;gap:8px;font-size:1.02rem;line-height:1.35}
 .volopts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .volopts .opt{justify-content:center;font-weight:700}
 .volcalc{display:grid;gap:8px;margin-top:12px}
-.volcalc>div{background:#080c24;border:1.5px solid var(--line);border-radius:12px;padding:10px 14px;font-size:clamp(1rem,1.25vw,1.15rem);line-height:1.55}
+.volcalc>div{background:#04140f;border:1.5px solid var(--line);border-radius:12px;padding:10px 14px;font-size:clamp(1rem,1.25vw,1.15rem);line-height:1.55}
 .volcalc em{color:var(--sun);font-style:normal;font-weight:900}
 .volcalc .vn{color:var(--sun);font-weight:900;margin-right:6px}
 .volmini{display:flex;justify-content:center;gap:18px;margin-bottom:6px}
 .volmini>div{width:90px;text-align:center}
 .volcount{font-size:1.3rem;margin-top:6px}.volcount b{color:var(--sun);font-size:1.8rem}
 .grsteps{margin:0;padding:0;list-style:none;counter-reset:g;display:grid;gap:7px}
-.grsteps li{counter-increment:g;position:relative;padding:8px 12px 8px 46px;background:#080c24;border:1.5px solid var(--line);border-radius:12px;font-size:clamp(.98rem,1.2vw,1.1rem);line-height:1.5}
+.grsteps li{counter-increment:g;position:relative;padding:8px 12px 8px 46px;background:#04140f;border:1.5px solid var(--line);border-radius:12px;font-size:clamp(.98rem,1.2vw,1.1rem);line-height:1.5}
 .grsteps li::before{content:counter(g);position:absolute;left:10px;top:8px;width:26px;height:26px;border-radius:50%;background:var(--sun);color:#2a1500;font-weight:900;display:grid;place-items:center;font-size:.95rem}
 .grsteps em{color:var(--sun);font-style:normal;font-weight:700}
 .grpick{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 8px}
@@ -234,13 +234,13 @@ table.sumtab .tb{display:inline-block;min-width:5.5em;font-weight:700}
 .grpick button.y{background:#3fe6a622}.grpick button.n{background:#ff6b6b26}
 .grnow{display:flex;gap:12px;align-items:center;background:#ffb13b12;border:1.5px solid var(--sun);border-radius:14px;padding:10px 14px}
 .grnow img{width:46px;height:46px;border-radius:50%;object-fit:cover;flex:0 0 auto}
-.frame{background:#080c24;border:1.5px dashed var(--line2);border-radius:14px;padding:12px 16px;color:var(--mut);font-size:1.05rem;margin:10px 0}
+.frame{background:#04140f;border:1.5px dashed var(--line2);border-radius:14px;padding:12px 16px;color:var(--mut);font-size:1.05rem;margin:10px 0}
 .frame b{color:var(--cyan)}
 
 /* 표 */
 table.t{border-collapse:collapse;width:100%;font-size:clamp(1rem,1.25vw,1.15rem);font-variant-numeric:tabular-nums}
 table.t th,table.t td{border:1px solid var(--line);padding:10px 12px;text-align:center}
-table.t th{background:#080c24;color:var(--cyan);font-weight:700}
+table.t th{background:#04140f;color:var(--cyan);font-weight:700}
 table.t td:first-child{color:var(--sun);font-weight:700;white-space:nowrap}
 table.t .grpA{background:#5a3a0a99;color:#ffe0a8} table.t .grpB{background:#0e2f5a99;color:#cfe6ff}
 .twrap{overflow-x:auto;margin:10px 0}
@@ -258,7 +258,7 @@ table.t .grpA{background:#5a3a0a99;color:#ffe0a8} table.t .grpB{background:#0e2f
 @media (prefers-reduced-motion:no-preference){.spin{animation:rot linear infinite}@keyframes rot{to{transform:rotate(360deg)}}}
 .planet{position:absolute;border-radius:50%;transform:translate(-50%,-50%);cursor:pointer;box-shadow:0 0 10px #0008}
 .planet u{text-decoration:none}
-.planet span{position:absolute;left:50%;top:-2em;transform:translateX(-50%);font-size:.9rem;color:var(--fg);background:#080c24dd;border:1px solid var(--line);border-radius:8px;padding:1px 8px;white-space:nowrap;opacity:0;transition:opacity .2s;pointer-events:none}
+.planet span{position:absolute;left:50%;top:-2em;transform:translateX(-50%);font-size:.9rem;color:var(--fg);background:#04140fdd;border:1px solid var(--line);border-radius:8px;padding:1px 8px;white-space:nowrap;opacity:0;transition:opacity .2s;pointer-events:none}
 .planet.show span{opacity:1}
 .sunCore{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:15%;aspect-ratio:1;border-radius:50%;
  background:radial-gradient(circle at 38% 34%,#fff3c4,#ffb13b 55%,#ff7a1a);box-shadow:0 0 36px 10px #ffb13b66,0 0 90px 30px #ff7a1a22}
@@ -278,7 +278,7 @@ table.t .grpA{background:#5a3a0a99;color:#ffe0a8} table.t .grpB{background:#0e2f
 .hangar h4{font-family:var(--disp);font-size:1.15rem;margin:0 0 6px}
 .hangar.rock{border-color:#d08f5a} .hangar.gas{border-color:var(--cyan)}
 .hangar .got{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
-.hangar .got span{background:#080c24;border:1px solid var(--line);border-radius:10px;padding:3px 10px;font-size:.95rem}
+.hangar .got span{background:#04140f;border:1px solid var(--line);border-radius:10px;padding:3px 10px;font-size:.95rem}
 .qPlanet{text-align:center;margin:8px 0}
 .qPlanet .ball{display:inline-block;border-radius:50%;box-shadow:0 0 30px #000a;background:#000 center/cover}
 .qPlanet .nm{font-family:var(--disp);font-size:1.6rem;display:block;margin-top:8px}
@@ -286,7 +286,7 @@ table.t .grpA{background:#5a3a0a99;color:#ffe0a8} table.t .grpB{background:#0e2f
 .binbtns button{flex:1;font-size:1.15rem;min-height:62px}
 
 /* 시뮬레이터 */
-.sim{border:1.5px solid var(--line);border-radius:20px;background:#080c24d9;padding:18px;text-align:left}
+.sim{border:1.5px solid var(--line);border-radius:20px;background:#04140fd9;padding:18px;text-align:left}
 .simrow{display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:center}
 .simsun{position:relative;width:130px;height:130px;border-radius:50%;flex:0 0 auto;overflow:hidden;
  background:radial-gradient(circle at 38% 34%,#fff3c4,#ffb13b 55%,#ff7a1a);box-shadow:0 0 12px 4px #ffb13b66;transition:box-shadow .3s}
@@ -316,10 +316,10 @@ input[type=range]{width:100%;accent-color:var(--sun);height:40px}
 
 /* 수배 파일 */
 .wgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:16px}
-.wanted{position:relative;border:2px solid var(--line2);border-radius:20px;padding:18px;background:linear-gradient(170deg,var(--panel),#080c24)}
+.wanted{position:relative;border:2px solid var(--line2);border-radius:20px;padding:18px;background:linear-gradient(170deg,var(--panel),#04140f)}
 .wanted::before{content:"CASE FILE";position:absolute;right:16px;top:-12px;font-family:var(--disp);font-size:.8rem;letter-spacing:.2em;color:var(--dim);background:var(--space0);padding:0 8px}
 .wanted.solved{border-color:var(--green)}
-.clue{background:#080c24;border:1.5px dashed var(--line2);border-radius:14px;padding:12px 16px;font-size:1.1rem;margin:10px 0}
+.clue{background:#04140f;border:1.5px dashed var(--line2);border-radius:14px;padding:12px 16px;font-size:1.1rem;margin:10px 0}
 .wphoto{aspect-ratio:16/9;border-radius:14px;background:#000 center/cover;border:1.5px solid var(--line);filter:blur(0)}
 .wphoto.hid{filter:blur(14px) brightness(.6)}
 .wopts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -342,17 +342,17 @@ input[type=range]{width:100%;accent-color:var(--sun);height:40px}
 /* 센터장 */
 .sec{border:1.5px solid var(--line);border-radius:16px;margin:12px 0;overflow:hidden}
 .sec>button{width:100%;text-align:left;background:var(--panel2);border:0;border-radius:0;font-size:1.08rem;font-weight:700}
-.sec>div{padding:14px 18px;background:#080c24}
+.sec>div{padding:14px 18px;background:#04140f}
 .codebox{background:#04071a;border:1.5px solid var(--line);border-radius:12px;padding:12px;font-size:.85rem;word-break:break-all;max-height:160px;overflow:auto;user-select:all;font-family:ui-monospace,Menlo,monospace;white-space:pre-wrap}
 table.r{border-collapse:collapse;width:100%;font-size:1rem;font-variant-numeric:tabular-nums}
 table.r th,table.r td{border-bottom:1px solid var(--line);padding:9px 10px;text-align:left}
-table.r th{color:var(--cyan);font-weight:700;background:#080c24;position:sticky;top:0}
-table.r tr.sel td{background:#182052}
+table.r th{color:var(--cyan);font-weight:700;background:#04140f;position:sticky;top:0}
+table.r tr.sel td{background:#143a32}
 table.r td.c{text-align:center}
 .pill{display:inline-block;border-radius:999px;padding:1px 10px;font-size:.85rem;border:1px solid var(--line2);color:var(--mut)}
 .pill.g{border-color:var(--green);color:var(--green)} .pill.w{border-color:var(--sun);color:var(--sun)}
 .badgerow{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
-.badge{background:#080c24;border:1.5px solid var(--line);border-radius:12px;padding:7px 13px;font-size:1rem}
+.badge{background:#04140f;border:1.5px solid var(--line);border-radius:12px;padding:7px 13px;font-size:1rem}
 .badge.on{border-color:var(--sun);color:var(--sun);box-shadow:0 0 14px #ffb13b22}
 .steps{counter-reset:s;list-style:none;padding:0;margin:8px 0}
 .steps li{counter-increment:s;position:relative;padding:8px 0 8px 44px;border-bottom:1px dashed var(--line)}
@@ -367,20 +367,20 @@ body.deckmode .toast{bottom:110px}
 /* ── 관제팀 분류 회의 (MISSION 02 모둠 탐구) ── */
 .rawgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:10px 0}
 @media (max-width:900px){.rawgrid{grid-template-columns:1fr 1fr}}
-.rawcard{display:block;width:100%;text-align:left;background:#0a0f2c;border:2px solid var(--line2);border-radius:16px;padding:10px 12px;min-height:0;font-size:.98rem;line-height:1.5;position:relative}
+.rawcard{display:block;width:100%;text-align:left;background:#06201a;border:2px solid var(--line2);border-radius:16px;padding:10px 12px;min-height:0;font-size:.98rem;line-height:1.5;position:relative}
 .rawcard h5{margin:0 0 4px;font-family:var(--disp);font-size:1.25rem;color:var(--cyan)}
 .rawcard dl{display:grid;grid-template-columns:auto 1fr;gap:0 10px;margin:0}
 .rawcard dt{color:var(--mut);font-size:.88rem} .rawcard dd{margin:0;font-weight:700;color:var(--fg);text-align:right}
 .rawcard .tm{position:absolute;top:8px;right:10px;font-size:.85rem;font-weight:900;padding:1px 10px;border-radius:99px;background:var(--panel2);color:var(--mut)}
-.rawcard.t1{border-color:var(--sun);background:linear-gradient(160deg,#3a2508,#0a0f2c 70%)} .rawcard.t1 .tm{background:var(--sun);color:#2a1500}
-.rawcard.t2{border-color:var(--cyan);background:linear-gradient(160deg,#08303a,#0a0f2c 70%)} .rawcard.t2 .tm{background:var(--cyan);color:#04202a}
+.rawcard.t1{border-color:var(--sun);background:linear-gradient(160deg,#3a2508,#06201a 70%)} .rawcard.t1 .tm{background:var(--sun);color:#2a1500}
+.rawcard.t2{border-color:var(--cyan);background:linear-gradient(160deg,#08303a,#06201a 70%)} .rawcard.t2 .tm{background:var(--cyan);color:#04202a}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0}
 .chips button{min-height:42px;padding:4px 16px;font-size:1rem;border-radius:99px;background:transparent;border:1.5px solid var(--line2);color:var(--mut)}
 .chips button.on{border-color:var(--sun);color:var(--sun);background:#ffb13b1a;font-weight:700}
 .meetrow{display:grid;grid-template-columns:1.1fr 1fr;gap:16px;align-items:start}
 @media (max-width:900px){.meetrow{grid-template-columns:1fr}}
 .board{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
-.bteam{background:#0a0f2c;border:1.5px solid var(--line2);border-radius:16px;padding:12px 14px;font-size:1.05rem}
+.bteam{background:#06201a;border:1.5px solid var(--line2);border-radius:16px;padding:12px 14px;font-size:1.05rem}
 .bteam h4{margin:0 0 6px;font-family:var(--disp);color:var(--sun);font-size:1.2rem}
 .bteam .grp{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:3px 0}
 .bteam .grp i{font-style:normal;font-weight:900;border-radius:8px;padding:0 8px}
@@ -388,7 +388,7 @@ body.deckmode .toast{bottom:110px}
 .eye{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(280px,1fr);gap:18px;align-items:start}
 @media (max-width:900px){.eye{grid-template-columns:1fr}}
 .eyel{display:flex;gap:14px;align-items:center;flex-wrap:wrap;justify-content:center}
-.eye .scopecv{height:min(54vh,520px);border:0;border-radius:50%;box-shadow:0 0 0 6px #182052,0 20px 50px #000a;cursor:crosshair}
+.eye .scopecv{height:min(54vh,520px);border:0;border-radius:50%;box-shadow:0 0 0 6px #143a32,0 20px 50px #000a;cursor:crosshair}
 .wheelbox{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
 #whlg{transition:transform .6s cubic-bezier(.3,1.4,.5,1)}
 .eymis{display:flex;gap:10px;align-items:flex-start;margin-top:8px;padding:8px 10px;border-radius:12px;background:var(--panel2);border:1.5px solid var(--line2)}
@@ -396,7 +396,7 @@ body.deckmode .toast{bottom:110px}
 .eymis.done{border-color:#3fe6a6;background:#3fe6a614}.eymis.done .n{background:#3fe6a6;color:#05221a}
 .eyer{display:grid;gap:12px}
 .drillhd{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-.alarm{flex:1;min-width:240px;font-family:var(--disp);font-size:1.25rem;padding:10px 16px;border-radius:14px;background:#080c24;border:1.5px solid var(--line2)}
+.alarm{flex:1;min-width:240px;font-family:var(--disp);font-size:1.25rem;padding:10px 16px;border-radius:14px;background:#04140f;border:1.5px solid var(--line2)}
 .alarm.on{border-color:var(--red);color:#ffd0d0;animation:alm 1s infinite}.alarm.hit{border-color:#3fe6a6;color:#c8ffe9}
 @keyframes alm{50%{background:#ff6b6b22}}
 .cd{text-align:right}.cd b{display:block;font-family:var(--disp);font-size:2rem;color:var(--sun);min-width:7em}
@@ -424,9 +424,9 @@ body.deckmode .toast{bottom:110px}
 .ssnbars{display:flex;align-items:flex-end;gap:3px;height:50px;margin-top:8px}
 .ssnbars i{flex:1;background:#5fe3ff66;border-radius:3px 3px 0 0;cursor:pointer}.ssnbars i.on{background:var(--sun)}
 .scoper,.racer{display:grid;gap:12px}
-.scopecard{background:#080c24;border:1.5px solid var(--line);border-radius:14px;padding:12px 14px}
+.scopecard{background:#04140f;border:1.5px solid var(--line);border-radius:14px;padding:12px 14px}
 .scstat{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}.scstat b{display:block;font-family:var(--disp);font-size:1.5rem;color:var(--sun)}
-.racemsg{background:#080c24;border:1.5px solid var(--line);border-left:5px solid var(--sun);border-radius:12px;padding:10px 14px;margin-bottom:8px;min-height:3.2em;line-height:1.55}
+.racemsg{background:#04140f;border:1.5px solid var(--line);border-left:5px solid var(--sun);border-radius:12px;padding:10px 14px;margin-bottom:8px;min-height:3.2em;line-height:1.55}
 .racectl{display:flex;gap:10px;align-items:center;margin-top:8px;flex-wrap:wrap}
 .raceq{display:grid;gap:6px;margin-top:6px}.raceq div{display:flex;justify-content:space-between;background:var(--panel2);border-radius:10px;padding:6px 10px}.raceq b{color:var(--sun);font-family:var(--disp)}
 .fxrow{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:7px;font-size:.98rem}
@@ -448,7 +448,7 @@ body.deckmode .toast{bottom:110px}
 .cmcol>h3 span{float:right;color:var(--cyan);font-family:var(--body)}
 .cmcol .inner{overflow-y:auto;padding-right:4px;flex:1}
 .cmcol .inner::-webkit-scrollbar{width:7px} .cmcol .inner::-webkit-scrollbar-thumb{background:var(--line2);border-radius:4px}
-.cmq{background:#0a0f2c;border:1.5px solid var(--line);border-left:5px solid var(--sun);border-radius:14px;padding:10px 12px;margin:0 0 10px}
+.cmq{background:#06201a;border:1.5px solid var(--line);border-left:5px solid var(--sun);border-radius:14px;padding:10px 12px;margin:0 0 10px}
 .cmq.done{border-left-color:var(--cyan)} .cmq.mine{box-shadow:inset 0 0 0 1.5px #ffb13b55}
 .cmmeta{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center;font-size:.82rem;color:var(--dim)}
 .cmph{color:var(--mut);font-weight:700} .cmn{margin-left:auto;color:var(--sun);font-weight:700} .cmq.done .cmn{color:var(--cyan)}
@@ -459,7 +459,7 @@ body.deckmode .toast{bottom:110px}
 .cmrep{color:var(--cyan);border-color:var(--line2)}
 .cmbox textarea{min-height:70px;margin-top:6px}
 @media (max-width:760px){.cmboard{display:block}.cmcol{max-width:none;max-height:none}.cmcol .inner{overflow:visible}}
-.skybar{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;margin:-2px 0 12px;padding:6px 12px;background:#080c24;border:1.5px dashed var(--line2);border-radius:16px}
+.skybar{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;margin:-2px 0 12px;padding:6px 12px;background:#04140f;border:1.5px dashed var(--line2);border-radius:16px}
 .skyh{font-family:var(--disp);color:var(--cyan);margin-right:4px}
 .skybtn{display:inline-flex;align-items:center;min-height:36px;padding:2px 12px;border-radius:99px;background:var(--panel2);border:1.5px solid var(--line2);color:var(--fg);text-decoration:none;font-size:.98rem}
 .skybtn:hover{border-color:var(--cyan);color:var(--cyan)} .skyn{margin-left:auto;color:var(--dim)}
@@ -481,46 +481,46 @@ body.deckmode .toast{bottom:110px}
 /* 하늘 시계 */
 .skywrap{display:grid;grid-template-columns:1.6fr .9fr;gap:20px;align-items:start}
 @media (max-width:1000px){.skywrap{grid-template-columns:1fr}}
-.skycv{position:relative;border-radius:18px;overflow:hidden;border:1.5px solid var(--line);background:#050a1e}
+.skycv{position:relative;border-radius:18px;overflow:hidden;border:1.5px solid var(--line);background:#03110d}
 .skycv canvas{display:block;width:100%;height:auto}
 .skyclock{position:absolute;left:14px;top:10px;font-family:var(--disp);font-size:1.25rem;color:#ffe0a8;text-shadow:0 2px 8px #000}
-.skyctl{background:#080c24;border:1.5px solid var(--line);border-radius:18px;padding:14px 16px}
+.skyctl{background:#04140f;border:1.5px solid var(--line);border-radius:18px;padding:14px 16px}
 .dirbtn{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:6px}
 .dirbtn button{min-height:46px;padding:4px;background:var(--panel2);border:1.5px solid var(--line2);font-size:.98rem}
 .dirbtn button.on,.btn-s.on{background:var(--cyan);color:#04202a;border-color:var(--cyan);font-weight:900}
 input[type=range]{width:100%;accent-color:var(--sun);height:34px}
-.skyread{margin-top:10px;font-size:.98rem;color:var(--fg);background:#0d1335;border-radius:12px;padding:8px 12px;min-height:44px}
+.skyread{margin-top:10px;font-size:.98rem;color:var(--fg);background:#0a2520;border-radius:12px;padding:8px 12px;min-height:44px}
 .skyread b{color:var(--sun)}
 .skyglobe{margin:10px auto 0;max-width:280px}
 /* 사진 분류 */
 .trgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 @media (max-width:800px){.trgrid{grid-template-columns:1fr 1fr}}
-.trcard{border:2px solid var(--line2);border-radius:18px;padding:8px;background:#080c24}
+.trcard{border:2px solid var(--line2);border-radius:18px;padding:8px;background:#04140f}
 .trcard .fig{width:100%}.trcard .fig img{object-fit:cover}
 .trcard.ok{border-color:var(--green)}.trcard.no{border-color:var(--red)}
 .trbtn{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:8px}
 .trbtn button{min-height:42px;padding:2px;background:var(--panel2);border:1.5px solid var(--line2);font-weight:700}
 .trbtn button.on{background:var(--sun);color:#2a1500;border-color:var(--sun)}
 /* 공전 궤도 */
-.orbbox{background:#080c24;border:1.5px solid var(--line);border-radius:20px;padding:6px;max-width:620px;margin:0 auto;width:100%;cursor:grab}
+.orbbox{background:#04140f;border:1.5px solid var(--line);border-radius:20px;padding:6px;max-width:620px;margin:0 auto;width:100%;cursor:grab}
 .obinfo{display:grid;gap:10px}
 .obdate{font-family:var(--disp);font-size:1.8rem}
-.obrow{display:flex;gap:12px;align-items:center;background:#080c24;border:1.5px solid var(--line);border-radius:16px;padding:8px 14px}
+.obrow{display:flex;gap:12px;align-items:center;background:#04140f;border:1.5px solid var(--line);border-radius:16px;padding:8px 14px}
 .obrow b{font-family:var(--disp);font-size:1.5rem}
 .obrow.mid{border-color:var(--cyan)}.obrow.mid b{color:var(--cyan)}
 .obrow.sun{border-color:#ffb13b66}.obrow.sun b{color:var(--sun)}
-.obg{flex:0 0 auto;background:#050a1e;border-radius:12px}
+.obg{flex:0 0 auto;background:#03110d;border-radius:12px}
 /* 계절 맞추기 */
 .ssgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 @media (max-width:900px){.ssgrid{grid-template-columns:1fr 1fr}}
-.sscard{border:2px solid var(--line2);border-radius:18px;padding:10px;background:#080c24}
+.sscard{border:2px solid var(--line2);border-radius:18px;padding:10px;background:#04140f}
 .sscard.ok{border-color:var(--green)}
 .sscard h4{margin:0 0 4px;font-family:var(--disp);font-size:1.4rem;color:var(--sun)}
 .ssbtn{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px}
 .ssbtn button{min-height:44px;padding:4px;background:var(--panel2);border:1.5px solid var(--line2);font-weight:700}
 .ssbtn button.no{border-color:var(--red);opacity:.6}
 /* 달 위상 */
-.phview{display:flex;gap:16px;align-items:center;background:#080c24;border:1.5px solid var(--line);border-radius:20px;padding:12px 16px}
+.phview{display:flex;gap:16px;align-items:center;background:#04140f;border:1.5px solid var(--line);border-radius:20px;padding:12px 16px}
 .phview>div:first-child{flex:0 0 auto;width:170px}
 .phname{font-family:var(--disp);font-size:1.9rem;color:var(--sun);line-height:1.3}
 .phstrip{display:grid;grid-template-columns:repeat(8,1fr);gap:4px;margin-top:12px}
@@ -529,16 +529,16 @@ input[type=range]{width:100%;accent-color:var(--sun);height:34px}
 .phstrip img{width:100%;display:block}
 @media (max-width:600px){.phview{flex-direction:column}}
 .pgcount{display:flex;gap:6px;align-items:center;margin:4px 0 10px}
-.pgcount i{width:26px;height:10px;border-radius:9px;background:#273270}.pgcount i.on{background:var(--green)}
+.pgcount i{width:26px;height:10px;border-radius:9px;background:#1f5247}.pgcount i.on{background:var(--green)}
 .pggrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 .pggrid button{min-height:0;padding:6px;background:#000;border:2px solid var(--line2);border-radius:14px}
 .pggrid button.no{border-color:var(--red);opacity:.5}
 .pggrid img{width:100%;display:block}
 /* 그림자 */
-.ecstate{background:#080c24;border:1.5px solid var(--line);border-radius:18px;padding:12px 16px;min-height:112px}
+.ecstate{background:#04140f;border:1.5px solid var(--line);border-radius:18px;padding:12px 16px;min-height:112px}
 .ech{font-family:var(--disp);font-size:1.6rem;color:var(--sun)}
 .ecviews{display:flex;gap:12px;justify-content:center;margin-top:10px;text-align:center;flex-wrap:wrap}
-.ecviews>div{background:#050a1e;border:1.5px solid var(--line);border-radius:16px;padding:8px 12px}
+.ecviews>div{background:#03110d;border:1.5px solid var(--line);border-radius:16px;padding:8px 12px}
 /* 천재(정) 탐구 도우미 */
 .dpin{display:flex;flex-wrap:wrap;gap:8px 14px;margin-top:6px}
 .dpin label{display:flex;align-items:center;gap:6px;font-size:.98rem}
@@ -548,7 +548,7 @@ input[type=range]{width:100%;accent-color:var(--sun);height:34px}
 .dirbtn button.no{border-color:var(--red);color:var(--red)}
 table.sstab td.y{background:#3fe6a622}table.sstab td.n{background:#ff6b6b22}
 table.sstab select{min-height:44px;padding:6px 8px;font-size:1rem}
-.ovstage{position:relative;width:100%;max-width:820px;margin-left:auto;margin-right:auto;background:#050a1e;border:1.5px solid var(--line);border-radius:16px;overflow:hidden;touch-action:none;user-select:none}
+.ovstage{position:relative;width:100%;max-width:820px;margin-left:auto;margin-right:auto;background:#03110d;border:1.5px solid var(--line);border-radius:16px;overflow:hidden;touch-action:none;user-select:none}
 .ovcard{position:absolute;border:2.5px solid;border-radius:12px;background:rgba(30,60,140,.22);cursor:grab;touch-action:none;transition:box-shadow .2s}
 .ovcard.drag{cursor:grabbing;box-shadow:0 14px 34px #000c}
 .ovcard.ok{box-shadow:0 0 0 3px var(--green),0 0 24px #3fe6a655}
@@ -572,10 +572,13 @@ table.sstab select{min-height:44px;padding:6px 8px;font-size:1rem}
 .dkthumbs img.on{opacity:1;border-color:var(--cyan)}
 .dkov:fullscreen .dktop,.dkov:fullscreen .dkthumbs{display:none}.dkov:fullscreen .dkbody{padding:0}.dkov:fullscreen .dkbody img{border-radius:0;box-shadow:none}
 .dkov:fullscreen .dkarw{opacity:.25}.dkov:fullscreen .dkarw:hover{opacity:1}
-.dkmini{display:inline-block;margin:6px 0 2px;padding:4px 12px;border-radius:999px;border:1.5px solid var(--cyan);color:var(--cyan);font-size:.9rem;background:#05081acc;cursor:pointer}
+.dkmini{display:inline-block;margin:6px 0 2px;padding:4px 12px;border-radius:999px;border:1.5px solid var(--cyan);color:var(--cyan);font-size:.9rem;background:#03130fcc;cursor:pointer}
 .dkmini:hover{background:#0b2238}
 .stg-top .dkbtn{white-space:nowrap}
 @media (max-width:700px){.stg-top .dkbtn{font-size:.8rem;padding:2px 8px}.dkarw{width:40px;height:56px}.dkthumbs img{height:44px}}
+/* 시즌2 테마: 심해 청록 — 입장 화면 별궤적 사진을 청록빛으로 */
+#gate{background-image:radial-gradient(900px 600px at 70% 20%,#0f6b5a66,transparent 60%),linear-gradient(#0b6b5a,#06303a),url(img/trail_n.jpg)!important;background-blend-mode:normal,color,normal!important}
+.gatebox{border-color:#2f7a68!important}
 </style>
 </head>
 <body class="gate">
@@ -699,7 +702,7 @@ function astronautSVG(pts,suit,size,o){
   <defs>
    <linearGradient id="${uid}s" x1="0" x2="1"><stop offset="0" stop-color="${body}"/><stop offset=".6" stop-color="${body}"/><stop offset="1" stop-color="${bodyD}"/></linearGradient>
    <radialGradient id="${uid}f" cx=".4" cy=".35"><stop offset="0" stop-color="#ffe3c9"/><stop offset="1" stop-color="#e2b48f"/></radialGradient>
-   <radialGradient id="${uid}v" cx=".35" cy=".3"><stop offset="0" stop-color="${v2}" stop-opacity=".9"/><stop offset=".5" stop-color="${v1}" stop-opacity="${vo}"/><stop offset="1" stop-color="#0a0f2c" stop-opacity=".55"/></radialGradient>
+   <radialGradient id="${uid}v" cx=".35" cy=".3"><stop offset="0" stop-color="${v2}" stop-opacity=".9"/><stop offset=".5" stop-color="${v1}" stop-opacity="${vo}"/><stop offset="1" stop-color="#06201a" stop-opacity=".55"/></radialGradient>
    <linearGradient id="${uid}m" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#c9d0e3"/><stop offset="1" stop-color="#7e879f"/></linearGradient>
   </defs>
   ${H("legend")?`<circle cx="120" cy="150" r="118" fill="#ffd166" opacity=".14"><animate attributeName="opacity" values=".08;.22;.08" dur="2.4s" repeatCount="indefinite"/></circle><circle cx="120" cy="150" r="96" fill="none" stroke="#ffd166" stroke-width="2" stroke-dasharray="3 9" opacity=".7"><animateTransform attributeName="transform" type="rotate" from="0 120 150" to="360 120 150" dur="24s" repeatCount="indefinite"/></circle>`:""}
@@ -716,9 +719,9 @@ function astronautSVG(pts,suit,size,o){
   <!-- 몸통 -->
   <path d="M80 108 q40 -14 80 0 q14 6 14 24 v70 q0 16 -16 16 h-76 q-16 0 -16 -16 v-70 q0 -18 14 -24z" fill="url(#${uid}s)" stroke="${bodyD}" stroke-width="2.5"/>
   <path d="M120 112 v100" stroke="${bodyD}" stroke-width="2" opacity=".5"/><path d="M84 160 h72" stroke="${bodyD}" stroke-width="1.5" opacity=".4"/>
-  ${suitOn?`<rect x="92" y="138" width="56" height="36" rx="8" fill="#0d1335" stroke="${bodyD}" stroke-width="2"/><circle cx="104" cy="150" r="4" fill="#3fe6a6"/><circle cx="120" cy="150" r="4" fill="#ffb13b"/><circle cx="136" cy="150" r="4" fill="#5fe3ff"/><rect x="100" y="160" width="40" height="6" rx="3" fill="#3b4a9a"/><rect x="82" y="188" width="18" height="10" rx="3" fill="${bodyD}" opacity=".7"/><rect x="140" y="188" width="18" height="10" rx="3" fill="${bodyD}" opacity=".7"/>`
+  ${suitOn?`<rect x="92" y="138" width="56" height="36" rx="8" fill="#0a2520" stroke="${bodyD}" stroke-width="2"/><circle cx="104" cy="150" r="4" fill="#3fe6a6"/><circle cx="120" cy="150" r="4" fill="#ffb13b"/><circle cx="136" cy="150" r="4" fill="#5fe3ff"/><rect x="100" y="160" width="40" height="6" rx="3" fill="#2f7a68"/><rect x="82" y="188" width="18" height="10" rx="3" fill="${bodyD}" opacity=".7"/><rect x="140" y="188" width="18" height="10" rx="3" fill="${bodyD}" opacity=".7"/>`
    :`<path d="M100 110 l20 22 l20 -22" fill="none" stroke="#454c6b" stroke-width="3"/><rect x="110" y="140" width="20" height="26" rx="4" fill="#454c6b" opacity=".6"/>`}
-  ${H("patch")?`<circle cx="150" cy="128" r="12" fill="#0a0f2c" stroke="#ffb13b" stroke-width="2.5"/><circle cx="150" cy="128" r="6" fill="none" stroke="#5fe3ff" stroke-width="1.5"/><text x="150" y="131.5" text-anchor="middle" font-size="8" fill="#ffb13b" font-weight="900">${esc(SCHOOL)}</text>`:""}
+  ${H("patch")?`<circle cx="150" cy="128" r="12" fill="#06201a" stroke="#ffb13b" stroke-width="2.5"/><circle cx="150" cy="128" r="6" fill="none" stroke="#5fe3ff" stroke-width="1.5"/><text x="150" y="131.5" text-anchor="middle" font-size="8" fill="#ffb13b" font-weight="900">${esc(SCHOOL)}</text>`:""}
   <!-- 팔 -->
   <path d="M80 118 q-26 10 -34 60 q-2 14 8 18 l14 2 q10 -2 10 -14 q0 -30 10 -50z" fill="url(#${uid}s)" stroke="${bodyD}" stroke-width="2.5"/>
   <path d="M160 118 q26 10 34 60 q2 14 -8 18 l-14 2 q-10 -2 -10 -14 q0 -30 -10 -50z" fill="url(#${uid}s)" stroke="${bodyD}" stroke-width="2.5"/>
@@ -745,7 +748,7 @@ function astronautSVG(pts,suit,size,o){
   <path d="M99 58 q7 -4 14 0 M127 58 q7 -4 14 0" stroke="${brow}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
   <path d="M110 86 q10 8 20 0" stroke="#b05a4a" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M118 76 q2 3 0 5" stroke="#c98f72" stroke-width="1.5" fill="none"/>`}
   ${H("helmet")?`<circle cx="120" cy="66" r="50" fill="url(#${uid}v)" stroke="#e6ecff" stroke-width="5"/><path d="M80 52 q20 -34 60 -22" stroke="#fff" stroke-width="4" fill="none" opacity=".55" stroke-linecap="round"/><path d="M158 86 q-6 18 -24 26" stroke="#fff" stroke-width="2" fill="none" opacity=".35" stroke-linecap="round"/><rect x="100" y="110" width="40" height="8" rx="3" fill="#9aa3bd" stroke="${bodyD}"/>`:""}
-  ${H("robot")?`<g><rect x="6" y="196" width="34" height="40" rx="9" fill="url(#${uid}m)" stroke="#5fe3ff" stroke-width="2"/><rect x="12" y="206" width="22" height="12" rx="4" fill="#0a0f2c"/><circle cx="18" cy="212" r="2.5" fill="#5fe3ff"/><circle cx="28" cy="212" r="2.5" fill="#5fe3ff"/><rect x="14" y="224" width="18" height="3" rx="1.5" fill="#3b4a9a"/><line x1="23" y1="196" x2="23" y2="184" stroke="#5fe3ff" stroke-width="2"/><circle cx="23" cy="181" r="3.5" fill="#ffb13b"><animate attributeName="opacity" values="1;.3;1" dur="1.2s" repeatCount="indefinite"/></circle><rect x="2" y="238" width="42" height="6" rx="3" fill="#3b4a9a"/></g>`:""}
+  ${H("robot")?`<g><rect x="6" y="196" width="34" height="40" rx="9" fill="url(#${uid}m)" stroke="#5fe3ff" stroke-width="2"/><rect x="12" y="206" width="22" height="12" rx="4" fill="#06201a"/><circle cx="18" cy="212" r="2.5" fill="#5fe3ff"/><circle cx="28" cy="212" r="2.5" fill="#5fe3ff"/><rect x="14" y="224" width="18" height="3" rx="1.5" fill="#2f7a68"/><line x1="23" y1="196" x2="23" y2="184" stroke="#5fe3ff" stroke-width="2"/><circle cx="23" cy="181" r="3.5" fill="#ffb13b"><animate attributeName="opacity" values="1;.3;1" dur="1.2s" repeatCount="indefinite"/></circle><rect x="2" y="238" width="42" height="6" rx="3" fill="#2f7a68"/></g>`:""}
   </svg>`;
 }
 const isT=()=>!!(me&&me.cls==="T");
@@ -760,22 +763,22 @@ function directorSVG(size){
   <linearGradient id="${uid}t" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#5fe3ff"/><stop offset="1" stop-color="#2a6fd6"/></linearGradient></defs>
   <!-- 다리 -->
   <path d="M86 214 q-4 30 -2 54 h30 q0 -26 4 -54z" fill="#1a2250"/><path d="M122 214 q4 30 4 54 h30 q2 -24 -2 -54z" fill="#1a2250"/>
-  <path d="M84 266 h34 v16 q0 6 -6 6 h-30 q-6 0 -6 -6 v-4 q0 -8 8 -12z" fill="#0b0f28"/><path d="M122 266 h34 q8 4 8 12 v4 q0 6 -6 6 h-30 q-6 0 -6 -6z" fill="#0b0f28"/>
+  <path d="M84 266 h34 v16 q0 6 -6 6 h-30 q-6 0 -6 -6 v-4 q0 -8 8 -12z" fill="#07190f"/><path d="M122 266 h34 q8 4 8 12 v4 q0 6 -6 6 h-30 q-6 0 -6 -6z" fill="#07190f"/>
   <!-- 관제복 -->
-  <path d="M80 108 q40 -14 80 0 q14 6 14 24 v70 q0 16 -16 16 h-76 q-16 0 -16 -16 v-70 q0 -18 14 -24z" fill="url(#${uid}c)" stroke="#3b4a9a" stroke-width="2.5"/>
+  <path d="M80 108 q40 -14 80 0 q14 6 14 24 v70 q0 16 -16 16 h-76 q-16 0 -16 -16 v-70 q0 -18 14 -24z" fill="url(#${uid}c)" stroke="#2f7a68" stroke-width="2.5"/>
   <path d="M100 108 l20 26 l20 -26" fill="#f3f5ff"/><path d="M114 134 l6 70 l6 -70z" fill="#ffb13b"/>
-  <path d="M86 110 q-6 50 4 100 M154 110 q6 50 -4 100" stroke="#3b4a9a" stroke-width="1.5" fill="none" opacity=".6"/>
+  <path d="M86 110 q-6 50 4 100 M154 110 q6 50 -4 100" stroke="#2f7a68" stroke-width="1.5" fill="none" opacity=".6"/>
   <!-- 어깨 견장 + 명찰 -->
   <rect x="74" y="108" width="30" height="10" rx="3" fill="#ffd166" stroke="#b8860b"/><rect x="136" y="108" width="30" height="10" rx="3" fill="#ffd166" stroke="#b8860b"/>
   <g stroke="#b8860b" stroke-width="1.5"><path d="M80 113 h18 M142 113 h18"/><path d="M84 110 v6 M90 110 v6 M96 110 v6 M146 110 v6 M152 110 v6 M158 110 v6"/></g>
   <rect x="134" y="140" width="30" height="12" rx="2" fill="#f3f5ff"/><text x="149" y="149" text-anchor="middle" font-size="7.5" fill="#0e1640" font-weight="900">센터장</text>
-  <circle cx="92" cy="146" r="11" fill="#0a0f2c" stroke="#ffb13b" stroke-width="2.5"/><circle cx="92" cy="146" r="5.5" fill="none" stroke="#5fe3ff" stroke-width="1.5"/><text x="92" y="149.5" text-anchor="middle" font-size="7.5" fill="#ffb13b" font-weight="900">${esc(SCHOOL)}</text>
+  <circle cx="92" cy="146" r="11" fill="#06201a" stroke="#ffb13b" stroke-width="2.5"/><circle cx="92" cy="146" r="5.5" fill="none" stroke="#5fe3ff" stroke-width="1.5"/><text x="92" y="149.5" text-anchor="middle" font-size="7.5" fill="#ffb13b" font-weight="900">${esc(SCHOOL)}</text>
   <!-- 팔 -->
-  <path d="M80 118 q-26 10 -34 60 q-2 14 8 18 l14 2 q10 -2 10 -14 q0 -30 10 -50z" fill="url(#${uid}c)" stroke="#3b4a9a" stroke-width="2.5"/>
-  <path d="M160 118 q26 10 34 60 q2 14 -8 18 l-14 2 q-10 -2 -10 -14 q0 -30 -10 -50z" fill="url(#${uid}c)" stroke="#3b4a9a" stroke-width="2.5"/>
+  <path d="M80 118 q-26 10 -34 60 q-2 14 8 18 l14 2 q10 -2 10 -14 q0 -30 10 -50z" fill="url(#${uid}c)" stroke="#2f7a68" stroke-width="2.5"/>
+  <path d="M160 118 q26 10 34 60 q2 14 -8 18 l-14 2 q-10 -2 -10 -14 q0 -30 -10 -50z" fill="url(#${uid}c)" stroke="#2f7a68" stroke-width="2.5"/>
   <circle cx="58" cy="204" r="12" fill="url(#${uid}f)"/><circle cx="182" cy="204" r="12" fill="url(#${uid}f)"/>
   <!-- 태블릿 -->
-  <g transform="rotate(-12 170 196)"><rect x="150" y="176" width="44" height="58" rx="5" fill="#0b0f28" stroke="#9aa3bd" stroke-width="2"/><rect x="155" y="182" width="34" height="42" rx="2" fill="url(#${uid}t)" opacity=".85"/><path d="M158 212 l8 -10 l6 6 l8 -14 l6 8" stroke="#fff" stroke-width="2" fill="none"/></g>
+  <g transform="rotate(-12 170 196)"><rect x="150" y="176" width="44" height="58" rx="5" fill="#07190f" stroke="#9aa3bd" stroke-width="2"/><rect x="155" y="182" width="34" height="42" rx="2" fill="url(#${uid}t)" opacity=".85"/><path d="M158 212 l8 -10 l6 6 l8 -14 l6 8" stroke="#fff" stroke-width="2" fill="none"/></g>
   <!-- 목·머리 -->
   <ellipse cx="120" cy="108" rx="16" ry="7" fill="#e2b48f"/>
   <ellipse cx="120" cy="66" rx="34" ry="38" fill="url(#${uid}f)"/>
@@ -870,7 +873,7 @@ const ROT_FIG=`<div class="figure"><svg viewBox="0 0 440 330" style="width:100%;
  <defs><radialGradient id="rfE" cx=".38" cy=".35"><stop offset="0" stop-color="#9fd3ff"/><stop offset=".6" stop-color="#3f86e0"/><stop offset="1" stop-color="#1b3f8a"/></radialGradient>
  <marker id="rfA" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="#3fe6a6"/></marker>
  <marker id="rfB" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="#ffb13b"/></marker></defs>
- <circle cx="220" cy="165" r="140" fill="none" stroke="#3b4a9a" stroke-width="1.5" stroke-dasharray="4 6"/>
+ <circle cx="220" cy="165" r="140" fill="none" stroke="#2f7a68" stroke-width="1.5" stroke-dasharray="4 6"/>
  ${[[60,5],[110,8],[160,4],[220,7],[300,5],[340,9],[20,6],[250,4]].map(([a,s])=>`<circle cx="${(220+140*Math.cos(a*D2R)).toFixed(1)}" cy="${(165+140*Math.sin(a*D2R)).toFixed(1)}" r="${s/2.4}" fill="#fff"/>`).join("")}
  <path d="M 92 108 A 140 140 0 0 1 160 38" fill="none" stroke="#ffb13b" stroke-width="5" marker-end="url(#rfB)"/>
  <text x="172" y="30" fill="#ffd166" font-size="15" font-weight="700">하늘이 도는 것처럼 보이는 방향 (동→서)</text>
@@ -884,7 +887,7 @@ const ROT_FIG=`<div class="figure"><svg viewBox="0 0 440 330" style="width:100%;
 
 /* 천구 */
 const DOME_FIG=`<div class="figure"><svg viewBox="0 0 460 320" style="width:100%;display:block">
- <defs><radialGradient id="dmG" cx=".5" cy="1"><stop offset="0" stop-color="#1b2a6e"/><stop offset="1" stop-color="#080c24"/></radialGradient></defs>
+ <defs><radialGradient id="dmG" cx=".5" cy="1"><stop offset="0" stop-color="#1b2a6e"/><stop offset="1" stop-color="#04140f"/></radialGradient></defs>
  <path d="M30 236 A200 200 0 0 1 430 236 Z" fill="url(#dmG)" stroke="#5fe3ff" stroke-width="1.5" opacity=".95"/>
  <ellipse cx="230" cy="236" rx="200" ry="44" fill="#0f2a1e" stroke="#3fe6a6" stroke-width="1.5"/>
  ${(()=>{let g="";const px=230+160*Math.cos(37*D2R), py=236-160*Math.sin(37*D2R);
@@ -894,8 +897,8 @@ const DOME_FIG=`<div class="figure"><svg viewBox="0 0 460 320" style="width:100%
    g+=`<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="5" fill="#ffd166"/><text x="${(px+8).toFixed(1)}" y="${(py-12).toFixed(1)}" fill="#ffd166" font-size="15" font-weight="700" text-anchor="middle">북극성</text>`;return g;})()}
  ${[[340,90],[130,70],[80,150],[370,170],[200,60],[280,120],[160,130],[60,200],[400,210]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="2" fill="#fff"/>`).join("")}
  <g transform="translate(230 230)"><circle cy="-14" r="5" fill="#ffe3c9"/><path d="M0 -9 v12 M-6 -3 h12 M0 3 l-5 8 M0 3 l5 8" stroke="#ffe3c9" stroke-width="2.4" stroke-linecap="round"/></g>
- <text x="22" y="246" fill="#e9ecff" font-size="16" font-weight="700">남</text><text x="426" y="246" fill="#e9ecff" font-size="16" font-weight="700">북</text>
- <text x="230" y="300" fill="#e9ecff" font-size="16" font-weight="700" text-anchor="middle">동</text><text x="230" y="186" fill="#a3adda" font-size="14" text-anchor="middle">서</text>
+ <text x="22" y="246" fill="#e6faf4" font-size="16" font-weight="700">남</text><text x="426" y="246" fill="#e6faf4" font-size="16" font-weight="700">북</text>
+ <text x="230" y="300" fill="#e6faf4" font-size="16" font-weight="700" text-anchor="middle">동</text><text x="230" y="186" fill="#a3cfc4" font-size="14" text-anchor="middle">서</text>
  <text x="20" y="36" fill="#5fe3ff" font-size="15">천구 (가상의 둥근 하늘)</text><text x="60" y="268" fill="#3fe6a6" font-size="13">관측자(천구의 중심 = 지구)</text>
 </svg><p class="figcap">천구 — 별들은 거대한 구의 안쪽에 붙어 있는 것처럼 보이고, 그 중심에 지구가 있다. 보라색 점선 = 별이 하루 동안 그리는 원</p></div>`;
 
@@ -906,14 +909,14 @@ const AREA_FIG=`<div class="figure"><svg viewBox="0 0 520 250" style="width:100%
  <text x="390" y="24" fill="#a497ff" font-size="16" font-weight="700" text-anchor="middle">월식 — 밤인 곳 어디서나</text>
  <g transform="translate(130 136)"><path d="M-120 -40 L-30 -8 L-30 8 L-120 40z" fill="#ffd16622"/><circle cx="-36" r="12" fill="#3a4160"/>
   <path d="M-30 -9 L46 -3 L46 3 L-30 9z" fill="#000" opacity=".55"/>
-  <circle cx="70" r="58" fill="url(#arE)"/><path d="M70 -58 A58 58 0 0 1 70 58 Z" fill="#05081a" opacity=".55"/>
-  <ellipse cx="16" cy="0" rx="8" ry="24" fill="#05081a" opacity=".4"/><ellipse cx="13.5" cy="0" rx="3" ry="6" fill="#05081a"/>
-  <text x="-6" y="80" fill="#e9ecff" font-size="13" text-anchor="middle">좁은 지역</text></g>
- <g transform="translate(390 136)"><circle cx="-40" r="58" fill="url(#arE)"/><path d="M-40 -58 A58 58 0 0 1 -40 58 Z" fill="#05081a" opacity=".6"/>
+  <circle cx="70" r="58" fill="url(#arE)"/><path d="M70 -58 A58 58 0 0 1 70 58 Z" fill="#03130f" opacity=".55"/>
+  <ellipse cx="16" cy="0" rx="8" ry="24" fill="#03130f" opacity=".4"/><ellipse cx="13.5" cy="0" rx="3" ry="6" fill="#03130f"/>
+  <text x="-6" y="80" fill="#e6faf4" font-size="13" text-anchor="middle">좁은 지역</text></g>
+ <g transform="translate(390 136)"><circle cx="-40" r="58" fill="url(#arE)"/><path d="M-40 -58 A58 58 0 0 1 -40 58 Z" fill="#03130f" opacity=".6"/>
   <path d="M-40 -58 A58 58 0 0 1 -40 58 Z" fill="none" stroke="#a497ff" stroke-width="4"/>
   <path d="M-40 -58 L110 -26 L110 26 L-40 58z" fill="#000" opacity=".35"/><circle cx="92" r="16" fill="#c8553d"/>
   <text x="-20" y="80" fill="#a497ff" font-size="13" text-anchor="middle">지구의 밤인 쪽 전체</text></g>
- <text x="14" y="240" fill="#a3adda" font-size="12">← 햇빛</text><text x="300" y="240" fill="#a3adda" font-size="12">※ 크기와 거리의 비율은 실제와 다름</text>
+ <text x="14" y="240" fill="#a3cfc4" font-size="12">← 햇빛</text><text x="300" y="240" fill="#a3cfc4" font-size="12">※ 크기와 거리의 비율은 실제와 다름</text>
 </svg><p class="figcap">일식은 달의 그림자가 지구에 닿는 좁은 곳에서만, 월식은 달이 지구 그림자에 들어가므로 그 시각 지구에서 밤인 곳 어디서나 보인다</p></div>`;
 
 /* ── 별 자료 (적경 시, 적위 도, 밝기) — 하늘 시계 시뮬레이션용 ── */
@@ -1095,15 +1098,15 @@ function orbitSVG(doy,opt){
  <defs><radialGradient id="obS" cx=".45" cy=".4"><stop offset="0" stop-color="#fff6cf"/><stop offset=".6" stop-color="#ffb13b"/><stop offset="1" stop-color="#ff7a1a"/></radialGradient>
  <radialGradient id="obE" cx=".4" cy=".35"><stop offset="0" stop-color="#9fd3ff"/><stop offset="1" stop-color="#2a63c9"/></radialGradient>
  <marker id="obA" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#5fe3ff"/></marker></defs>
- <circle cx="${C}" cy="${C}" r="${R2+26}" fill="#ffffff05" stroke="#273270"/><circle cx="${C}" cy="${C}" r="${R2-26}" fill="none" stroke="#273270"/>`;
- ZOD.forEach(z=>{const [x1,y1]=P(z[1],R2-26),[x2,y2]=P(z[1],R2+26);g+=`<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="#273270"/>`;
-  const m=zodMid(z),big=BIG4.includes(z[0]);const [x,y]=P(m,R2);const hl=opt.quiz?(big?"#e9ecff":"#6d78b3"):z[0]===midZ?"#5fe3ff":z[0]===sunZ?"#ffb13b":(big?"#e9ecff":"#6d78b3");
+ <circle cx="${C}" cy="${C}" r="${R2+26}" fill="#ffffff05" stroke="#1f5247"/><circle cx="${C}" cy="${C}" r="${R2-26}" fill="none" stroke="#1f5247"/>`;
+ ZOD.forEach(z=>{const [x1,y1]=P(z[1],R2-26),[x2,y2]=P(z[1],R2+26);g+=`<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="#1f5247"/>`;
+  const m=zodMid(z),big=BIG4.includes(z[0]);const [x,y]=P(m,R2);const hl=opt.quiz?(big?"#e6faf4":"#6aa396"):z[0]===midZ?"#5fe3ff":z[0]===sunZ?"#ffb13b":(big?"#e6faf4":"#6aa396");
   if(big&&!opt.noGlyph)g+=glyphSVG(z[0],x,y-6,0.55,hl);
-  g+=`<text x="${x.toFixed(1)}" y="${(y+(big?16:5)).toFixed(1)}" text-anchor="middle" font-size="${big?15:11.5}" font-weight="${big||hl!=="#6d78b3"?800:400}" fill="${hl}">${z[0].replace("자리","")}</text>`;});
- g+=`<circle cx="${C}" cy="${C}" r="${R1}" fill="none" stroke="#3b4a9a" stroke-width="1.5" stroke-dasharray="4 6"/>`;
+  g+=`<text x="${x.toFixed(1)}" y="${(y+(big?16:5)).toFixed(1)}" text-anchor="middle" font-size="${big?15:11.5}" font-weight="${big||hl!=="#6aa396"?800:400}" fill="${hl}">${z[0].replace("자리","")}</text>`;});
+ g+=`<circle cx="${C}" cy="${C}" r="${R1}" fill="none" stroke="#2f7a68" stroke-width="1.5" stroke-dasharray="4 6"/>`;
  const MD1=[1,32,60,91,121,152,182,213,244,274,305,335]; /* 매달 1일 */
- MD1.forEach((d,m)=>{const [x,y]=P(wrap360(sunLon(d)+180),R1);const big=opt.earths&&opt.earths.includes(m+1);g+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${big?5:3}" fill="${big?'#a497ff':'#3b4a9a'}"/><text x="${(C+(x-C)*0.84).toFixed(1)}" y="${(C+(y-C)*0.84+4).toFixed(1)}" text-anchor="middle" font-size="${big?14:11}" font-weight="${big?800:400}" fill="${big?'#e9ecff':'#8a93bb'}">${m+1}월</text>`;
-  if(big)g+=`<g transform="translate(${x.toFixed(1)} ${y.toFixed(1)})"><circle r="12" fill="#2a63c9"/><path d="M0 -12 A12 12 0 0 1 0 12 Z" fill="#05081a" opacity=".7" transform="rotate(${(180-wrap360(sunLon(d)+180)).toFixed(1)})"/></g>`;});
+ MD1.forEach((d,m)=>{const [x,y]=P(wrap360(sunLon(d)+180),R1);const big=opt.earths&&opt.earths.includes(m+1);g+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${big?5:3}" fill="${big?'#a497ff':'#2f7a68'}"/><text x="${(C+(x-C)*0.84).toFixed(1)}" y="${(C+(y-C)*0.84+4).toFixed(1)}" text-anchor="middle" font-size="${big?14:11}" font-weight="${big?800:400}" fill="${big?'#e6faf4':'#86b3a8'}">${m+1}월</text>`;
+  if(big)g+=`<g transform="translate(${x.toFixed(1)} ${y.toFixed(1)})"><circle r="12" fill="#2a63c9"/><path d="M0 -12 A12 12 0 0 1 0 12 Z" fill="#03130f" opacity=".7" transform="rotate(${(180-wrap360(sunLon(d)+180)).toFixed(1)})"/></g>`;});
  /* 공전 방향 화살표 (시계 반대) */
  g+=`<path d="M ${C-R1*0.7} ${C-R1*0.71} A ${R1} ${R1} 0 0 0 ${C-R1*0.98} ${C-R1*0.2}" fill="none" stroke="#5fe3ff" stroke-width="2.5" marker-end="url(#obA)" opacity=".8" transform="rotate(-8 ${C} ${C})"/>`;
  const [ex,ey]=P(earthL,R1), [mx,my]=P(earthL,R2-30), [sx2,sy2]=P(sunL,R2-30);
@@ -1111,18 +1114,18 @@ function orbitSVG(doy,opt){
  g+=`<line x1="${ex.toFixed(1)}" y1="${ey.toFixed(1)}" x2="${mx.toFixed(1)}" y2="${my.toFixed(1)}" stroke="#5fe3ff" stroke-width="3" marker-end="url(#obA)"/>`;}
  g+=`<circle cx="${C}" cy="${C}" r="34" fill="url(#obS)"/><text x="${C}" y="${C+5}" text-anchor="middle" font-size="15" font-weight="800" fill="#2a1500">태양</text>`;
  const ang=(180-earthL); /* 화면에서 지구 위치 각 */
- if(!opt.earths)g+=`<g transform="translate(${ex.toFixed(1)} ${ey.toFixed(1)})"><circle r="17" fill="url(#obE)"/><path d="M0 -17 A17 17 0 0 1 0 17 Z" fill="#05081a" opacity=".7" transform="rotate(${ang.toFixed(1)})"/><circle r="${opt.drag?30:0}" fill="transparent" class="ehit"/></g>`;
+ if(!opt.earths)g+=`<g transform="translate(${ex.toFixed(1)} ${ey.toFixed(1)})"><circle r="17" fill="url(#obE)"/><path d="M0 -17 A17 17 0 0 1 0 17 Z" fill="#03130f" opacity=".7" transform="rotate(${ang.toFixed(1)})"/><circle r="${opt.drag?30:0}" fill="transparent" class="ehit"/></g>`;
  if(!opt.mini)g+=`<text x="${(ex+(ex-C)*0.18).toFixed(1)}" y="${(ey+(ey-C)*0.18-24).toFixed(1)}" text-anchor="middle" font-size="13" fill="#5fe3ff" font-weight="700">한밤중</text>`;
  return g+`</svg>`;}
 function zodStripSVG(doy){
  const W=900,H=118,sunL=sunLon(doy); const X=L=>W-(wrap360(L-0)/360)*W;
- let g=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;display:block"><rect x="0" y="22" width="${W}" height="56" rx="10" fill="#0a1033" stroke="#273270"/>`;
- ZOD.forEach(z=>{const x1=X(z[1]);g+=`<line x1="${x1}" y1="22" x2="${x1}" y2="78" stroke="#273270"/>`;const m=zodMid(z);const x=X(m);const big=BIG4.includes(z[0]);
-  g+=`<text x="${x.toFixed(1)}" y="${big?56:55}" text-anchor="middle" font-size="${big?15:12}" font-weight="${big?800:400}" fill="${big?'#e9ecff':'#8a93bb'}">${z[0].replace("자리","")}</text>`;});
+ let g=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;display:block"><rect x="0" y="22" width="${W}" height="56" rx="10" fill="#0a1033" stroke="#1f5247"/>`;
+ ZOD.forEach(z=>{const x1=X(z[1]);g+=`<line x1="${x1}" y1="22" x2="${x1}" y2="78" stroke="#1f5247"/>`;const m=zodMid(z);const x=X(m);const big=BIG4.includes(z[0]);
+  g+=`<text x="${x.toFixed(1)}" y="${big?56:55}" text-anchor="middle" font-size="${big?15:12}" font-weight="${big?800:400}" fill="${big?'#e6faf4':'#86b3a8'}">${z[0].replace("자리","")}</text>`;});
  const xs=X(sunL); g+=`<circle cx="${xs.toFixed(1)}" cy="50" r="16" fill="#ffb13b" opacity=".9"/><circle cx="${xs.toFixed(1)}" cy="50" r="24" fill="#ffb13b33"/>`;
  g+=`<path d="M ${W-40} 100 H 40" stroke="#ffd166" stroke-width="2" marker-end="url(#zsA)"/><defs><marker id="zsA" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#ffd166"/></marker></defs>
   <text x="${W/2}" y="114" text-anchor="middle" font-size="13" fill="#ffd166">태양은 별자리 사이를 서쪽 → 동쪽으로 (일 년에 한 바퀴)</text>
-  <text x="8" y="16" font-size="13" fill="#a3adda">← 동</text><text x="${W-8}" y="16" font-size="13" fill="#a3adda" text-anchor="end">서 →</text></svg>`;
+  <text x="8" y="16" font-size="13" fill="#a3cfc4">← 동</text><text x="${W-8}" y="16" font-size="13" fill="#a3cfc4" text-anchor="end">서 →</text></svg>`;
  return g;}
 function phaseTopSVG(alpha,opt){
  opt=opt||{}; const W=600,H=520,cx=270,cy=260,R=175; const a=alpha*D2R; const mx=cx+R*Math.cos(a), my=cy-R*Math.sin(a);
@@ -1132,13 +1135,13 @@ function phaseTopSVG(alpha,opt){
  <marker id="phMk" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#3fe6a6"/></marker></defs>`;
  for(let i=0;i<6;i++){const y=50+i*84;g+=`<line x1="${W-10}" y1="${y}" x2="${W-70}" y2="${y}" stroke="#ffd166" stroke-width="2.5" marker-end="url(#phA)" opacity=".8"/>`;}
  g+=`<text x="${W-14}" y="30" text-anchor="end" font-size="15" fill="#ffd166" font-weight="700">← 햇빛</text>`;
- g+=`<circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="#3b4a9a" stroke-width="1.5" stroke-dasharray="4 6"/>`;
+ g+=`<circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="#2f7a68" stroke-width="1.5" stroke-dasharray="4 6"/>`;
  {const R3=R+30;g+=`<path d="M ${cx+R3*Math.cos(112*D2R)} ${cy-R3*Math.sin(112*D2R)} A ${R3} ${R3} 0 0 0 ${cx+R3*Math.cos(150*D2R)} ${cy-R3*Math.sin(150*D2R)}" fill="none" stroke="#3fe6a6" stroke-width="3" marker-end="url(#phMk)"/><text x="${cx+(R3+16)*Math.cos(131*D2R)}" y="${cy-(R3+16)*Math.sin(131*D2R)}" font-size="13" fill="#3fe6a6" text-anchor="end">공전 (서→동)</text>`;}
  if(opt.ticks){for(let i=0;i<8;i++){const t=i*45*D2R,x=cx+R*Math.cos(t),y=cy-R*Math.sin(t);const hi=opt.hi===i;
-   g+=`<g transform="translate(${x.toFixed(1)} ${y.toFixed(1)})"><circle r="19" fill="#0a0f2c" stroke="${hi?'#ffb13b':'#273270'}" stroke-width="${hi?4:1.5}"/><circle r="15" fill="#3a4160"/><path d="M0 -15 A15 15 0 0 1 0 15 Z" fill="#e9ecff"/>${hi?'<text y="-26" text-anchor="middle" font-size="18" fill="#ffb13b" font-weight="900">?</text>':''}</g>`;
-   if(opt.names){const lb=["삭","","상현","","망","","하현",""][i];if(lb)g+=`<text x="${(cx+(R+44)*Math.cos(t)).toFixed(1)}" y="${(cy-(R+44)*Math.sin(t)+6).toFixed(1)}" text-anchor="middle" font-size="17" font-weight="800" fill="#e9ecff">${lb}</text>`;}}}
- g+=`<circle cx="${cx}" cy="${cy}" r="40" fill="url(#phE)"/><path d="M${cx} ${cy-40} A40 40 0 0 0 ${cx} ${cy+40} Z" fill="#05081a" opacity=".65"/><text x="${cx}" y="${cy+5}" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">지구</text>`;
- g+=`<text x="${cx}" y="${cy+62}" text-anchor="middle" font-size="12" fill="#a3adda">(북극 위에서 내려다봄)</text>`;
+   g+=`<g transform="translate(${x.toFixed(1)} ${y.toFixed(1)})"><circle r="19" fill="#06201a" stroke="${hi?'#ffb13b':'#1f5247'}" stroke-width="${hi?4:1.5}"/><circle r="15" fill="#3a4160"/><path d="M0 -15 A15 15 0 0 1 0 15 Z" fill="#e6faf4"/>${hi?'<text y="-26" text-anchor="middle" font-size="18" fill="#ffb13b" font-weight="900">?</text>':''}</g>`;
+   if(opt.names){const lb=["삭","","상현","","망","","하현",""][i];if(lb)g+=`<text x="${(cx+(R+44)*Math.cos(t)).toFixed(1)}" y="${(cy-(R+44)*Math.sin(t)+6).toFixed(1)}" text-anchor="middle" font-size="17" font-weight="800" fill="#e6faf4">${lb}</text>`;}}}
+ g+=`<circle cx="${cx}" cy="${cy}" r="40" fill="url(#phE)"/><path d="M${cx} ${cy-40} A40 40 0 0 0 ${cx} ${cy+40} Z" fill="#03130f" opacity=".65"/><text x="${cx}" y="${cy+5}" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">지구</text>`;
+ g+=`<text x="${cx}" y="${cy+62}" text-anchor="middle" font-size="12" fill="#a3cfc4">(북극 위에서 내려다봄)</text>`;
  if(!opt.ticks){
   g+=`<line x1="${cx}" y1="${cy}" x2="${mx.toFixed(1)}" y2="${my.toFixed(1)}" stroke="#a497ff" stroke-width="1.5" stroke-dasharray="5 4"/>`;
   g+=`<g transform="translate(${mx.toFixed(1)} ${my.toFixed(1)})"><circle r="24" fill="#3a4160"/><path d="M0 -24 A24 24 0 0 1 0 24 Z" fill="#f1f3fb"/><circle r="24" fill="none" stroke="#a497ff" stroke-width="2"/><circle r="40" fill="transparent" class="mhit"/></g>`;
@@ -1150,7 +1153,7 @@ function phaseTopSVG(alpha,opt){
     g+=`<path d="M${(mx+R5*Math.cos(a1)).toFixed(1)} ${(my+R5*Math.sin(a1)).toFixed(1)} A${R5} ${R5} 0 ${w>180?1:0} 1 ${(mx+R5*Math.cos(a2)).toFixed(1)} ${(my+R5*Math.sin(a2)).toFixed(1)}" fill="none" stroke="#ffe14d" stroke-width="7" stroke-linecap="round"/>`;}
    const pa=(ph+90)*D2R; g+=`<line x1="${(mx+(rr+10)*Math.cos(pa)).toFixed(1)}" y1="${(my+(rr+10)*Math.sin(pa)).toFixed(1)}" x2="${(mx-(rr+10)*Math.cos(pa)).toFixed(1)}" y2="${(my-(rr+10)*Math.sin(pa)).toFixed(1)}" stroke="#5fe3ff" stroke-width="1.5" stroke-dasharray="4 3"/>`;
    g+=`<text x="16" y="${H-20}" font-size="14" fill="#ffe14d" font-weight="700">노란 곡선 = 지구 쪽을 향한 반쪽 중 햇빛을 받아 밝은 부분 → 지구에서 보이는 모양</text>`; }
-  if(opt.names)[[0,"삭"],[90,"상현"],[180,"망"],[270,"하현"]].forEach(([d,n])=>{const t=d*D2R;g+=`<text x="${(cx+(R+50)*Math.cos(t)).toFixed(1)}" y="${(cy-(R+50)*Math.sin(t)+6).toFixed(1)}" text-anchor="middle" font-size="16" font-weight="800" fill="#8a93bb">${n}</text>`;});
+  if(opt.names)[[0,"삭"],[90,"상현"],[180,"망"],[270,"하현"]].forEach(([d,n])=>{const t=d*D2R;g+=`<text x="${(cx+(R+50)*Math.cos(t)).toFixed(1)}" y="${(cy-(R+50)*Math.sin(t)+6).toFixed(1)}" text-anchor="middle" font-size="16" font-weight="800" fill="#86b3a8">${n}</text>`;});
  }
  return g+`</svg>`;}
 const SCENES={
@@ -1228,7 +1231,7 @@ ACT.sky=(root,k,done)=>{
   ctx.lineTo(W*1.5,H);ctx.lineTo(-W*0.5,H);ctx.closePath(); ctx.fillStyle="#07140f"; ctx.fill(); ctx.strokeStyle="#1f4a36"; ctx.lineWidth=lw*1.5; ctx.stroke();
   const DN={0:"북",45:"북동",90:"동",135:"남동",180:"남",225:"남서",270:"서",315:"북서"};
   Object.keys(DN).forEach(a=>{const p=proj(0,+a,V); if(!p||p[0]<0||p[0]>W)return; const main=(+a)%90===0;
-   ctx.fillStyle=main?"#e9ecff":"#8a93bb"; ctx.font=`${main?800:500} ${(main?18:13)*dpr}px 'Noto Sans KR',sans-serif`; ctx.textAlign="center"; ctx.fillText(DN[a],p[0],p[1]+(main?30:24)*dpr);});
+   ctx.fillStyle=main?"#e6faf4":"#86b3a8"; ctx.font=`${main?800:500} ${(main?18:13)*dpr}px 'Noto Sans KR',sans-serif`; ctx.textAlign="center"; ctx.fillText(DN[a],p[0],p[1]+(main?30:24)*dpr);});
   /* 시계·읽기 */
   root.querySelector("#skT").textContent=fmt(t); root.querySelector(".skyclock").textContent=fmt(t);
   const el=t-1170, dg=Math.round(el/60*15.04);
@@ -1237,11 +1240,11 @@ ACT.sky=(root,k,done)=>{
  }
  function drawGlobe(t){const ph=((t%1440)-720)/4; const a=ph*D2R; const x=60+38*Math.cos(a), y=60-38*Math.sin(a);
   root.querySelector("#skG").innerHTML=`<svg viewBox="0 0 220 120" style="width:100%;display:block"><defs><marker id="sgA" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#3fe6a6"/></marker></defs>
-   <circle cx="60" cy="60" r="38" fill="#2a63c9"/><path d="M60 22 A38 38 0 0 0 60 98 Z" fill="#05081a" opacity=".7"/>
+   <circle cx="60" cy="60" r="38" fill="#2a63c9"/><path d="M60 22 A38 38 0 0 0 60 98 Z" fill="#03130f" opacity=".7"/>
    <path d="M 102 78 A 46 46 0 0 1 78 102" fill="none" stroke="#3fe6a6" stroke-width="3" marker-end="url(#sgA)"/>
    <circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="6" fill="#ffb13b" stroke="#fff" stroke-width="2"/>
    ${[0,1,2].map(i=>`<line x1="216" y1="${36+i*24}" x2="176" y2="${36+i*24}" stroke="#ffd166" stroke-width="2"/>`).join("")}<text x="214" y="22" text-anchor="end" font-size="11" fill="#ffd166">햇빛</text>
-   <text x="118" y="112" font-size="11" fill="#3fe6a6">지구 자전 (서→동)</text><text x="4" y="12" font-size="11" fill="#a3adda">우주에서 본 지구 · ● ${PLACE}</text></svg>`;}
+   <text x="118" y="112" font-size="11" fill="#3fe6a6">지구 자전 (서→동)</text><text x="4" y="12" font-size="11" fill="#a3cfc4">우주에서 본 지구 · ● ${PLACE}</text></svg>`;}
  const R=root.querySelector("#skR");
  const setDir=a=>{ST.dir=a;S.skyDir=a;root.querySelectorAll(".dirbtn button").forEach(b=>b.classList.toggle("on",+b.dataset.az===a));draw();};
  root.querySelectorAll(".dirbtn button").forEach(b=>b.onclick=()=>setDir(+b.dataset.az));
@@ -1369,15 +1372,15 @@ ACT.eclipse=(root,k,done)=>{
   let g=`<svg viewBox="0 0 760 420" style="width:100%;display:block;touch-action:none;user-select:none"><defs><radialGradient id="ecSun" cx=".7" cy=".5"><stop offset="0" stop-color="#fff6cf"/><stop offset=".55" stop-color="#ffb13b"/><stop offset="1" stop-color="#ff7a1a"/></radialGradient><radialGradient id="ecE" cx=".3" cy=".4"><stop offset="0" stop-color="#9fd3ff"/><stop offset="1" stop-color="#2a63c9"/></radialGradient></defs>
    <circle cx="-70" cy="${EY}" r="170" fill="url(#ecSun)"/><text x="22" y="${EY+6}" font-size="18" font-weight="800" fill="#2a1500">태양</text>
    ${[0,1,2,3,4].map(i=>`<line x1="120" y1="${80+i*65}" x2="190" y2="${80+i*65}" stroke="#ffd16688" stroke-width="2"/>`).join("")}
-   <circle cx="${EX}" cy="${EY}" r="${MR}" fill="none" stroke="#3b4a9a" stroke-width="1.5" stroke-dasharray="4 6"/>
+   <circle cx="${EX}" cy="${EY}" r="${MR}" fill="none" stroke="#2f7a68" stroke-width="1.5" stroke-dasharray="4 6"/>
    <path d="M${EX} ${EY-ER} L${EX+SL} ${EY} L${EX} ${EY+ER} Z" fill="#000" opacity=".5"/>
-   <text x="${EX+SL-6}" y="${EY-14}" text-anchor="end" font-size="13" fill="#8a93bb">지구의 그림자</text>
-   <circle cx="${EX}" cy="${EY}" r="${ER}" fill="url(#ecE)"/><path d="M${EX} ${EY-ER} A${ER} ${ER} 0 0 1 ${EX} ${EY+ER} Z" fill="#05081a" opacity=".6"/>
+   <text x="${EX+SL-6}" y="${EY-14}" text-anchor="end" font-size="13" fill="#86b3a8">지구의 그림자</text>
+   <circle cx="${EX}" cy="${EY}" r="${ER}" fill="url(#ecE)"/><path d="M${EX} ${EY-ER} A${ER} ${ER} 0 0 1 ${EX} ${EY+ER} Z" fill="#03130f" opacity=".6"/>
    ${st.startsWith("lunar")?`<path d="M${EX} ${EY-ER} A${ER} ${ER} 0 0 1 ${EX} ${EY+ER}" fill="none" stroke="#a497ff" stroke-width="5"/><text x="${EX+4}" y="${EY+ER+22}" font-size="13" fill="#a497ff" font-weight="700">밤인 지역 어디서나 월식!</text>`:""}
    <text x="${EX}" y="${EY+5}" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">지구</text>`;
   { const hitE=mx<EX&&Math.abs(dy)<ER; const sx=hitE?EX-Math.sqrt(ER*ER-dy*dy):mx+150; const ex2=Math.max(sx,mx+14);
    g+=`<path d="M${mx.toFixed(1)} ${(my-mr).toFixed(1)} L${ex2.toFixed(1)} ${(my-2).toFixed(1)} L${ex2.toFixed(1)} ${(my+2).toFixed(1)} L${mx.toFixed(1)} ${(my+mr).toFixed(1)} Z" fill="#000" opacity="${hitE?0.6:0.35}"/>`;
-   if(st==="solar"||st==="solarEdge")g+=`<ellipse cx="${sx+4}" cy="${my}" rx="6" ry="20" fill="#05081a" opacity=".45"/><ellipse cx="${sx+2.5}" cy="${my}" rx="3" ry="6" fill="#05081a"/><text x="${((mx+sx)/2).toFixed(1)}" y="${(my+46).toFixed(1)}" text-anchor="middle" font-size="13" fill="#ffd166" font-weight="700">달의 그림자 — 닿는 곳에서만 일식</text>`; }
+   if(st==="solar"||st==="solarEdge")g+=`<ellipse cx="${sx+4}" cy="${my}" rx="6" ry="20" fill="#03130f" opacity=".45"/><ellipse cx="${sx+2.5}" cy="${my}" rx="3" ry="6" fill="#03130f"/><text x="${((mx+sx)/2).toFixed(1)}" y="${(my+46).toFixed(1)}" text-anchor="middle" font-size="13" fill="#ffd166" font-weight="700">달의 그림자 — 닿는 곳에서만 일식</text>`; }
   const red=st==="lunarT"?1:st==="lunarP"?0.4:0;
   g+=`<g transform="translate(${mx.toFixed(1)} ${my.toFixed(1)})"><circle r="${mr}" fill="${red?`rgb(${150+60*(1-red)|0},${70+90*(1-red)|0},${50+90*(1-red)|0})`:'#3a4160'}"/>${red?'':`<path d="M0 -${mr} A${mr} ${mr} 0 0 0 0 ${mr} Z" fill="#f1f3fb"/>`}<circle r="30" fill="transparent" class="mhit"/></g>
    <text x="${mx.toFixed(1)}" y="${(my-20).toFixed(1)}" text-anchor="middle" font-size="13" fill="#a497ff" font-weight="800">달</text></svg>`;
@@ -1455,10 +1458,10 @@ ACT.dipper=(root,k,done)=>{
  const lineAng=H0=>{const [x,y]=pos(DIP[0][1],DIP[0][2],H0); return wrap360(Math.atan2(C[1]-y,x-C[0])*R2D);}; /* 수학 각(반시계+) */
  const A=T.map(t=>lineAng(t[2]));
  const P=(ang,r)=>[C[0]+r*Math.cos(ang*D2R), C[1]-r*Math.sin(ang*D2R)];
- function prot(){const R=292, rho=D.rho; let g=`<path d="M${P(rho,R).join(" ")} A${R} ${R} 0 0 0 ${P(rho+180,R).join(" ")} Z" fill="#ffffff10" stroke="#e9ecff" stroke-width="1.5"/>`;
-  for(let i=0;i<=180;i+=2){const big=i%10===0, mid=i%5===0;const [x1,y1]=P(rho+i,R),[x2,y2]=P(rho+i,R-(big?16:mid?10:6));g+=`<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="#e9ecff" stroke-width="${big?1.6:0.8}" opacity=".85"/>`;
-   if(big){const [tx,ty]=P(rho+i,R-30);g+=`<text x="${tx.toFixed(1)}" y="${(ty+5).toFixed(1)}" text-anchor="middle" font-size="13" font-weight="700" fill="#ffe0a8">${i}</text>`;const [ux,uy]=P(rho+i,R-50);g+=`<text x="${ux.toFixed(1)}" y="${(uy+4).toFixed(1)}" text-anchor="middle" font-size="10" fill="#8a93bb">${180-i}</text>`;}}
-  const [bx,by]=P(rho,R),[ex,ey]=P(rho+180,R); g+=`<line x1="${bx.toFixed(1)}" y1="${by.toFixed(1)}" x2="${ex.toFixed(1)}" y2="${ey.toFixed(1)}" stroke="#e9ecff" stroke-width="1.5"/><circle cx="${C[0]}" cy="${C[1]}" r="5" fill="none" stroke="#ff6b6b" stroke-width="2"/>`;
+ function prot(){const R=292, rho=D.rho; let g=`<path d="M${P(rho,R).join(" ")} A${R} ${R} 0 0 0 ${P(rho+180,R).join(" ")} Z" fill="#ffffff10" stroke="#e6faf4" stroke-width="1.5"/>`;
+  for(let i=0;i<=180;i+=2){const big=i%10===0, mid=i%5===0;const [x1,y1]=P(rho+i,R),[x2,y2]=P(rho+i,R-(big?16:mid?10:6));g+=`<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="#e6faf4" stroke-width="${big?1.6:0.8}" opacity=".85"/>`;
+   if(big){const [tx,ty]=P(rho+i,R-30);g+=`<text x="${tx.toFixed(1)}" y="${(ty+5).toFixed(1)}" text-anchor="middle" font-size="13" font-weight="700" fill="#ffe0a8">${i}</text>`;const [ux,uy]=P(rho+i,R-50);g+=`<text x="${ux.toFixed(1)}" y="${(uy+4).toFixed(1)}" text-anchor="middle" font-size="10" fill="#86b3a8">${180-i}</text>`;}}
+  const [bx,by]=P(rho,R),[ex,ey]=P(rho+180,R); g+=`<line x1="${bx.toFixed(1)}" y1="${by.toFixed(1)}" x2="${ex.toFixed(1)}" y2="${ey.toFixed(1)}" stroke="#e6faf4" stroke-width="1.5"/><circle cx="${C[0]}" cy="${C[1]}" r="5" fill="none" stroke="#ff6b6b" stroke-width="2"/>`;
   return g;}
  let ANIM=null; /* {i, h} — i번째 위치에서 다음 위치로 움직이는 중 */
  const stage=()=>Math.max(0,Math.min(2,D.stage||0));
@@ -1469,20 +1472,20 @@ ACT.dipper=(root,k,done)=>{
   g+=`<g opacity="${fade?0.45:1}">`;
   [[0,1],[1,2],[2,3],[3,0],[3,4],[4,5],[5,6]].forEach(([a,b])=>g+=`<line x1="${pts[a][0].toFixed(1)}" y1="${pts[a][1].toFixed(1)}" x2="${pts[b][0].toFixed(1)}" y2="${pts[b][1].toFixed(1)}" stroke="${col}" stroke-width="1.6" opacity=".8"/>`);
   pts.forEach((p,j)=>g+=`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="${j===0?5:3.8}" fill="#fff" ${j===0?`stroke="${col}" stroke-width="2"`:''}/>`);
-  if(lab)g+=`<text x="${(dx+12).toFixed(1)}" y="${(dy+5).toFixed(1)}" font-size="17" font-weight="800" fill="${col}" paint-order="stroke" stroke="#050a1e" stroke-width="4">${lab} ${tm}</text>`;
+  if(lab)g+=`<text x="${(dx+12).toFixed(1)}" y="${(dy+5).toFixed(1)}" font-size="17" font-weight="800" fill="${col}" paint-order="stroke" stroke="#03110d" stroke-width="4">${lab} ${tm}</text>`;
   return g+`</g>`;}
- function svg(){ const st=stage(); let g=`<svg viewBox="0 0 640 620" style="width:100%;display:block;touch-action:none;user-select:none"><rect width="640" height="620" rx="16" fill="#050a1e"/>`;
-  g+=`<text x="16" y="28" font-size="14" fill="#a3adda">북쪽 하늘 · 어느 날 2시간 간격 관찰</text><text x="20" y="606" font-size="15" fill="#e9ecff" font-weight="700">서</text><text x="608" y="606" font-size="15" fill="#e9ecff" font-weight="700">동</text><text x="320" y="608" font-size="15" fill="#e9ecff" font-weight="700" text-anchor="middle">북 (아래쪽 지평선)</text>`;
+ function svg(){ const st=stage(); let g=`<svg viewBox="0 0 640 620" style="width:100%;display:block;touch-action:none;user-select:none"><rect width="640" height="620" rx="16" fill="#03110d"/>`;
+  g+=`<text x="16" y="28" font-size="14" fill="#a3cfc4">북쪽 하늘 · 어느 날 2시간 간격 관찰</text><text x="20" y="606" font-size="15" fill="#e6faf4" font-weight="700">서</text><text x="608" y="606" font-size="15" fill="#e6faf4" font-weight="700">동</text><text x="320" y="608" font-size="15" fill="#e6faf4" font-weight="700" text-anchor="middle">북 (아래쪽 지평선)</text>`;
   const shown=ANIM?ANIM.i:st;
   for(let i=0;i<=shown;i++){const [lab,tm,H0,col]=T[i]; g+=dipper(H0,col,lab,tm,ANIM?false:(i<st));}
   if(ANIM){const col=T[ANIM.i+1][3]; g+=dipper(ANIM.h,col,"","",false);}
   const nowM=ANIM?(20*60+120*ANIM.i+120*ANIM.f):(20*60+120*st);
-  g+=`<g transform="translate(470 22)"><rect width="156" height="46" rx="12" fill="#0d1335" stroke="#3b4a9a"/><text x="78" y="31" text-anchor="middle" font-size="22" font-weight="800" fill="#ffe0a8">🕗 ${clock(nowM)}</text></g>`;
-  if(!ANIM&&st===0)g+=`<text x="${(pos(DIP[0][1],DIP[0][2],225)[0]+14).toFixed(1)}" y="${(pos(DIP[0][1],DIP[0][2],225)[1]+28).toFixed(1)}" font-size="13" fill="#a3adda">↑ 국자 끝 별 — 북극성과 점선으로 이었어요</text>`;
+  g+=`<g transform="translate(470 22)"><rect width="156" height="46" rx="12" fill="#0a2520" stroke="#2f7a68"/><text x="78" y="31" text-anchor="middle" font-size="22" font-weight="800" fill="#ffe0a8">🕗 ${clock(nowM)}</text></g>`;
+  if(!ANIM&&st===0)g+=`<text x="${(pos(DIP[0][1],DIP[0][2],225)[0]+14).toFixed(1)}" y="${(pos(DIP[0][1],DIP[0][2],225)[1]+28).toFixed(1)}" font-size="13" fill="#a3cfc4">↑ 국자 끝 별 — 북극성과 점선으로 이었어요</text>`;
   if(D.dir&&st===2&&!ANIM){const r=105, a0=A[0]+4, a1=A[2]-4, cw=D.dir==="cw"; const s0=cw?a1:a0, s1=cw?a0:a1; const [x0,y0]=P(s0,r),[x1,y1]=P(s1,r);
    g+=`<defs><marker id="dpA" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="${D.dir==='ccw'?'#3fe6a6':'#ff6b6b'}"/></marker></defs><path d="M${x0.toFixed(1)} ${y0.toFixed(1)} A${r} ${r} 0 0 ${cw?1:0} ${x1.toFixed(1)} ${y1.toFixed(1)}" fill="none" stroke="${D.dir==='ccw'?'#3fe6a6':'#ff6b6b'}" stroke-width="4" marker-end="url(#dpA)"/>`;}
   if(D.prot&&st===2)g+=prot();
-  g+=`<circle cx="${C[0]}" cy="${C[1]}" r="6" fill="#ffd166"/><text x="${C[0]-12}" y="${C[1]-12}" text-anchor="end" font-size="16" font-weight="800" fill="#ffd166" paint-order="stroke" stroke="#050a1e" stroke-width="4">북극성</text></svg>`; return g;}
+  g+=`<circle cx="${C[0]}" cy="${C[1]}" r="6" fill="#ffd166"/><text x="${C[0]-12}" y="${C[1]-12}" text-anchor="end" font-size="16" font-weight="800" fill="#ffd166" paint-order="stroke" stroke="#03110d" stroke-width="4">북극성</text></svg>`; return g;}
  function advance(){ const st=stage(); if(ANIM||st>=2)return; const h0=T[st][2], h1=T[st+1][2], t0=performance.now(), dur=1600;
   const step=now=>{const f=Math.min(1,(now-t0)/dur); ANIM={i:st,f,h:h0+(h1-h0)*f}; const B=root.querySelector("#dpBox svg"); if(!B){ANIM=null;return;} B.outerHTML=svg();
    if(f<1)requestAnimationFrame(step); else {ANIM=null; D.stage=st+1; save(); draw();}};
@@ -1566,14 +1569,14 @@ ACT.overlay=(root,k,done)=>{
    <line x1="6" y1="${SUN[1]}" x2="${PW-6}" y2="${SUN[1]}" stroke="${COL[i]}" stroke-width="2.5"/>
    <path d="M${SUN[0]-20} ${SUN[1]} A20 20 0 0 1 ${SUN[0]+20} ${SUN[1]} Z" fill="#ffb13b" stroke="${COL[i]}" stroke-width="2.5"/>
    ${glyphSVG(s.n,CST[i][0],CST[i][1],1.25,COL[i])}
-   <text x="${PW-22}" y="${SUN[1]+26}" font-size="15" fill="#e9ecff" text-anchor="end">서</text></svg>`;}
+   <text x="${PW-22}" y="${SUN[1]+26}" font-size="15" fill="#e6faf4" text-anchor="end">서</text></svg>`;}
  function arrowSVG(){ if(!allDone())return "";
   const pts=O.goal==="sun"?[0,1,2].map(i=>world(i,CST[i])):[0,1,2].map(i=>world(i,[SUN[0],SUN[1]-10]));
   const [a,c]=[pts[0],pts[2]], dx=O.goal==="sun"?40:36;
   const lab=O.goal==="sun"?SETS[O.set].n+"의 움직임":"태양의 움직임";
   return `<svg viewBox="0 0 ${SW} ${SH}" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none"><defs><marker id="ov2A" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#ffd166"/></marker></defs>
    <path d="M${a[0]+dx} ${a[1]} L${c[0]+dx} ${c[1]}" stroke="#ffd166" stroke-width="4" marker-end="url(#ov2A)"/>
-   <text x="${Math.max(a[0],c[0])+dx+14}" y="${(a[1]+c[1])/2+5}" font-size="18" font-weight="800" fill="#ffd166" paint-order="stroke" stroke="#050a1e" stroke-width="4">${lab}: ?</text></svg>`;}
+   <text x="${Math.max(a[0],c[0])+dx+14}" y="${(a[1]+c[1])/2+5}" font-size="18" font-weight="800" fill="#ffd166" paint-order="stroke" stroke="#03110d" stroke-width="4">${lab}: ?</text></svg>`;}
  const Q={sun:["q1","태양이 하나가 되도록 겹쳐 볼 때, 별자리는 어느 방향으로 움직이는가?","동→서","별자리가 날마다 조금씩 태양 쪽(서쪽 지평선 쪽)으로 다가간다"],
           cst:["q2","별자리가 하나가 되도록 겹쳐 볼 때, 태양은 어느 방향으로 움직이는가?","서→동","태양이 별자리 사이를 날마다 조금씩 동쪽(위쪽)으로 옮겨 간다 — 태양의 연주 운동!"]};
  function layout(){const st=root.querySelector(".ovstage"); if(!st)return; scale=st.clientWidth/SW; st.style.height=(SH*scale)+"px";
@@ -1616,19 +1619,19 @@ ACT.progress=(root,k,done)=>{
  const G=S.prg=S.prg||{t:0}; let play=false;
  function solarSVG(t){const W=300,cx=150,cy=130,r=58, mx=cx+170-340*t/100; const uid="ps"+Math.floor(Math.random()*1e6);
   const ov=Math.max(0,1-Math.abs(mx-cx)/(2*r)); const tot=Math.abs(mx-cx)<4;
-  return `<svg viewBox="0 0 ${W} 260" style="width:100%;display:block"><defs><clipPath id="${uid}"><circle cx="${cx}" cy="${cy}" r="${r}"/></clipPath></defs><rect width="${W}" height="260" rx="14" fill="${tot?'#05081a':'#13306b'}"/>
+  return `<svg viewBox="0 0 ${W} 260" style="width:100%;display:block"><defs><clipPath id="${uid}"><circle cx="${cx}" cy="${cy}" r="${r}"/></clipPath></defs><rect width="${W}" height="260" rx="14" fill="${tot?'#03130f':'#13306b'}"/>
    ${tot?`<circle cx="${cx}" cy="${cy}" r="${r+34}" fill="#f4f1ff" opacity=".18"/><circle cx="${cx}" cy="${cy}" r="${r+16}" fill="#f4f1ff" opacity=".25"/>`:''}
    <circle cx="${cx}" cy="${cy}" r="${r}" fill="#ffd166"/><g clip-path="url(#${uid})"><circle cx="${mx.toFixed(1)}" cy="${cy}" r="${r+3}" fill="#141a33"/></g>
    <circle cx="${mx.toFixed(1)}" cy="${cy}" r="${r+3}" fill="none" stroke="#a497ff" stroke-width="1.5" stroke-dasharray="4 4" opacity="${ov>0?0.25:0.7}"/>
    <path d="M${(mx+40).toFixed(1)} ${cy+r+26} h-80" stroke="#a497ff" stroke-width="3" marker-end="url(#pgA)"/><text x="${mx.toFixed(1)}" y="${cy+r+50}" text-anchor="middle" font-size="13" fill="#a497ff">달</text>
-   <text x="14" y="248" font-size="13" fill="#e9ecff">← 동</text><text x="286" y="248" font-size="13" fill="#e9ecff" text-anchor="end">서 →</text><text x="150" y="22" font-size="13" fill="#a3adda" text-anchor="middle">남쪽 하늘을 볼 때</text></svg>`;}
+   <text x="14" y="248" font-size="13" fill="#e6faf4">← 동</text><text x="286" y="248" font-size="13" fill="#e6faf4" text-anchor="end">서 →</text><text x="150" y="22" font-size="13" fill="#a3cfc4" text-anchor="middle">남쪽 하늘을 볼 때</text></svg>`;}
  function lunarSVG(t){const W=300,cx=150,cy=130,R=95,r=34, mx=cx+190-380*t/100, uid="pl"+Math.floor(Math.random()*1e6);
   const inside=Math.abs(mx-cx)+r<=R;
-  return `<svg viewBox="0 0 ${W} 260" style="width:100%;display:block"><defs><clipPath id="${uid}"><circle cx="${mx.toFixed(1)}" cy="${cy}" r="${r}"/></clipPath><clipPath id="${uid}s"><circle cx="${cx}" cy="${cy}" r="${R}"/></clipPath></defs><rect width="${W}" height="260" rx="14" fill="#05081a"/>
+  return `<svg viewBox="0 0 ${W} 260" style="width:100%;display:block"><defs><clipPath id="${uid}"><circle cx="${mx.toFixed(1)}" cy="${cy}" r="${r}"/></clipPath><clipPath id="${uid}s"><circle cx="${cx}" cy="${cy}" r="${R}"/></clipPath></defs><rect width="${W}" height="260" rx="14" fill="#03130f"/>
    <circle cx="${cx}" cy="${cy}" r="${R}" fill="#ffffff06" stroke="#a497ff" stroke-width="1.5" stroke-dasharray="5 5"/><text x="${cx}" y="${cy-R+20}" text-anchor="middle" font-size="12" fill="#a497ff">지구의 그림자</text>
    <g clip-path="url(#${uid})"><image href="img/moon_p4.png" x="${(mx-r-1).toFixed(1)}" y="${cy-r-1}" width="${2*r+2}" height="${2*r+2}"/><g clip-path="url(#${uid}s)"><rect width="${W}" height="260" fill="${inside?'#8a2a12':'#1a0d0a'}" opacity="${inside?0.62:0.88}"/></g></g>
    <path d="M${(mx+30).toFixed(1)} ${cy+r+30} h-60" stroke="#ffd166" stroke-width="3" marker-end="url(#pgB)"/><text x="${mx.toFixed(1)}" y="${cy+r+52}" text-anchor="middle" font-size="13" fill="#ffd166">달</text>
-   <text x="14" y="248" font-size="13" fill="#e9ecff">← 동</text><text x="286" y="248" font-size="13" fill="#e9ecff" text-anchor="end">서 →</text><text x="150" y="22" font-size="13" fill="#a3adda" text-anchor="middle">남쪽 하늘을 볼 때</text></svg>`;}
+   <text x="14" y="248" font-size="13" fill="#e6faf4">← 동</text><text x="286" y="248" font-size="13" fill="#e6faf4" text-anchor="end">서 →</text><text x="150" y="22" font-size="13" fill="#a3cfc4" text-anchor="middle">남쪽 하늘을 볼 때</text></svg>`;}
  const stS=t=>{const d=Math.abs(170-340*t/100); if(d>=116)return t<50?"시작 전":"끝"; if(d<4)return "개기 일식!"; return t<50?"가려지는 중":"다시 보이는 중";};
  const stL=t=>{const d=Math.abs(190-380*t/100); if(d>=129)return t<50?"시작 전":"끝"; if(d+34<=95)return "개기 월식 — 붉은 달"; return t<50?"어두워지는 중":"다시 밝아지는 중";};
  const QQ=[["p1","일식은 태양의 어느 쪽부터 가려지기 시작할까?",["오른쪽","왼쪽"],"오른쪽"],["p2","월식 때 달은 어느 쪽부터 어두워질까?",["오른쪽","왼쪽"],"왼쪽"]];
@@ -1653,12 +1656,12 @@ ACT.fullmoon=(root,k,done)=>{
  const P=29.5, F=S.fm=S.fm||{d0:20};
  const MS=["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"], MD1=[0,31,59,90,120,151,181,212,243,273,304,334];
  function svg(){const W=960,L=20,R=940,X=d=>L+(R-L)*d/365; let g=`<svg viewBox="0 0 ${W} 170" style="width:100%;display:block">`;
-  MD1.forEach((d,m)=>{g+=`<rect x="${X(d).toFixed(1)}" y="46" width="${(X(d+(m<11?MD1[m+1]-d:31))-X(d)).toFixed(1)}" height="60" fill="${m%2?'#0d1335':'#111a44'}"/><text x="${(X(d)+ (X(d+30)-X(d))/2).toFixed(1)}" y="128" text-anchor="middle" font-size="14" fill="#a3adda">${MS[m]}</text>`;});
-  g+=`<rect x="${L}" y="46" width="${R-L}" height="60" fill="none" stroke="#3b4a9a"/>`;
+  MD1.forEach((d,m)=>{g+=`<rect x="${X(d).toFixed(1)}" y="46" width="${(X(d+(m<11?MD1[m+1]-d:31))-X(d)).toFixed(1)}" height="60" fill="${m%2?'#0a2520':'#111a44'}"/><text x="${(X(d)+ (X(d+30)-X(d))/2).toFixed(1)}" y="128" text-anchor="middle" font-size="14" fill="#a3cfc4">${MS[m]}</text>`;});
+  g+=`<rect x="${L}" y="46" width="${R-L}" height="60" fill="none" stroke="#2f7a68"/>`;
   const ds=[]; for(let d=F.d0-1;d<365;d+=P)ds.push(d);
   ds.forEach((d,n)=>{const x=X(d); g+=`<circle cx="${x.toFixed(1)}" cy="76" r="13" fill="#fff4c9" stroke="#ffd166" stroke-width="2"/><text x="${x.toFixed(1)}" y="81" text-anchor="middle" font-size="13" font-weight="800" fill="#2a1500">${n+1}</text>`;
    if(n>0){const xp=X(ds[n-1]); g+=`<path d="M${(xp+14).toFixed(1)} 34 Q${((xp+x)/2).toFixed(1)} 16 ${(x-14).toFixed(1)} 34" fill="none" stroke="#5fe3ff" stroke-width="1.4" opacity=".7"/>`;}});
-  g+=`<text x="${L}" y="18" font-size="13" fill="#5fe3ff">⌒ 한 칸 = 약 29.5일 (삭→망→삭)</text><text x="${R}" y="158" text-anchor="end" font-size="13" fill="#a3adda">1년 = 365일</text></svg>`;
+  g+=`<text x="${L}" y="18" font-size="13" fill="#5fe3ff">⌒ 한 칸 = 약 29.5일 (삭→망→삭)</text><text x="${R}" y="158" text-anchor="end" font-size="13" fill="#a3cfc4">1년 = 365일</text></svg>`;
   return {g,n:ds.length};}
  function draw(){const {g,n}=svg();
   root.innerHTML=`<div class="key" style="margin-top:0"><span class="kt">조건</span>달의 위상은 약 <b>29.5일</b>마다 반복돼요. 1년은 <b>365일</b>.</div>
@@ -1718,7 +1721,7 @@ function mountSpin3d(el){
  let SC=1, dashT=0;
  function draw(){ const FRONT=wrap360(270+st.az+20); /* 관측자 기준 보기에서 관측자를 앞쪽에 세운다 */
   const phiE=st.mode==="space"?st.phi:FRONT-L0, skyRot=st.mode==="space"?0:(FRONT-L0-st.phi), sa=st.mode==="space"?0:skyRot;
-  ctx.fillStyle="#050a1e"; ctx.fillRect(0,0,W,H);
+  ctx.fillStyle="#03110d"; ctx.fillRect(0,0,W,H);
   const cx=W*0.36, cy=H*0.54; SC=Math.min(W*0.15,H*0.25); const Rs=2.35; /* 천구 반지름(지구=1) */
   /* 별 (천구에 고정 — 관측자 기준이면 반대로 돈다) */
   SPIN_STARS.forEach(([ra,dec,b])=>{const v=view(surf(dec,ra*15+skyRot,Rs)); const x=cx+v[0]*SC,y=cy-v[1]*SC; if(x<0||x>W*0.72)return;
@@ -1742,13 +1745,13 @@ function mountSpin3d(el){
   const wl=wrap360(L0+st.phi), hr=((12+wl/15)%24); const night=Math.cos(wl*D2R)<0;
   ctx.textAlign="left"; ctx.font=`800 ${16*dpr}px 'Noto Sans KR',sans-serif`; ctx.fillStyle="#ffe0a8"; ctx.fillText(`🕗 ${PLACE} 약 ${Math.floor(hr)}시 ${night?"(밤)":"(낮)"}`,14*dpr,26*dpr);
   ctx.font=`500 ${12.5*dpr}px 'Noto Sans KR',sans-serif`; ctx.fillStyle="#ffd166"; ctx.fillText("햇빛 →→ 오른쪽에서",14*dpr,46*dpr);
-  ctx.fillStyle="#a3adda"; ctx.fillText(st.mode==="space"?"우주에서 보면 — 별은 그대로, 지구가 돈다":"지구를 멈추고 보면 — 하늘(별)이 반대로 돈다",14*dpr,H-14*dpr);
+  ctx.fillStyle="#a3cfc4"; ctx.fillText(st.mode==="space"?"우주에서 보면 — 별은 그대로, 지구가 돈다":"지구를 멈추고 보면 — 하늘(별)이 반대로 돈다",14*dpr,H-14*dpr);
   /* 오른쪽: 관측자가 본 남쪽 하늘 */
-  const bx0=W*0.73, by0=H*0.08, bw=W*0.25, bh=H*0.84; ctx.fillStyle="#0b1638"; ctx.strokeStyle="#3b4a9a"; ctx.lineWidth=1.5*dpr; ctx.beginPath(); ctx.roundRect?ctx.roundRect(bx0,by0,bw,bh,14*dpr):ctx.rect(bx0,by0,bw,bh); ctx.fill(); ctx.stroke();
+  const bx0=W*0.73, by0=H*0.08, bw=W*0.25, bh=H*0.84; ctx.fillStyle="#0b1638"; ctx.strokeStyle="#2f7a68"; ctx.lineWidth=1.5*dpr; ctx.beginPath(); ctx.roundRect?ctx.roundRect(bx0,by0,bw,bh,14*dpr):ctx.rect(bx0,by0,bw,bh); ctx.fill(); ctx.stroke();
   const skyBright=night?0:1; if(skyBright){ctx.fillStyle="#2a4f9a55";ctx.fillRect(bx0+2,by0+30*dpr,bw-4,bh*0.72-30*dpr);}
-  ctx.fillStyle="#e9ecff"; ctx.textAlign="center"; ctx.font=`800 ${13.5*dpr}px 'Noto Sans KR',sans-serif`; ctx.fillText("관측자가 본 남쪽 하늘",bx0+bw/2,by0+20*dpr);
+  ctx.fillStyle="#e6faf4"; ctx.textAlign="center"; ctx.font=`800 ${13.5*dpr}px 'Noto Sans KR',sans-serif`; ctx.fillText("관측자가 본 남쪽 하늘",bx0+bw/2,by0+20*dpr);
   const hy=by0+bh*0.78; ctx.strokeStyle="#3fe6a6"; ctx.beginPath(); ctx.moveTo(bx0+8*dpr,hy); ctx.lineTo(bx0+bw-8*dpr,hy); ctx.stroke(); ctx.fillStyle="#07140f"; ctx.fillRect(bx0+2,hy,bw-4,by0+bh-hy-2);
-  ctx.fillStyle="#e9ecff"; ctx.font=`800 ${14*dpr}px 'Noto Sans KR',sans-serif`; ctx.fillText("동",bx0+16*dpr,hy+22*dpr); ctx.fillText("남",bx0+bw/2,hy+22*dpr); ctx.fillText("서",bx0+bw-16*dpr,hy+22*dpr);
+  ctx.fillStyle="#e6faf4"; ctx.font=`800 ${14*dpr}px 'Noto Sans KR',sans-serif`; ctx.fillText("동",bx0+16*dpr,hy+22*dpr); ctx.fillText("남",bx0+bw/2,hy+22*dpr); ctx.fillText("서",bx0+bw-16*dpr,hy+22*dpr);
   const LSTd=wrap360(L0+st.phi); /* 두 보기 모두 실제 관계는 같다 */
   [...SPIN_NAMED.map(s=>[s[0],s[1],s[2],1]),...SPIN_STARS.slice(0,90).map(s=>["",s[0],s[1],s[2]])].forEach(([n,ra,dec,b])=>{const [alt,azm]=altaz(ra,dec,LSTd); if(alt<0||azm<90||azm>270)return;
    const x=bx0+bw*(azm-90)/180, y=hy-(bh*0.72-34*dpr)*alt/75; if(y<by0+30*dpr)return;
@@ -1791,7 +1794,7 @@ function mountDome(el){
   return `<path d="M${(b[0]+Math.cos(an)*7).toFixed(1)} ${(b[1]+Math.sin(an)*7).toFixed(1)} L${(b[0]+Math.cos(an+2.5)*9).toFixed(1)} ${(b[1]+Math.sin(an+2.5)*9).toFixed(1)} L${(b[0]+Math.cos(an-2.5)*9).toFixed(1)} ${(b[1]+Math.sin(an-2.5)*9).toFixed(1)}Z" fill="#c9bfff"/>`;}
  function draw(){
   let g=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;display:block">
-  <defs><radialGradient id="dmG2" cx=".5" cy="1"><stop offset="0" stop-color="#1b2a6e"/><stop offset="1" stop-color="#080c24"/></radialGradient></defs>
+  <defs><radialGradient id="dmG2" cx=".5" cy="1"><stop offset="0" stop-color="#1b2a6e"/><stop offset="1" stop-color="#04140f"/></radialGradient></defs>
   <path d="M${cx-R} ${cy} A${R} ${R} 0 0 1 ${cx+R} ${cy} Z" fill="url(#dmG2)"/>
   <path d="${backPaths}" fill="none" stroke="#a497ff" stroke-width="1.6" stroke-dasharray="3 5" opacity=".55"/>
   <ellipse cx="${cx}" cy="${cy}" rx="${R}" ry="${(R*Math.sin(EL)).toFixed(1)}" fill="#0f2a1e" fill-opacity=".9" stroke="#3fe6a6" stroke-width="1.5"/>
@@ -1805,7 +1808,7 @@ function mountDome(el){
   stars.forEach(([v,p])=>{if(v[2]>0&&p[2]>=0)g+=`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="4" fill="#fff"/><circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="8" fill="#fff" opacity=".18"/>`;});
   g+=`<circle cx="${pol[0].toFixed(1)}" cy="${pol[1].toFixed(1)}" r="6" fill="#ffd166"/><text x="${(pol[0]+10).toFixed(1)}" y="${(pol[1]-10).toFixed(1)}" fill="#ffd166" font-size="15" font-weight="800">북극성</text>
   <g transform="translate(${cx} ${cy-6})"><circle cy="-14" r="5" fill="#ffe3c9"/><path d="M0 -9 v12 M-6 -3 h12 M0 3 l-5 8 M0 3 l5 8" stroke="#ffe3c9" stroke-width="2.4" stroke-linecap="round"/></g>
-  ${[["남",[-1,0,0],1],["북",[1,0,0],1],["동",[0,1,0],1],["서",[0,-1,0],0]].map(([n,v,big])=>{const q=scr(v);const dx=(q[0]-cx),dy=(q[1]-cy),L=Math.hypot(dx,dy)||1;return `<text x="${(q[0]+dx/L*20).toFixed(1)}" y="${(q[1]+dy/L*20+6).toFixed(1)}" fill="${big?'#e9ecff':'#a3adda'}" font-size="${big?16:14}" font-weight="800" text-anchor="middle">${n}</text>`;}).join("")}
+  ${[["남",[-1,0,0],1],["북",[1,0,0],1],["동",[0,1,0],1],["서",[0,-1,0],0]].map(([n,v,big])=>{const q=scr(v);const dx=(q[0]-cx),dy=(q[1]-cy),L=Math.hypot(dx,dy)||1;return `<text x="${(q[0]+dx/L*20).toFixed(1)}" y="${(q[1]+dy/L*20+6).toFixed(1)}" fill="${big?'#e6faf4':'#a3cfc4'}" font-size="${big?16:14}" font-weight="800" text-anchor="middle">${n}</text>`;}).join("")}
   <text x="14" y="24" fill="#5fe3ff" font-size="15">천구 (가상의 둥근 하늘)</text><text x="${cx+14}" y="${cy+16}" fill="#3fe6a6" font-size="12.5">관측자 (천구의 중심 = 지구)</text></svg>`;
   box.innerHTML=g;}
  let last=0; const loop=ts=>{if(!document.body.contains(el))return; if(st.run&&ts-last>40){st.h=(st.h+0.6)%360;last=ts;draw();} requestAnimationFrame(loop);};
