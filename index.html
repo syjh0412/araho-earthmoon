@@ -648,7 +648,7 @@ function save(){
      .then(()=>setSync('on')).catch(()=>setSync('err')); },1500); }
 }
 function setSync(s){syncState=s;const el=document.querySelector('.hud .sync');if(el){el.className='sync '+(s==='on'?'on':'');el.textContent=s==='on'?'● 센터장 시트에 저장됨':s==='pending'?'○ 저장 중…':s==='err'?'! 저장 실패(다시 시도 중)':API?'○ 연결 대기':'기기에만 저장';}}
-function logSrv(type,item,text,score,ai){ if(API&&me) post({action:'log',...me,type,item,text,score,ai}).catch(()=>{}); }
+function logSrv(type,item,text,score,ai){ if(API&&me&&!isT()) post({action:'log',...me,type,item,text,score,ai}).catch(()=>{}); }
 function addPts(n){if(isT()){save();return;}const b=S.pts;S.pts+=n;save();toast("+"+n+"점!");checkUnlock(b,S.pts);}
 function toast(m){const t=document.createElement("div");t.className="toast";t.textContent=m;document.body.appendChild(t);setTimeout(()=>{t.style.opacity=0;setTimeout(()=>t.remove(),400);},1500);}
 /* 시즌 2 등급: 지구–달 귀환 작전 (점수는 0점부터 새로) */
@@ -847,7 +847,7 @@ async function aiFeedback(item,rubric,textGetter,outEl,score){
   const t=textGetter(); if(!t.trim()){outEl.innerHTML='<div class="fb no">먼저 글을 써 주세요!</div>';return;}
   outEl.innerHTML='<div class="fb no">🤖 AI 코치가 읽는 중… (10초쯤 걸려요)</div>';
   try{
-    const res=await post({action:'feedback',...(me||{}),item,rubric,text:t,score:score||''});
+    const res=await post({action:'feedback',nolog:(me&&me.cls==="T")?'1':'',...(me||{}),item,rubric,text:t,score:score||''});
     const fb=res.fb||{};
     outEl.innerHTML=`<div class="fb ok"><b>🤖 AI 코치 (수준: ${esc(fb.level||"-")})</b>
       <ul class="cklist">${(fb.good||[]).map(g=>`<li class="y">${esc(g)}</li>`).join("")}${(fb.improve||[]).map(g=>`<li class="n">${esc(g)}</li>`).join("")}</ul>
@@ -2212,10 +2212,11 @@ function saveLocalComms(a){try{localStorage.setItem(LSC,JSON.stringify(a.slice(0
 async function commsList(f){
   if(API){const r=await call({action:'qlist',cls:f.cls||'',num:me?me.num:'',mission:f.mission||'',pin:isT()?TPIN:''});
     const my=new Set((S.myq||[]).map(String));
-    return (r.rows||[]).map(x=>({...x,mine:!!(x.mine||my.has(String(x.id))||(me&&x.num!==''&&String(x.cls)===String(me.cls)&&String(x.num)===String(me.num)))}));}
-  let rows=localComms(); if(f.cls)rows=rows.filter(x=>String(x.cls)===String(f.cls)); if(f.mission)rows=rows.filter(x=>x.mission===f.mission); return rows.map(x=>({...x,mine:me&&x.cls===me.cls&&x.num===me.num}));
+    return (r.rows||[]).filter(x=>String(x.cls)!=="T").map(x=>({...x,mine:!!(x.mine||my.has(String(x.id))||(me&&x.num!==''&&String(x.cls)===String(me.cls)&&String(x.num)===String(me.num)))}));}
+  let rows=localComms().filter(x=>String(x.cls)!=="T"); if(f.cls)rows=rows.filter(x=>String(x.cls)===String(f.cls)); if(f.mission)rows=rows.filter(x=>x.mission===f.mission); return rows.map(x=>({...x,mine:me&&x.cls===me.cls&&x.num===me.num}));
 }
 async function commsAdd(o){
+  if(me&&me.cls==="T"){toast("센터장 체험 질문은 저장되지 않아요");return {ok:true};}
   if(API){const r=await post({action:'qadd',...me,...o}); if(r&&r.id){S.myq=S.myq||[];S.myq.push(String(r.id));if(S.myq.length>200)S.myq=S.myq.slice(-200);save();} return r;}
   const rows=localComms(); rows.unshift({id:'l'+Date.now(),t:new Date().toISOString(),cls:me.cls,num:o.anon==='1'?'':me.num,name:o.anon==='1'?'익명 승무원':me.name,mission:o.mission,phase:o.phase,text:o.text,answers:[]}); saveLocalComms(rows); return {ok:true};
 }
@@ -2364,7 +2365,7 @@ async function sendAnswer(b,force){
   if(scoring&&AI_ON&&API&&!force){
     const lab=b.textContent; b.textContent="🤖 AI가 응답을 읽는 중… (5~10초)"; if(out)out.innerHTML="";
     try{const q=(card.querySelector(".cmtx")||{}).textContent||"";
-      const res=await post({action:'feedback',...me,item:'교신응답',rubric:ansRubric(q,card.dataset.k==="1"),text:t,score:''});
+      const res=await post({action:'feedback',nolog:(me&&me.cls==="T")?'1':'',...me,item:'교신응답',rubric:ansRubric(q,card.dataset.k==="1"),text:t,score:''});
       const fb=res&&res.fb; lvl=fb&&fb.level||null;
       if(lvl==="하"){
         b.textContent=lab; b.disabled=false;
