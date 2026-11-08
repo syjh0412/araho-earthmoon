@@ -579,6 +579,10 @@ table.sstab select{min-height:44px;padding:6px 8px;font-size:1rem}
 /* 시즌2 테마: 심해 청록 — 입장 화면 별궤적 사진을 청록빛으로 */
 #gate{background-image:radial-gradient(900px 600px at 70% 20%,#0f6b5a66,transparent 60%),linear-gradient(#0b6b5a,#06303a),url(img/trail_n.jpg)!important;background-blend-mode:normal,color,normal!important}
 .gatebox{border-color:#2f7a68!important}
+.chapw{display:flex;flex-direction:column;gap:8px}
+.chapw>.chap{flex:1}
+.dkunder{width:100%;min-height:44px;padding:8px 12px;border-radius:14px;border:1.5px solid var(--cyan);color:var(--cyan);background:#03130fcc;font-size:.95rem;font-weight:700;cursor:pointer}
+.dkunder:hover{background:#0b2a24}
 </style>
 </head>
 <body class="gate">
@@ -2010,12 +2014,12 @@ function loadHof(id){
 function renderLearn(){
  app.innerHTML=`${hudBlock()}<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:18px 4px 4px"><h2 style="font-size:1.9rem">📚 미션 학습</h2>${isT()||isG()?"":`<button class="btn-g rvbtn ${S.review?"on":""}" id="rvwL" style="margin-left:auto">🔁 복습 모드 ${S.review?"켜짐 — 공부한 카드도 빈칸이 다시 가려져요":"꺼짐"}</button>`}</div>
  <p class="small" style="margin:0 4px 12px">교과서(천재 Ⅶ-2) 쪽수 순서대로. 교과서 탐구를 앱에서 먼저 해 보고, 마지막 '관측 보고' 한두 문장으로 마무리!</p>
- <div class="grid">${CH.map((c,i)=>{const p=chapProg(c);return `<button class="chap ${p.d>=p.total?'doneAll':''}" data-ch="${i}" style="background-image:url(img/${c.cover}.jpg)"><div class="in">
+ <div class="grid">${CH.map((c,i)=>{const p=chapProg(c);return `<div class="chapw"><button class="chap ${p.d>=p.total?'doneAll':''}" data-ch="${i}" style="background-image:url(img/${c.cover}.jpg)"><div class="in">
    <div class="k">${c.no}</div><h3>${c.title}</h3><span class="small">${c.sub}</span>
-   ${DECKS[c.id]?`<span class="dkmini" data-dk="${c.id}" role="button" tabindex="0" title="수업 슬라이드 보기">📽 수업 슬라이드</span>`:""}<span class="dots">${c.slides.map((sl,j)=>`<i class="${slideDone(c,sl,j)?'on':''}"></i>`).join("")}</span>
-   ${p.d>=p.total?'<span class="stamp" style="margin-top:8px">MISSION CLEAR</span>':`<span class="small" style="color:var(--cyan)">진행 ${p.d}/${p.total} ${p.d>0?"· 이어서 하기 ▶":"· 시작 ▶"}</span>`}</div></button>`;}).join("")}</div>`;
+   <span class="dots">${c.slides.map((sl,j)=>`<i class="${slideDone(c,sl,j)?'on':''}"></i>`).join("")}</span>
+   ${p.d>=p.total?'<span class="stamp" style="margin-top:8px">MISSION CLEAR</span>':`<span class="small" style="color:var(--cyan)">진행 ${p.d}/${p.total} ${p.d>0?"· 이어서 하기 ▶":"· 시작 ▶"}</span>`}</div></button>${DECKS[c.id]?`<button class="dkunder" data-dk="${c.id}" title="이 미션의 수업 슬라이드(PPT) 보기">📽 수업 슬라이드</button>`:""}</div>`;}).join("")}</div>`;
  drawHud();
- app.querySelectorAll(".dkmini").forEach(b=>{const f=e=>{e.stopPropagation();e.preventDefault();openDeck(b.dataset.dk);};b.addEventListener("click",f,true);b.onkeydown=e=>{if(e.key==="Enter"||e.key===" ")f(e);};});
+ app.querySelectorAll(".dkunder").forEach(b=>b.onclick=()=>openDeck(b.dataset.dk));
  const rvl=document.getElementById("rvwL"); if(rvl)rvl.onclick=()=>{S.review=!S.review;save();render();};
  document.querySelectorAll(".chap").forEach(b=>b.onclick=()=>{const ci=+b.dataset.ch;const c=CH[ci];deck={ch:ci,i:Math.min(S.slide[c.id]||0,c.slides.length-1)};render();});
 }
