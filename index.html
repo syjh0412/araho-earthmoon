@@ -589,6 +589,12 @@ table.sstab select{min-height:44px;padding:6px 8px;font-size:1rem}
 .bdname{font-family:var(--disp);font-size:clamp(1.8rem,3.4vw,2.6rem);color:var(--sun);margin-top:4px}
 .wopt.on{border-color:var(--cyan);background:#0b2a24}
 .bdrev p{font-size:1.02rem}
+.refbox{margin-top:14px;font-size:.98rem}
+.refbox summary{cursor:pointer;font-weight:800;color:var(--cyan);list-style:none}
+.refbox summary::-webkit-details-marker{display:none}
+.refbox summary::after{content:" ▾ 펼쳐 보기";font-weight:400;color:var(--mut);font-size:.9rem}
+.refbox[open] summary::after{content:" ▴ 접기"}
+.refbox p{margin:10px 0 0;line-height:1.7}
 </style>
 </head>
 <body class="gate">
@@ -1048,7 +1054,7 @@ const CH=[
  {t:"learn",h:"태양의 연주 운동",art:"zodStrip",b:`<p>공전하는 지구에서 보면 태양이 별자리 사이를 <b>서쪽에서 동쪽</b>으로 이동해, <em>1년 후</em> 처음 위치로 되돌아오는 것처럼 보여요. 이것이 <b>태양의 연주 운동</b>이에요.</p><div class="key"><span class="kt">우주에서 보면</span>지구의 공전 방향과 태양의 연주 운동 방향은 모두 <b>시계 반대 방향</b>(서→동)!</div>`},
  {t:"act",m:"orbit",h:"모형으로 태양의 연주 운동 관찰하기 — 공전 궤도 시뮬레이터",kick:"🌍 교과서 탐구 250쪽"},
  {t:"act",m:"season",h:"모형 관측 기록표 채우기",kick:"📋 교과서 탐구 250쪽 표",lock:"기록표 여덟 칸을 모두 맞혀야 다음으로 갈 수 있어요"},
- {t:"learn",h:"황도와 황도 12궁",b:`<p>태양이 연주 운동하면서 별자리 사이로 지나가는 길을 <b>황도</b>, 황도 부근의 12개 대표 별자리를 <b>황도 12궁</b>이라고 해요.</p><p>태양 근처에 있는 별자리는 태양과 함께 뜨고 지므로 <em>볼 수 없어요</em>. 반면에 <b>태양 반대쪽</b>에 있는 별자리는 한밤중에 남쪽 하늘에서 볼 수 있어요.</p><div class="key"><span class="kt">알쏭달쏭 · 태양 반대쪽 별자리는 언제 볼까?</span>해가 진 직후 <b>동쪽</b>에서 보이기 시작해 → 한밤중 <b>남쪽</b> 하늘에서 가장 높이 → 해 뜰 무렵 <b>서쪽</b>으로 진다.</div><div class="bdreveal"></div>`,art:"orbitMini"},
+ {t:"learn",h:"황도와 황도 12궁",b:`<p>밤하늘 전체는 국제천문연맹(IAU)이 정한 <span style="color:var(--sun);font-weight:800">88개</span>의 별자리로 나뉘어 있어요. 그중 몇 개가 태양이 지나가는 길 위에 놓여 있을까요?</p><p>태양이 연주 운동하면서 별자리 사이로 지나가는 길을 <b>황도</b>, 황도 부근의 12개 대표 별자리를 <b>황도 12궁</b>이라고 해요.</p><p>태양 근처에 있는 별자리는 태양과 함께 뜨고 지므로 <em>볼 수 없어요</em>. 반면에 <b>태양 반대쪽</b>에 있는 별자리는 한밤중에 남쪽 하늘에서 볼 수 있어요.</p><div class="key"><span class="kt">알쏭달쏭 · 태양 반대쪽 별자리는 언제 볼까?</span>해가 진 직후 <b>동쪽</b>에서 보이기 시작해 → 한밤중 <b>남쪽</b> 하늘에서 가장 높이 → 해 뜰 무렵 <b>서쪽</b>으로 진다.</div><div class="bdreveal"></div><details class="frame refbox"><summary>📎 참고 자료 — "13번째 별자리 발견, 이제 황도 13궁?" 뉴스는 사실일까?</summary><p>2016년 미국 항공우주국(NASA)의 어린이용 누리집 글이 퍼지면서 “13번째 별자리 <span style="color:var(--sun)">뱀주인자리</span>가 발견됐다, 별자리 운세가 바뀐다”는 뉴스가 여러 번 나왔어요. 하지만 <span style="color:var(--sun)">새로 발견된 별자리는 아니에요.</span></p><p>1928년 국제천문연맹이 88개 별자리의 경계를 정해 보니, 태양이 지나가는 길(황도)이 전갈자리와 궁수자리 사이에서 <span style="color:var(--sun)">뱀주인자리</span>도 지나가요. 태양은 해마다 11월 말~12월 중순(약 18일) 뱀주인자리 앞을 지나요. 약 3000년 전 바빌로니아 사람들이 1년 열두 달에 맞추어 12개만 골랐기 때문에 ‘12궁’이 된 거예요.</p><p>NASA도 2020년에 “우리는 별자리를 바꾸지 않았다”고 밝혔어요. 그래서 과학 교과서에서는 지금도 <span style="color:var(--sun)">황도 12궁</span>이라고 불러요. 태양이 실제로 지나가는 별자리는 13개라는 것, 그것이 정확한 사실이에요.</p><p class="small">출처: 한국천문연구원 천문우주지식정보 「뱀주인자리」(황도가 지나지만 황도 12궁에는 포함되지 않음) · 한국천문연구원 「별자리의 역사」(1928년 88개 확정) · CBS News, 2020.7.17 “No, NASA has not discovered a new zodiac sign”</p></details>`,art:"orbitMini"},
  {t:"quiz",art:"orbitQ3",q:"그림에서 <b>3월</b>의 지구를 찾아보자. 3월 한밤중에 남쪽 하늘에서 볼 수 있는 별자리는?",o:["물병자리","사자자리","물고기자리"],a:1,ex:"3월 지구에서 태양 쪽을 보면 물병자리(낮이라 안 보임), 그 반대쪽 — 지구의 밤인 쪽으로 쭉 나가면 사자자리. 한밤중 남쪽 하늘에는 태양 반대쪽 별자리가 보여요."},
  {t:"quiz",q:"태양의 연주 운동 방향과 그 까닭으로 옳은 것은?",o:["동→서, 지구의 자전 때문","서→동, 지구의 공전 때문","동→서, 지구의 공전 때문"],a:1,ex:"연주 운동은 지구가 1년에 한 바퀴 공전하기 때문에 나타나며, 태양은 별자리 사이를 서→동으로 이동해요."},
  {t:"quiz",q:"시리우스와 태양이 <b>일 년에 한 번</b> 함께 뜨는 까닭은?",o:["시리우스가 일 년에 한 번 지구에 다가와서","지구가 일 년에 한 바퀴 공전해, 태양이 별자리 사이를 돌아 일 년 만에 같은 자리로 오기 때문","태양이 일 년에 한 번 자전하기 때문"],a:1,ex:"태양의 연주 운동! 태양은 1년에 한 바퀴 별자리 사이를 돌아 같은 별(시리우스) 근처로 돌아와요."},
@@ -1732,14 +1738,14 @@ ACT.birth=(root,k,done)=>{
 function fillBdReveal(el){
  const B=S.bday||{};
  if(!B.m||!B.d){el.innerHTML=`<div class="frame">🎂 미션 첫 카드에서 <b>생일</b>을 고르고 오면, 여기서 <b>내 생일 별자리를 언제 볼 수 있는지</b> 비밀이 풀려요!</div>`;return;}
- const sg=bsignOf(B.m,B.d), now=zodAt(sunLon(doyOf(B.m,B.d))), bn=bestNight(sg);
+ const sg=bsignOf(B.m,B.d), dy=doyOf(B.m,B.d), oph=dy>=333&&dy<=351, now=oph?"뱀주인자리":zodAt(sunLon(dy)), bn=bestNight(sg);
  const gap=bn?MOD(bn[0]-B.m,12)||12:6;
  const right=B.p===1;
  el.innerHTML=`<div class="fb ok bdrev"><b>🎂 비밀 공개 — ${B.m}월 ${B.d}일생의 ${sg} ${BICON[sg]||""}</b>
   <p style="margin:8px 0 0">생일 무렵에는 태양이 바로 그 별자리 근처에 있어요. 별자리가 <b>태양과 함께 뜨고 져서</b>, 내 생일날 밤에는 <b>볼 수 없어요!</b></p>
   ${bn?`<p style="margin:8px 0 0">${sg}가 <b>한밤중 남쪽 하늘</b>에 가장 높이 뜨는 때는 태양이 정반대쪽에 올 때 — <b style="color:var(--sun)">${bn[0]}월 ${bn[1]<=10?"초":bn[1]<=20?"중순":"말"}</b> 무렵이에요. 생일에서 약 <b>${gap}개월</b> 뒤!</p>`:""}
   <p class="small" style="margin:8px 0 0">처음 예상: “${B.p!=null?BPICK[B.p]:"(안 고름)"}” ${B.p==null?"":right?"→ 🎯 정답!":"→ 아쉽! 이제 이유를 알았죠?"}</p>
-  ${now!==sg?`<p class="small" style="margin:8px 0 0">🤫 하나 더 — 별자리 날짜표는 약 2000년 전에 만들어졌어요. 그동안 지구 자전축의 방향이 팽이처럼 아주 천천히 바뀌어서(세차 운동), 지금 내 생일날 태양은 한 칸 옆 <b>${now}</b> 쪽에 있답니다.</p>`:""}</div>`;
+  ${now!==sg?`<p class="small" style="margin:8px 0 0">🤫 하나 더 — 별자리 날짜표는 약 2000년 전에 만들어졌어요. 그동안 지구 자전축의 방향이 팽이처럼 아주 천천히 바뀌어서(세차 운동), 지금 내 생일날 태양은 ${oph?"<b>뱀주인자리</b> 앞에 있답니다 — 아래 참고 자료에 나오는 바로 그 13번째 별자리!":"한 칸 옆 <b>"+now+"</b> 쪽에 있답니다."}</p>`:""}</div>`;
 }
 
 /* ═══════ 3D 지구 자전 — 우주에서 보기 / 관측자 기준으로 보기 ═══════
