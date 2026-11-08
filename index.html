@@ -2083,7 +2083,7 @@ function renderLearn(){
  drawHud();
  app.querySelectorAll(".dkunder").forEach(b=>b.onclick=()=>openDeck(b.dataset.dk));
  const rvl=document.getElementById("rvwL"); if(rvl)rvl.onclick=()=>{S.review=!S.review;save();render();};
- document.querySelectorAll(".chap").forEach(b=>b.onclick=()=>{const ci=+b.dataset.ch;const c=CH[ci];deck={ch:ci,i:Math.min(S.slide[c.id]||0,c.slides.length-1)};render();});
+ document.querySelectorAll(".chap").forEach(b=>b.onclick=()=>{const ci=+b.dataset.ch;const c=CH[ci];deck={ch:ci,i:(isT()||isG())?0:Math.min(S.slide[c.id]||0,c.slides.length-1)};render();});
 }
 
 /* ═══════ 슬라이드 ═══════ */
