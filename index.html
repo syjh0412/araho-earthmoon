@@ -1121,10 +1121,15 @@ function orbitSVG(doy,opt){
   g+=`<text x="${x.toFixed(1)}" y="${(y+(big?16:5)).toFixed(1)}" text-anchor="middle" font-size="${big?15:11.5}" font-weight="${big||hl!=="#6aa396"?800:400}" fill="${hl}">${z[0].replace("자리","")}</text>`;});
  g+=`<circle cx="${C}" cy="${C}" r="${R1}" fill="none" stroke="#2f7a68" stroke-width="1.5" stroke-dasharray="4 6"/>`;
  const MD1=[1,32,60,91,121,152,182,213,244,274,305,335]; /* 매달 1일 */
- MD1.forEach((d,m)=>{const [x,y]=P(wrap360(sunLon(d)+180),R1);const big=opt.earths&&opt.earths.includes(m+1);g+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${big?5:3}" fill="${big?'#a497ff':'#2f7a68'}"/><text x="${(C+(x-C)*0.84).toFixed(1)}" y="${(C+(y-C)*0.84+4).toFixed(1)}" text-anchor="middle" font-size="${big?14:11}" font-weight="${big?800:400}" fill="${big?'#e6faf4':'#86b3a8'}">${m+1}월</text>`;
+ MD1.forEach((d,m)=>{const [x,y]=P(wrap360(sunLon(d)+180),R1);const big=opt.earths&&opt.earths.includes(m+1);g+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${big?5:2.5}" fill="${big?'#a497ff':'#2f7a68'}"/>`;
+  if(big)g+=`<text x="${x.toFixed(1)}" y="${(y+31).toFixed(1)}" text-anchor="middle" font-size="13" font-weight="800" fill="#c9c2ff">${m+1}월 지구</text>`;
+  /* 교과서처럼: ○월 = 그 달에 태양이 있는(보이는) 별자리 쪽에 표시 */
+  const [tx,ty]=P(sunLon(d),R2-43);const key=[3,6,9,12].includes(m+1);
+  g+=`<text x="${tx.toFixed(1)}" y="${(ty+4.5).toFixed(1)}" text-anchor="middle" font-size="${key?14:12}" font-weight="800" fill="#ffb13b" opacity="${key?1:.75}">${m+1}월</text>`;
   if(big)g+=`<g transform="translate(${x.toFixed(1)} ${y.toFixed(1)})"><circle r="12" fill="#2a63c9"/><path d="M0 -12 A12 12 0 0 1 0 12 Z" fill="#03130f" opacity=".7" transform="rotate(${(180-wrap360(sunLon(d)+180)).toFixed(1)})"/></g>`;});
+ g+=`<text x="8" y="20" font-size="13" font-weight="800" fill="#ffb13b">주황 ○월</text><text x="8" y="38" font-size="12" fill="#a3cfc4">= 그 달 태양이 있는 별자리</text><text x="8" y="54" font-size="12" fill="#a3cfc4">(지구는 정반대편)</text>`;
  /* 공전 방향 화살표 (시계 반대) */
- g+=`<path d="M ${C-R1*0.7} ${C-R1*0.71} A ${R1} ${R1} 0 0 0 ${C-R1*0.98} ${C-R1*0.2}" fill="none" stroke="#5fe3ff" stroke-width="2.5" marker-end="url(#obA)" opacity=".8" transform="rotate(-8 ${C} ${C})"/>`;
+ g+=`<path d="M ${C-R1*0.7} ${C-R1*0.71} A ${R1} ${R1} 0 0 0 ${C-R1*0.98} ${C-R1*0.2}" fill="none" stroke="#5fe3ff" stroke-width="2.5" marker-end="url(#obA)" opacity=".8" transform="rotate(14 ${C} ${C})"/>`;
  const [ex,ey]=P(earthL,R1), [mx,my]=P(earthL,R2-30), [sx2,sy2]=P(sunL,R2-30);
  if(!opt.quiz){g+=`<line x1="${ex.toFixed(1)}" y1="${ey.toFixed(1)}" x2="${sx2.toFixed(1)}" y2="${sy2.toFixed(1)}" stroke="#ffb13b" stroke-width="1.6" stroke-dasharray="6 5" opacity=".75"/>`;
  g+=`<line x1="${ex.toFixed(1)}" y1="${ey.toFixed(1)}" x2="${mx.toFixed(1)}" y2="${my.toFixed(1)}" stroke="#5fe3ff" stroke-width="3" marker-end="url(#obA)"/>`;}
@@ -1138,6 +1143,7 @@ function zodStripSVG(doy){
  let g=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;display:block"><rect x="0" y="22" width="${W}" height="56" rx="10" fill="#0a1033" stroke="#1f5247"/>`;
  ZOD.forEach(z=>{const x1=X(z[1]);g+=`<line x1="${x1}" y1="22" x2="${x1}" y2="78" stroke="#1f5247"/>`;const m=zodMid(z);const x=X(m);const big=BIG4.includes(z[0]);
   g+=`<text x="${x.toFixed(1)}" y="${big?56:55}" text-anchor="middle" font-size="${big?15:12}" font-weight="${big?800:400}" fill="${big?'#e6faf4':'#86b3a8'}">${z[0].replace("자리","")}</text>`;});
+ [1,32,60,91,121,152,182,213,244,274,305,335].forEach((d,m)=>{const x=X(sunLon(d));g+=`<text x="${x.toFixed(1)}" y="${[3,6,9,12].includes(m+1)?74:73}" text-anchor="middle" font-size="${[3,6,9,12].includes(m+1)?12:10.5}" font-weight="800" fill="#ffb13b" opacity="${[3,6,9,12].includes(m+1)?1:.7}">${m+1}월</text>`;});
  const xs=X(sunL); g+=`<circle cx="${xs.toFixed(1)}" cy="50" r="16" fill="#ffb13b" opacity=".9"/><circle cx="${xs.toFixed(1)}" cy="50" r="24" fill="#ffb13b33"/>`;
  g+=`<path d="M ${W-40} 100 H 40" stroke="#ffd166" stroke-width="2" marker-end="url(#zsA)"/><defs><marker id="zsA" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#ffd166"/></marker></defs>
   <text x="${W/2}" y="114" text-anchor="middle" font-size="13" fill="#ffd166">태양은 별자리 사이를 서쪽 → 동쪽으로 (일 년에 한 바퀴)</text>
