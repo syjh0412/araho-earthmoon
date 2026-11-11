@@ -595,6 +595,8 @@ table.sstab select{min-height:44px;padding:6px 8px;font-size:1rem}
 .refbox summary::after{content:" ▾ 펼쳐 보기";font-weight:400;color:var(--mut);font-size:.9rem}
 .refbox[open] summary::after{content:" ▴ 접기"}
 .refbox p{margin:10px 0 0;line-height:1.7}
+.actpre{margin:6px 0 14px;font-size:.98rem;line-height:1.7}
+.actpre ol{margin:6px 0 0;padding-left:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(440px,1fr));column-gap:28px}
 </style>
 </head>
 <body class="gate">
@@ -1066,7 +1068,12 @@ const CH=[
 {id:"c3",cover:"cov_moon",title:"달은 변신하지 않는다",no:"MISSION 03",sub:"달의 위상 변화 · 252~255쪽",slides:[
  {t:"hero",log:"통신 로그 · S2-D45 · 달 궤도 접근",h:"달은 변신하지 않는다",sub:"별이 달을 부러워했다. \"넌 초승달, 반달, 보름달로 모양을 바꿀 수 있잖아.\" 달이 대답했다. \"내가 변신하는 게 아니야. 나를 어디서 보느냐에 따라 다르게 보이는 것뿐이야!\" — 무슨 뜻인지 증명하라. — 센터장",scene:"moonHero"},
  {t:"learn",h:"달의 모양이 변하는 까닭",figs:[["moon_p4.png","햇빛을 반사해 빛나는 <b>보름달</b>"],["moon_p2.png","오른쪽이 둥근 <b>상현달</b>"]],b:`<p>달은 스스로 빛을 낼 수 없어서 <b>햇빛을 반사</b>하여 밝게 보여요.</p><p>그런데 달이 지구 주위를 <b>공전</b>하기 때문에 지구에서 볼 때 <em>햇빛이 비치는 부분</em>이 달라지면서 모양이 변해요. 이를 <b>달의 위상 변화</b>라고 해요.</p>`},
- {t:"act",m:"phase",h:"모형을 이용하여 달의 위상 변화 관찰하기 — 달 위상 시뮬레이터",kick:"🌙 교과서 탐구 253쪽"},
+ {t:"act",m:"phase",h:"모형을 이용하여 달의 위상 변화 관찰하기 — 달 위상 시뮬레이터",kick:"🌙 교과서 탐구 253쪽",pre:`<b style="color:var(--cyan)">📘 교과서 253쪽 · 모둠 활동 순서</b><ol>
+<li>4절 종이(관찰판)에 지구와 ㉮~㉵ 자리, 햇빛 방향을 그려요.</li>
+<li>절반은 노란색, 절반은 검은색으로 칠한 공(달)을 ㉮ 자리에 놓아요. <b>노란 쪽은 햇빛 쪽!</b></li>
+<li>지구 자리에서 스마트 기기로 달 모형을 찍어요.</li>
+<li>공을 ㉯~㉵까지 차례로 옮기며 똑같이 찍어요. 노란 쪽은 계속 햇빛 쪽을 향해요.</li></ol>
+<span class="small">아래 시뮬레이터로 먼저 해 보고, 교실에서 진짜 공으로 확인해요.</span>`},
  {t:"learn",h:"삭 · 상현 · 망 · 하현",wide:true,b:`<div class="figs c4">${[[0,"삭","음력 1일경 · 달이 지구와 태양 <b>사이</b> → 전혀 보이지 않음"],[2,"상현","음력 7~8일경 · <b>오른쪽</b>이 둥근 반달"],[4,"망","음력 15일경 · 태양 <b>반대쪽</b> → 보름달"],[6,"하현","음력 22~23일경 · <b>왼쪽</b>이 둥근 반달"]].map(x=>`<div style="text-align:center"><div style="background:#000;border-radius:18px;padding:10px;border:1.5px solid var(--line)"><img src="img/${MOONP[x[0]]}.png" alt="${x[1]}" style="width:100%;display:block"></div><p style="margin:6px 0 0;font-family:var(--disp);font-size:1.3rem">${x[1]}</p><p class="figcap" style="margin:0">${x[2]}</p></div>`).join("")}</div><div class="key"><span class="kt">사이사이의 달 · 주기</span>삭과 상현 사이는 <b>초승달</b>, 하현과 삭 사이는 <b>그믐달</b>. 달이 약 한 달 주기로 공전하기 때문에 위상도 <b>약 한 달</b> 주기로 반복돼요.</div>`},
  {t:"act",m:"phasegame",h:"사진 찍은 공 색칠하기 — 이 자리의 달은 어떻게 보일까?",kick:"🎨 교과서 탐구 253쪽 정리",lock:"다섯 문제를 맞혀야 다음으로 갈 수 있어요"},
  {t:"learn",h:"창의·융합 · 달 탐사선 다누리",figs:[["danuri_launch","2022년 8월 5일 발사된 <b>다누리</b>"],["danuri_earth","다누리가 달 궤도에서 본 <b>지구</b>"]],b:`<p>우리나라 최초의 달 탐사선 <b>다누리</b>는 2022년 8월 5일 발사되어 12월 27일 달 궤도에 진입했어요. 우리나라는 세계 <em>7번째</em> 달 탐사국이 되었죠.</p><p>다누리가 보내온 지구 사진을 날짜순으로 늘어놓으면 — <b>지구도 달처럼 위상이 변해요!</b> 다누리에서 보면 태양·달·지구의 위치가 계속 바뀌기 때문이에요.</p><div class="key"><span class="kt">생각 더하기</span>달에서 '보름달'처럼 동그란 지구가 보일 때, 지구에서 본 달은 어떤 모양일까? (힌트: 그때 달은 지구와 태양 사이)</div>`},
@@ -1074,18 +1081,12 @@ const CH=[
  {t:"quiz",q:"<b>왼쪽</b>이 둥근 반달의 이름은?",o:["상현달","하현달","그믐달"],a:1,ex:"망에서 삭으로 가는 과정의 반달 = 하현달(왼쪽이 둥근 반달). 삭에서 망으로 가는 과정의 반달은 상현달(오른쪽이 둥근 반달)."},
  {t:"quiz",q:"추석(음력 8월 15일)과 정월 대보름(음력 1월 15일)에 볼 수 있는 달은?",o:["초승달","상현달","보름달"],a:2,ex:"음력 15일경은 망 — 둥근 보름달이에요."},
  {t:"act",m:"fullmoon",h:"1년 동안 보름달은 최대 몇 번까지 볼 수 있을까?",kick:"🧮 이것만은 3번 · 254쪽 [문제 해결력]",lock:"답을 맞혀야 다음으로 갈 수 있어요"},
- {t:"learn",h:"교실 활동 · 공 모형과 오레오로 달의 위상 만들기",wide:true,b:`<div class="figs" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;align-items:start">
-<div class="frame"><b style="color:var(--cyan)">🟡⚫ 활동 1 · 공 모형 관찰판</b> <span class="small">(교과서 253쪽)</span><ol style="margin:8px 0 0;padding-left:20px;line-height:1.75">
-<li>모둠별로 관찰판을 펼쳐요. 가운데가 <b>지구</b>, 오른쪽에서 <b>햇빛</b>이 와요.</li>
-<li>절반은 노랑, 절반은 검정으로 칠한 공(달)을 ㉮ 자리에 놓아요. <b>노란 쪽은 햇빛 쪽(오른쪽)</b>!</li>
-<li>지구 자리에서 스마트 기기로 공을 찍어요.</li>
-<li>㉯→㉰→…→㉵ 차례로 옮기며 찍어요. 옮겨도 노란 쪽은 <b>계속 오른쪽</b>을 향해요.</li></ol></div>
-<div class="frame"><b style="color:var(--sun)">🍪 활동 2 · 오레오로 만드는 달의 위상</b><ol style="margin:8px 0 0;padding-left:20px;line-height:1.75">
-<li>오레오를 비틀어 열고 <b>크림 쪽</b>만 써요. 크림 = 햇빛을 받아 <b>밝게 보이는 부분</b>.</li>
-<li>활동 1에서 찍은 사진을 보며 이쑤시개로 크림을 긁어 모양을 만들어요.</li>
+ {t:"learn",h:"교실 활동 · 오레오로 만드는 달의 위상",wide:true,b:`<div class="frame"><b style="color:var(--sun)">🍪 이렇게 해요</b><ol style="margin:8px 0 0;padding-left:22px;line-height:1.8">
+<li>오레오를 비틀어 열고 <b>크림 쪽</b>만 써요. 크림 = 햇빛을 받아 <b>밝게 보이는 부분</b>, 긁어낸 곳 = 햇빛이 닿지 않는 부분.</li>
+<li>앞에서 찍은 공 모형 사진을 보며, 이쑤시개로 크림을 긁어 <b>지구에서 본</b> 달 모양을 만들어요.</li>
 <li>활동지의 ㉮~㉵ 자리에 놓고, 달의 이름과 음력 날짜를 써요.</li>
-<li>정리가 끝나면 선생님께 확인받아요. 🍪 먹는 건 선생님 허락을 받은 뒤에!</li></ol></div></div>
-<p class="small" style="margin-top:12px">💡 앞에서 해 본 <span style="color:var(--cyan);font-weight:700">달 위상 시뮬레이터</span>의 모양과 내가 만든 오레오 달을 비교해 보세요. 관찰판·활동지는 선생님이 나눠 줘요.</p>`},
+<li>선생님께 확인받아요. 🍪 먹는 건 선생님 허락을 받은 뒤에!</li></ol></div>
+<div class="frame" style="margin-top:14px"><span style="color:var(--cyan);font-weight:700">🌓 오레오 달 예시</span> <span class="small">— 음력 1일(삭)부터 차례대로 · 북반구에서 본 모습</span><svg viewBox="0 0 800 128" style="width:100%;max-width:880px;display:block;margin:6px auto 0" role="img" aria-label="오레오로 만든 달의 위상 예시: 삭부터 그믐달까지"><circle cx="50" cy="50" r="40" fill="#3a2f2a" stroke="#7a6a5e" stroke-width="2"/><text x="50" y="116" text-anchor="middle" font-size="15" font-weight="700" fill="#e6faf4">삭</text><circle cx="150" cy="50" r="40" fill="#3a2f2a" stroke="#7a6a5e" stroke-width="2"/><path d="M150 10 A40 40 0 0 1 150 90 A22 40 0 0 0 150 10 Z" fill="#fff8e7"/><text x="150" y="116" text-anchor="middle" font-size="15" font-weight="700" fill="#e6faf4">초승달</text><circle cx="250" cy="50" r="40" fill="#3a2f2a" stroke="#7a6a5e" stroke-width="2"/><path d="M250 10 A40 40 0 0 1 250 90 Z" fill="#fff8e7"/><text x="250" y="116" text-anchor="middle" font-size="15" font-weight="700" fill="#e6faf4">상현달</text><circle cx="350" cy="50" r="40" fill="#3a2f2a" stroke="#7a6a5e" stroke-width="2"/><path d="M350 10 A40 40 0 0 1 350 90 A22 40 0 0 1 350 10 Z" fill="#fff8e7"/><text x="350" y="116" text-anchor="middle" font-size="15" font-weight="700" fill="#e6faf4">상현~보름</text><circle cx="450" cy="50" r="40" fill="#3a2f2a" stroke="#7a6a5e" stroke-width="2"/><circle cx="450" cy="50" r="40" fill="#fff8e7"/><text x="450" y="116" text-anchor="middle" font-size="15" font-weight="700" fill="#e6faf4">보름달</text><circle cx="550" cy="50" r="40" fill="#3a2f2a" stroke="#7a6a5e" stroke-width="2"/><path d="M550 10 A40 40 0 0 0 550 90 A22 40 0 0 0 550 10 Z" fill="#fff8e7"/><text x="550" y="116" text-anchor="middle" font-size="15" font-weight="700" fill="#e6faf4">보름~하현</text><circle cx="650" cy="50" r="40" fill="#3a2f2a" stroke="#7a6a5e" stroke-width="2"/><path d="M650 10 A40 40 0 0 0 650 90 Z" fill="#fff8e7"/><text x="650" y="116" text-anchor="middle" font-size="15" font-weight="700" fill="#e6faf4">하현달</text><circle cx="750" cy="50" r="40" fill="#3a2f2a" stroke="#7a6a5e" stroke-width="2"/><path d="M750 10 A40 40 0 0 0 750 90 A22 40 0 0 1 750 10 Z" fill="#fff8e7"/><text x="750" y="116" text-anchor="middle" font-size="15" font-weight="700" fill="#e6faf4">그믐달</text></svg></div>`},
 {t:"write",key:"r_c3",h:"관측 보고 · 한두 문장",img:"cov_moon",prompt:`"내가 변신하는 게 아니야." — 달의 위상이 <b>약 한 달 주기</b>로 반복되는 까닭을 태양·지구·달의 위치와 관련지어 한두 문장으로 보고하세요.`,frame:"달이 지구 주위를 약 <b>한 달</b>에 한 바퀴씩 ___하면서 태양, 지구, 달의 상대적 ___가 달라지고, 지구에서 볼 때 ___이/가 비치는 부분이 달라지기 때문이다.",
   spec:{min:25,groups:[{name:"달의 '공전'",words:["공전"]},{name:"태양·지구·달의 위치(배열)",words:["위치","배열"]},{name:"햇빛이 비치는(밝은) 부분",words:["햇빛","밝은","비치"]}]},
   ai:"[관측 보고 ③ 위상 변화의 주기] 정답 요소: (1) 달이 지구 주위를 약 한 달에 한 바퀴 공전한다 (2) 태양·지구·달의 상대적 위치가 달라진다 (3) 지구에서 볼 때 햇빛이 비치는(밝게 보이는) 부분이 달라져 모양이 변한다 / 달은 스스로 빛을 내지 못하고 햇빛을 반사한다. 상=세 요소 / 중=두 요소 / 하=지구 그림자가 달을 가려서라고 씀(월식과 혼동하는 대표 오개념 — 반드시 먼저 짚을 것) 또는 달이 스스로 빛난다고 씀."},
@@ -2147,7 +2148,7 @@ function renderSlide(){
    <div id="opts">${sl.o.map((o,j)=>`<button class="opt" data-j="${j}"><span class="n">${j+1}</span><span>${o}</span></button>`).join("")}</div>
    <div id="qfb">${S.quiz[k]?`<div class="fb ok"><b>✅ 해결한 퀴즈!</b> ${esc(sl.ex)}</div>`:""}</div></div>${sl.art?artOf(sl.art):IMG(c.cover,"",'tall')}</div>`;}
  if(sl.t==="act"){ if(!sl.lock)seen();
-   body=`<div class="s-kicker">${c.no} · ${sl.kick||"활동"}</div><div class="s-title" style="font-size:clamp(1.4rem,2.6vw,2.2rem)">${sl.h}</div>${sl.sky?skyLinks(sl.sky):""}<div class="actbox" id="act"></div>`;}
+   body=`<div class="s-kicker">${c.no} · ${sl.kick||"활동"}</div><div class="s-title" style="font-size:clamp(1.4rem,2.6vw,2.2rem)">${sl.h}</div>${sl.sky?skyLinks(sl.sky):""}${sl.pre?`<div class="frame actpre">${sl.pre}</div>`:""}<div class="actbox" id="act"></div>`;}
  if(sl.t==="write"){const w=S.writes[sl.key]||{};
    body=`<div class="s-kicker">✍️ ${sl.h}</div><div class="s-grid rev">${IMG(sl.img,"",'tall')}<div><div class="s-title" style="font-size:clamp(1.3rem,2.2vw,1.9rem)">${sl.prompt}</div>
    <div class="frame">💬 문장 틀 — ${sl.frame}</div><p class="small" style="margin:4px 0 0">한두 문장이면 충분해요. 점검을 <b>통과</b>해야 다음으로 갑니다. 막히면 시뮬레이터를 다시 돌려 보거나, 옆 승무원·센터장에게!</p>
