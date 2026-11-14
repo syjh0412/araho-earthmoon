@@ -937,6 +937,45 @@ const AREA_FIG=`<div class="figure"><svg viewBox="0 0 520 250" style="width:100%
  <text x="14" y="240" fill="#a3cfc4" font-size="12">← 햇빛</text><text x="300" y="240" fill="#a3cfc4" font-size="12">※ 크기와 거리의 비율은 실제와 다름</text>
 </svg><p class="figcap">일식은 달의 그림자가 지구에 닿는 좁은 곳에서만, 월식은 달이 지구 그림자에 들어가므로 그 시각 지구에서 밤인 곳 어디서나 보인다</p></div>`;
 
+/* 일식 — 개기 일식·부분 일식을 볼 수 있는 지역 (교과서 그림 19) */
+const ECL_SOLAR_FIG=`<div class="figure"><svg viewBox="0 0 520 270" style="width:100%;display:block" role="img" aria-label="달의 짙은 그림자가 닿는 좁은 지역은 개기 일식, 옅은 그림자가 닿는 넓은 지역은 부분 일식">
+ <defs><radialGradient id="esSun" cx=".75" cy=".5"><stop offset="0" stop-color="#fff6cf"/><stop offset=".55" stop-color="#ffb13b"/><stop offset="1" stop-color="#ff7a1a"/></radialGradient>
+ <radialGradient id="esE" cx=".35" cy=".4"><stop offset="0" stop-color="#9fd3ff"/><stop offset="1" stop-color="#2a63c9"/></radialGradient><clipPath id="esClip"><circle cx="432" cy="135" r="78"/></clipPath></defs>
+ <circle cx="-70" cy="135" r="125" fill="url(#esSun)"/><text x="10" y="141" font-size="17" font-weight="800" fill="#2a1500">태양</text>
+ <polygon points="230,121 230,149 388,205 388,65" fill="#86b3a8" opacity=".22"/>
+ <polygon points="230,121 230,149 356,139 356,131" fill="#86b3a8" opacity=".55"/>
+ <circle cx="230" cy="135" r="14" fill="#3a4160" stroke="#86b3a8" stroke-width="1"/><text x="230" y="110" text-anchor="middle" font-size="15" font-weight="800" fill="#a497ff">달</text>
+ <circle cx="432" cy="135" r="78" fill="url(#esE)"/><path d="M432 57 A78 78 0 0 1 432 213 Z" fill="#03130f" opacity=".55"/>
+ <g clip-path="url(#esClip)"><ellipse cx="364" cy="135" rx="17" ry="56" fill="#03130f" opacity=".55" stroke="#5fe3ff" stroke-width="1.5" stroke-dasharray="4 3"/><ellipse cx="357" cy="135" rx="6" ry="8" fill="#03130f" stroke="#ffd166" stroke-width="1.5"/></g>
+ <text x="460" y="141" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">지구</text>
+ <line x1="357" y1="137" x2="318" y2="226" stroke="#ffd166" stroke-width="1.6"/><circle cx="357" cy="137" r="2.5" fill="#ffd166"/>
+ <text x="300" y="244" text-anchor="middle" font-size="14" font-weight="800" fill="#ffd166">개기 일식을 볼 수 있는 지역</text><text x="300" y="262" text-anchor="middle" font-size="12" fill="#a3cfc4">달의 짙은 그림자 · 아주 좁다</text>
+ <line x1="368" y1="96" x2="330" y2="44" stroke="#5fe3ff" stroke-width="1.6"/><circle cx="368" cy="96" r="2.5" fill="#5fe3ff"/>
+ <text x="300" y="22" text-anchor="middle" font-size="14" font-weight="800" fill="#5fe3ff">부분 일식을 볼 수 있는 지역</text><text x="300" y="38" text-anchor="middle" font-size="12" fill="#a3cfc4">달의 옅은 그림자 · 그 둘레</text>
+ <text x="512" y="236" text-anchor="end" font-size="12" fill="#a3cfc4">그림자 밖 → 일식 X</text>
+ <text x="10" y="262" font-size="11" fill="#a3cfc4">※ 크기·거리 비율은 실제와 다름</text>
+</svg><p class="figcap">같은 일식이라도 달의 짙은 그림자 속에서는 개기 일식, 옅은 그림자 속에서는 부분 일식으로 보이고, 그림자가 닿지 않는 곳에서는 일식이 보이지 않는다</p></div>`;
+
+/* 월식 — 개기 월식·부분 월식이 일어나는 달의 위치 (교과서 그림 21) */
+const ECL_LUNAR_FIG=`<div class="figure"><svg viewBox="0 0 520 270" style="width:100%;display:block" role="img" aria-label="지구 그림자에 달이 일부 들어간 A와 C는 부분 월식, 완전히 들어간 B는 개기 월식">
+ <defs><radialGradient id="elSun" cx=".75" cy=".5"><stop offset="0" stop-color="#fff6cf"/><stop offset=".55" stop-color="#ffb13b"/><stop offset="1" stop-color="#ff7a1a"/></radialGradient>
+ <radialGradient id="elE" cx=".35" cy=".4"><stop offset="0" stop-color="#9fd3ff"/><stop offset="1" stop-color="#2a63c9"/></radialGradient>
+ <clipPath id="elAC"><circle cx="300" cy="163" r="11"/><circle cx="300" cy="107" r="11"/></clipPath></defs>
+ <circle cx="-70" cy="135" r="125" fill="url(#elSun)"/><text x="10" y="141" font-size="17" font-weight="800" fill="#2a1500">태양</text>
+ <polygon points="190,93 190,177 500,135" fill="#86b3a8" opacity=".28"/>
+ <circle cx="190" cy="135" r="42" fill="url(#elE)"/><path d="M190 93 A42 42 0 0 1 190 177 Z" fill="#03130f" opacity=".6"/>
+ <path d="M190 93 A42 42 0 0 1 190 177" fill="none" stroke="#a497ff" stroke-width="4"/>
+ <text x="190" y="140" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">지구</text>
+ <text x="505" y="160" text-anchor="end" font-size="12" fill="#a3cfc4">지구의 그림자</text>
+ <line x1="300" y1="232" x2="300" y2="50" stroke="#a3cfc4" stroke-width="1.5" stroke-dasharray="5 5"/><path d="M293 60 L300 48 L307 60" fill="none" stroke="#a3cfc4" stroke-width="2"/>
+ <text x="300" y="40" text-anchor="middle" font-size="12" fill="#a3cfc4">달의 공전 방향</text>
+ <circle cx="300" cy="163" r="11" fill="#e6faf4"/><circle cx="300" cy="107" r="11" fill="#e6faf4"/><circle cx="300" cy="135" r="11" fill="#c8553d"/>
+ <polygon points="190,93 190,177 500,135" fill="#03130f" opacity=".8" clip-path="url(#elAC)"/>
+ <g font-size="14" font-weight="800"><line x1="313" y1="170" x2="360" y2="200" stroke="#e6faf4" stroke-width="1"/><text x="364" y="206" fill="#e6faf4">A 부분 월식</text><line x1="313" y1="135" x2="360" y2="135" stroke="#ff8f6b" stroke-width="1"/><text x="364" y="140" fill="#ff8f6b">B 개기 월식</text><line x1="313" y1="100" x2="360" y2="74" stroke="#e6faf4" stroke-width="1"/><text x="364" y="76" fill="#e6faf4">C 부분 월식</text></g>
+ <text x="190" y="206" text-anchor="middle" font-size="13" font-weight="800" fill="#a497ff">밤인 쪽 어디서나</text><text x="190" y="223" text-anchor="middle" font-size="13" font-weight="800" fill="#a497ff">같은 모습으로 보인다</text>
+ <text x="10" y="262" font-size="11" fill="#a3cfc4">※ 크기·거리 비율은 실제와 다름</text>
+</svg><p class="figcap">개기 월식인지 부분 월식인지는 <b>달이 지구 그림자에 얼마나 들어갔는지</b>로 정해진다 — 그래서 월식은 그 시각 밤인 지역 어디서 보든 같은 모습이다</p></div>`;
+
 /* ── 별 자료 (적경 시, 적위 도, 밝기) — 하늘 시계 시뮬레이션용 ── */
 const STARS_NAMED=[
  ["북극성",2.53,89.26,2.0],
@@ -1095,18 +1134,23 @@ const CH=[
 {id:"c4",cover:"cov_ecl",title:"가려지는 태양, 그림자 속의 달",no:"MISSION 04",sub:"일식과 월식 · 256~259쪽",slides:[
  {t:"hero",log:"통신 로그 · S2-D60 · 숨바꼭질 작전",h:"가려지거나, 그림자 속에 숨거나",sub:"숨바꼭질 — 한 아이는 소파 뒤에 숨고(가려짐), 한 아이는 깜깜한 곳에 숨었다(그림자 속). 하늘에서도 똑같은 일이 벌어진다. 태양이 가려지는 날과, 달이 그림자 속에 숨는 밤 — 둘의 정체를 밝혀라. — 센터장",scene:"eclHero"},
  {t:"learn",h:"일식",figs:[["ecl_tsolar.png","<b>개기 일식</b> — 태양이 달에 완전히 가려짐"],["ecl_psolar.png","<b>부분 일식</b> — 태양의 일부분이 가려짐"]],b:`<p>달이 태양의 일부 또는 전체를 가려서 보이지 않게 되는 현상을 <b>일식</b>이라고 해요.</p><p>일식은 <b>태양, 달, 지구</b> 순으로 일직선상에 놓이는 <em>삭</em>일 때 일어나요.</p><ul><li>태양이 달에 의해 완전히 가려짐 → <b>개기 일식</b></li><li>태양의 일부분이 가려짐 → <b>부분 일식</b></li></ul>`},
+ {t:"learn",h:"일식은 어디서 볼 수 있을까?",art:ECL_SOLAR_FIG,b:`<p>일식은 <b>달의 그림자</b>가 지구에 드리워진 지역에서만 볼 수 있어요. <span class="small">(교과서 그림 19)</span></p><ul><li>달의 짙은 그림자가 닿는 <span style="color:var(--sun)">아주 좁은 지역</span> → 태양이 완전히 가려지는 <b>개기 일식</b></li><li>그 둘레, 옅은 그림자가 닿는 <span style="color:var(--sun)">더 넓은 지역</span> → 태양의 일부만 가려지는 <b>부분 일식</b></li><li>달의 그림자가 닿지 않는 곳 → 일식이 보이지 않아요 (낮이어도 태양이 그대로)</li></ul><div class="key"><span class="kt">핵심</span>같은 날 일어난 일식이라도 <em>사는 곳</em>에 따라 개기 일식, 부분 일식으로 다르게 보이거나 아예 보이지 않아요.</div>`},
  {t:"learn",h:"월식",figs:[["ecl_tlunar.png","<b>개기 월식</b> — 달이 붉게 보임"],["ecl_plunar.png","<b>부분 월식</b> — 달의 일부가 어두워짐"]],b:`<p>달이 <b>지구의 그림자</b> 속에 들어가 일부 또는 전체가 보이지 않는 현상을 <b>월식</b>이라고 해요.</p><p>월식은 <b>태양, 지구, 달</b> 순으로 일직선상에 놓이는 <em>망</em>일 때 일어나요.</p><ul><li>달의 일부가 지구 그림자 속 → <b>부분 월식</b></li><li>달이 지구 그림자 속으로 완전히 → 달이 붉게 보이는 <b>개기 월식</b></li></ul>`},
+ {t:"learn",h:"월식은 어디서 볼 수 있을까?",art:ECL_LUNAR_FIG,b:`<p>월식은 달이 <b>지구의 그림자</b> 속에 들어가는 현상이에요. 그래서 그 시각 지구에서 <em>밤인 지역</em> 어디서나 볼 수 있어요. <span class="small">(교과서 그림 21)</span></p><ul><li>A, C — 달의 일부만 지구 그림자 속 → <b>부분 월식</b></li><li>B — 달 전체가 지구 그림자 속 → <b>개기 월식</b> (붉은 달)</li></ul><div class="key"><span class="kt">일식과 다른 점</span>일식은 관측하는 <span style="color:var(--sun)">장소</span>에 따라 개기·부분이 달라지지만, 월식은 <span style="color:var(--violet)">달의 위치</span>에 따라 정해져요. 같은 시각이면 밤인 곳 어디서 보든 똑같은 월식이 보여요.</div>`},
+ {t:"learn",h:"일식 vs 월식 — 볼 수 있는 지역은 어디가 더 넓을까?",art:AREA_FIG,b:`<p>일식은 달의 그림자가 닿는 <span style="color:var(--sun)">좁은 지역</span>에서만, 월식은 <span style="color:var(--violet)">밤인 지역 어디서나</span> 볼 수 있어요.</p><p>까닭 — 달은 지구보다 훨씬 작아서 <b>달의 그림자</b>는 지구의 일부만 덮지만, 월식은 달 자체가 <b>지구의 그림자</b>에 가려지므로 달이 떠 있는 곳(밤인 지역)이면 어디서나 보이기 때문이에요.</p><div class="frame">🔍 <b style="color:var(--violet)">그래서</b> 한 장소에서는 일식보다 월식을 더 자주 볼 수 있어요. 개기 일식은 같은 장소에서 수백 년에 한 번 볼까 말까 해요.</div>`},
  {t:"act",m:"eclipse",h:"그림자 시뮬레이터 — 삭과 망에서 무슨 일이?",kick:"🌑 교과서 그림 19·21"},
  {t:"act",m:"progress",h:"식의 진행 — 왜 일식은 오른쪽부터, 월식은 왼쪽부터?",kick:"🔭 교과서 탐구 257쪽 정리 · 259쪽",lock:"두 질문에 답해야 다음으로 갈 수 있어요"},
  {t:"learn",h:"개기 월식 때 달이 붉은 까닭",img:"ecl_tlunar.png",cap:"<b>개기 월식</b> — 지구 그림자 속에서도 붉게 보이는 달",b:`<p>개기 월식 때 달이 완전히 사라지지 않고 <b>붉게</b> 보이는 까닭은, 지구 <em>대기</em> 때문에 햇빛의 <b>붉은색 빛</b>만 달에 비치기 때문이에요.</p><div class="key"><span class="kt">점검 7번 함정</span>"개기 월식이 발생하면 달을 완전히 볼 수 없다" — <b>틀린</b> 말! 붉게 보여요.</div><div class="frame">🔍 <b style="color:var(--violet)">더 알아보기 · 평가 범위 밖</b> — 삭과 망마다 일식·월식이 일어나지는 않아요. 달이 지구를 도는 길이 지구가 태양을 도는 길에 대해 조금 기울어져 있어서, 대부분의 삭·망에서는 셋이 정확히 일직선이 되지 않거든요.</div>`},
  {t:"learn",h:"위상 변화 vs 부분 월식 — 무엇이 다를까?",art:"phaseVsEcl",b:`<p>둘 다 달의 일부가 어둡게 보이지만 원인이 달라요.</p><ul><li><b>위상 변화</b> — 햇빛이 비치지 않는 쪽이 보이는 것. 경계선은 달의 양 끝을 잇는 <em>타원 모양</em>이고, 매일 조금씩 바뀌며 한 달 내내 일어나요.</li><li><b>부분 월식</b> — 둥근 <em>지구의 그림자</em>가 달을 가리는 것. 그림자의 가장자리가 달보다 훨씬 큰 원의 일부라 <em>원 모양으로 파인</em> 듯 보이고, <b>망</b>일 때만 몇 시간 동안 일어나요.</li></ul>`},
  {t:"learn",h:"일식 관측 안전 수칙",img:"ecl_psolar.png",cap:"반드시 <b>태양 필터</b>를 통해서만",b:`<p>태양을 천체 망원경이나 맨눈으로 <b>직접 보면</b> 실명할 수도 있어요. 일식 때도 마찬가지예요.</p><ul><li>망원경에는 <em>태양 필터</em>를 설치하거나 <em>투영판</em>에 비친 상을 보기</li><li>관측 시 파인더의 렌즈 뚜껑은 덮어 두기</li><li>월식은 맨눈으로 안전하게 볼 수 있어요</li></ul>`},
  {t:"quiz",q:"일식이 일어날 때 천체의 배열과 달의 위상은?",o:["태양–달–지구, 삭","태양–지구–달, 망","태양–달–지구, 망"],a:0,ex:"일식은 달이 태양과 지구 사이에 들어오는 삭일 때. 월식은 태양–지구–달, 망일 때!"},
+  {t:"quiz",q:"개기 일식이 일어난 날, 개기 일식 지역의 둘레(달의 옅은 그림자 속)에 있던 사람이 본 태양은?",o:["태양의 일부만 가려진 부분 일식","똑같이 태양 전체가 가려진 개기 일식","붉게 변한 태양"],a:0,ex:"개기 일식은 달의 짙은 그림자가 닿는 아주 좁은 지역에서만! 그 둘레 옅은 그림자 지역에서는 부분 일식이 보여요."},
+ {t:"quiz",q:"일식보다 월식을 볼 수 있는 지역이 넓은 까닭은?",o:["월식은 달이 지구의 그림자에 가려지므로 밤인 지역 어디서나 보이기 때문","월식은 낮에도 보이기 때문","달의 그림자가 지구 전체를 덮기 때문"],a:0,ex:"달의 그림자는 지구의 좁은 지역만 덮지만, 월식은 달 자체가 지구 그림자에 들어가므로 달이 보이는 곳(밤인 지역) 어디서나 볼 수 있어요."},
  {t:"quiz",q:"부분 일식 사진을 보고 한 말 중 <b>옳지 않은</b> 것은? (대단원 마무리 9번)",o:["\"이건 달의 위상이 망일 때 찍은 사진이야.\"","\"태양이 달에 의해 직접 가려진 거야.\"","\"일식은 오른쪽부터 가려지고, 월식은 왼쪽부터 어두워져.\""],a:0,ex:"일식은 망이 아니라 삭일 때 일어나요!"},
  {t:"write",key:"r_c4",h:"관측 보고 · 한두 문장",img:"cov_ecl",prompt:`<b>사고력</b> — 만약 지구에 <b>대기가 없다면</b> 개기 월식 때 달은 어떻게 보일까요? 까닭과 함께 한두 문장으로 보고하세요.`,frame:"지구에 대기가 없다면 지구 그림자 속으로 ___색 빛이 비치지 않으므로, 개기 월식 때 달은 붉게 보이지 않고 ___.",
   spec:{min:25,groups:[{name:"달이 (거의) 보이지 않음 / 검게 보임",words:["보이지","안 보","검","어둡","까맣","사라"]},{name:"'대기'",words:["대기"]},{name:"붉은 빛이 달에 닿지 못함",words:["붉은","빛"]}]},
   ai:"[관측 보고 ④ 대기가 없다면] 정답 요소: (1) 개기 월식 때 달이 붉게 보이는 것은 지구 대기 때문에 햇빛의 붉은색 빛이 달에 비치기 때문이다 (2) 대기가 없다면 지구 그림자 속의 달에 빛이 비치지 않는다 (3) 그래서 달이 (거의) 보이지 않거나 검게 보일 것이다. 상=세 요소 / 중=결과(보이지 않음)는 맞으나 까닭이 약함 / 하=더 밝아진다, 그대로 붉다 등 틀린 결과. 굴절·산란 같은 고등 용어는 요구하지 말 것."},
- {t:"clear",vids:[3],pts:["일식: 달이 태양을 가림 · 태양–달–지구 · 삭 · 개기 일식/부분 일식","월식: 달이 지구 그림자 속으로 · 태양–지구–달 · 망 · 부분 월식/개기 월식(붉은 달)","달은 하늘에서 서→동(오른쪽→왼쪽)으로 옮겨 간다 → 일식은 태양의 오른쪽부터, 월식은 달의 왼쪽부터","붉은 달: 지구 대기 때문에 붉은색 빛만 달에 비친다","위상 변화(타원 경계·매일) ≠ 부분 월식(둥근 그림자·망일 때만)"]}
+ {t:"clear",vids:[3],pts:["일식: 달이 태양을 가림 · 태양–달–지구 · 삭 · 개기 일식/부분 일식","월식: 달이 지구 그림자 속으로 · 태양–지구–달 · 망 · 부분 월식/개기 월식(붉은 달)","볼 수 있는 곳: 일식은 달의 그림자 속만(짙은 그림자 → 개기, 옅은 그림자 → 부분), 월식은 밤인 지역 어디서나 같은 모습","달은 하늘에서 서→동(오른쪽→왼쪽)으로 옮겨 간다 → 일식은 태양의 오른쪽부터, 월식은 달의 왼쪽부터","붉은 달: 지구 대기 때문에 붉은색 빛만 달에 비친다","위상 변화(타원 경계·매일) ≠ 부분 월식(둥근 그림자·망일 때만)"]}
 ]},
 {id:"c5",cover:"telescope_girl",title:SCHOOL_TAG+"천체관측의 밤",no:"BONUS",sub:"11월 23일 관측 행사 대비 · 6분",slides:[
  {t:"hero",log:"통신 로그 · 지상 관제 · 특별 임무",h:SCHOOL_TAG+"천체관측의 밤",sub:"11월 23일 저녁, 운동장에 망원경이 선다. 그날 밤 하늘에 무엇이 어디쯤 떠 있을지 오늘 배운 것으로 먼저 예보하라. — 센터장",img:"telescope_girl"},
