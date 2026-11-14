@@ -1159,7 +1159,7 @@ const CH=[
  {t:"act",m:"umbra",h:"내가 서 있는 곳에서 태양을 올려다보면?",kick:"⚫ 본그림자 · 🌗 반그림자 · ☀️ 그림자 밖",lock:"세 곳(본그림자·반그림자·그림자 밖)에 모두 서 봐야 다음으로 갈 수 있어요"},
  {t:"learn",h:"월식",figs:[["ecl_tlunar.png","<b>개기 월식</b> — 달이 붉게 보임"],["ecl_plunar.png","<b>부분 월식</b> — 달의 일부가 어두워짐"]],b:`<p>달이 <b>지구의 그림자</b> 속에 들어가 일부 또는 전체가 보이지 않는 현상을 <b>월식</b>이라고 해요.</p><p>월식은 <b>태양, 지구, 달</b> 순으로 일직선상에 놓이는 <em>망</em>일 때 일어나요.</p><ul><li>달의 일부가 지구 그림자 속 → <b>부분 월식</b></li><li>달이 지구 그림자 속으로 완전히 → 달이 붉게 보이는 <b>개기 월식</b></li></ul>`},
  {t:"learn",h:"월식은 어디서 볼 수 있을까?",art:ECL_LUNAR_FIG,b:`<p>월식은 달이 <b>지구의 그림자</b> 속에 들어가는 현상이에요. 그래서 그 시각 지구에서 <em>밤인 지역</em> 어디서나 볼 수 있어요. <span class="small">(교과서 그림 21)</span></p><ul><li>A, C — 달의 일부만 지구 그림자 속 → <b>부분 월식</b></li><li>B — 달 전체가 지구 그림자 속 → <b>개기 월식</b> (붉은 달)</li></ul><div class="key"><span class="kt">일식과 다른 점</span>일식은 관측하는 <span style="color:var(--sun)">장소</span>에 따라 개기·부분이 달라지지만, 월식은 <span style="color:var(--violet)">달의 위치</span>에 따라 정해져요. 같은 시각이면 밤인 곳 어디서 보든 똑같은 월식이 보여요.</div>`},
- {t:"act",m:"lunarWho",h:"월식은 누가 볼까? — 지구 위 여기저기 서 보기",kick:"🔴 월식은 밤인 곳 어디서나",lock:"한밤중·밤 가장자리·낮에 모두 서 봐야 다음으로 갈 수 있어요"},
+ {t:"act",m:"lunarWho",h:"월식 시뮬레이터 — 달을 지구 그림자 속으로!",kick:"🔴 달을 움직이고, 나도 움직여 보기",lock:"보름달·부분 월식·개기 월식을 모두 만들고, 밤과 낮에서 모두 봐야 다음으로 갈 수 있어요"},
  {t:"learn",h:"일식 vs 월식 — 볼 수 있는 지역은 어디가 더 넓을까?",art:AREA_FIG,b:`<p>일식은 달의 그림자가 닿는 <span style="color:var(--sun)">좁은 지역</span>에서만, 월식은 <span style="color:var(--violet)">밤인 지역 어디서나</span> 볼 수 있어요.</p><p>까닭 — 달은 지구보다 훨씬 작아서 <b>달의 그림자</b>는 지구의 일부만 덮지만, 월식은 달 자체가 <b>지구의 그림자</b>에 가려지므로 달이 떠 있는 곳(밤인 지역)이면 어디서나 보이기 때문이에요.</p><div class="frame">🔍 <b style="color:var(--violet)">그래서</b> 한 장소에서는 일식보다 월식을 더 자주 볼 수 있어요. 개기 일식은 같은 장소에서 수백 년에 한 번 볼까 말까 해요.</div>`},
  {t:"act",m:"eclipse",h:"그림자 시뮬레이터 — 삭과 망에서 무슨 일이?",kick:"🌑 교과서 그림 19·21"},
  {t:"act",m:"progress",h:"식의 진행 — 왜 일식은 오른쪽부터, 월식은 왼쪽부터?",kick:"🔭 교과서 탐구 257쪽 정리 · 259쪽",lock:"두 질문에 답해야 다음으로 갈 수 있어요"},
@@ -1841,41 +1841,72 @@ ACT.umbra=(root,k,done)=>{
  draw();
 };
 
-/* ═══════ 월식은 누가 볼까? — 지구 위 어디에 서 있든 ═══════ */
+/* ═══════ 월식 시뮬레이터 — 달을 지구 그림자 속으로 + 지구 위 어디서 볼까 ═══════ */
 ACT.lunarWho=(root,k,done)=>{
- const G=S.lwho=S.lwho||{a:0,v:{}};
- const EX=330,EY=200,ER=95;
+ const G=S.lwho=S.lwho||{a:0,m:110,v:{}};
+ if(G.m==null)G.m=110; G.v=G.v||{};
+ const EX=330,EY=170,ER=95,TIP=740,MXp=600,MR=18;
+ const H=ER*(1-(MXp-EX)/(TIP-EX)); /* 달 경로에서 그림자 반높이 */
+ let play=false;
  root.innerHTML=`<div class="s-grid" style="align-items:start;gap:22px;grid-template-columns:1.3fr .7fr"><div><div class="figure" style="margin:0;padding:6px;cursor:grab" id="lwB"></div>
-   <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><button class="btn-s" data-a="0" style="flex:1">🌙 한밤중</button><button class="btn-s" data-a="-55" style="flex:1">🌆 초저녁 쪽</button><button class="btn-s" data-a="55" style="flex:1">🌅 새벽 쪽</button><button class="btn-s" data-a="180" style="flex:1">☀️ 한낮</button></div>
-   <p class="small" style="margin-top:6px">사람을 지구 둘레로 끌어 보세요 · ※ 크기와 거리는 실제와 다름</p></div>
-  <div><div class="ecstate" id="lwS"></div><div class="ecviews" id="lwV"></div><div id="lwC" class="small" style="margin-top:8px"></div></div></div>`;
+   <label class="small" for="lwM" style="display:block;margin-top:8px">🌕 달의 위치 — 막대를 오른쪽으로 밀면 달이 공전해요 (그림에서 아래 → 위)</label>
+   <input type="range" id="lwM" min="-120" max="120" value="${-G.m}" aria-label="달의 위치">
+   <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px"><button class="btn-p" id="lwP" style="flex:1 1 100%">▶ 달을 공전시키기 (그림자 통과)</button></div>
+   <div class="small" style="margin-top:10px">🧍 나의 위치</div>
+   <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px"><button class="btn-s" data-a="0" style="flex:1">🌙 한밤중</button><button class="btn-s" data-a="-55" style="flex:1">🌆 초저녁</button><button class="btn-s" data-a="55" style="flex:1">🌅 새벽</button><button class="btn-s" data-a="180" style="flex:1">☀️ 한낮</button></div>
+   <p class="small" style="margin-top:6px">그림에서 달이나 '나'를 직접 끌어도 돼요 · ※ 크기와 거리는 실제와 다름</p></div>
+  <div><div class="ecstate" id="lwS"></div><div class="ecviews" id="lwV"></div><div id="lwC" class="small" style="margin-top:8px;line-height:1.7"></div></div></div>`;
  const B=root.querySelector("#lwB");
+ function moonView(dy,size){ /* 지구에서 본 달: 그림자는 달이 가는 쪽(왼쪽=동쪽)에서 들어온다 */
+  const R=50,k=R/MR,sR=H*k,cx=-dy*k, uid="lw"+Math.floor(Math.random()*1e7);
+  const tot=Math.abs(dy)+MR<H;
+  return `<svg viewBox="-60 -60 120 120" width="${size}" height="${size}"><defs><clipPath id="${uid}"><circle r="${R}"/></clipPath></defs>
+   <rect x="-60" y="-60" width="120" height="120" rx="12" fill="#0b1230"/>
+   <circle r="${R}" fill="${tot?"#8a3a26":"#e9ecf5"}"/>${tot?"":`<g clip-path="url(#${uid})"><circle cx="${cx.toFixed(1)}" r="${sR.toFixed(1)}" fill="#5a1e14" opacity=".92"/></g>`}
+   <circle r="${R}" fill="none" stroke="#ffffff22"/><text x="-54" y="54" font-size="10" fill="#a3cfc4">동</text><text x="44" y="54" font-size="10" fill="#a3cfc4">서</text></svg>`;}
  function draw(){
-  const a=G.a, r=a*D2R, px=EX+ER*Math.cos(r), py=EY-ER*Math.sin(r);
-  const night=Math.cos(r)>0.02; /* 오른쪽(태양 반대쪽) 반구 = 밤 */
-  const key=!night?"day":(Math.abs(a)<25?"mid":"edge"); G.v[key]=1;
-  let g=`<svg viewBox="0 0 760 400" style="width:100%;display:block;touch-action:none;user-select:none"><defs><radialGradient id="lwSun" cx=".7" cy=".5"><stop offset="0" stop-color="#fff6cf"/><stop offset=".55" stop-color="#ffb13b"/><stop offset="1" stop-color="#ff7a1a"/></radialGradient><radialGradient id="lwE" cx=".3" cy=".4"><stop offset="0" stop-color="#9fd3ff"/><stop offset="1" stop-color="#2a63c9"/></radialGradient></defs>
+  const a=G.a, r=a*D2R, px=EX+ER*Math.cos(r), py=EY-ER*Math.sin(r), my=EY+G.m, dy=G.m;
+  const night=Math.cos(r)>0.02;
+  const ms=Math.abs(dy)+MR<H?"tot":Math.abs(dy)-MR<H?"part":"out";
+  G.v[ms]=1; G.v[night?"night":"day"]=1;
+  const uid="lwc"+Math.floor(Math.random()*1e7);
+  let g=`<svg viewBox="0 0 760 340" style="width:100%;display:block;touch-action:none;user-select:none"><defs><radialGradient id="lwSun" cx=".7" cy=".5"><stop offset="0" stop-color="#fff6cf"/><stop offset=".55" stop-color="#ffb13b"/><stop offset="1" stop-color="#ff7a1a"/></radialGradient><radialGradient id="lwE" cx=".3" cy=".4"><stop offset="0" stop-color="#9fd3ff"/><stop offset="1" stop-color="#2a63c9"/></radialGradient><clipPath id="${uid}"><circle cx="${MXp}" cy="${my}" r="${MR}"/></clipPath></defs>
    <circle cx="-60" cy="${EY}" r="150" fill="url(#lwSun)"/><text x="16" y="${EY+6}" font-size="18" font-weight="800" fill="#2a1500">태양</text>
-   <polygon points="${EX},${EY-ER} ${EX},${EY+ER} 740,${EY}" fill="#86b3a8" opacity=".25"/><text x="735" y="${EY+62}" text-anchor="end" font-size="13" fill="#a3cfc4">지구의 그림자</text>
+   <polygon points="${EX},${EY-ER} ${EX},${EY+ER} ${TIP},${EY}" fill="#86b3a8" opacity=".25"/><text x="745" y="${EY+62}" text-anchor="end" font-size="13" fill="#a3cfc4">지구의 그림자</text>
+   <line x1="${MXp}" y1="${EY+135}" x2="${MXp}" y2="${EY-135}" stroke="#a3cfc4" stroke-width="1.3" stroke-dasharray="5 5"/><path d="M${MXp-7} ${EY-125} L${MXp} ${EY-137} L${MXp+7} ${EY-125}" fill="none" stroke="#a3cfc4" stroke-width="2"/><text x="${MXp+12}" y="${EY-122}" font-size="12" fill="#a3cfc4">달의 공전 방향</text>
    <circle cx="${EX}" cy="${EY}" r="${ER}" fill="url(#lwE)"/><path d="M${EX} ${EY-ER} A${ER} ${ER} 0 0 1 ${EX} ${EY+ER} Z" fill="#03130f" opacity=".6"/>
    <text x="${EX-48}" y="${EY+6}" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">낮</text><text x="${EX+48}" y="${EY+6}" text-anchor="middle" font-size="15" font-weight="800" fill="#a497ff">밤</text>
-   <circle cx="600" cy="${EY}" r="22" fill="#c8553d"/><text x="600" y="${EY-32}" text-anchor="middle" font-size="14" font-weight="800" fill="#ff8f6b">달 (개기 월식 중)</text>
-   ${night?`<line x1="${px.toFixed(1)}" y1="${py.toFixed(1)}" x2="578" y2="${EY}" stroke="#3fe6a6" stroke-width="2.5" stroke-dasharray="6 4"/>`:''}
+   <circle cx="${MXp}" cy="${my}" r="${MR}" fill="${ms==="tot"?"#c8553d":"#e9ecf5"}"/>
+   ${ms==="part"?`<polygon points="${EX},${EY-ER} ${EX},${EY+ER} ${TIP},${EY}" fill="#5a1e14" opacity=".9" clip-path="url(#${uid})"/>`:""}
+   <circle cx="${MXp}" cy="${my}" r="34" fill="transparent" class="mhit"/>
+   <text x="${MXp+26}" y="${my+5}" font-size="14" font-weight="800" fill="${ms==="out"?"#e9ecf5":"#ff8f6b"}">달 · ${ms==="tot"?"개기 월식":ms==="part"?"부분 월식":"보름달"}</text>
+   ${night?`<line x1="${px.toFixed(1)}" y1="${py.toFixed(1)}" x2="${MXp-MR}" y2="${my}" stroke="#3fe6a6" stroke-width="2.5" stroke-dasharray="6 4"/>`:""}
    <g transform="translate(${px.toFixed(1)} ${py.toFixed(1)})"><circle r="16" fill="#3fe6a633" stroke="#3fe6a6" stroke-width="2"/><circle r="5" fill="#ffe3c9"/></g>
    <text x="${(EX+(ER+34)*Math.cos(r)).toFixed(1)}" y="${(EY-(ER+34)*Math.sin(r)+5).toFixed(1)}" text-anchor="middle" font-size="14" font-weight="800" fill="#3fe6a6">나</text></svg>`;
   B.innerHTML=g;
-  const T={day:["☀️ 달이 안 보여요","나는 지구의 <b>낮</b>인 쪽에 있어요. 달이 지평선 아래에 있어서 월식을 볼 수 없어요."],
-   mid:["🔴 개기 월식이 보여요","나는 <b>밤</b>인 쪽에 있어요. 하늘에 뜬 달이 붉게 보여요."],
-   edge:["🔴 여기서도 똑같이!","밤인 쪽이면 어디서든 <b>같은 모습</b>의 개기 월식이 보여요. 달 자체가 지구 그림자 속에 들어갔기 때문이에요."]}[key];
+  const T=!night?["☀️ 달이 안 보여요","나는 지구의 <b>낮</b>인 쪽에 있어요. 달이 지평선 아래에 있어서 볼 수 없어요. 밤인 쪽으로 옮겨 보세요."]
+   :ms==="out"?["🌕 보름달","달이 아직 지구 그림자 <b>밖</b>에 있어요 (망). 공전시켜서 그림자 속으로 넣어 보세요."]
+   :ms==="part"?["🌗 부분 월식","달의 <b>일부</b>만 지구 그림자 속에 들어갔어요. 달이 동쪽(왼쪽)으로 움직이므로 <b>왼쪽부터</b> 어두워지고, 나올 때도 왼쪽부터 밝아져요."]
+   :["🔴 개기 월식!","달 <b>전체</b>가 지구 그림자 속에 들어갔어요. 완전히 사라지지 않고 <b>붉게</b> 보여요 (지구 대기 때문)."];
   root.querySelector("#lwS").innerHTML=`<div class="ech">${T[0]}</div><div class="small" style="color:var(--fg)">${T[1]}</div>`;
-  root.querySelector("#lwV").innerHTML=night?`<div>${moonFaceSVG(180,120,{red:1,noShadow:true})}<div class="small">내가 본 달</div></div>`:`<div><svg viewBox="0 0 120 120" width="120" height="120"><rect width="120" height="120" rx="12" fill="#3a6fb8"/><circle cx="60" cy="40" r="16" fill="#ffd166"/><rect y="84" width="120" height="36" fill="#2e7d4f"/></svg><div class="small">내가 본 하늘 (낮)</div></div>`;
-  const vis=["mid","edge","day"].filter(z=>G.v[z]).length;
-  root.querySelector("#lwC").innerHTML=`<div style="padding:8px 10px;border:1.5px dashed var(--line);border-radius:12px">🔑 일식은 <b>서 있는 곳</b>에 따라 개기·부분·없음이 갈리지만, 월식은 <b>밤이기만 하면</b> 누구나 같은 월식을 봐요.</div><div style="margin-top:6px">한밤중·밤 가장자리·낮에 서 보기: ${vis}/3</div>`;
-  if(vis===3){ if(!S.quiz[k]){S.quiz[k]=1;addPts(4);} else save(); done&&done(); } else save();
+  root.querySelector("#lwV").innerHTML=night?`<div>${moonView(dy,130)}<div class="small">내가 본 달</div></div>`:`<div><svg viewBox="0 0 120 120" width="130" height="130"><rect width="120" height="120" rx="12" fill="#3a6fb8"/><circle cx="60" cy="40" r="16" fill="#ffd166"/><rect y="84" width="120" height="36" fill="#2e7d4f"/></svg><div class="small">내가 본 하늘 (낮)</div></div>`;
+  const ck=(x,l)=>`${G.v[x]?"✅":"⬜"} ${l}`;
+  const need=["out","part","tot","night","day"], vis=need.filter(z=>G.v[z]).length;
+  root.querySelector("#lwC").innerHTML=`<div style="padding:8px 10px;border:1.5px dashed var(--line);border-radius:12px">🔑 개기 월식인지 부분 월식인지는 <b>달이 지구 그림자에 얼마나 들어갔는지</b>로 정해져요. 그래서 <b>밤이기만 하면</b> 어디서 보든 같은 월식이 보여요. (일식은 서 있는 곳에 따라 달라졌죠!)</div>
+   <div style="margin-top:6px">${ck("out","보름달")} · ${ck("part","부분 월식")} · ${ck("tot","개기 월식")}<br>${ck("night","밤인 곳에서 보기")} · ${ck("day","낮인 곳에서 보기")}</div>`;
+  root.querySelector("#lwM").value=-G.m;
+  if(vis===need.length){ if(!S.quiz[k]){S.quiz[k]=1;addPts(4);} else save(); done&&done(); } else save();
  }
  const setA=a=>{G.a=Math.round(((a+540)%360)-180);draw();};
- dragOn(B,q=>setA(Math.atan2(EY-q.y,q.x-EX)*R2D));
+ const setM=m=>{G.m=Math.max(-120,Math.min(120,Math.round(m)));draw();};
+ let grab=null;
+ dragOn(B,q=>{ if(grab===null){ const my=EY+G.m; grab=Math.hypot(q.x-MXp,q.y-my)<45?"moon":"me"; }
+  if(grab==="moon")setM(q.y-EY); else setA(Math.atan2(EY-q.y,q.x-EX)*R2D); });
+ B.addEventListener("pointerup",()=>{grab=null;}); B.addEventListener("pointercancel",()=>{grab=null;});
+ root.querySelector("#lwM").oninput=e=>setM(-e.target.value);
  root.querySelectorAll("[data-a]").forEach(b=>b.onclick=()=>setA(+b.dataset.a));
+ let last=0; const loop=ts=>{ if(!play)return; if(!document.body.contains(B)){play=false;return;} if(ts-last>40){last=ts; let m=G.m-2; if(m<-120)m=120; setM(m);} requestAnimationFrame(loop); };
+ root.querySelector("#lwP").onclick=e=>{ play=!play; e.target.textContent=play?"⏸ 멈추기":"▶ 달을 공전시키기 (그림자 통과)"; if(play)requestAnimationFrame(loop); };
  draw();
 };
 
