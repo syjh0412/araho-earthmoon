@@ -597,6 +597,7 @@ table.sstab select{min-height:44px;padding:6px 8px;font-size:1rem}
 .refbox p{margin:10px 0 0;line-height:1.7}
 .actpre{margin:6px 0 14px;font-size:.98rem;line-height:1.7}
 .actpre ol{margin:6px 0 0;padding-left:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(440px,1fr));column-gap:28px}
+.cmdel{float:right;background:none;border:1px solid var(--line);border-radius:8px;color:var(--mut);font-size:.8rem;padding:2px 8px;cursor:pointer;min-height:28px}.cmdel:hover{color:#ff8f8f;border-color:#ff8f8f}
 </style>
 </head>
 <body class="gate">
@@ -2882,7 +2883,7 @@ async function commsAdd(o){
 }
 async function commsAnswer(qid,text){
   const teacher=(me&&me.cls==="T")?'1':'';
-  if(API){return post({action:'qanswer',...me,qid,text,teacher});}
+  if(API){return post({action:'qanswer',...me,qid,text,teacher,pin:teacher?TPIN:''});}
   const rows=localComms(); const q=rows.find(x=>x.id===qid); if(q){q.answers.push({t:new Date().toISOString(),name:me.name,text,teacher:!!teacher});saveLocalComms(rows);} return {ok:true};
 }
 const PHASES=["출발 전","귀환 후","귀환 보고"];
@@ -2968,7 +2969,7 @@ function cmCard(r){
    <div class="cmmeta">${(!CM.mission&&r.phase!=="귀환 보고")?`<span class="cmph">${r.phase==="출발 전"?"출발 전":"귀환 후"}</span>`:''}<span>${who}</span><span>${esc((r.t||'').slice(5,16).replace('T',' '))}</span>${r.mine?'<span class="pill w" style="margin:0">내 교신</span>':''}<span class="cmn">${r.phase==="귀환 보고"?(ans.length?`댓글 ${ans.length}`:''):(ans.length?`응답 ${ans.length}`:'응답 기다림')}</span></div>
    <p class="cmtx">${esc(r.text)}</p>
    ${ans.length>shown.length?`<button class="cmmore" data-more="${esc(r.id)}">이전 응답 ${ans.length-shown.length}개 더 보기</button>`:''}
-   ${shown.map(a=>`<div class="cma ${a.teacher?'t':''}"><b>${a.teacher?'🎖️ 센터장':'💬 '+(r.ro?(a.cls?esc(a.cls)+'반 ':'')+'승무원':esc(a.name))}</b> <span class="small">${esc((a.t||'').slice(5,16).replace('T',' '))}</span><div>${esc(a.text)}</div></div>`).join("")}
+   ${shown.map(a=>`<div class="cma ${a.teacher?'t':''}"><b>${a.teacher?'🎖️ 센터장':'💬 '+(r.ro?(a.cls?esc(a.cls)+'반 ':'')+'승무원':esc(a.name))}</b> <span class="small">${esc((a.t||'').slice(5,16).replace('T',' '))}</span>${isT()&&a.id&&API?`<button class="cmdel" data-adel="${esc(a.id)}" title="이 응답 지우기" aria-label="이 응답 지우기">🗑</button>`:''}<div>${esc(a.text)}</div></div>`).join("")}
    ${r.ro?'':`<button class="cmrep" data-rep="${esc(r.id)}" data-lab="${r.phase==="귀환 보고"?"👍 댓글 달기":"응답하기"}">${r.phase==="귀환 보고"?"👍 댓글 달기":"응답하기"}</button>
    <div class="cmbox" hidden><textarea class="ansIn" placeholder="아는 만큼, 근거와 함께"></textarea><button class="btn-s ansBtn" style="min-height:44px;width:100%;margin-top:6px">${ansBtnLabel()}</button><div class="ansFb"></div></div>`}</div>`;
 }
@@ -2999,6 +3000,8 @@ async function loadComms(){
     L.querySelectorAll("[data-more]").forEach(b=>b.onclick=()=>{CM.open=CM.open||{};CM.open[b.dataset.more]=1;loadComms();});
     L.querySelectorAll("[data-rep]").forEach(b=>b.onclick=()=>{const bx=b.nextElementSibling;bx.hidden=!bx.hidden;b.textContent=bx.hidden?b.dataset.lab:"취소";if(!bx.hidden)bx.querySelector("textarea").focus();});
     L.querySelectorAll(".ansBtn").forEach(b=>b.onclick=()=>sendAnswer(b,false));
+    L.querySelectorAll("[data-adel]").forEach(b=>b.onclick=async()=>{ if(b.dataset.sure!=="1"){b.dataset.sure="1";b.textContent="정말 지울까요? 한 번 더 누르기";return;}
+      b.disabled=true; try{const r=await post({action:'adel',pin:TPIN,id:b.dataset.adel}); if(r&&r.ok===false)throw r.error; toast("응답을 지웠어요"); loadComms();}catch(e){toast("지우기 실패: "+e+" (Code.gs를 최신판으로 바꿔 새 버전 배포가 필요할 수 있어요)");b.disabled=false;} });
   }catch(e){L.innerHTML=`<div class="fb no">교신 채널 연결 실패: ${esc(e)}</div>`;}
 }
 
@@ -3017,7 +3020,9 @@ async function sendAnswer(b,force){
   const card=b.closest("[data-q]"),inp=card.querySelector(".ansIn"),out=card.querySelector(".ansFb"),t=inp.value.trim();
   if(t.length<2)return toast("응답을 적어 주세요");
   const left=ansLeft(), scoring=!isT()&&!isG()&&left>0;
-  const lazy=scoring&&!force?ansLazy(t):"";
+  const norm=t.replace(/[\s.,!?~…·'"“”‘’()\-ㅋㅎㅠㅜ]/g,""); S.comms=S.comms||{}; const sent=S.comms.ansH||[];
+  const dup=scoring&&!force&&norm.length>0&&sent.includes(norm);
+  const lazy=dup?"전에 보낸 응답과 <b>똑같아요</b>. 이 질문에 맞게 <b>내 말로</b> 다시 써 주세요.":(scoring&&!force?ansLazy(t):"");
   if(lazy){ if(out)out.innerHTML=`<div class="fb no" style="margin-top:8px"><b>✍️ 조금만 더!</b> ${lazy}<div class="small">고쳐서 보내면 +${ANS_PTS}점이에요.</div><button class="cmmore ansForce" style="margin-top:6px">점수 없이 그대로 보내기</button></div>`;
     const f=out&&out.querySelector(".ansForce"); if(f)f.onclick=()=>sendAnswer(b,true); inp.focus(); return; }
   let lvl=null;
@@ -3035,6 +3040,7 @@ async function sendAnswer(b,force){
   }
   try{
     await commsAnswer(card.dataset.q,t);
+    S.comms.ansH=(S.comms.ansH||[]).concat([norm]).slice(-80);
     if(scoring&&!force){S.comms.ans=(S.comms.ans||0)+1; addPts(ANS_PTS); if(lvl==="상")setTimeout(()=>toast("🤖 근거까지 든 멋진 응답!"),700);}
     else save();
     CM.open=CM.open||{};CM.open[card.dataset.q]=1; loadComms();

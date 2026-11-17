@@ -102,6 +102,7 @@ function handle(p){
   if(a==='qadd')      return qadd(p);
   if(a==='qlist')     return qlist(p);
   if(a==='qanswer')   return qanswer(p);
+  if(a==='adel')      return adel(p);
   if(a==='tlogin')    return tlogin(p);
   if(a==='roster')    return roster(p);
   if(a==='logs')      return logs(p);
@@ -275,11 +276,24 @@ function qadd(p){
 function qanswer(p){
   if(!p.qid || !p.text || String(p.text).trim().length<2) throw new Error('응답 내용을 적어 주세요');
   var s = sheet(SHEET_A, ['id','qid','시각','반','번호','이름','내용','센터장']);
-  s.appendRow([qid(), p.qid, new Date(), p.cls||'', p.num||'', p.name||'', String(p.text).slice(0,1000), p.teacher==='1'?'1':'']);
+  var t = (p.teacher==='1' && pinOk(p));   // 센터장 표시는 센터장 코드가 맞을 때만
+  s.appendRow([qid(), p.qid, new Date(), t?'':(p.cls||''), t?'':(p.num||''), t?'센터장':(p.name||''), String(p.text).slice(0,1000), t?'1':'']);
   // 응답수 갱신
   var q = sheet(SHEET_Q, ['id','시각','반','번호','이름','미션','단계','내용','익명','응답수']);
   var v = q.getDataRange().getValues();
   for(var i=1;i<v.length;i++){ if(String(v[i][0])===String(p.qid)){ q.getRange(i+1,10).setValue(Number(v[i][9]||0)+1); break; } }
+  return {ok:true};
+}
+/* 센터장: 응답 하나 지우기 (교신 탭의 🗑 버튼) */
+function adel(p){
+  checkPin(p);
+  var s = sheet(SHEET_A, ['id','qid','시각','반','번호','이름','내용','센터장']);
+  var v = s.getDataRange().getValues(), qidv = null;
+  for(var i=v.length-1;i>=1;i--){ if(String(v[i][0])===String(p.id)){ qidv=String(v[i][1]); s.deleteRow(i+1); break; } }
+  if(qidv===null) return {ok:false, error:'이미 지워졌거나 찾을 수 없는 응답이에요'};
+  var q = sheet(SHEET_Q, ['id','시각','반','번호','이름','미션','단계','내용','익명','응답수']);
+  var qv = q.getDataRange().getValues();
+  for(var j=1;j<qv.length;j++){ if(String(qv[j][0])===qidv){ q.getRange(j+1,10).setValue(Math.max(0,Number(qv[j][9]||0)-1)); break; } }
   return {ok:true};
 }
 function qlist(p){
@@ -288,7 +302,7 @@ function qlist(p){
   var qv = q.getDataRange().getValues(), av = a.getDataRange().getValues();
   var full = pinOk(p), nm = function(x){ return full ? String(x) : maskName(x); };
   var ans = {};
-  for(var j=1;j<av.length;j++){ var r=av[j]; (ans[String(r[1])]=ans[String(r[1])]||[]).push({t:r[2]?new Date(r[2]).toISOString():'',cls:r[3],num:r[4],name:r[5],text:r[6],teacher:String(r[7])==='1'}); }
+  for(var j=1;j<av.length;j++){ var r=av[j]; (ans[String(r[1])]=ans[String(r[1])]||[]).push({id:String(r[0]),t:r[2]?new Date(r[2]).toISOString():'',cls:r[3],num:r[4],name:r[5],text:r[6],teacher:String(r[7])==='1'}); }
   for(var aq in ans){ ans[aq].forEach(function(a){ if(!a.teacher) a.name = nm(a.name); }); }
   var rows=[];
   for(var i=qv.length-1;i>=1 && rows.length<300;i--){ var x=qv[i];
