@@ -182,7 +182,7 @@ function login(p){
   var k = key({cls:p.cls,num:p.num,name:name}), r = findRow(s,k), state = null;
   if(r<0){ s.appendRow([k, p.cls, p.num, name, 0, S2 ? '지상 관측병' : '지상 훈련생', '', '', new Date()]); }
   else{ var raw = s.getRange(r,8).getValue(); try{ state = raw ? JSON.parse(raw) : null; }catch(e){ state=null; } s.getRange(r,9).setValue(new Date()); }
-  var res = {ok:true, name:name, state:state};
+  var res = {ok:true, name:name, state:state, adj:adjFor(p.cls,p.num)};
   if(S2) res.prev = prevSeason(k);
   return res;
 }
@@ -197,6 +197,20 @@ function prevSeason(k){
   }catch(e){}
   return null;
 }
+/* 센터장 점수 조정 — '점수조정'(시즌 2는 '점수조정 S2') 탭에 줄을 넣으면 학생 앱이 다음 저장·입장 때 한 번만 반영합니다.
+   점수: 더하거나 뺄 점수(예: -10) · 응답수: 응답 점수 상한(50건)에서 되돌려 줄 건수(예: -5) · id는 비워 두면 자동으로 채워져요 */
+function adjFor(cls, num){
+  try{
+    var s = sheet('점수조정'+(S2?' S2':''), ['id','반','번호','이름','점수','응답수','까닭']);
+    var v = s.getDataRange().getValues(), n = function(x){ return String(x).replace(/\.0$/,'').trim(); }, out = [];
+    for(var i=1;i<v.length;i++){ var r=v[i];
+      if(n(r[1])!==n(cls) || n(r[2])!==n(num)) continue;
+      if(!Number(r[4]) && !Number(r[5])) continue;
+      var id = String(r[0]||''); if(!id){ id = qid(); s.getRange(i+1,1).setValue(id); }
+      out.push({id:id, pts:Number(r[4]||0), ans:Number(r[5]||0), why:String(r[6]||'')}); }
+    return out;
+  }catch(e){ return []; }
+}
 function resetCode(p){
   checkPin(p); var R = findRoster(); if(!R) throw new Error('명단 탭이 없어요');
   var row = rosterRow(R, p.cls, p.num); if(!row) throw new Error('명단에 없어요');
@@ -210,7 +224,7 @@ function save(p){
   var st = String(p.state||'');
   if(st.length > 45000) st = st.slice(0,45000);
   s.getRange(r,5,1,5).setValues([[Number(p.pts||0), String(p.rank||''), String(p.prog||''), st, new Date()]]);
-  return {ok:true};
+  return {ok:true, adj:adjFor(p.cls,p.num)};
 }
 
 /* 기록은 전체 '기록' 탭 + 문항별 탭에 나눠 쌓입니다 */

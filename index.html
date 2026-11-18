@@ -925,7 +925,17 @@ function save(){
   drawHud();
   if(API&&me){ clearTimeout(saveTimer); setSync('pending'); saveTimer=setTimeout(()=>{
     post({action:'save',...me,s:'2',pts:S.pts,rank:rank().r,prog:CH.map(c=>{const p=chapProg(c);return p.d+'/'+p.total;}).join(' '),state:JSON.stringify(S)})
-     .then(()=>setSync('on')).catch(()=>setSync('err')); },1500); }
+     .then(r=>{setSync('on'); applyAdj(r&&r.adj);}).catch(()=>setSync('err')); },1500); }
+}
+function applyAdj(list){
+  if(!list||!list.length||isT()||isG()||!me)return;
+  S.adjDone=S.adjDone||[]; let ch=0;
+  list.forEach(a=>{ const id=String(a.id); if(S.adjDone.includes(id))return;
+    S.pts=Math.max(0,(S.pts||0)+Number(a.pts||0));
+    if(a.ans){S.comms=S.comms||{}; S.comms.ans=Math.max(0,(S.comms.ans||0)+Number(a.ans));}
+    S.adjDone.push(id); ch++;
+    setTimeout(()=>toast(`🛰️ 센터장 점수 조정 ${a.pts>0?'+':''}${a.pts}점${a.why?' — '+a.why:''}`),1600+ch*1800); });
+  if(ch){ save(); render(); }
 }
 function setSync(s){syncState=s;const el=document.querySelector('.hud .sync');if(el){el.className='sync '+(s==='on'?'on':'');el.textContent=s==='on'?'● 센터장 시트에 저장됨':s==='pending'?'○ 저장 중…':s==='err'?'! 저장 실패(다시 시도 중)':API?'○ 연결 대기':'기기에만 저장';}}
 function logSrv(type,item,text,score,ai){ if(API&&me&&!isT()) post({action:'log',...me,type,item,text,score,ai}).catch(()=>{}); }
@@ -2560,11 +2570,12 @@ function renderGate(){
    const cand={cls,num,name};
    if(API){try{const r=await call({action:'login',...cand,code:code||''}); if(r.name)cand.name=r.name; me=cand; loadLocal();
         if(r.state){const sv=r.state; if((sv.pts||0)>=(S.pts||0)) S={...freshState(),...sv};}
+        window.__adj=r.adj||null;
         if(r.prev){S.prev={pts:r.prev.pts,rank:r.prev.rank}; if(!S.sty&&r.prev.sty){S.sty={look:r.prev.sty.look,hair:r.prev.sty.hair};}} setSync('on');}
      catch(e){ b.disabled=false;b.textContent="관제센터 입장"; m.innerHTML='<span style="color:var(--red)">'+esc(e)+'</span>'; return; }}
    else{ me=cand; loadLocal(); }
    me.ver=SESSION_VER; try{localStorage.setItem(LS_ME,JSON.stringify(me));}catch(e){}
-   save(); view="home"; render(); toast((S.prev&&S.prev.pts?"시즌 1의 "+S.prev.rank+", ":"")+"귀환을 환영합니다, "+me.name+"! 🫡");};
+   save(); view="home"; render(); if(API&&window.__adj){applyAdj(window.__adj);window.__adj=null;} toast((S.prev&&S.prev.pts?"시즌 1의 "+S.prev.rank+", ":"")+"귀환을 환영합니다, "+me.name+"! 🫡");};
  const eye=gate.querySelector("#gEye"); if(eye){eye.onclick=()=>{const i=gate.querySelector("#gCode");const on=i.style.webkitTextSecurity==="disc";i.style.webkitTextSecurity=on?"none":"disc";eye.textContent=on?"숨김":"보기";};}
  gate.querySelector("#gGo").onclick=go;
  gate.querySelectorAll("input").forEach(i=>i.onkeydown=e=>{if(e.key==="Enter")go();});
