@@ -2679,14 +2679,24 @@ function loadHof(id){
 }
 
 /* ═══════ 학습 목록 ═══════ */
+const SUMS=[["지구의 운동","미션 01~02 · 자전과 공전",[["sum_earth_dan","단권화 정답","land"],["sum_earth_ans","정리 틀 정답",""],["sum_earth_model","모범 예시",""]]],
+ ["달의 운동","미션 03~04 · 위상과 일식·월식",[["sum_moon_dan","단권화 정답","land"],["sum_moon_ans","정리 틀 정답",""],["sum_moon_model","모범 예시",""]]]];
+function sumHTML(){return `<div class="card" style="margin-top:18px"><h3>📝 한 장 정리 — 정답·모범 예시</h3><p class="small" style="margin:2px 0 10px">내 정리를 먼저 끝낸 뒤 비교해 보세요. 그림을 누르면 크게 보여요.</p>
+ ${SUMS.map(g=>`<div style="margin:10px 0 4px"><b style="font-family:var(--disp);font-size:1.15rem;color:var(--sun)">${g[0]}</b> <span class="small">${g[1]}</span></div>
+ <div style="display:flex;gap:12px;flex-wrap:wrap">${g[2].map(x=>`<button class="sumth" data-s="${x[0]}" data-n="${esc(g[0]+' · '+x[1])}" style="min-height:0;padding:6px;border-radius:12px;background:#ffffff0d;border:1.5px solid #ffffff2a;color:var(--fg);width:${x[2]?'260px':'150px'}"><img src="img/${x[0]}_t.jpg" alt="${esc(x[1])}" loading="lazy" style="display:block;width:100%;border-radius:6px;background:#fff"><span class="small" style="display:block;margin-top:5px;color:var(--fg)">${x[1]}</span></button>`).join("")}</div>`).join("")}</div>`;}
+function sumBind(root){root.querySelectorAll(".sumth").forEach(b=>b.onclick=()=>{
+ const o=document.createElement("div");o.style.cssText="position:fixed;inset:0;z-index:9999;background:#000d;display:flex;flex-direction:column;align-items:center;padding:12px;overflow:auto";
+ o.innerHTML=`<div style="display:flex;gap:10px;align-items:center;width:100%;max-width:1100px;margin-bottom:8px"><b style="color:#fff;flex:1">${b.dataset.n}</b><a class="btn-g" href="img/${b.dataset.s}.jpg" target="_blank" rel="noopener" style="min-height:36px;padding:4px 12px;text-decoration:none">새 탭에서 크게 ↗</a><button class="btn-s" style="min-height:36px;padding:4px 14px">닫기 ✕</button></div><img src="img/${b.dataset.s}.jpg" style="max-width:min(1100px,100%);height:auto;background:#fff;border-radius:6px">`;
+ const close=()=>{o.remove();document.removeEventListener("keydown",ek);};const ek=e=>{if(e.key==="Escape")close();};
+ o.querySelector("button").onclick=close;o.onclick=e=>{if(e.target===o)close();};document.addEventListener("keydown",ek);document.body.appendChild(o);});}
 function renderLearn(){
  app.innerHTML=`${hudBlock()}<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:18px 4px 4px"><h2 style="font-size:1.9rem">📚 미션 학습</h2>${isT()||isG()?"":`<button class="btn-g rvbtn ${S.review?"on":""}" id="rvwL" style="margin-left:auto">🔁 복습 모드 ${S.review?"켜짐 — 공부한 카드도 빈칸이 다시 가려져요":"꺼짐"}</button>`}</div>
  <p class="small" style="margin:0 4px 12px">교과서(천재 Ⅶ-2) 쪽수 순서대로. 교과서 탐구를 앱에서 먼저 해 보고, 마지막 '관측 보고' 한두 문장으로 마무리!</p>
  <div class="grid">${CH.map((c,i)=>{const p=chapProg(c);return `<div class="chapw"><button class="chap ${p.d>=p.total?'doneAll':''}" data-ch="${i}" style="background-image:url(img/${c.cover}.jpg)"><div class="in">
    <div class="k">${c.no}</div><h3>${c.title}</h3><span class="small">${c.sub}</span>
    <span class="dots">${c.slides.map((sl,j)=>`<i class="${slideDone(c,sl,j)?'on':''}"></i>`).join("")}</span>
-   ${p.d>=p.total?'<span class="stamp" style="margin-top:8px">MISSION CLEAR</span>':`<span class="small" style="color:var(--cyan)">진행 ${p.d}/${p.total} ${p.d>0?"· 이어서 하기 ▶":"· 시작 ▶"}</span>`}</div></button>${DECKS[c.id]?`<button class="dkunder" data-dk="${c.id}" title="이 미션의 수업 슬라이드(PPT) 보기">📽 수업 슬라이드</button>`:""}</div>`;}).join("")}</div>`;
- drawHud();
+   ${p.d>=p.total?'<span class="stamp" style="margin-top:8px">MISSION CLEAR</span>':`<span class="small" style="color:var(--cyan)">진행 ${p.d}/${p.total} ${p.d>0?"· 이어서 하기 ▶":"· 시작 ▶"}</span>`}</div></button>${DECKS[c.id]?`<button class="dkunder" data-dk="${c.id}" title="이 미션의 수업 슬라이드(PPT) 보기">📽 수업 슬라이드</button>`:""}</div>`;}).join("")}</div>${sumHTML()}`;
+ drawHud(); sumBind(app);
  app.querySelectorAll(".dkunder").forEach(b=>b.onclick=()=>openDeck(b.dataset.dk));
  const rvl=document.getElementById("rvwL"); if(rvl)rvl.onclick=()=>{S.review=!S.review;save();render();};
  document.querySelectorAll(".chap").forEach(b=>b.onclick=()=>{const ci=+b.dataset.ch;const c=CH[ci];deck={ch:ci,i:(isT()||isG())?0:Math.min(S.slide[c.id]||0,c.slides.length-1)};render();});
