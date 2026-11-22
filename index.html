@@ -2010,7 +2010,7 @@ function xItemHTML(q,n){
   h+=`<div class="xbogi"><span class="lb">보 기</span>${q.bogi.map((b,i)=>{const l=XL[i];
    return `<div class="xbl"><span class="t"><b>${l}.</b> ${esc(b[0])}</span>${done?`<span class="xjudge ${b[1]?'o':'x'}">${b[1]?'○':'✕'}</span>`:`<span class="xox"><button data-q="${q.id}" data-l="${l}" data-m="o" class="o ${m[l]==='o'?'on':''}" aria-label="${l} 옳음">○</button><button data-q="${q.id}" data-l="${l}" data-m="x" class="x ${m[l]==='x'?'on':''}" aria-label="${l} 틀림">✕</button></span>`}</div>
     ${done?`<div class="xwhy">${esc(b[2])}</div>`:""}`;}).join("")}</div>`;
-  h+=`<div class="xopts">${XSET[q.set].map((s,i)=>{const c=!done&&xCutByMarks(q,i);
+  h+=`<div class="xopts">${XSET[q.set].map((s,i)=>{const c=false;
    return `<button class="xopt ${done&&i===q.ans?'ok':''} ${c?'cut':''}" data-q="${q.id}" data-i="${i}" ${done?'disabled':''}>${XNUM[i]} ${s.join(", ")}</button>`;}).join("")}</div>`;
  } else if(q.kind==="one"){
   h+=`<div class="xopts col">${q.opts.map((o,i)=>`<div class="xorow"><button class="xopt ${done&&i===q.ans?'ok':''} ${!done&&cut[i]?'cut':''}" data-q="${q.id}" data-i="${i}" ${done?'disabled':''}>${XNUM[i]} ${esc(o[0])}</button>${done?"":`<button class="xstrike ${cut[i]?'on':''}" data-q="${q.id}" data-s="${i}" aria-label="${XNUM[i]} 지우기">✕</button>`}</div>${done?`<div class="xwhy">${o[1]?'○':'✕'} ${esc(o[2])}</div>`:""}`).join("")}</div>`;
@@ -2027,8 +2027,8 @@ function renderExamPrac(){
  <div class="row2"><div class="card"><h3>✏️ 처음 보는 정기시험, 이렇게 풀어요</h3><ol class="steps">
   <li><b>발문 끝</b>부터 읽기 — ‘옳은 것은?’, ‘옳지 <u>않은</u> 것은?’, ‘있는 대로 고른 것은?’이 서로 달라요</li>
   <li><b>그림의 기호</b>(A, B, (가)~(라)…)를 모두 찾고, <b>(단, …)</b> 조건에 밑줄 치기</li>
-  <li>&lt;보기&gt;의 ㄱ, ㄴ, ㄷ을 <b>하나씩 ○/✕로 판단</b> — 아래 문항에서 ○/✕를 누르면 맞지 않는 선택지가 <s>저절로 지워져요</s></li>
-  <li>남은 선택지 중에서 고르기 — ✕가 하나라도 들어간 선택지는 답이 될 수 없어요 (<b>소거법</b>)</li>
+  <li>&lt;보기&gt;의 ㄱ, ㄴ, ㄷ을 <b>하나씩 끝까지 읽고 ○/✕로 판단</b> — 아래 선택지는 그다음에 봐요</li>
+  <li>○만 모은 선택지 고르기 — ✕로 판단한 보기가 들어간 선택지는 답이 될 수 없어요</li>
   <li>‘옳은 것은?’ 문제는 틀린 선택지에 ✕를 쳐서 지워 가며 풀기</li></ol></div>
   <div class="card"><h3>📊 내 연습 현황 <span class="small">${d}/${XQ.length}</span></h3><div class="xprog">${XTOPICS.map(t=>{const qs=XQ.filter(q=>q.topic===t),k=qs.filter(q=>S.exam[q.id]&&S.exam[q.id].ok).length;
    return `<div><span>${t}</span><span class="pill ${k>=qs.length?'g':k?'w':''}">${k}/${qs.length}</span></div>`;}).join("")}</div>
@@ -2057,7 +2057,7 @@ function xPick(id,i){
  S.exam[id]=sv; save();
  let msg;
  if(q.kind==="bogi"){const m=XMARK[id]||{},marked=XL.filter(l=>m[l]);
-  if(marked.length<3)msg="ㄱ, ㄴ, ㄷ을 하나씩 ○/✕로 판단해 봐. 표시하면 맞지 않는 선택지가 지워져서 답이 좁혀져.";
+  if(marked.length<3)msg="선택지부터 고르지 말고, ㄱ, ㄴ, ㄷ을 하나씩 읽고 ○/✕로 판단한 다음 골라 봐.";
   else if(xCutByMarks(q,i))msg="네가 표시한 ○/✕와 고른 답이 서로 달라! ○/✕ 표시에 맞는 선택지를 골라 봐.";
   else{const wrong=XL.filter((l,k)=>(m[l]==="o")!==!!q.bogi[k][1]).length;msg=`고른 답은 네 ○/✕ 표시와 맞아. 그렇다면 ㄱ, ㄴ, ㄷ 중 판단이 틀린 것이 <b>${wrong}개</b> 있어. 그림의 기호와 자료(날짜·순서·방향)를 다시 확인해 봐.`;}}
  else msg=q.hint||"그림과 조건을 다시 읽어 봐.";
