@@ -602,6 +602,7 @@ table.sstab select{min-height:44px;padding:6px 8px;font-size:1rem}
 .mcell{position:relative;text-align:left;background:#ffffff08;border:1.5px solid var(--line);border-radius:12px;padding:6px;display:flex;flex-direction:column;gap:4px;min-height:0;color:var(--fg);font-size:.8rem}
 .mcell.has{border-color:#5fd4e680;background:#5fd4e60f}.mcell.sel{border-color:var(--sun);box-shadow:0 0 0 2px #ffb13b55}.mcell.today .md b{color:var(--sun)}
 .mcell .md{display:flex;justify-content:space-between;gap:2px;color:var(--mut);white-space:nowrap}.mcell .md b{color:var(--fg)}.mcell .md i{font-style:normal;color:var(--sun);font-weight:700;font-size:.72rem}
+.mcell .ml{color:var(--mut);font-size:.72rem;white-space:nowrap}
 .mcell .mph{aspect-ratio:1;border-radius:8px;overflow:hidden;background:#02070c;display:grid;place-items:center;position:relative}
 .mcell .mph.g{grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:1px;place-items:stretch}
 .mcell .mph img{width:100%;height:100%;object-fit:cover;display:block}.mcell .mph svg{width:62%;opacity:.3}
@@ -2636,10 +2637,14 @@ function renderHome(){
 const MOON_FROM=new Date("2026-11-19T00:00:00+09:00"), LSM="araho2_moon_local", LSMV="araho2_moonv";
 let MOON=null, moonSel=null, moonTab="cal", moonUpOpen=false, MU=null, moonBusy=false;
 const kDay=d=>Math.floor((d.getTime()+9*36e5)/864e5);            /* 한국 날짜(일 번호) */
-function lunarDay(d){ /* 그 달의 삭이 든 날(한국 날짜)이 음력 1일 */
- try{let t=new Date(d.getTime()-31*864e5), nm=Astronomy.SearchMoonPhase(0,t,40).date;
-  for(let i=0;i<3;i++){const nx=Astronomy.SearchMoonPhase(0,new Date(nm.getTime()+864e5),40); if(nx&&kDay(nx.date)<=kDay(d))nm=nx.date; else break;}
-  return Math.max(1,Math.min(30,kDay(d)-kDay(nm)+1));}catch(e){return Math.min(30,Math.floor(Astronomy.MoonPhase(d)/360*29.53)+1);}}
+function lunarStart(d){ /* 그 달의 삭이 든 날(한국 날짜 번호) = 음력 1일 */
+ let t=new Date(d.getTime()-31*864e5), nm=Astronomy.SearchMoonPhase(0,t,40).date;
+ for(let i=0;i<3;i++){const nx=Astronomy.SearchMoonPhase(0,new Date(nm.getTime()+864e5),40); if(nx&&kDay(nx.date)<=kDay(d))nm=nx.date; else break;}
+ return kDay(nm);}
+function lunarDay(d){ try{return Math.max(1,Math.min(30,kDay(d)-lunarStart(d)+1));}catch(e){return Math.min(30,Math.floor(Astronomy.MoonPhase(d)/360*29.53)+1);}}
+const WK="일월화수목금토";
+const solOf=k=>{const d=new Date(k*864e5);return {m:d.getUTCMonth()+1,d:d.getUTCDate(),w:WK[d.getUTCDay()]};};   /* 한국 날짜 번호 → 양력 월·일·요일 */
+const solTxt=k=>{const o=solOf(k);return `${o.m}월 ${o.d}일(${o.w})`;};
 const MOONNM={1:"삭",3:"초승달",8:"상현달",15:"보름달",23:"하현달",27:"그믐달"};
 function moonNear(n){if(n<=1||n>=30)return"삭 무렵";if(n<=6)return"초승달 무렵";if(n<=10)return"상현달 무렵";if(n<=13)return"상현달~보름달";if(n<=17)return"보름달 무렵";if(n<=20)return"보름달~하현달";if(n<=25)return"하현달 무렵";return"그믐달 무렵";}
 function moonSVG(p){const wax=p<180,q=wax?p:360-p,k=Math.cos(q*Math.PI/180)*44;
@@ -2656,16 +2661,16 @@ async function moonLoad(){
 function moonByDay(){const m={};(MOON||[]).forEach(e=>{(m[e.lunar]=m[e.lunar]||[]).push(e);});return m;}
 function moonCard(e){const v=moonVotes()[e.id];
  return `<div class="mcard"><div class="mpair"><div><img src="${e.img}" alt="달 사진" loading="lazy">찍은 달</div><div><div class="mc">${moonSVG(Astronomy.MoonPhase(e.d))}</div>계산한 달</div></div>
-  <div class="small" style="color:var(--fg)"><b>${esc(e.cls)}${e.cls?"반 ":""}${e.num?esc(e.num)+"번 ":""}${esc(e.name)}</b> · ${moonFmt(e.d)}${e.dir?" · "+esc(e.dir)+" 하늘":""}</div>
+  <div class="small" style="color:var(--fg)"><b>${esc(e.cls)}${e.cls?"반 ":""}${e.num?esc(e.num)+"번 ":""}${esc(e.name)}</b> · 양력 ${moonFmt(e.d)} (음력 ${e.lunar}일)${e.dir?" · "+esc(e.dir)+" 하늘":""}</div>
   ${e.memo?`<div class="small">${esc(e.memo)}</div>`:""}
   <div class="mvote"><button data-mv="same" data-id="${e.id}" class="${v==="same"?"on":""}">모양이 같아요 ${e.same||""}</button><button data-mv="diff" data-id="${e.id}" class="${v==="diff"?"on":""}">조금 달라요 ${e.diff||""}</button></div>
   <div style="display:flex;gap:8px;align-items:center">${e.orig?`<a class="small" href="${esc(e.orig)}" target="_blank" rel="noopener" style="color:var(--cyan)">원본 사진 ↗</a>`:""}<span style="flex:1"></span>${(isT()||e.mine)?`<button class="cmdel" data-mdel="${e.id}" style="float:none">🗑 지우기</button>`:""}</div></div>`;}
 function renderMoon(){
  if(MOON===null){app.innerHTML=`${hudBlock()}<h2 style="margin:18px 4px 4px;font-size:1.9rem">🌙 달 관측 앨범</h2><p class="small" style="margin:0 4px">불러오는 중…</p>`;drawHud();moonLoad();return;}
  const m=moonByDay(), filled=Object.keys(m).length, now=new Date(), tl=lunarDay(now), who=new Set(MOON.map(e=>e.cls+"|"+e.name)).size;
- if(moonSel===null)moonSel=tl;
+ if(moonSel===null)moonSel=tl; let ls; try{ls=lunarStart(now);}catch(e){ls=kDay(now)-tl+1;} const sol=n=>solOf(ls+n-1);
  const cal=Array.from({length:30},(_,i)=>{const n=i+1,L=m[n]||[],p=((n-.5)/29.53*360)%360;
-  return `<button class="mcell ${L.length?"has":""} ${moonSel===n?"sel":""} ${tl===n?"today":""}" data-md="${n}"><span class="md"><b>${n}일</b><i>${tl===n?"오늘":(MOONNM[n]||"")}</i></span>
+  return `<button class="mcell ${L.length?"has":""} ${moonSel===n?"sel":""} ${tl===n?"today":""}" data-md="${n}"><span class="md"><b>${sol(n).m}/${sol(n).d}</b><i>${tl===n?"오늘":(MOONNM[n]||"")}</i></span><span class="ml">음력 ${n}일</span>
    <span class="mph ${L.length>1?"g":""}">${L.length?L.slice(-4).map(e=>`<img src="${e.img}" alt="" loading="lazy">`).join(""):moonSVG(p)}${L.length>4?`<span class="mn">${L.length}</span>`:""}</span></button>`;}).join("");
  const L=m[moonSel]||[];
  app.innerHTML=`${hudBlock()}
@@ -2674,15 +2679,15 @@ function renderMoon(){
   <div style="min-width:220px"><div class="small">사진 <b style="color:var(--fg)">${MOON.length}</b>장 · 승무원 ${who}명 · 30칸 중 <b style="color:var(--sun)">${filled}</b>칸</div>
    <div style="height:10px;border-radius:99px;background:#ffffff14;overflow:hidden;margin-top:4px"><i style="display:block;height:100%;width:${filled/30*100}%;background:linear-gradient(90deg,var(--cyan),var(--sun))"></i></div></div></div>
  <div class="card" style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;padding:14px 18px"><div style="width:64px;flex:0 0 auto">${moonSVG(Astronomy.MoonPhase(now))}</div>
-  <div style="flex:1;min-width:200px"><b>오늘은 음력 ${tl}일 — ${moonNear(tl)}</b><div class="small">오늘 달은 이런 모양이에요. 밤하늘에서 찾아 찍어 올려 보세요!${(m[tl]||[]).length?"":" 오늘 칸은 아직 비어 있어요."}</div></div>
+  <div style="flex:1;min-width:200px"><b>오늘은 양력 ${solTxt(kDay(now))} · 음력 ${tl}일 — ${moonNear(tl)}</b><div class="small">오늘 달은 이런 모양이에요. 밤하늘에서 찾아 찍어 올려 보세요!${(m[tl]||[]).length?"":" 오늘 칸은 아직 비어 있어요."}</div></div>
   ${isG()?"":`<button class="btn-p" id="mUpBtn" style="min-height:46px">📷 달 사진 올리기</button>`}<button class="btn-g" id="mRe" style="min-height:46px">🔄 새로 고침</button></div>
  ${moonUpOpen?moonUpHTML():""}
  <div style="display:flex;gap:6px;margin:6px 0 10px"><button class="${moonTab==="cal"?"btn-s":"btn-g"}" data-mt="cal" style="min-height:40px">위상 달력</button><button class="${moonTab==="gal"?"btn-s":"btn-g"}" data-mt="gal" style="min-height:40px">날짜순 사진</button></div>
- ${moonTab==="cal"?`<div class="small" style="margin:0 4px 8px">칸 = 음력 날짜 · 흐린 달 = 그날 계산한 모양 · <span style="color:var(--cyan)">파란 테두리 = 사진 있음</span></div>
+ ${moonTab==="cal"?`<div class="small" style="margin:0 4px 8px">칸의 큰 글씨 = 이번 달 양력 날짜, 작은 글씨 = 음력 날짜 · 흐린 달 = 그날 계산한 모양 · <span style="color:var(--cyan)">파란 테두리 = 사진 있음</span></div>
   <div class="mcal">${cal}</div>
-  <div class="card"><b style="font-family:var(--disp);font-size:1.3rem">음력 ${moonSel}일 · ${moonNear(moonSel)}</b> <span class="small">사진 ${L.length}장</span>
+  <div class="card"><b style="font-family:var(--disp);font-size:1.3rem">양력 ${solTxt(ls+moonSel-1)} · 음력 ${moonSel}일 · ${moonNear(moonSel)}</b> <span class="small">사진 ${L.length}장</span>
    ${L.length?`<div class="mdet">${L.map(moonCard).join("")}</div>`:`<p class="small" style="margin-top:8px">이날 사진이 아직 없어요. 이 모양의 달을 찍으면 첫 사진이 돼요.</p><div style="width:110px">${moonSVG(((moonSel-.5)/29.53*360)%360)}</div>`}</div>`
- :`<div class="mgal">${MOON.length?MOON.map(e=>`<button class="mgi" data-md="${e.lunar}"><img src="${e.img}" alt="" loading="lazy"><b>${moonFmt(e.d)} · 음력 ${e.lunar}일</b><span class="small" style="font-size:.78rem">${esc(e.cls)}${e.cls?"반 ":""}${esc(e.name)}</span></button>`).join(""):`<p class="small">아직 사진이 없어요. 첫 사진의 주인공이 되어 보세요!</p>`}</div>`}`;
+ :`<div class="mgal">${MOON.length?MOON.map(e=>`<button class="mgi" data-md="${e.lunar}"><img src="${e.img}" alt="" loading="lazy"><b>양력 ${moonFmt(e.d)} · 음력 ${e.lunar}일</b><span class="small" style="font-size:.78rem">${esc(e.cls)}${e.cls?"반 ":""}${esc(e.name)}</span></button>`).join(""):`<p class="small">아직 사진이 없어요. 첫 사진의 주인공이 되어 보세요!</p>`}</div>`}`;
  drawHud();
  const ub=document.getElementById("mUpBtn"); if(ub)ub.onclick=()=>{moonUpOpen=!moonUpOpen;MU=null;renderMoon();};
  document.getElementById("mRe").onclick=()=>{MOON=null;renderMoon();};
@@ -2716,7 +2721,7 @@ function moonUpBind(){
  const draw=()=>{x.fillStyle="#02070c";x.fillRect(0,0,400,400); if(!MU){x.fillStyle="#9fb3c3";x.font="16px sans-serif";x.textAlign="center";x.fillText("사진을 고르면 여기에 보여요",200,205);return;}
   const s=Math.min(MU.w,MU.h)/MU.z; MU.cx=Math.max(s/2,Math.min(MU.w-s/2,MU.cx)); MU.cy=Math.max(s/2,Math.min(MU.h-s/2,MU.cy)); x.drawImage(MU.im,MU.cx-s/2,MU.cy-s/2,s,s,0,0,400,400);};
  const calc=()=>{const d=new Date(wh.value); if(isNaN(d))return; const n=lunarDay(d); document.getElementById("mCalc").innerHTML=moonSVG(Astronomy.MoonPhase(d));
-  document.getElementById("mCap").innerHTML=`<b style="color:var(--fg)">음력 ${n}일 · ${moonNear(n)}</b><br>그날 계산한 달 모양이에요. 내 사진과 같은지 비교해 보세요.`;};
+  document.getElementById("mCap").innerHTML=`<b style="color:var(--fg)">양력 ${solTxt(kDay(d))} → 음력 ${n}일 · ${moonNear(n)}</b><br>그날 계산한 달 모양이에요. 내 사진과 같은지 비교해 보세요.`;};
  wh.oninput=calc; calc(); draw();
  document.getElementById("mFile").onchange=ev=>{const f=ev.target.files[0]; if(!f||!f.type.startsWith("image/"))return; const u=URL.createObjectURL(f),im=new Image();
   im.onload=()=>{MU={im,w:im.naturalWidth,h:im.naturalHeight,z:1,cx:im.naturalWidth/2,cy:im.naturalHeight/2};zm.value=1;
@@ -2736,7 +2741,7 @@ function moonUpBind(){
   try{ let id; if(API){const r=await post({action:"moonUp",...row,full:fc.toDataURL("image/jpeg",.85)});id=r.id;}
    else{id="L"+Date.now();const L=moonLocal();L.push({id,...row,same:0,diff:0});try{localStorage.setItem(LSM,JSON.stringify(L));}catch(e){}}
    MOON.push({id,...row,mine:true,same:0,diff:0,d,name:isT()?who.name:maskName(who.name)}); MOON.sort((a,b)=>a.d-b.d);
-   moonSel=row.lunar; moonTab="cal"; moonUpOpen=false; MU=null; toast(`음력 ${row.lunar}일 칸에 올렸어요!`);
+   moonSel=row.lunar; moonTab="cal"; moonUpOpen=false; MU=null; toast(`${solOf(kDay(d)).m}/${solOf(kDay(d)).d}(음력 ${row.lunar}일) 칸에 올렸어요!`);
    if(!isT()){S.moon=S.moon||{}; const k=String(kDay(new Date())); if(!S.moon[k]&&Object.keys(S.moon).length<10){S.moon[k]=1;addPts(3);} logSrv("달앨범","음력 "+row.lunar+"일",row.memo||"",3,"");}
    renderMoon(); }
   catch(e){toast("올리기 실패: "+e+" (Code.gs를 최신판으로 바꿔 새 버전 배포가 필요할 수 있어요)");bt.disabled=false;bt.textContent="앨범에 올리기";}
