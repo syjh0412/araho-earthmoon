@@ -650,6 +650,32 @@ table.sstab select{min-height:44px;padding:6px 8px;font-size:1rem}
 .xtbl.pick td:first-child,.xtbl.pick th:first-child,.xtbl.pick .xs{border:0;background:transparent;padding:3px}
 .xtbl .xnum{min-width:44px;padding:0 8px}.xtbl tr.cut td:not(.xs){text-decoration:line-through;opacity:.35}.xtbl tr.ok td{font-weight:700;color:#1f7a4d}
 .xfb{margin-top:10px;border-radius:12px;padding:10px 14px;font-size:1rem}.xfb.ok{background:#e3f4ea;border:1.5px solid #1f7a4d}.xfb.no{background:#fff4e0;border:1.5px solid #c77700}
+.xpaper .small{color:#6b5d3a}.xpaper .stamp{color:#1f7a4d;border-color:#1f7a4d;background:#e3f4ea}
+.xwide{overflow-x:auto;-webkit-overflow-scrolling:touch}.xwide svg{min-width:560px}
+@media(max-width:600px){.xwide::after{content:"← 그림을 옆으로 밀어 볼 수 있어요 →";display:block;text-align:center;font-size:.8rem;color:#6b5d3a}}
+@media(max-width:430px){nav#tabs{padding-left:2px;padding-right:2px}nav#tabs button{flex:1 1 0;min-width:0;font-size:.6rem;white-space:nowrap;letter-spacing:-.06em;padding:6px 0;overflow:hidden}nav#tabs button .ic{font-size:1.15rem}}
+.xgrp{margin:6px 0;line-height:1.7}.xgrpbox{break-inside:avoid;padding-top:12px}
+.xpaper.one{max-width:880px;margin:8px auto 0}
+.xw{cursor:pointer;border-radius:4px;transition:background .15s}.xw:hover{background:#f1e7c6}
+.xw.xk.on,mark.xhl{background:#ffe76a;color:#1a1a1a;border-radius:4px;padding:0 2px;box-shadow:0 2px 0 #c9a800}
+.xw.miss{background:#f6d5d1;text-decoration:line-through}
+.xstage{margin:14px 0 6px;padding:8px 12px;border-left:5px solid #8a4b00;background:#f4eedc;border-radius:6px;font-size:1rem}.xstage .small{color:#6b5d3a}
+.xstage.s1{border-color:#c9a800;background:#fff7cf}
+.xkl{margin:8px 0 0;padding-left:20px;font-size:.95rem}.xkl li{margin:3px 0}
+.xknotes{margin:10px 0;font-size:.95rem}.xknotes summary{cursor:pointer;color:#6b5d3a}
+.xshow{margin-left:8px;min-height:34px;padding:2px 12px;border-radius:8px;border:1.5px solid #c9a800;background:#fff}
+.xopt:disabled{cursor:default}.xopt:disabled:not(.ok):not(.bad){opacity:.45}
+.xopt.sel{border-color:#1a1a1a;background:#1a1a1a;color:#fff;font-weight:700}
+.xopt.bad,.xopt.bad:disabled{border-color:#b3261e;background:#fbe9e7;opacity:1;text-decoration:line-through}
+.xres{font-weight:900}.xres.o{color:#1f7a4d}.xres.x{color:#b3261e}
+.xmodes{display:flex;gap:10px;flex-wrap:wrap;margin:0 4px 10px}.xmodes button{flex:1 1 260px;background:var(--panel2);border:1.5px solid var(--line2);display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap}
+.xmodes button.on{border-color:var(--sun);box-shadow:0 0 0 2px #ffb13b55;font-weight:800}
+.xdots{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin:4px 0 8px}
+.xdots button{min-height:40px;min-width:40px;padding:0;border-radius:50%;background:#ffffff10;border:1.5px solid var(--line2);font-weight:700}
+.xdots button.ok{background:#1f7a4d;border-color:#3fe6a6;color:#fff}.xdots button.cur{box-shadow:0 0 0 3px var(--sun)}
+.xnav{display:flex;justify-content:space-between;gap:10px;margin-top:14px}.xnav button{min-height:48px}
+.xbar{display:flex;justify-content:space-between;gap:10px;font-size:1.05rem;margin-top:6px}
+.xtr{position:relative;width:100%;aspect-ratio:1;border-radius:6px;overflow:hidden;background:#000}.xtr img{width:100%;height:100%;object-fit:cover;object-position:center 70%;border-radius:0}.xtr svg{position:absolute;inset:0;width:100%;height:100%;background:none!important;aspect-ratio:auto}
 .xprog{display:grid;gap:6px;margin-top:8px}.xprog>div{display:flex;justify-content:space-between;align-items:center}
 @media(max-width:560px){.xpaper{padding:12px 10px;font-size:1rem}.xcols{columns:1}.xopt{padding:4px 10px}.xox button{min-width:38px}}
 </style>
@@ -1868,22 +1894,27 @@ function renderObs(){
    else{b.classList.add("no");fb.innerHTML=`<div class="fb no">🛰️ 단서를 다시 읽어 봐! <b>방향</b>(동·서·남·북), <b>시각</b>(해 질 무렵·새벽), <b>배열</b>이 핵심.</div>`;}});
 }
 
-/* ═══════ 시험 연습 — 정기시험 형식 연습 (지구와 달의 운동, 주제별 2문항) ═══════
-   실제 시험과 유형(발문·보기·선택지 형식)만 같고, 자료와 묻는 내용은 다르게 만든 연습 문항입니다.
-   보기 ㄱ→ㄷ은 짧은 것부터, 정답 번호는 ①~⑤가 2번씩 나오게 맞췄습니다. */
+/* ═══════ 시험 연습 — 정기시험 형식 연습 (지구와 달의 운동, 주제별 3문항 · 15문항) ═══════
+   ① 한 문제씩: 조건 찾기 → 보기 ○/✕ 판단 → 답 고르기 (한 문제 = 한 페이지)
+   ② 15문항을 한 번씩 다 맞히면 실전 모드: 시험지처럼 쭉 풀고 제출한 뒤 채점
+   실제 시험과 형식만 같고 자료·묻는 내용은 다르게 만든 연습 문항입니다. */
 const XSET={A:[["ㄱ"],["ㄴ"],["ㄱ","ㄷ"],["ㄴ","ㄷ"],["ㄱ","ㄴ","ㄷ"]], B:[["ㄱ"],["ㄴ"],["ㄷ"],["ㄱ","ㄴ"],["ㄴ","ㄷ"]]};
-const XNUM="①②③④⑤", XL=["ㄱ","ㄴ","ㄷ"];
-const XPTS_FIRST=2, XPTS_RETRY=1;
+const XNUM="①②③④⑤", XL=["ㄱ","ㄴ","ㄷ"], XPTS_FIRST=2, XPTS_RETRY=1;
+const XK_ALL=["있는 대로","옳은 것이 1개일 수도, 3개일 수도 있어. 개수를 짐작하지 말고 ㄱ, ㄴ, ㄷ을 모두 판단!"];
+const XK_SEQ=["순서 없이","(가), (나)…의 차례가 진행 순서가 아니야. 모양을 보고 순서를 직접 정해야 해."];
 
 /* ── 그림 (시험지처럼 흰 종이 위 검은 선) ── */
-function xsvg(w,h,body){return `<svg viewBox="0 0 ${w} ${h}" width="${w}" style="max-width:100%;height:auto;display:block;margin:0 auto" font-family="var(--body),sans-serif">${body}</svg>`;}
-function xt(x,y,s,o){o=o||{};return `<text x="${x.toFixed?x.toFixed(1):x}" y="${y.toFixed?y.toFixed(1):y}" font-size="${o.size||15}" text-anchor="${o.anchor||'middle'}" font-weight="${o.bold?700:400}" fill="${o.fill||'#111'}">${s}</text>`;}
+function xsvg(w,h,body,mw){return `<svg viewBox="0 0 ${w} ${h}" width="${mw||w}" style="max-width:100%;height:auto;display:block;margin:0 auto" font-family="var(--body),sans-serif">${body}</svg>`;}
+function xt(x,y,s,o){o=o||{};return `<text x="${(+x).toFixed(1)}" y="${(+y).toFixed(1)}" font-size="${o.size||15}" text-anchor="${o.anchor||'middle'}" font-weight="${o.bold?700:400}" fill="${o.fill||'#111'}">${s}</text>`;}
+const XAH=id=>`<marker id="${id}" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9z" fill="#111"/></marker>`;
+const xCirc=(x,y,s,size)=>`<circle cx="${(+x).toFixed(1)}" cy="${(+y).toFixed(1)}" r="${size*0.72}" fill="#fff" stroke="#111" stroke-width="1.3"/>`+xt(x,y+size*0.36,s,{size});
+
 function xfSouth(){ /* 남쪽 하늘: 20시에 남중한 별 S, 동쪽 A·서쪽 B */
  const cx=210,cy=196,R=150,P=a=>[cx+R*Math.cos(a*D2R),cy-R*Math.sin(a*D2R)];
  const [ax,ay]=P(135),[sx,sy]=P(90),[bx,by]=P(45),m1=[cx+(R+20)*Math.cos(112.5*D2R),cy-(R+20)*Math.sin(112.5*D2R)],m2=[cx+(R+20)*Math.cos(67.5*D2R),cy-(R+20)*Math.sin(67.5*D2R)];
  let b=`<rect x="14" y="${cy}" width="392" height="22" fill="#d9d9d9"/><line x1="14" y1="${cy}" x2="406" y2="${cy}" stroke="#111" stroke-width="2"/>`;
  b+=`<path d="M${cx-R},${cy} A${R},${R} 0 0 1 ${cx+R},${cy}" fill="none" stroke="#555" stroke-width="1.5" stroke-dasharray="6 5"/>`;
- b+=`<line x1="${cx}" y1="${cy}" x2="${ax.toFixed(1)}" y2="${ay.toFixed(1)}" stroke="#999" stroke-dasharray="3 3"/><line x1="${cx}" y1="${cy}" x2="${sx}" y2="${sy}" stroke="#999" stroke-dasharray="3 3"/><line x1="${cx}" y1="${cy}" x2="${bx.toFixed(1)}" y2="${by.toFixed(1)}" stroke="#999" stroke-dasharray="3 3"/>`;
+ b+=[[ax,ay],[sx,sy],[bx,by]].map(([x,y])=>`<line x1="${cx}" y1="${cy}" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" stroke="#999" stroke-dasharray="3 3"/>`).join("");
  b+=xt(m1[0],m1[1]+5,"45°",{size:14})+xt(m2[0],m2[1]+5,"45°",{size:14});
  [[ax,ay,"A",-16],[bx,by,"B",16]].forEach(([x,y,l,d])=>{b+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="5.5" fill="#fff" stroke="#111" stroke-width="1.8"/>`+xt(x+d,y-8,l,{size:17,bold:1});});
  b+=`<path d="M${sx},${sy-10} l3,7 7,1 -5,5 1.5,7 -6.5,-3.5 -6.5,3.5 1.5,-7 -5,-5 7,-1z" fill="#111"/>`+xt(sx,sy-18,"S (20시)",{size:15,bold:1});
@@ -1900,17 +1931,44 @@ function xfWest(){ /* 해가 진 직후 서쪽 하늘, 15일 간격 — 전갈�
   b+=`<polyline fill="none" stroke="#555" stroke-width="1.2" points="${P.map(p=>p.map(v=>v.toFixed(1)).join(",")).join(" ")}"/>`+P.map(([x,y])=>`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="2.8" fill="#111"/>`).join("");
   b+=xt(ox+18,oy-18,"전갈자리",{size:16})+xt(x0+pw/2,y0+ph+26,lab,{size:18});});
  return xsvg(3*pw+4*g,ph+44,b);}
-function xfStrip(){ /* 황도 12궁 띠 — 3월 태양은 물병자리 쪽 (한 줄에 3개, 휴대폰에서도 읽히게) */
- const N=["물병자리","물고기자리","양자리","황소자리","쌍둥이자리","게자리","사자자리","처녀자리","천칭자리","전갈자리","궁수자리","염소자리"];
- const per=3,bw=132,bh=46,gp=26,x0=18,y0=70,rg=80;let b="";const xe=x0+(per-1)*(bw+gp)+bw;
- N.forEach((n,i)=>{const r=Math.floor(i/per),c=i%per,x=x0+c*(bw+gp),y=y0+r*rg;
-  b+=`<rect x="${x}" y="${y}" width="${bw}" height="${bh}" rx="6" fill="${i===0?'#e4e4e4':'#fff'}" stroke="#111" stroke-width="1.6"/>`+xt(x+bw/2,y+30,n,{size:19});
-  if(c<per-1)b+=`<path d="M${x+bw+3},${y+bh/2} h${gp-8}" stroke="#111" stroke-width="1.6" marker-end="url(#xah)"/>`;
-  else if(i<N.length-1)b+=`<path d="M${xe+3},${y+bh/2} H${xe+14} V${y+bh+17} H${x0+bw/2} V${y+rg-4}" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#xah)"/>`;});
- const yl=y0+3*rg; b+=`<path d="M${xe+3},${yl+bh/2} h14" stroke="#111" stroke-width="1.6" marker-end="url(#xah)"/>`+xt(xe+12,yl+bh+26,"(다시 물병자리로)",{size:15,anchor:"end"});
- b+=`<circle cx="${x0+12}" cy="34" r="11" fill="#fff" stroke="#111" stroke-width="1.6"/>`+xt(x0+30,40,"3월 태양",{size:18,bold:1,anchor:"start"})+`<path d="M${x0+bw/2},48 v14" stroke="#111" stroke-width="1.6" marker-end="url(#xah)"/>`;
- b+=xt(xe+16,40,"태양의 연주 운동 방향 →",{size:16,anchor:"end"});
- return xsvg(xe+34,yl+bh+40,`<defs><marker id="xah" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8z" fill="#111"/></marker></defs>`+b);}
+function xfRing(){ /* 교과서식 황도 12궁 고리 — ○월 = 그 달에 태양이 있는 쪽의 별자리 */
+ const W=720,H=340,cx=360,cy=172,RX=270,RY=112,BW=26,OX=118,OY=46;
+ const N=[["물병자리",3],["물고기자리",4],["양자리",5],["황소자리",6],["쌍둥이자리",7],["게자리",8],["사자자리",9],["처녀자리",10],["천칭자리",11],["전갈자리",12],["궁수자리",1],["염소자리",2]];
+ const E=(a,rx,ry)=>[cx+rx*Math.cos(a*D2R),cy-ry*Math.sin(a*D2R)];
+ let b=`<defs>${XAH("xahR")}</defs><ellipse cx="${cx}" cy="${cy}" rx="${RX+BW}" ry="${RY+BW}" fill="#dfe6ee" stroke="#111" stroke-width="1.4"/><ellipse cx="${cx}" cy="${cy}" rx="${RX-BW}" ry="${RY-BW}" fill="#fdfbf4" stroke="#111" stroke-width="1.4"/>`;
+ N.forEach(([n,m],i)=>{const a=-90+30*i,[x,y]=E(a,RX,RY);b+=xt(x,y+5,n,{size:14.5,bold:1});const [mx,my]=E(a,RX+BW+18,RY+BW+14);b+=xt(mx,my+5,m+"월",{size:13.5,fill:"#444"});});
+ b+=`<ellipse cx="${cx}" cy="${cy}" rx="${OX}" ry="${OY}" fill="none" stroke="#333" stroke-width="1.4" stroke-dasharray="5 4"/>`;
+ {const a1=200*D2R,a2=245*D2R;b+=`<path d="M${(cx+(OX+14)*Math.cos(a1)).toFixed(1)},${(cy-(OY+10)*Math.sin(a1)).toFixed(1)} A${OX+14},${OY+10} 0 0 0 ${(cx+(OX+14)*Math.cos(a2)).toFixed(1)},${(cy-(OY+10)*Math.sin(a2)).toFixed(1)}" fill="none" stroke="#111" stroke-width="1.8" marker-end="url(#xahR)"/>`;}
+ b+=`<circle cx="${cx}" cy="${cy}" r="17" fill="#fff" stroke="#111" stroke-width="1.6"/>`+xt(cx,cy+5,"태양",{size:13,bold:1});
+ [["A",90,22,6],["B",180,-16,5],["C",270,0,24],["D",0,16,5]].forEach(([l,a,dx,dy])=>{const [x,y]=E(a,OX,OY);
+  b+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="8" fill="#9a9a9a" stroke="#111" stroke-width="1.3"/>`+xt(x+dx,y+dy,l,{size:16,bold:1});});
+ b+=xt(cx,cy-OY-26,"지구의 공전 궤도",{size:12,fill:"#444"});
+ return xsvg(W,H,b);}
+function xfPhase8(){ /* 교과서식 달의 위치 ㉮~㉵ — 북극 위에서 내려다봄, 햇빛은 오른쪽에서 */
+ const W=470,H=330,cx=200,cy=165,R=118,L=["㉵","㉮","㉯","㉰","㉱","㉲","㉳","㉴"];
+ let b=`<defs>${XAH("xahP")}</defs><circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="#555" stroke-width="1.4"/>`;
+ for(let i=0;i<8;i++){const a=i*45*D2R,x=cx+R*Math.cos(a),y=cy-R*Math.sin(a),lx=cx+(R+30)*Math.cos(a),ly=cy-(R+30)*Math.sin(a);
+  b+=`<line x1="${cx}" y1="${cy}" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" stroke="#999" stroke-dasharray="3 4"/>`;
+  b+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="11" fill="#333" stroke="#111"/><path d="M${x.toFixed(1)},${(y-11).toFixed(1)} A11,11 0 0 1 ${x.toFixed(1)},${(y+11).toFixed(1)}z" fill="#fff" stroke="#111"/>`;
+  b+=xt(lx,ly+7,L[i],{size:20,bold:1});}
+ b+=`<circle cx="${cx}" cy="${cy}" r="24" fill="#5b6f8a" stroke="#111" stroke-width="1.4"/><path d="M${cx},${cy-24} A24,24 0 0 1 ${cx},${cy+24}z" fill="#cfe0f0" stroke="#111" stroke-width="1.4"/>`+xt(cx,cy+42,"지구",{size:14,bold:1});
+ for(let k=0;k<6;k++){const y=50+k*46;b+=`<line x1="${W-10}" y1="${y}" x2="${W-60}" y2="${y}" stroke="#111" stroke-width="1.8" marker-end="url(#xahP)"/>`;}
+ b+=xt(W-35,H-6,"햇빛",{size:15,bold:1});
+ return xsvg(W,H,b);}
+function xfEclPos(){ /* 교과서식 — 달의 위치 ①~⑤와 지구의 그림자 */
+ const W=560,H=330,ex=310,ey=165,er=26,R=150,h=33,mr=12;
+ let b=`<defs>${XAH("xahE")}</defs>`;
+ b+=`<rect x="${ex}" y="${ey-h}" width="${W-ex}" height="${2*h}" fill="#c4c4c4"/>`;
+ b+=`<line x1="70" y1="${ey-58}" x2="${ex}" y2="${ey-er}" stroke="#777"/><line x1="70" y1="${ey+58}" x2="${ex}" y2="${ey+er}" stroke="#777"/>`;
+ b+=`<circle cx="70" cy="${ey}" r="58" fill="#f3f3f3" stroke="#111" stroke-width="1.6"/>`+xt(70,ey+6,"태양",{size:17,bold:1});
+ b+=`<circle cx="${ex}" cy="${ey}" r="${R}" fill="none" stroke="#333" stroke-width="1.5" stroke-dasharray="6 5"/>`;
+ b+=`<path d="M${ex+R*Math.cos(100*D2R)},${ey-R*Math.sin(100*D2R)} A${R},${R} 0 0 0 ${ex+R*Math.cos(125*D2R)},${ey-R*Math.sin(125*D2R)}" fill="none" stroke="#111" stroke-width="2" marker-end="url(#xahE)"/>`;
+ b+=`<path d="M${ex+R*Math.cos(255*D2R)},${ey-R*Math.sin(255*D2R)} A${R},${R} 0 0 0 ${ex+R*Math.cos(280*D2R)},${ey-R*Math.sin(280*D2R)}" fill="none" stroke="#111" stroke-width="2" marker-end="url(#xahE)"/>`;
+ b+=`<circle cx="${ex}" cy="${ey}" r="${er}" fill="#7d8ea3" stroke="#111" stroke-width="1.5"/>`+xt(ex,ey+er+18,"지구",{size:15,bold:1});
+ [["①",-15],["②",0],["③",15],["④",40],["⑤",180]].forEach(([l,a])=>{const x=ex+R*Math.cos(a*D2R),y=ey-R*Math.sin(a*D2R);
+  b+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${mr}" fill="#fff" stroke="#111" stroke-width="1.4"/>`+xt(x,y+5.5,l,{size:16,bold:1});});
+ b+=xt(W-6,ey-h-8,"지구의 그림자",{size:13,anchor:"end",fill:"#333"})+xt(ex+R*Math.cos(-35*D2R)+12,ey-R*Math.sin(-35*D2R)+8,"달의 공전 궤도",{size:13,anchor:"start",fill:"#333"});
+ return xsvg(W,H,b);}
 function xfSunEcl(){ /* 개기 일식 진행 (가)~(라) 순서 없이: 가=끝, 나=시작, 다=개기, 라=많이 가려짐 */
  const F=[["(가)",-60],["(나)",70],["(다)",0],["(라)",25]],pw=132;let b="";
  F.forEach(([lab,mx],i)=>{const cx=i*pw+pw/2,cy=62,id="xse"+i;
@@ -1920,21 +1978,43 @@ function xfSunEcl(){ /* 개기 일식 진행 (가)~(라) 순서 없이: 가=끝,
   b+=xt(cx,cy+78,lab,{size:16});});
  return xsvg(4*pw,150,b);}
 function xMoonRow(items){return `<div class="xrow">${items.map(([lab,html])=>`<div class="xcell">${html}<span>${lab}</span></div>`).join("")}</div>`;}
-function xfPhotos(){return xMoonRow([["(가)",'<img src="img/moon_p2.png" alt="">'],["(나)",'<img src="img/moon_p4.png" alt="">'],["(다)",'<img src="img/moon_p6.png" alt="">'],["(라)",'<img src="img/moon_p1.png" alt="">']]);}
-function xfLunEcl(){return xMoonRow([["(가)",moonEclSVG(0,150,{edge:false})],["(나)",moonEclSVG(-125,150,{edge:false})],["(다)",moonEclSVG(125,150,{edge:false})]]);}
-function xfPhaseVsEcl(){return xMoonRow([["(가) 음력 10일경의 달",moonFaceSVG(120,170)],["(나) 부분 월식",moonEclSVG(-125,170,{edge:false})]]);}
+const XTRAIL={w:`<line x1="24" y1="26" x2="70" y2="72" stroke="#ffd400" stroke-width="5" marker-end="url(#xtA)"/>`,
+ n:`<path d="M75,38 A30,30 0 0 0 25,38" fill="none" stroke="#ffd400" stroke-width="5" marker-end="url(#xtA)"/>`,
+ e:`<line x1="24" y1="76" x2="70" y2="30" stroke="#ffd400" stroke-width="5" marker-end="url(#xtA)"/>`,
+ s:`<path d="M14,58 Q50,48 82,58" fill="none" stroke="#ffd400" stroke-width="5" marker-end="url(#xtA)"/>`};
+function xTrail(d){return `<div class="xtr"><img src="img/trail_${d}.jpg" alt=""><svg viewBox="0 0 100 100"><defs><marker id="xtA" markerWidth="4" markerHeight="4" refX="2.6" refY="2" orient="auto"><path d="M0,0 L4,2 L0,4z" fill="#ffd400"/></marker></defs>${XTRAIL[d]}</svg></div>`;}
+const xfTrails=()=>xMoonRow([["(가)",xTrail("w")],["(나)",xTrail("n")],["(다)",xTrail("e")],["(라)",xTrail("s")]]);
+const xfPhotos=()=>xMoonRow([["(가)",'<img src="img/moon_p2.png" alt="">'],["(나)",'<img src="img/moon_p4.png" alt="">'],["(다)",'<img src="img/moon_p6.png" alt="">'],["(라)",'<img src="img/moon_p1.png" alt="">']]);
+const xfLunEcl=()=>xMoonRow([["(가)",moonEclSVG(0,150,{edge:false})],["(나)",moonEclSVG(-125,150,{edge:false})],["(다)",moonEclSVG(125,150,{edge:false})]]);
+const xfPhaseVsEcl=()=>xMoonRow([["(가) 음력 10일경의 달",moonFaceSVG(120,170)],["(나) 부분 월식",moonEclSVG(-125,170,{edge:false})]]);
 const xTable=(head,rows)=>`<table class="xtbl"><tr>${head.map(h=>`<th>${h}</th>`).join("")}</tr>${rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join("")}</tr>`).join("")}</table>`;
+const xfCompare=()=>xTable(["구분","일식","월식"],[["천체의 배열","태양 – 달 – 지구","( ㉠ )"],["달의 위상","( ㉡ )","망"],["가려지기 시작하는 쪽","태양의 오른쪽","달의 ( ㉢ )"]]);
 
-/* ── 문항 ── kind: bogi(보기 조합) · one(옳은 것은?) · pair(짝 짓기 표) */
+/* ── 묶음 문항 (실제 시험의 [5~6]처럼 자료 하나에 두 문항) ── */
+const XG={
+ gR:{stem:"그림은 태양 주위를 공전하는 지구의 위치 A~D와 황도 12궁을 나타낸 것이다. 그림의 ○월은 그 달에 태양이 있는 쪽의 별자리를 나타낸다.",fig:xfRing},
+ gP:{stem:"그림은 북극 위에서 내려다본 달의 공전 궤도와 달의 위치 ㉮~㉵를 나타낸 것이다. 햇빛은 오른쪽에서 비친다.",fig:xfPhase8},
+ gE:{stem:"그림은 지구 주위를 공전하는 달의 위치 ①~⑤와 지구의 그림자를 나타낸 것이다.",fig:xfEclPos}};
+const BQ="이에 대한 설명으로 옳은 것만을 <보기>에서 있는 대로 고른 것은?";
+
+/* ── 문항 ── kind: bogi(보기 조합) · one(옳은 것은?) · pair(짝 짓기 표) · pos(그림의 위치 고르기)
+   keys: 꼼꼼히 읽어야 할 조건 [어구, 왜 중요한지] */
 const XQ=[
+ {id:"x11",topic:"자전과 일주 운동",pts:4,kind:"bogi",set:"A",
+  stem:"그림 (가)~(라)는 우리나라에서 동쪽, 서쪽, 남쪽, 북쪽 하늘을 오랫동안 찍은 사진을 순서 없이 나타낸 것이고, 화살표는 별이 움직인 방향이다.",fig:xfTrails,q:BQ,
+  keys:[XK_SEQ,["화살표는 별이 움직인 방향","사진의 줄만으로는 별이 어느 쪽으로 갔는지 알 수 없어. 화살표가 판단 근거야!"],XK_ALL],
+  bogi:[["(나)는 북쪽 하늘의 모습이다.",1,"(나)는 별이 북극성을 중심으로 원을 그리며 시계 반대 방향으로 돈다 — 북쪽 하늘이다."],
+        ["(가)와 (다)에서 별은 모두 지평선 아래로 지고 있다.",0,"(가)는 별이 오른쪽 아래로 비스듬히 지는 서쪽 하늘, (다)는 오른쪽 위로 비스듬히 떠오르는 동쪽 하늘이다."],
+        ["(라)에서 별은 지평선과 거의 나란하게 동쪽에서 서쪽으로 이동한다.",1,"(라)는 남쪽 하늘이다. 남쪽을 보면 왼쪽이 동쪽이므로, 별은 왼쪽(동)에서 오른쪽(서)으로 지평선과 거의 나란하게 움직인다."]]},
  {id:"x1",topic:"자전과 일주 운동",pts:3,kind:"bogi",set:"B",
-  stem:"그림은 우리나라에서 20시에 정남쪽 하늘에 남중한 별 S와, S가 일주 운동하는 길 위의 두 위치 A, B를 나타낸 것이다.",fig:xfSouth,
-  q:"이에 대한 설명으로 옳은 것만을 <보기>에서 있는 대로 고른 것은?",
+  stem:"그림은 우리나라에서 20시에 정남쪽 하늘에 남중한 별 S와, S가 일주 운동하는 길 위의 두 위치 A, B를 나타낸 것이다.",fig:xfSouth,q:BQ,
+  keys:[["20시","기준 시각이야. 몇 시간 뒤인지 계산할 때 출발점!"],["정남쪽 하늘","남쪽 하늘에서 별은 동쪽에서 서쪽으로 움직여."],["A, B","그림의 기호는 보기에서 모두 쓰여. A, B가 동쪽·서쪽 중 어디인지 확인!"],XK_ALL],
   bogi:[["23시에 별 S는 B 위치에서 보인다.",1,"별은 1시간에 15°씩 동쪽에서 서쪽으로 움직인다. 45° ÷ 15° = 3시간이므로 20시 + 3시간 = 23시에 서쪽의 B에 온다."],
         ["별 S가 A에서 B까지 이동하는 데 약 3시간이 걸린다.",0,"A에서 B까지는 45° + 45° = 90°이다. 90° ÷ 15° = 약 6시간이 걸린다."],
         ["별 S가 이와 같이 움직이는 것처럼 보이는 것은 지구가 동쪽에서 서쪽으로 자전하기 때문이다.",0,"지구는 서쪽에서 동쪽으로 자전한다. 그래서 별은 반대 방향인 동쪽에서 서쪽으로 움직이는 것처럼 보인다."]]},
  {id:"x2",topic:"자전과 일주 운동",pts:3,kind:"one",
   q:"지구의 자전과 천체의 일주 운동에 대한 설명으로 옳은 것은?",
+  keys:[["지구의 자전과 천체의 일주 운동","원인(자전)과 겉보기 운동(일주 운동)을 함께 묻고 있어. 두 방향은 서로 반대!"],["옳은 것은","‘옳은 것’ 하나를 고르는 문제야. ‘옳지 않은 것은?’과 헷갈리지 않기!"]],
   opts:[["지구는 동쪽에서 서쪽으로 자전한다.",0,"지구는 서쪽에서 동쪽으로 자전한다."],
         ["천체는 서쪽에서 동쪽으로 일주 운동한다.",0,"천체는 지구 자전과 반대 방향인 동쪽에서 서쪽으로 일주 운동한다."],
         ["별은 하루에 한 바퀴씩 도는 것처럼 보인다.",1,"지구가 하루에 한 바퀴 자전하므로 별도 하루에 한 바퀴씩 도는 것처럼 보인다. 별이 실제로 도는 것이 아니라 겉보기 운동이다."],
@@ -1942,128 +2022,260 @@ const XQ=[
         ["북쪽 하늘의 별은 북극성을 중심으로 시계 방향으로 회전한다.",0,"우리나라 북쪽 하늘에서 별은 북극성을 중심으로 시계 반대 방향으로 돈다."]],
   hint:"‘지구 자전 방향’과 ‘천체가 움직여 보이는 방향’은 서로 반대야. 틀린 선택지에 ✕를 쳐 가며 지워 봐."},
  {id:"x3",topic:"공전과 연주 운동",pts:4,kind:"bogi",set:"A",
-  stem:"그림 (가)~(다)는 우리나라에서 해가 진 직후 서쪽 하늘을 15일 간격으로 관측하여 태양과 전갈자리의 위치를 나타낸 것이다.",fig:xfWest,
-  q:"이에 대한 설명으로 옳은 것만을 <보기>에서 있는 대로 고른 것은?",
+  wide:1,stem:"그림 (가)~(다)는 우리나라에서 해가 진 직후 서쪽 하늘을 15일 간격으로 관측하여 태양과 전갈자리의 위치를 나타낸 것이다.",fig:xfWest,q:BQ,
+  keys:[["해가 진 직후","날마다 같은 때에 관측했어 → 하루 동안의 일주 운동이 아니라 날짜에 따른 변화를 보는 거야."],["서쪽 하늘","태양이 지는 쪽이 서쪽. 그림 왼쪽 아래 ‘서’ 표시도 확인!"],["15일 간격","(가)→(다)는 한 달 동안의 변화 — 지구의 공전 때문이야."],XK_ALL],
   bogi:[["별자리를 기준으로 태양은 동쪽에서 서쪽으로 이동한다.",0,"별자리를 기준으로 보면 태양은 서쪽에서 동쪽으로 이동한다. 이것이 태양의 연주 운동이다."],
         ["태양을 기준으로 전갈자리는 날마다 조금씩 동쪽에서 서쪽으로 이동한다.",1,"(가)→(다)로 갈수록 전갈자리가 태양이 있는 서쪽 지평선 쪽으로 가까워진다. 태양을 기준으로 별자리는 동→서로 움직인다."],
         ["이와 같은 위치 변화가 나타나는 것은 지구가 태양 주위를 1년에 한 바퀴씩 공전하기 때문이다.",1,"계절에 따라 별자리 위치가 달라지는 것은 지구의 공전 때문이다. 자전 때문이 아니다."]]},
- {id:"x4",topic:"공전과 연주 운동",pts:4,kind:"pair",
-  stem:"그림은 태양이 연주 운동하면서 지나가는 황도 12궁을 순서대로 나타낸 것이다. 3월에 지구에서 보면 태양은 물병자리 쪽에 있다.",fig:xfStrip,
-  q:"6월에 지구에서 볼 때 태양이 있는 쪽의 별자리 (가)와, 한밤중에 남쪽 하늘에서 볼 수 있는 별자리 (나)를 옳게 짝 지은 것은?",
-  head:["(가)","(나)"],rows:[["양자리","천칭자리"],["황소자리","전갈자리"],["황소자리","궁수자리"],["쌍둥이자리","전갈자리"],["쌍둥이자리","궁수자리"]],ans:1,
-  why:"태양은 한 달에 별자리 하나씩 서쪽에서 동쪽으로 옮겨 가는 것처럼 보인다. 3월 물병자리 → 4월 물고기자리 → 5월 양자리 → 6월 황소자리. 한밤중 남쪽 하늘에는 태양 반대쪽 별자리가 보이므로, 황소자리에서 여섯 칸 떨어진 전갈자리가 보인다.",
-  hint:"(가)는 3월에서 몇 달 지났는지 세어 봐. (나)는 태양 반대쪽 — 12궁 중 정확히 절반(6칸) 떨어진 별자리야."},
+ {id:"x12",topic:"공전과 연주 운동",pts:4,kind:"bogi",set:"A",grp:"gR",q:BQ,
+  keys:[["A~D","네 위치가 보기와 선택지에서 모두 쓰여. 위치마다 태양 쪽 별자리와 반대쪽 별자리를 확인!"],["그 달에 태양이 있는 쪽의 별자리","그림의 ○월은 지구의 위치가 아니라, 그 달에 태양이 보이는 별자리야."],XK_ALL],
+  bogi:[["지구가 A에 있을 때 태양은 물병자리 쪽에 있다.",1,"A에서 태양 쪽을 바라보면 그 너머에 물병자리가 있다. 그래서 물병자리에 3월이 적혀 있다."],
+        ["지구가 B에 있을 때 한밤중에 남쪽 하늘에서 황소자리를 볼 수 있다.",0,"B에서 황소자리는 태양 쪽에 있어 태양과 함께 뜨고 진다. 한밤중에는 태양 반대쪽인 전갈자리가 보인다."],
+        ["지구가 C에서 D로 공전하는 동안 태양은 별자리 사이를 사자자리에서 게자리 쪽으로 이동하는 것처럼 보인다.",0,"C에서 태양은 사자자리 쪽, D에서는 전갈자리 쪽에 있다. 그사이 태양은 사자 → 처녀 → 천칭 → 전갈자리 쪽으로(서→동) 이동한다."]]},
+ {id:"x13",topic:"공전과 연주 운동",pts:4,kind:"one",grp:"gR",
+  q:"지구의 위치에 따른 설명으로 옳은 것은?",
+  keys:[["A~D","네 위치를 선택지에서 하나씩 확인해야 해."],["옳은 것은","옳은 것 하나를 고르는 문제야."]],
+  opts:[["지구가 A에 있을 때는 9월경이다.",0,"A에서 태양은 물병자리 쪽에 있다. 물병자리에 적힌 3월경이다."],
+        ["지구가 B에 있을 때는 6월경이다.",1,"B에서 태양은 황소자리 쪽에 있고, 황소자리에 6월이 적혀 있다."],
+        ["지구가 C에 있을 때 태양은 물병자리 쪽에 있다.",0,"C에서 태양 쪽을 바라보면 사자자리가 있다. 물병자리는 한밤중에 보인다."],
+        ["지구가 D에 있을 때 한밤중에 남쪽 하늘에서 전갈자리를 볼 수 있다.",0,"D에서 전갈자리는 태양 쪽에 있다. 한밤중에는 반대쪽 황소자리가 보인다."],
+        ["지구가 A에서 B로 공전하는 동안 태양은 별자리 사이를 동쪽에서 서쪽으로 이동하는 것처럼 보인다.",0,"태양의 연주 운동 방향은 서쪽에서 동쪽이다 (물병 → 물고기 → 양 → 황소자리)."]],
+  hint:"지구에서 태양 쪽으로 선을 그어 그 너머의 별자리를 찾아봐. 한밤중에 보이는 별자리는 그 반대쪽이야."},
  {id:"x5",topic:"달의 위상",pts:4,kind:"bogi",set:"A",
-  stem:"그림 (가)~(라)는 우리나라에서 약 한 달 동안 관측한 달의 모습을 순서 없이 나타낸 것이다.",fig:xfPhotos,
-  q:"이에 대한 설명으로 옳은 것만을 <보기>에서 있는 대로 고른 것은?",
+  stem:"그림 (가)~(라)는 우리나라에서 약 한 달 동안 관측한 달의 모습을 순서 없이 나타낸 것이다.",fig:xfPhotos,q:BQ,
+  keys:[["약 한 달 동안","달의 위상이 한 바퀴 바뀌는 기간이야 — 삭 → 상현 → 망 → 하현."],XK_SEQ,XK_ALL],
   bogi:[["(가)는 음력 7~8일경에 볼 수 있다.",1,"(가)는 오른쪽이 둥근 반달인 상현달로, 음력 7~8일경에 볼 수 있다."],
         ["(나)일 때 달은 지구를 중심으로 태양의 반대쪽에 있다.",1,"(나)는 보름달(망)이다. 지구를 중심으로 달이 태양 반대쪽에 있을 때 둥근 보름달로 보인다."],
         ["음력 1일 이후 관측한 순서대로 나열하면 (라) → (가) → (나) → (다)이다.",1,"초승달 (라) → 상현달 (가) → 보름달 (나) → 하현달 (다) 순서다. (다)는 왼쪽이 둥근 반달인 하현달이다."]]},
- {id:"x6",topic:"달의 위상",pts:4,kind:"bogi",set:"A",
-  stem:"고천이는 음력 3일경에 초승달을 관측한 뒤, 약 한 달 동안 달의 모양 변화를 관찰하였다.",
-  q:"이 기간 동안의 달에 대한 설명으로 옳은 것만을 <보기>에서 있는 대로 고른 것은?",
-  bogi:[["음력 7~8일경에는 오른쪽이 둥근 반달이 보인다.",1,"음력 7~8일경은 상현으로, 오른쪽이 둥근 반달인 상현달이 보인다."],
-        ["음력 15일경에는 달이 지구와 태양 사이에 있어서 보이지 않는다.",0,"달이 지구와 태양 사이에 있어 보이지 않는 때는 삭(음력 1일경)이다. 음력 15일경은 망으로, 달이 태양 반대쪽에 있어 보름달로 보인다."],
-        ["음력 22~23일경 이후 그믐달이 될 때까지 달의 밝게 보이는 부분은 점점 작아진다.",1,"음력 22~23일경은 하현이다. 하현 → 그믐달 → 삭으로 가면서 밝게 보이는 부분은 점점 작아진다."]]},
+ {id:"x14",topic:"달의 위상",pts:4,kind:"one",grp:"gP",
+  q:"달이 각 위치에 있을 때에 대한 설명으로 옳은 것은?",
+  keys:[["북극 위에서 내려다본","위에서 내려다보면 달은 시계 반대 방향으로 공전해."],["햇빛은 오른쪽에서","달의 밝은 반쪽은 언제나 오른쪽(태양 쪽)을 향해. 삭은 태양 쪽, 망은 그 반대쪽!"],["옳은 것은","옳은 것 하나를 고르는 문제야."]],
+  opts:[["달이 ㉮에 있을 때 하현달이 보인다.",0,"㉮는 삭과 상현 사이로, 초승달이 보인다."],
+        ["달이 ㉯에 있을 때는 음력 7~8일경이다.",1,"㉯는 상현이다. 오른쪽이 둥근 반달이 보이는 음력 7~8일경이다."],
+        ["달이 ㉱에 있을 때 달이 전혀 보이지 않는다.",0,"㉱는 지구를 중심으로 태양 반대쪽인 망으로, 보름달이 보인다."],
+        ["달이 ㉳에 있을 때 오른쪽이 둥근 반달이 보인다.",0,"㉳는 하현으로, 왼쪽이 둥근 반달이 보인다."],
+        ["달이 ㉴에 있을 때는 달이 지구와 태양 사이에 있다.",0,"㉴는 하현과 삭 사이로 그믐달이 보인다. 달이 지구와 태양 사이에 있는 곳은 ㉵(삭)이다."]],
+  hint:"먼저 그림에 삭(태양 쪽)·상현·망(반대쪽)·하현을 표시해 봐. 달은 시계 반대 방향으로 돌아."},
+ {id:"x15",topic:"달의 위상",pts:4,kind:"bogi",set:"A",grp:"gP",q:BQ,
+  keys:[["㉮~㉵","여덟 위치 중 어디가 삭·상현·망·하현인지 먼저 정해 봐."],XK_ALL],
+  bogi:[["달이 ㉵에 있을 때의 위상은 삭이다.",1,"㉵는 달이 지구와 태양 사이에 있는 곳으로, 위상은 삭이다."],
+        ["달이 ㉰에 있을 때는 음력 15일경이다.",0,"㉰는 상현과 망 사이(음력 10~12일경)이다. 음력 15일경 망은 ㉱이다."],
+        ["달이 ㉲에서 ㉳를 거쳐 ㉴로 가는 동안 밝게 보이는 부분은 점점 작아진다.",1,"망을 지나 하현(㉳), 그믐달(㉴)로 가는 동안 밝게 보이는 부분은 점점 작아진다."]]},
  {id:"x7",topic:"일식",pts:3,kind:"bogi",set:"B",
-  stem:"그림 (가)~(라)는 어느 날 일어난 개기 일식의 진행 모습을 순서 없이 나타낸 것이다.",fig:xfSunEcl,
-  q:"이에 대한 설명으로 옳은 것만을 <보기>에서 있는 대로 고른 것은?",
+  stem:"그림 (가)~(라)는 어느 날 일어난 개기 일식의 진행 모습을 순서 없이 나타낸 것이다.",fig:xfSunEcl,q:BQ,
+  keys:[["개기 일식","태양이 완전히 가려지는 순간이 있다는 뜻이야."],XK_SEQ,XK_ALL],
   bogi:[["(다)일 때 달의 위상은 삭이다.",1,"일식은 태양, 달, 지구 순으로 일직선상에 놓이는 삭일 때 일어난다."],
         ["일식은 (나) → (라) → (다) → (가) 순으로 진행된다.",1,"태양은 오른쪽부터 가려지기 시작해 (나) → (라), 완전히 가려진 뒤 (다), 다시 오른쪽부터 보이기 시작한다 (가)."],
-        ["태양이 오른쪽부터 가려지는 것은 달이 동쪽에서 서쪽으로 공전하기 때문이다.",0,"달은 지구 주위를 서쪽에서 동쪽으로(북극 쪽에서 내려다보면 시계 반대 방향으로) 공전한다. 그래서 달이 태양의 서쪽인 오른쪽부터 가린다."]]},
+        ["태양이 오른쪽부터 가려지는 것은 달이 동쪽에서 서쪽으로 공전하기 때문이다.",0,"달은 지구 주위를 서쪽에서 동쪽으로(북극 위에서 내려다보면 시계 반대 방향으로) 공전한다. 그래서 달이 태양의 오른쪽(서쪽)부터 가린다."]]},
  {id:"x8",topic:"일식",pts:4,kind:"pair",
-  stem:"표는 일식과 월식을 비교한 것이다.",
-  figHTML:()=>xTable(["구분","일식","월식"],[["천체의 배열","태양 – 달 – 지구","( ㉠ )"],["달의 위상","( ㉡ )","망"],["가려지기 시작하는 쪽","태양의 오른쪽","달의 ( ㉢ )"]]),
-  q:"㉠~㉢에 들어갈 말을 옳게 짝 지은 것은?",
+  stem:"표는 일식과 월식을 비교한 것이다.",fig:xfCompare,q:"㉠~㉢에 들어갈 말을 옳게 짝 지은 것은?",
+  keys:[["일식과 월식","두 현상을 비교하고 있어 — 누가 누구를 가리는지 생각해."],["㉠~㉢","빈칸 세 개가 모두 맞아야 정답이야."],["옳게 짝 지은","표의 한 줄이 모두 맞아야 해."]],
   head:["㉠","㉡","㉢"],rows:[["태양 – 지구 – 달","삭","왼쪽"],["태양 – 지구 – 달","망","오른쪽"],["태양 – 지구 – 달","삭","오른쪽"],["태양 – 달 – 지구","삭","왼쪽"],["태양 – 달 – 지구","망","오른쪽"]],ans:0,
   why:"월식은 태양 – 지구 – 달 순으로 놓일 때(㉠) 일어난다. 일식은 삭(㉡)일 때, 월식은 망일 때 일어난다. 일식은 태양의 오른쪽부터, 월식은 달의 왼쪽(㉢)부터 가려진다.",
   hint:"일식은 달이 태양을 가리고, 월식은 지구 그림자가 달을 가려. 누가 가운데에 있어야 할까?"},
+ {id:"x16",topic:"일식",pts:3,kind:"pos",grp:"gE",
+  q:"일식이 일어날 수 있는 달의 위치는?",
+  keys:[["①~⑤","다섯 위치 중 태양–달–지구, 태양–지구–달 순서가 되는 곳을 찾아봐."],["일식","달이 태양을 가리는 현상 — 달이 태양과 지구 사이에 있어야 해."]],
+  ans:4,why:"일식은 달이 태양과 지구 사이에 놓여(태양 – 달 – 지구) 태양을 가리는 현상이다. 그림에서 ⑤의 위치이며, 이때 달의 위상은 삭이다.",
+  hint:"일식은 ‘달’이 태양을 가려. 달이 태양과 지구 사이에 있는 위치를 찾아봐."},
+ {id:"x17",topic:"월식",pts:4,kind:"bogi",set:"B",grp:"gE",q:BQ,
+  keys:[["지구의 그림자","월식은 달이 지구 그림자 속에 들어갈 때 일어나."],XK_ALL],
+  bogi:[["달이 ②에 있을 때 개기 월식이 일어난다.",1,"②에서 달은 지구 그림자 속에 완전히 들어가 있다 — 개기 월식."],
+        ["달이 ①과 ③에 있을 때 부분 월식이 일어난다.",1,"①과 ③에서는 달의 일부만 지구 그림자에 들어가 있다 — 부분 월식."],
+        ["달이 ④에 있을 때와 ⑤에 있을 때 모두 지구에서 월식을 볼 수 있다.",0,"④는 지구 그림자 밖이라 월식이 일어나지 않는다. ⑤는 달이 태양과 지구 사이에 있는 삭으로, 일식이 일어날 수 있는 위치다."]]},
  {id:"x9",topic:"월식",pts:5,kind:"bogi",set:"B",
-  stem:"그림 (가)~(다)는 어느 날 일어난 개기 월식의 진행 모습을 순서 없이 나타낸 것이다.",fig:xfLunEcl,
-  q:"이에 대한 설명으로 옳은 것만을 <보기>에서 있는 대로 고른 것은?",
+  stem:"그림 (가)~(다)는 어느 날 일어난 개기 월식의 진행 모습을 순서 없이 나타낸 것이다.",fig:xfLunEcl,q:BQ,
+  keys:[["개기 월식","달이 지구 그림자 속에 완전히 들어가는 순간이 있다는 뜻이야."],XK_SEQ,XK_ALL],
   bogi:[["이때 달의 위상은 삭이다.",0,"월식은 태양, 지구, 달 순으로 일직선상에 놓이는 망일 때 일어난다."],
         ["월식은 (나) → (가) → (다) 순으로 진행된다.",1,"달은 왼쪽부터 어두워지고 (나), 지구 그림자 속에 완전히 들어갔다가 (가), 다시 왼쪽부터 밝아진다 (다)."],
         ["(가)에서 달이 붉게 보이는 것은 지구 대기를 지난 붉은색 빛이 달에 비치기 때문이다.",1,"개기 월식 때 달이 완전히 사라지지 않고 붉게 보이는 것은 지구 대기 때문에 햇빛 중 붉은색 빛만 달에 비치기 때문이다."]]},
  {id:"x10",topic:"월식",pts:4,kind:"bogi",set:"B",
-  stem:"그림 (가)는 음력 10일경의 달을, (나)는 부분 월식이 일어난 달을 나타낸 것이다.",fig:xfPhaseVsEcl,
-  q:"이에 대한 설명으로 옳은 것만을 <보기>에서 있는 대로 고른 것은?",
+  stem:"그림 (가)는 음력 10일경의 달을, (나)는 부분 월식이 일어난 달을 나타낸 것이다.",fig:xfPhaseVsEcl,q:BQ,
+  keys:[["음력 10일경","상현과 망 사이 — 위상 변화로 일부만 밝게 보이는 달이야."],["부분 월식","지구 그림자가 달의 일부를 가린 거야."],XK_ALL],
   bogi:[["(가)에서 어둡게 보이는 부분은 지구의 그림자이다.",0,"(가)는 위상 변화다. 달이 공전하면서 지구에서 햇빛을 받는 부분이 일부만 보이는 것이고, 지구의 그림자 때문이 아니다."],
         ["(나)는 달의 일부가 지구의 그림자 속에 들어간 모습이다.",1,"부분 월식은 지구 그림자 속으로 달의 일부가 들어가서 그 부분이 어두워지는 현상이다."],
         ["(가)와 (나)에서 밝은 부분과 어두운 부분의 경계선 모양은 서로 같다.",0,"(가)의 경계선은 달의 위·아래 끝을 잇는 타원 모양이고, (나)의 경계선은 커다란 지구 그림자 원의 일부라서 모양이 다르다."]]}];
-/* 보기 조합형 정답은 ○인 보기로부터 자동 계산 */
 XQ.forEach(q=>{if(q.kind==="bogi"){const t=XL.filter((l,i)=>q.bogi[i][1]);q.ans=XSET[q.set].findIndex(s=>s.join()===t.join());}
  else if(q.kind==="one")q.ans=q.opts.findIndex(o=>o[1]);});
 const XTOPICS=["자전과 일주 운동","공전과 연주 운동","달의 위상","일식","월식"];
+const XTOTAL=XQ.reduce((a,q)=>a+q.pts,0);
+function xGrpRange(q){if(!q.grp)return "";const ids=XQ.map((z,i)=>z.grp===q.grp?i+1:0).filter(Boolean);return `[${ids[0]}~${ids[ids.length-1]}]`;}
+function xFull(q){return [(q.grp?XG[q.grp].stem:""),q.stem||"",q.q].join("\n");}
 
-let XMARK={}, XCUT={};   /* 학생이 표시한 ○/✕, 지운 선택지 (화면에서만, 저장 안 함) */
+/* ── 화면 상태 (조건 찾기·○/✕·지운 선택지는 화면에서만, 저장 안 함) ── */
+let XMARK={},XCUT={},XFOUND={},XMISS={},XMODE=null,XCUR=0,XPAPER=null;
 function xDone(){S.exam=S.exam||{};return XQ.filter(q=>S.exam[q.id]&&S.exam[q.id].ok).length;}
-function xOptLabel(q,i){return q.kind==="bogi"?XSET[q.set][i].join(", "):q.kind==="one"?q.opts[i][0]:q.rows[i].join(" / ");}
-function xCutByMarks(q,i){const m=XMARK[q.id]||{},s=XSET[q.set][i];return XL.some(l=>(m[l]==="x"&&s.includes(l))||(m[l]==="o"&&!s.includes(l)));}
+function xAllDone(){return xDone()>=XQ.length;}
+function xOptLabel(q,i){return q.kind==="bogi"?XSET[q.set][i].join(", "):q.kind==="one"?q.opts[i][0]:q.kind==="pos"?XNUM[i]:q.rows[i].join(" / ");}
+function xKeysDone(q){const sv=S.exam[q.id];return (sv&&(sv.k||sv.ok))||(XFOUND[q.id]&&XFOUND[q.id].size>=q.keys.length);}
 
-function xItemHTML(q,n){
- const sv=S.exam[q.id],done=sv&&sv.ok,m=XMARK[q.id]||{},cut=XCUT[q.id]||{};
- let h=`<div class="xq ${done?'done':''}" id="xq_${q.id}"><div class="xtop"><span class="xtopic">${q.topic}</span>${done?`<span class="stamp" style="font-size:.95rem">정답! +${sv.p}</span>`:(sv&&sv.t?`<span class="xtry">${sv.t}번 시도</span>`:"")}</div>`;
- h+=`<p class="xstem"><b class="qn">${n}.</b>${q.stem?esc(q.stem):esc(q.q)+` <span class="xp">[${q.pts}점]</span>`}</p>`;
- if(q.fig)h+=`<div class="xfig">${q.fig()}</div>`; if(q.figHTML)h+=`<div class="xfig">${q.figHTML()}</div>`;
- if(q.stem)h+=`<p class="xq2">${esc(q.q)} <span class="xp">[${q.pts}점]</span></p>`;
+/* 문장을 눌러 볼 수 있는 어절로 나누고, 조건 어구는 한 덩어리로 */
+function xTapHTML(txt,q,live){
+ const keys=q.keys.map((k,i)=>({s:k[0],i})),fd=XFOUND[q.id]||new Set(),done=xKeysDone(q);let out="",pos=0;const used=new Set();
+ while(pos<txt.length){let best=null;keys.forEach(k=>{if(used.has(k.i))return;const j=txt.indexOf(k.s,pos);if(j>=0&&(!best||j<best.j))best={j,k};});
+  let end=best?best.j:txt.length;
+  if(best){let a=best.j,b=best.j+best.k.s.length;while(a>pos&&!/\s/.test(txt[a-1]))a--;while(b<txt.length&&!/\s/.test(txt[b]))b++;end=a;best.a=a;best.b=b;}
+  out+=txt.slice(pos,end).split(/(\s+)/).map(w=>!w?"":/^\s+$/.test(w)?w:(live?`<span class="xw" data-q="${q.id}">${esc(w)}</span>`:esc(w))).join("");
+  if(!best)break; used.add(best.k.i);const on=done||fd.has(best.k.i),seg=esc(txt.slice(best.a,best.b));
+  out+=live?`<span class="xw xk ${on?'on':''}" data-q="${q.id}" data-k="${best.k.i}">${seg}</span>`:(on?`<mark class="xhl">${seg}</mark>`:seg);
+  pos=best.b;}
+ return out;}
+function xTextBlock(q,n,mode){
+ const live=mode==="step"&&!xKeysDone(q);const T=s=>mode==="step"?xTapHTML(s,q,live):esc(s);
+ let h="";
+ if(q.grp&&mode==="step")h+=`<p class="xgrp"><b>${xGrpRange(q)}</b> ${T(XG[q.grp].stem)}</p><div class="xfig xwide">${XG[q.grp].fig()}</div>`;
+ h+=`<p class="xstem"><b class="qn">${n}.</b>${q.stem?T(q.stem):T(q.q)+` <span class="xp">[${q.pts}점]</span>`}</p>`;
+ if(q.fig)h+=`<div class="xfig ${q.wide?"xwide":""}">${q.fig()}</div>`;
+ if(q.stem)h+=`<p class="xq2">${T(q.q)} <span class="xp">[${q.pts}점]</span></p>`;
+ return h;}
+
+/* 문항 몸통 — mode: step(한 문제씩) · paper(실전 풀이) · review(실전 채점 결과) */
+function xItemHTML(q,n,mode){
+ const sv=S.exam[q.id]||{},done=mode==="step"&&sv.ok,rev=mode==="review",m=XMARK[q.id]||{},cut=XCUT[q.id]||{};
+ const pick=mode==="paper"||rev?(XPAPER&&XPAPER.a[q.id]):undefined,showWhy=done||rev;
+ let h=`<div class="xq ${done?'done':''}" id="xq_${q.id}"><div class="xtop"><span class="xtopic">${q.topic}</span>`;
+ if(mode==="step")h+=done?`<span class="stamp" style="font-size:.95rem">정답! +${sv.p}</span>`:(sv.t?`<span class="xtry">${sv.t}번 시도</span>`:"");
+ if(rev)h+=pick===q.ans?`<span class="xres o">○ ${q.pts}점</span>`:`<span class="xres x">✕ 0점</span>`;
+ h+=`</div>`+xTextBlock(q,n,mode);
+ if(mode==="step"&&!xKeysDone(q)){const k=XFOUND[q.id]?XFOUND[q.id].size:0;
+  h+=`<div class="xstage s1"><b>🔎 1단계 — 조건 찾기</b> <span class="small">답을 정하는 데 꼭 필요한 말을 위 문제에서 찾아 눌러 봐 (<b>${k}/${q.keys.length}</b>)</span>
+   ${(XMISS[q.id]||0)>=3?`<button class="xshow" data-q="${q.id}">남은 조건 보여 줘</button>`:""}<div id="xm_${q.id}" class="small"></div>${xKeyNotes(q)}</div><div id="xf_${q.id}"></div></div>`;return h;}
+ if(mode==="step")h+=`<details class="xknotes"><summary>🔎 찾은 조건 ${q.keys.length}개 다시 보기</summary>${xKeyNotes(q,true)}</details>`;
+ const lockOpt=mode==="step"&&!done&&q.kind==="bogi"&&XL.some(l=>!m[l]);
  if(q.kind==="bogi"){
+  if(mode==="step"&&!done)h+=`<div class="xstage"><b>✏️ 2단계 — ㄱ, ㄴ, ㄷ을 하나씩 읽고 ○/✕ 판단</b></div>`;
   h+=`<div class="xbogi"><span class="lb">보 기</span>${q.bogi.map((b,i)=>{const l=XL[i];
-   return `<div class="xbl"><span class="t"><b>${l}.</b> ${esc(b[0])}</span>${done?`<span class="xjudge ${b[1]?'o':'x'}">${b[1]?'○':'✕'}</span>`:`<span class="xox"><button data-q="${q.id}" data-l="${l}" data-m="o" class="o ${m[l]==='o'?'on':''}" aria-label="${l} 옳음">○</button><button data-q="${q.id}" data-l="${l}" data-m="x" class="x ${m[l]==='x'?'on':''}" aria-label="${l} 틀림">✕</button></span>`}</div>
-    ${done?`<div class="xwhy">${esc(b[2])}</div>`:""}`;}).join("")}</div>`;
-  h+=`<div class="xopts">${XSET[q.set].map((s,i)=>{const c=false;
-   return `<button class="xopt ${done&&i===q.ans?'ok':''} ${c?'cut':''}" data-q="${q.id}" data-i="${i}" ${done?'disabled':''}>${XNUM[i]} ${s.join(", ")}</button>`;}).join("")}</div>`;
+   return `<div class="xbl"><span class="t"><b>${l}.</b> ${esc(b[0])}</span>${showWhy?`<span class="xjudge ${b[1]?'o':'x'}">${b[1]?'○':'✕'}</span>`:`<span class="xox"><button data-q="${q.id}" data-l="${l}" data-m="o" class="o ${m[l]==='o'?'on':''}" aria-label="${l} 옳음">○</button><button data-q="${q.id}" data-l="${l}" data-m="x" class="x ${m[l]==='x'?'on':''}" aria-label="${l} 틀림">✕</button></span>`}</div>
+    ${showWhy?`<div class="xwhy">${esc(b[2])}</div>`:""}`;}).join("")}</div>`;
+  if(mode==="step"&&!done)h+=`<div class="xstage"><b>🎯 3단계 — 답 고르기</b> ${lockOpt?'<span class="small">ㄱ, ㄴ, ㄷ을 모두 ○/✕로 판단하면 열려요</span>':''}</div>`;
+  h+=`<div class="xopts">${XSET[q.set].map((s,i)=>xOptBtn(q,i,`${XNUM[i]} ${s.join(", ")}`,mode,done,pick,lockOpt)).join("")}</div>`;
  } else if(q.kind==="one"){
-  h+=`<div class="xopts col">${q.opts.map((o,i)=>`<div class="xorow"><button class="xopt ${done&&i===q.ans?'ok':''} ${!done&&cut[i]?'cut':''}" data-q="${q.id}" data-i="${i}" ${done?'disabled':''}>${XNUM[i]} ${esc(o[0])}</button>${done?"":`<button class="xstrike ${cut[i]?'on':''}" data-q="${q.id}" data-s="${i}" aria-label="${XNUM[i]} 지우기">✕</button>`}</div>${done?`<div class="xwhy">${o[1]?'○':'✕'} ${esc(o[2])}</div>`:""}`).join("")}</div>`;
+  if(mode==="step"&&!done)h+=`<div class="xstage"><b>✏️ 2단계 — 선택지를 하나씩 판단하고, 틀린 것은 ✕로 지우며 고르기</b></div>`;
+  h+=`<div class="xopts col">${q.opts.map((o,i)=>`<div class="xorow">${xOptBtn(q,i,`${XNUM[i]} ${esc(o[0])}`,mode,done,pick,false,cut[i])}${showWhy?"":`<button class="xstrike ${cut[i]?'on':''}" data-q="${q.id}" data-s="${i}" aria-label="${XNUM[i]} 지우기">✕</button>`}</div>${showWhy?`<div class="xwhy">${o[1]?'○':'✕'} ${esc(o[2])}</div>`:""}`).join("")}</div>`;
+ } else if(q.kind==="pos"){
+  if(mode==="step"&&!done)h+=`<div class="xstage"><b>✏️ 2단계 — 그림에서 위치를 하나씩 따져 보고 고르기</b></div>`;
+  h+=`<div class="xopts">${[0,1,2,3,4].map(i=>xOptBtn(q,i,XNUM[i],mode,done,pick,false,cut[i])).join("")}</div>`;
+  if(showWhy)h+=`<div class="xwhy">${esc(q.why)}</div>`;
  } else {
-  h+=`<table class="xtbl pick"><tr><th></th>${q.head.map(x=>`<th>${x}</th>`).join("")}${done?"":"<th class=\"xs\"></th>"}</tr>${q.rows.map((r,i)=>`<tr class="${done&&i===q.ans?'ok':''} ${!done&&cut[i]?'cut':''}"><td><button class="xopt xnum ${done&&i===q.ans?'ok':''}" data-q="${q.id}" data-i="${i}" ${done?'disabled':''}>${XNUM[i]}</button></td>${r.map(c=>`<td>${esc(c)}</td>`).join("")}${done?"":`<td class="xs"><button class="xstrike ${cut[i]?'on':''}" data-q="${q.id}" data-s="${i}" aria-label="${XNUM[i]} 지우기">✕</button></td>`}</tr>`).join("")}</table>`;
-  if(done)h+=`<div class="xwhy">${esc(q.why)}</div>`;
+  if(mode==="step"&&!done)h+=`<div class="xstage"><b>✏️ 2단계 — 줄마다 확인하고, 틀린 줄은 ✕로 지우며 고르기</b></div>`;
+  h+=`<table class="xtbl pick"><tr><th></th>${q.head.map(x=>`<th>${x}</th>`).join("")}${showWhy?"":'<th class="xs"></th>'}</tr>${q.rows.map((r,i)=>`<tr class="${(showWhy&&i===q.ans)?'ok':''} ${!showWhy&&cut[i]?'cut':''}"><td>${xOptBtn(q,i,XNUM[i],mode,done,pick,false,false,"xnum")}</td>${r.map(c=>`<td>${esc(c)}</td>`).join("")}${showWhy?"":`<td class="xs"><button class="xstrike ${cut[i]?'on':''}" data-q="${q.id}" data-s="${i}" aria-label="${XNUM[i]} 지우기">✕</button></td>`}</tr>`).join("")}</table>`;
+  if(showWhy)h+=`<div class="xwhy">${esc(q.why)}</div>`;
  }
+ if(rev&&pick!==q.ans)h+=`<div class="xfb no">내 답: ${pick==null?'(고르지 않음)':XNUM[pick]+' '+esc(xOptLabel(q,pick))} → 정답: ${XNUM[q.ans]} ${esc(xOptLabel(q,q.ans))}</div>`;
  h+=`<div id="xf_${q.id}"></div></div>`;return h;}
+function xOptBtn(q,i,label,mode,done,pick,lock,isCut,cls){
+ const rev=mode==="review",ok=(done||rev)&&i===q.ans,bad=rev&&pick===i&&i!==q.ans,sel=mode==="paper"&&pick===i;
+ return `<button class="xopt ${cls||''} ${ok?'ok':''} ${bad?'bad':''} ${sel?'sel':''} ${isCut&&!done&&!rev?'cut':''}" data-q="${q.id}" data-i="${i}" ${done||rev||lock?'disabled':''}>${label}</button>`;}
+function xKeyNotes(q,all){const fd=XFOUND[q.id]||new Set(),done=all||xKeysDone(q);
+ const list=q.keys.map((k,i)=>done||fd.has(i)?`<li><mark class="xhl">${esc(k[0])}</mark> — ${esc(k[1])}</li>`:"").join("");
+ return list?`<ul class="xkl">${list}</ul>`:"";}
 
+/* ── 화면 ── */
 function renderExamPrac(){
- S.exam=S.exam||{}; const d=xDone();
- app.innerHTML=`${hudBlock()}<h2 style="margin:18px 4px 4px;font-size:1.9rem">📝 시험 연습 — 정기시험처럼 풀어 보기</h2>
- <p class="small" style="margin:0 4px 12px">지구와 달의 운동 · 주제별 2문항씩 10문항. 처음에 맞히면 +${XPTS_FIRST}점, 다시 풀어 맞히면 +${XPTS_RETRY}점. 문제 옆 [점]은 실제 시험의 배점 예시예요.</p>
- <div class="row2"><div class="card"><h3>✏️ 처음 보는 정기시험, 이렇게 풀어요</h3><ol class="steps">
-  <li><b>발문 끝</b>부터 읽기 — ‘옳은 것은?’, ‘옳지 <u>않은</u> 것은?’, ‘있는 대로 고른 것은?’이 서로 달라요</li>
-  <li><b>그림의 기호</b>(A, B, (가)~(라)…)를 모두 찾고, <b>(단, …)</b> 조건에 밑줄 치기</li>
-  <li>&lt;보기&gt;의 ㄱ, ㄴ, ㄷ을 <b>하나씩 끝까지 읽고 ○/✕로 판단</b> — 아래 선택지는 그다음에 봐요</li>
-  <li>○만 모은 선택지 고르기 — ✕로 판단한 보기가 들어간 선택지는 답이 될 수 없어요</li>
-  <li>‘옳은 것은?’ 문제는 틀린 선택지에 ✕를 쳐서 지워 가며 풀기</li></ol></div>
-  <div class="card"><h3>📊 내 연습 현황 <span class="small">${d}/${XQ.length}</span></h3><div class="xprog">${XTOPICS.map(t=>{const qs=XQ.filter(q=>q.topic===t),k=qs.filter(q=>S.exam[q.id]&&S.exam[q.id].ok).length;
-   return `<div><span>${t}</span><span class="pill ${k>=qs.length?'g':k?'w':''}">${k}/${qs.length}</span></div>`;}).join("")}</div>
-   <p class="small" style="margin-top:10px">○/✕ 표시와 지운 선택지는 이 화면에서만 쓰는 연습 표시예요. 정답과 점수만 기록돼요.</p></div></div>
- <div class="xpaper"><div class="xhead"><b>2026학년도 2학기 과학 · 시험 연습</b><span>Ⅶ-2. 지구와 달의 운동</span></div>
-  <div class="xcols">${XQ.map((q,i)=>xItemHTML(q,i+1)).join("")}</div></div>`;
- drawHud(); xBind();}
+ S.exam=S.exam||{}; S.xfull=S.xfull||{};
+ const open=xAllDone()||isT()||isG();
+ if(!XMODE)XMODE=xAllDone()?"paper":"step";
+ if(XMODE==="paper"&&!open)XMODE="step";
+ const d=xDone(),fb=S.xfull.best;
+ let h=`${hudBlock()}<h2 style="margin:18px 4px 4px;font-size:1.9rem">📝 시험 연습 — 정기시험처럼 풀어 보기</h2>
+ <p class="small" style="margin:0 4px 10px">지구와 달의 운동 · 주제별 3문항씩 15문항. 먼저 <b>한 문제씩</b> 조건을 찾아 가며 풀고, 15문항을 모두 맞히면 <b>실전 모드</b>가 열려 시험지처럼 쭉 풀 수 있어요.</p>
+ <div class="xmodes"><button class="${XMODE==='step'?'on':''}" data-xm="step">① 한 문제씩 연습 <span class="pill ${d>=XQ.length?'g':d?'w':''}">${d}/${XQ.length}</span></button>
+  <button class="${XMODE==='paper'?'on':''}" data-xm="paper" ${open?'':'disabled'}>② 실전 모드 ${open?(fb!=null?`<span class="pill g">최고 ${fb}/${XTOTAL}점</span>`:'<span class="pill">열림</span>'):`<span class="small">🔒 15문항을 모두 맞히면 열려요</span>`}</button></div>`;
+ h+=XMODE==="step"?xStepHTML():xPaperHTML();
+ app.innerHTML=h; drawHud(); xBind();
+ app.querySelectorAll("[data-xm]").forEach(b=>b.onclick=()=>{XMODE=b.dataset.xm;renderExamPrac();window.scrollTo(0,0);});}
+
+function xStepHTML(){
+ if(XCUR<0||XCUR>=XQ.length)XCUR=0;
+ const q=XQ[XCUR],sv=S.exam[q.id]||{};
+ let h=`<div class="xdots">${XQ.map((z,i)=>{const v=S.exam[z.id];return `<button class="${i===XCUR?'cur':''} ${v&&v.ok?'ok':''}" data-xj="${i}" title="${z.topic}">${i+1}</button>`;}).join("")}</div>`;
+ if(XCUR===0&&!sv.ok&&!sv.t&&!xKeysDone(q))h+=`<div class="card" style="margin-top:8px"><h3>✏️ 처음 보는 정기시험, 이렇게 풀어요</h3><ol class="steps">
+  <li><b>조건부터 찾기</b> — 시각(20시), 방향(서쪽 하늘), 간격(15일), ‘순서 없이’, ‘옳은 것만 있는 대로’처럼 답을 정하는 말을 먼저 찾아요</li>
+  <li><b>그림의 기호</b>(A, B, (가)~(라), ㉮~㉵, ①~⑤)가 문제에서 모두 쓰인다는 걸 기억하기</li>
+  <li>&lt;보기&gt;의 ㄱ, ㄴ, ㄷ을 <b>하나씩 끝까지 읽고 ○/✕</b>로 판단한 다음, ○만 모은 선택지를 골라요</li></ol></div>`;
+ h+=`<div class="xpaper one"><div class="xhead"><b>${XCUR+1} / ${XQ.length}</b><span>${q.topic}</span></div>${xItemHTML(q,XCUR+1,"step")}
+  <div class="xnav"><button class="btn-g" data-xj="${XCUR-1}" ${XCUR===0?'disabled':''}>← 이전 문제</button>${sv.ok?`<button class="btn-p" data-xj="${XCUR+1<XQ.length?XCUR+1:-1}">${XCUR+1<XQ.length?'다음 문제 →':(xAllDone()?'📝 실전 모드로 →':'안 푼 문제로 →')}</button>`:`<button class="btn-g" data-xj="${XCUR+1}" ${XCUR+1>=XQ.length?'disabled':''}>건너뛰기 →</button>`}</div></div>`;
+ return h;}
+
+function xPaperHTML(){
+ if(!XPAPER)XPAPER={a:{},t0:Date.now(),sub:false};
+ const rev=XPAPER.sub,n=Object.keys(XPAPER.a).length;let h="";
+ if(rev){const r=XPAPER.res;h+=`<div class="card"><h3>📊 채점 결과 — <b style="color:var(--sun)">${r.s} / ${XTOTAL}점</b> <span class="small">(${r.c}/${XQ.length}문항 · ${r.min}분)</span></h3>
+   <div class="xprog">${XTOPICS.map(t=>{const qs=XQ.filter(q=>q.topic===t),k=qs.filter(q=>XPAPER.a[q.id]===q.ans).length;return `<div><span>${t}</span><span class="pill ${k>=qs.length?'g':k?'w':''}">${k}/${qs.length}</span></div>`;}).join("")}</div>
+   <p class="small" style="margin-top:8px">${r.pts?`첫 실전 제출 보너스 +${r.pts}점이 들어갔어요. `:''}틀린 문항은 아래에서 내 답과 정답, 보기마다의 까닭을 확인해 봐.</p>
+   <button class="btn-p" id="xAgain" style="margin-top:6px">🔁 다시 풀기</button></div>`;}
+ else h+=`<div class="card"><h3>📝 실전 모드 — 시험 시간처럼 쭉 풀어 보기</h3><p class="small">조건 찾기·해설 없이 시험지처럼 풀어요. ○/✕ 표시와 ✕ 지우기는 시험지에 연필로 쓰는 것처럼 쓸 수 있어요. 다 풀면 맨 아래 <b>제출하기</b>. 처음 제출할 때 맞힌 문항 수만큼 점수를 받아요.</p>
+   <div class="xbar"><span>고른 답 <b id="xCnt">${n}</b> / ${XQ.length}</span><span>⏱ <b id="xClock">0:00</b></span></div></div>`;
+ h+=`<div class="xpaper"><div class="xhead"><b>2026학년도 2학기 과학 · ${rev?'실전 연습 채점':'실전 연습'}</b><span>Ⅶ-2. 지구와 달의 운동 · ${XQ.length}문항 · ${XTOTAL}점</span></div><div class="xcols">`;
+ const seen=new Set();
+ XQ.forEach((q,i)=>{if(q.grp&&!seen.has(q.grp)){seen.add(q.grp);h+=`<div class="xgrpbox"><p class="xgrp"><b>${xGrpRange(q)}</b> ${esc(XG[q.grp].stem)} 물음에 답하시오.</p><div class="xfig xwide">${XG[q.grp].fig()}</div></div>`;}
+  h+=xItemHTML(q,i+1,rev?"review":"paper");});
+ h+=`</div>${rev?"":`<button class="btn-p" id="xSubmit" style="width:100%;margin-top:14px">제출하기</button><div id="xSubMsg"></div>`}</div>`;
+ return h;}
 
 function xBind(){
- app.querySelectorAll(".xox button").forEach(b=>b.onclick=()=>{const id=b.dataset.q,l=b.dataset.l,m=(XMARK[id]=XMARK[id]||{});m[l]=m[l]===b.dataset.m?undefined:b.dataset.m;xRefresh(id);});
- app.querySelectorAll(".xstrike").forEach(b=>b.onclick=()=>{const id=b.dataset.q,c=(XCUT[id]=XCUT[id]||{});c[b.dataset.s]=!c[b.dataset.s];xRefresh(id);});
- app.querySelectorAll(".xopt[data-i]").forEach(b=>b.onclick=()=>xPick(b.dataset.q,+b.dataset.i));}
-function xRefresh(id){const q=XQ.find(z=>z.id===id),el=document.getElementById("xq_"+id),fb=document.getElementById("xf_"+id).innerHTML;
- const w=document.createElement("div");w.innerHTML=xItemHTML(q,XQ.indexOf(q)+1);el.replaceWith(w.firstElementChild);document.getElementById("xf_"+id).innerHTML=fb;xBind();}
+ app.querySelectorAll("[data-xj]").forEach(b=>b.onclick=()=>{let j=+b.dataset.xj;
+  if(j===-1){if(xAllDone()){XMODE="paper";}else{j=XQ.findIndex(q=>!(S.exam[q.id]&&S.exam[q.id].ok));XCUR=j<0?0:j;}}else XCUR=j;
+  renderExamPrac();window.scrollTo(0,0);});
+ app.querySelectorAll(".xw").forEach(w=>w.onclick=()=>xTap(w));
+ app.querySelectorAll(".xshow").forEach(b=>b.onclick=()=>{const q=XQ.find(z=>z.id===b.dataset.q);XFOUND[q.id]=new Set(q.keys.map((k,i)=>i));xKeysFinished(q,true);});
+ app.querySelectorAll(".xox button").forEach(b=>b.onclick=()=>{const id=b.dataset.q,l=b.dataset.l,m=(XMARK[id]=XMARK[id]||{});m[l]=m[l]===b.dataset.m?undefined:b.dataset.m;xRedraw(id);});
+ app.querySelectorAll(".xstrike").forEach(b=>b.onclick=()=>{const id=b.dataset.q,c=(XCUT[id]=XCUT[id]||{});c[b.dataset.s]=!c[b.dataset.s];xRedraw(id);});
+ app.querySelectorAll(".xopt[data-i]").forEach(b=>b.onclick=()=>{if(XMODE==="paper")xPaperPick(b.dataset.q,+b.dataset.i);else xPick(b.dataset.q,+b.dataset.i);});
+ const sb=document.getElementById("xSubmit");if(sb)sb.onclick=xSubmit;
+ const ag=document.getElementById("xAgain");if(ag)ag.onclick=()=>{XPAPER=null;XMARK={};XCUT={};renderExamPrac();window.scrollTo(0,0);};
+ xClock();}
+let XCLK=null;function xClock(){clearInterval(XCLK);const el=document.getElementById("xClock");if(!el||!XPAPER)return;
+ const f=()=>{const e=document.getElementById("xClock");if(!e){clearInterval(XCLK);return;}const s=Math.floor((Date.now()-XPAPER.t0)/1000);e.textContent=Math.floor(s/60)+":"+String(s%60).padStart(2,"0");};f();XCLK=setInterval(f,1000);}
+function xRedraw(id){const q=XQ.find(z=>z.id===id),el=document.getElementById("xq_"+id);if(!el)return;const fe=document.getElementById("xf_"+id),f=fe?fe.innerHTML:"";
+ const mode=XMODE==="paper"?(XPAPER&&XPAPER.sub?"review":"paper"):"step";
+ const w=document.createElement("div");w.innerHTML=xItemHTML(q,XQ.indexOf(q)+1,mode);el.replaceWith(w.firstElementChild);const fn=document.getElementById("xf_"+id);if(fn)fn.innerHTML=f;xBind();}
+
+function xTap(w){const id=w.dataset.q,q=XQ.find(z=>z.id===id),fd=(XFOUND[id]=XFOUND[id]||new Set());
+ if(w.dataset.k!=null){const k=+w.dataset.k;if(fd.has(k))return;fd.add(k);
+  if(fd.size>=q.keys.length){xKeysFinished(q,false);return;}
+  xRedraw(id);const m=document.getElementById("xm_"+id);if(m)m.innerHTML=`<span style="color:#1f7a4d">✔ 찾았다! 남은 조건 ${q.keys.length-fd.size}개</span>`;return;}
+ XMISS[id]=(XMISS[id]||0)+1;w.classList.add("miss");setTimeout(()=>w.classList.remove("miss"),700);
+ const m=document.getElementById("xm_"+id);if(m)m.innerHTML=`🤔 ‘${esc(w.textContent)}’도 읽어야 할 말이지만, 이 문제에서 <b>답을 가르는 조건</b>은 따로 있어. <b>시각·방향·간격</b>, <b>‘순서 없이’</b>, <b>‘옳은 것만 있는 대로’</b>, 그림의 기호처럼 놓치면 틀리는 말을 찾아봐.`;
+ if(XMISS[id]===3)xRedraw(id),setTimeout(()=>{const mm=document.getElementById("xm_"+id);if(mm)mm.innerHTML="막히면 ‘남은 조건 보여 줘’를 눌러도 돼.";},0);}
+function xKeysFinished(q,shown){S.exam[q.id]=S.exam[q.id]||{t:0};S.exam[q.id].k=shown?2:1;if(!isT()&&!isG())save();
+ xRedraw(q.id);const f=document.getElementById("xf_"+q.id);if(f)f.innerHTML="";
+ const el=document.querySelector(`#xq_${q.id} .xknotes`);if(el){el.open=true;}
+ toast(shown?"조건을 확인했어. 이제 판단해 보자!":"🔎 조건을 모두 찾았어!");}
+
 function xPick(id,i){
- const q=XQ.find(z=>z.id===id); S.exam=S.exam||{}; const sv=S.exam[id]||{t:0};
+ const q=XQ.find(z=>z.id===id); const sv=S.exam[id]||{t:0};
  if(sv.ok)return; if(isG()){toast(GUEST_MSG);return;}
  sv.t=(sv.t||0)+1;
  if(i===q.ans){const p=sv.t===1?XPTS_FIRST:XPTS_RETRY; sv.ok=1;sv.p=p; S.exam[id]=sv;
    logSrv('시험연습',`연습 ${XQ.indexOf(q)+1}번 (${q.topic})`,`${XNUM[i]} ${xOptLabel(q,i)}`,sv.t===1?'첫 시도 정답':`${sv.t}번째 정답`,'');
    addPts(p); XMARK[id]={};XCUT[id]={};
-   const y=window.scrollY; renderExamPrac(); window.scrollTo(0,y);
+   renderExamPrac();
    document.getElementById("xf_"+id).innerHTML=`<div class="xfb ok"><b>🎯 정답! ${XNUM[i]} ${esc(xOptLabel(q,i))}</b>${q.kind==="bogi"?'<div class="small">보기마다 ○/✕ 까닭을 확인해 봐.</div>':""}</div>`;
-   if(xDone()===XQ.length)setTimeout(()=>toast("📝 시험 연습 10문항 완주!"),1200);
+   if(xAllDone())setTimeout(()=>toast("📝 15문항 완주! 실전 모드가 열렸어요"),1200);
    return;}
  S.exam[id]=sv; save();
  let msg;
- if(q.kind==="bogi"){const m=XMARK[id]||{},marked=XL.filter(l=>m[l]);
-  if(marked.length<3)msg="선택지부터 고르지 말고, ㄱ, ㄴ, ㄷ을 하나씩 읽고 ○/✕로 판단한 다음 골라 봐.";
-  else if(xCutByMarks(q,i))msg="네가 표시한 ○/✕와 고른 답이 서로 달라! ○/✕ 표시에 맞는 선택지를 골라 봐.";
-  else{const wrong=XL.filter((l,k)=>(m[l]==="o")!==!!q.bogi[k][1]).length;msg=`고른 답은 네 ○/✕ 표시와 맞아. 그렇다면 ㄱ, ㄴ, ㄷ 중 판단이 틀린 것이 <b>${wrong}개</b> 있어. 그림의 기호와 자료(날짜·순서·방향)를 다시 확인해 봐.`;}}
- else msg=q.hint||"그림과 조건을 다시 읽어 봐.";
+ if(q.kind==="bogi"){const m=XMARK[id]||{},s=XSET[q.set][i];
+  const off=XL.some(l=>(m[l]==="x"&&s.includes(l))||(m[l]==="o"&&!s.includes(l)));
+  if(off)msg="네가 표시한 ○/✕와 고른 답이 서로 달라! ○로 판단한 보기만 모은 선택지를 골라 봐.";
+  else{const wrong=XL.filter((l,k)=>(m[l]==="o")!==!!q.bogi[k][1]).length;msg=`고른 답은 네 ○/✕ 판단과 맞아. 그렇다면 ㄱ, ㄴ, ㄷ 중 판단이 틀린 것이 <b>${wrong}개</b> 있어. 찾은 조건과 그림을 다시 확인해 봐.`;}}
+ else msg=q.hint||"찾은 조건과 그림을 다시 확인해 봐.";
  const b=app.querySelector(`.xopt[data-q="${id}"][data-i="${i}"]`); if(b){b.classList.add("no");setTimeout(()=>b.classList.remove("no"),900);}
  const t=app.querySelector(`#xq_${id} .xtop`); if(t&&!t.querySelector(".xtry"))t.insertAdjacentHTML("beforeend",`<span class="xtry"></span>`); if(t)t.querySelector(".xtry").textContent=sv.t+"번 시도";
  document.getElementById("xf_"+id).innerHTML=`<div class="xfb no">🛰️ ${XNUM[i]}은(는) 아니야. ${msg}</div>`;}
+
+function xPaperPick(id,i){if(!XPAPER||XPAPER.sub)return;XPAPER.a[id]=XPAPER.a[id]===i?undefined:i;if(XPAPER.a[id]===undefined)delete XPAPER.a[id];
+ xRedraw(id);const c=document.getElementById("xCnt");if(c)c.textContent=Object.keys(XPAPER.a).length;}
+function xSubmit(){
+ const left=XQ.filter(q=>XPAPER.a[q.id]==null).length,msg=document.getElementById("xSubMsg"),bt=document.getElementById("xSubmit");
+ if(left&&!bt.dataset.ok){bt.dataset.ok=1;bt.textContent=`아직 고르지 않은 문항이 ${left}개 — 그래도 제출하기`;msg.innerHTML=`<p class="small" style="text-align:center">빈 문항: ${XQ.map((q,i)=>XPAPER.a[q.id]==null?(i+1)+"번":"").filter(Boolean).join(", ")}</p>`;return;}
+ const c=XQ.filter(q=>XPAPER.a[q.id]===q.ans).length,s=XQ.reduce((a,q)=>a+(XPAPER.a[q.id]===q.ans?q.pts:0),0),min=Math.max(1,Math.round((Date.now()-XPAPER.t0)/60000));
+ let pts=0; const xf=S.xfull=S.xfull||{};
+ if(!isT()&&!isG()){if(!xf.n)pts=c; xf.n=(xf.n||0)+1; if(xf.first==null)xf.first=s; xf.best=Math.max(xf.best||0,s); xf.last=s;
+  logSrv('시험연습',`실전 모드 ${xf.n}회`,XQ.map((q,i)=>`${i+1}:${XPAPER.a[q.id]==null?'-':XNUM[XPAPER.a[q.id]]}`).join(" "),`${s}/${XTOTAL}점 (${c}/${XQ.length}) ${min}분`,'');
+  if(pts)addPts(pts);else save();}
+ XPAPER.sub=true;XPAPER.res={c,s,min,pts};clearInterval(XCLK);renderExamPrac();window.scrollTo(0,0);}
 
 /* ═══════ 천재(정) 교과서 탐구 도우미 ═══════ */
 /* 달 + 지구 그림자(월식) 그리기: dx = 그림자 중심의 x 위치(달 반지름 50 기준), full=개기 정도 0~1 */
@@ -2846,7 +3058,7 @@ function renderHome(){
  <div class="hero" style="margin-top:14px"><div><div class="log">${esc(SCHOOL_EN)} MISSION CONTROL · 2049</div><h1>아라호 관제센터</h1>
   <div class="s2tag" style="margin:6px 0 2px">SEASON 2 · 귀환 작전 — 지구와 달</div>
   <p class="lead">태양계 끝까지 다녀온 <b style="color:var(--sun)">아라호</b>가 지구–달 궤도로 돌아왔다. 이번 임무의 무대는 바로 <b style="color:var(--cyan)">우리 머리 위의 하늘</b>. 별은 왜 원을 그리며 돌까? 계절마다 별자리는 왜 바뀔까? 달은 왜 얼굴을 바꾸고, 태양과 달은 왜 가려질까? 관측소 기록을 읽고, 시뮬레이터를 돌려 보고, 짧게 보고하라.</p>
-  <div class="flow"><span>📚 <b>미션 학습</b> 4개 장 + 보너스</span><span>🔍 <b>관측 추리</b> 8건</span><span>📝 <b>시험 연습</b> 10문항</span><span>📡 <b>교신</b></span></div></div><div></div></div>
+  <div class="flow"><span>📚 <b>미션 학습</b> 4개 장 + 보너스</span><span>🔍 <b>관측 추리</b> 8건</span><span>📝 <b>시험 연습</b> 15문항</span><span>📡 <b>교신</b></span></div></div><div></div></div>
  <div class="row2">
   <div class="card"><div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap">
     <div style="flex:0 0 auto;filter:drop-shadow(0 10px 24px #0008);cursor:pointer" id="avatarGo">${isT()?directorSVG(150):astronautSVG(null,null,150)}</div>
@@ -2858,7 +3070,7 @@ function renderHome(){
    <span class="badge ${OBS.every(o=>S.wanted[o.id])?'on':''}">🔍 추리 ${OBS.filter(o=>S.wanted[o.id]).length}/${OBS.length}</span>
    <span class="badge ${xDone()>=XQ.length?'on':''}">📝 시험 ${xDone()}/${XQ.length}</span></div>
    ${S.prev&&S.prev.pts?`<div class="frame" style="margin-top:12px;color:var(--fg)">🏅 <b>시즌 1 기록</b> — ${esc(S.prev.rank)} · ⭐${esc(S.prev.pts)} <span class="small">(시즌 2 점수는 0점부터 새로)</span></div>`:""}</div>
-  <div class="card"><h3>오늘의 임무 순서</h3><ol class="steps"><li><b>미션 학습</b> — 장을 열면 전체 화면 슬라이드. 시작할 때 <b>출발 전 교신</b>(질문) 하나, 마칠 때 <b>귀환 교신</b></li><li><b>교과서 탐구 도우미</b> — 각도기·투명 종이·모형 기록표처럼 교과서 탐구를 앱에서 먼저 해 보고, 시뮬레이터로 확인</li><li><b>관측 보고</b> — 미션마다 한두 문장, 자동 점검 + AI 코치</li><li><b>관측 추리</b> — 관측소 기록 8건 판독</li><li><b>시험 연습</b> — 정기시험과 같은 형식으로 10문항 (보기 ○/✕ 판단 연습)</li><li><b>교신 채널</b> — 다른 승무원의 질문에 응답하면 +2점</li></ol>
+  <div class="card"><h3>오늘의 임무 순서</h3><ol class="steps"><li><b>미션 학습</b> — 장을 열면 전체 화면 슬라이드. 시작할 때 <b>출발 전 교신</b>(질문) 하나, 마칠 때 <b>귀환 교신</b></li><li><b>교과서 탐구 도우미</b> — 각도기·투명 종이·모형 기록표처럼 교과서 탐구를 앱에서 먼저 해 보고, 시뮬레이터로 확인</li><li><b>관측 보고</b> — 미션마다 한두 문장, 자동 점검 + AI 코치</li><li><b>관측 추리</b> — 관측소 기록 8건 판독</li><li><b>시험 연습</b> — 정기시험 형식 15문항. 한 문제씩 조건 찾기 → ○/✕ 판단 → 답 고르기, 다 풀면 실전 모드</li><li><b>교신 채널</b> — 다른 승무원의 질문에 응답하면 +2점</li></ol>
    <p class="small" style="margin-top:10px">${API?"모든 기록은 자동으로 센터장께 전송됩니다.":"⚠ 서버 미연결: 기록이 이 기기에만 남습니다."}</p></div>
  </div>`;
  drawHud();
@@ -2982,7 +3194,7 @@ function moonUpBind(){
 }
 
 /* ═══════ 승무원실 — 캐릭터·장비·보급 ═══════ */
-const HOWPTS=[["카드 한 장 읽기",1],["시뮬레이터 열어 보기",1],["퀴즈 정답",2],["교과서 탐구 도우미 완료 (각도기·화살표·투명 종이·기록표·달 색칠·식의 진행)",4],["관측 보고 통과",5],["미션 요약 확인",2],["출발 전 교신",3],["귀환 교신 (질문 / 알게 된 점 각각)",3],["귀환 교신 둘 다 보내기 보너스",2],["다른 승무원 교신에 응답 (AI 확인 통과, 최대 50건)",2],["관측 추리 판독",4],["시험 연습 정답 (처음에 맞히면 2점, 다시 풀어 맞히면 1점)",2],["달 관측 앨범에 사진 올리기 (하루 한 번, 최대 10일)",3]];
+const HOWPTS=[["카드 한 장 읽기",1],["시뮬레이터 열어 보기",1],["퀴즈 정답",2],["교과서 탐구 도우미 완료 (각도기·화살표·투명 종이·기록표·달 색칠·식의 진행)",4],["관측 보고 통과",5],["미션 요약 확인",2],["출발 전 교신",3],["귀환 교신 (질문 / 알게 된 점 각각)",3],["귀환 교신 둘 다 보내기 보너스",2],["다른 승무원 교신에 응답 (AI 확인 통과, 최대 50건)",2],["관측 추리 판독",4],["시험 연습 정답 (처음에 맞히면 2점, 다시 풀어 맞히면 1점)",2],["시험 연습 실전 모드 첫 제출 (맞힌 문항 1개당)",1],["달 관측 앨범에 사진 올리기 (하루 한 번, 최대 10일)",3]];
 function renderCrew(){
  if(isT()){
   app.innerHTML=`${hudBlock()}<h2 style="margin:18px 4px 4px;font-size:1.9rem">🧑‍🚀 승무원실 <span class="small">— 센터장 참고용</span></h2>
@@ -2994,7 +3206,7 @@ function renderCrew(){
    <div class="card" style="margin:0"><h3>🍬 보급 쿠폰 조건</h3><div style="display:grid;gap:8px;margin-top:8px">${CPNS.map(c=>`<div class="frame" style="display:flex;gap:10px;align-items:center;color:var(--fg);margin:0"><span style="font-size:1.4rem">🍬</span><div style="flex:1"><b>${c.n}</b><div class="small">${c.c}</div></div></div>`).join("")}</div><p class="small" style="margin-top:8px">학생이 신청하면 센터장 콘솔 '보급 신청 결재'에 올라옵니다.</p></div>
   </div>
   <div class="row2"><div class="card"><h3>🎖️ 승급 경로</h3><div style="display:grid;gap:8px;margin-top:8px">${RANKS.map((x,i)=>`<div class="frame" style="display:flex;gap:12px;align-items:center;color:var(--fg)"><span class="pill" style="min-width:64px;text-align:center">${x[0]}점</span><b style="font-family:var(--disp);font-size:1.1rem">${x[1]}</b></div>`).join("")}</div>
-    <p class="small" style="margin-top:8px">미션 1개 ≈ 33~38점(교신 포함). 미션 01~04 ≈ 143점, 보너스 18점, 관측 추리 32점, 시험 연습 20점 → 모두 하면 약 213점(함대 사령관). 그 위는 교신 응답(최대 100점)으로.</p></div>
+    <p class="small" style="margin-top:8px">미션 1개 ≈ 33~38점(교신 포함). 미션 01~04 ≈ 143점, 보너스 18점, 관측 추리 32점, 시험 연습 45점(한 문제씩 30 + 실전 15) → 모두 하면 약 238점(함대 사령관). 그 위는 교신 응답(최대 100점)으로.</p></div>
    <div class="card"><h3>⭐ 점수표</h3><table class="t" style="margin-top:6px"><tr><th style="text-align:left">활동</th><th>점수</th></tr>${HOWPTS.map(x=>`<tr><td style="text-align:left;color:var(--fg);font-weight:400">${x[0]}</td><td style="color:var(--sun);font-weight:700">+${x[1]}</td></tr>`).join("")}</table><p class="small" style="margin-top:8px">같은 카드·퀴즈·논술은 처음 한 번만 점수가 붙습니다.</p></div></div>`;
   drawHud(); return;
  }
@@ -3229,7 +3441,7 @@ async function loadRoster(){
    tb.innerHTML=head+(TROWS.length?TROWS.map((x,i)=>{let st={};try{st=JSON.parse(x.state||'{}');}catch(e){}
      const wr=Object.values(st.writes||{}),wok=wr.filter(w=>w.ok).length,ex=OBS.filter(o=>(st.wanted||{})[o.id]).length,xp=XQ.filter(q=>(st.exam||{})[q.id]&&st.exam[q.id].ok).length;
      const prog=CH.map(c=>{const p=chapProgFrom(c,st);return `<span class="pill ${p.d>=p.total?'g':p.d>0?'w':''}">${p.d}/${p.total}</span>`;}).join(" ");
-     return `<tr data-i="${i}" class="${TSEL===i?'sel':''}" style="cursor:pointer"><td>${esc(x.cls)}</td><td>${esc(x.num)}</td><td><b>${esc(x.name)}</b></td><td class="c">${esc(x.pts)}</td><td>${esc(x.rank)}</td><td>${prog}</td><td class="c">${wok}/4</td><td class="c">${ex}/${OBS.length}</td><td class="c">${xp}/${XQ.length}</td><td class="c small">${x.prev===''||x.prev==null?'—':esc(x.prev)}</td><td class="small">${x.seen?x.seen.slice(5,16).replace('T',' '):''}</td><td>${x.code?`<span class="small">${esc(x.code)}</span> <button class="btn-g rc" data-c="${esc(x.cls)}" data-n="${esc(x.num)}" style="min-height:30px;padding:2px 8px;font-size:.8rem">초기화</button>`:'<span class="small">—</span>'}</td></tr>`;}).join(""):'<tr><td colspan="12" class="small">아직 접속한 학생이 없어요.</td></tr>');
+     return `<tr data-i="${i}" class="${TSEL===i?'sel':''}" style="cursor:pointer"><td>${esc(x.cls)}</td><td>${esc(x.num)}</td><td><b>${esc(x.name)}</b></td><td class="c">${esc(x.pts)}</td><td>${esc(x.rank)}</td><td>${prog}</td><td class="c">${wok}/4</td><td class="c">${ex}/${OBS.length}</td><td class="c">${xp}/${XQ.length}${st.xfull&&st.xfull.best!=null?`<br><span class="small">실전 ${st.xfull.best}</span>`:""}</td><td class="c small">${x.prev===''||x.prev==null?'—':esc(x.prev)}</td><td class="small">${x.seen?x.seen.slice(5,16).replace('T',' '):''}</td><td>${x.code?`<span class="small">${esc(x.code)}</span> <button class="btn-g rc" data-c="${esc(x.cls)}" data-n="${esc(x.num)}" style="min-height:30px;padding:2px 8px;font-size:.8rem">초기화</button>`:'<span class="small">—</span>'}</td></tr>`;}).join(""):'<tr><td colspan="12" class="small">아직 접속한 학생이 없어요.</td></tr>');
    tb.querySelectorAll(".rc").forEach(bt=>bt.onclick=async(ev)=>{ev.stopPropagation(); if(!bt.dataset.ok){bt.dataset.ok=1;bt.textContent="정말 초기화?";return;} try{await call({action:'resetcode',pin:TPIN,cls:bt.dataset.c,num:bt.dataset.n});toast("콜사인 초기화 — 학생이 다음 입장 때 새로 정합니다");loadRoster();}catch(e){toast("실패: "+e);} });
    tb.querySelectorAll("tr[data-i]").forEach(tr=>tr.onclick=()=>{TSEL=+tr.dataset.i;tb.querySelectorAll("tr").forEach(t=>t.classList.remove("sel"));tr.classList.add("sel");showDetail(TROWS[TSEL]);});
  }catch(e){tb.innerHTML=tb.rows[0].outerHTML+`<tr><td colspan="9"><div class="fb no">불러오기 실패: ${esc(e)}</div></td></tr>`;}
@@ -3245,7 +3457,8 @@ async function showDetail(x){
  D.innerHTML=`<div class="card"><h3>🧑‍🚀 ${esc(x.name)} <span class="small">(${esc(x.cls)}반 ${esc(x.num)}번 · ⭐${esc(x.pts)} · ${esc(x.rank)})</span></h3>
   <div class="row2"><div><h4 style="margin:10px 0 4px;color:var(--cyan)">관측 보고 ${writes.length}건</h4>${writes.length?writes.map(([k,w])=>`<div class="frame" style="color:var(--fg)"><b style="color:var(--sun)">${esc(k)}</b> <span class="pill ${w.ok?'g':'w'}">${w.ok?'통과':'연습 중'} ${esc(w.g||'')}</span><br>${esc(w.t)}</div>`).join(""):'<p class="small">없음</p>'}</div>
   <div><h4 style="margin:10px 0 4px;color:var(--cyan)">관측 추리 ${OBS.filter(o=>(st.wanted||{})[o.id]).length}/${OBS.length}</h4>${Object.entries(st.wanted||{}).map(([id,v])=>{const w=OBS.find(z=>z.id===id);return `<span class="pill g">${w?w.o[w.a]:id}</span> <span class="small">${esc(v.memo||'')}</span><br>`;}).join("")}
-   <h4 style="margin:12px 0 4px;color:var(--cyan)">시험 연습 ${XQ.filter(q=>(st.exam||{})[q.id]&&st.exam[q.id].ok).length}/${XQ.length}</h4>${XQ.map((q,i)=>{const v=(st.exam||{})[q.id];return `<span class="pill ${v&&v.ok?(v.t===1?'g':'w'):''}" title="${esc(q.topic)}">${i+1}번 ${v&&v.ok?(v.t===1?'한 번에':v.t+'번째'):v&&v.t?v.t+'회 오답':'—'}</span> `;}).join("")}</div></div>
+   <h4 style="margin:12px 0 4px;color:var(--cyan)">시험 연습 ${XQ.filter(q=>(st.exam||{})[q.id]&&st.exam[q.id].ok).length}/${XQ.length}</h4>${XQ.map((q,i)=>{const v=(st.exam||{})[q.id];return `<span class="pill ${v&&v.ok?(v.t===1?'g':'w'):''}" title="${esc(q.topic)}">${i+1}번 ${v&&v.ok?(v.t===1?'한 번에':v.t+'번째'):v&&v.t?v.t+'회 오답':'—'}</span> `;}).join("")}
+   <div class="small" style="margin-top:6px">실전 모드: ${st.xfull&&st.xfull.n?`${st.xfull.n}회 · 첫 ${st.xfull.first}점 · 최고 ${st.xfull.best}점 / ${XTOTAL}점`:'아직 안 함'}</div></div></div>
   <div id="tlogs"><p class="small">AI 피드백·제출 이력 불러오는 중…</p></div></div>`;
  D.scrollIntoView({behavior:"smooth",block:"start"});
  try{const r=await call({action:'logs',pin:TPIN,cls:x.cls,num:x.num}); const rows=r.rows||[];
