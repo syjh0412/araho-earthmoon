@@ -103,6 +103,10 @@ function handle(p){
   if(a==='qlist')     return qlist(p);
   if(a==='qanswer')   return qanswer(p);
   if(a==='adel')      return adel(p);
+  if(a==='moonUp')    return moonUp(p);
+  if(a==='moonList')  return moonList(p);
+  if(a==='moonVote')  return moonVote(p);
+  if(a==='moonDel')   return moonDel(p);
   if(a==='tlogin')    return tlogin(p);
   if(a==='roster')    return roster(p);
   if(a==='logs')      return logs(p);
@@ -126,6 +130,7 @@ function findRow(s, k){
 function isAppSheet(name){
   name = String(name);
   if(/^(학생|기록|교신|응답|쿠폰|설정)( S2)?$/.test(name)) return true;
+  if(name==='달앨범') return true;
   if(/^(한줄논술|시험 문항|수배파일|S2 )/.test(name)) return true;
   return false;
 }
@@ -414,4 +419,56 @@ function logs(p){
     rows.push({t:v[i][0]?new Date(v[i][0]).toISOString():'', cls:v[i][1], num:v[i][2], name:v[i][3], type:v[i][4], item:v[i][5], text:v[i][6], score:v[i][7], ai:v[i][8], aifb:v[i][9]});
   }
   return {ok:true, rows:rows};
+}
+
+
+/* ───────── 🌙 달 관측 앨범 (시즌 2) ─────────
+   학년 전체가 하나의 달력을 채웁니다. '달앨범' 탭에 한 줄씩 쌓이고,
+   작은 사진(썸네일)은 시트 칸에, 큰 사진은 내 드라이브 '아라호 달 앨범' 폴더에 저장됩니다.
+   처음 한 번: Apps Script 편집기에서 함수 '달앨범준비'를 골라 ▶ 실행 → 드라이브 권한 허용. */
+var MOON_H = ['id','올린 시각','찍은 시각','음력일','반','번호','이름','방향','한마디','사진','원본','같아요','달라요'];
+function moonSheet(){ return sheet('달앨범', MOON_H); }
+function moonFolder(){
+  var it = DriveApp.getFoldersByName('아라호 달 앨범');
+  return it.hasNext() ? it.next() : DriveApp.createFolder('아라호 달 앨범');
+}
+function 달앨범준비(){ moonSheet(); moonFolder(); }
+function moonUp(p){
+  var img = String(p.img||'');
+  if(img.indexOf('data:image/jpeg;base64,')!==0 || img.length>49000) throw new Error('사진을 다시 골라 주세요');
+  var t = new Date(p.t); if(isNaN(t)) throw new Error('찍은 날짜를 넣어 주세요');
+  var id = qid(), link = '';
+  try{
+    if(p.full && String(p.full).indexOf('data:image/jpeg;base64,')===0){
+      var b = Utilities.newBlob(Utilities.base64Decode(String(p.full).split(',')[1]), 'image/jpeg',
+        Utilities.formatDate(t,'Asia/Seoul','yyyyMMdd_HHmm')+'_'+(p.cls||'')+'반'+(p.num||'')+'번.jpg');
+      link = moonFolder().createFile(b).getUrl();
+    }
+  }catch(e){ link=''; }
+  moonSheet().appendRow([id, new Date(), t, Number(p.lunar)||'', p.cls||'', p.num||'', p.name||'', p.dir||'', String(p.memo||'').slice(0,200), img, link, 0, 0]);
+  return {ok:true, id:id};
+}
+function moonList(p){
+  var v = moonSheet().getDataRange().getValues(), full = pinOk(p), L = [];
+  for(var i=1;i<v.length;i++){ var r=v[i]; if(!r[0]) continue;
+    var t = r[2] instanceof Date ? r[2].toISOString() : String(r[2]);
+    L.push({id:String(r[0]), t:t, lunar:Number(r[3])||0, cls:String(r[4]), num:full?String(r[5]):'', name:full?String(r[6]):maskName(r[6]),
+      mine: String(r[4])===String(p.cls||'') && String(r[5])===String(p.num||'') && String(r[6])===String(p.name||''),
+      dir:String(r[7]), memo:String(r[8]), img:String(r[9]), orig: full?String(r[10]):'', same:Number(r[11])||0, diff:Number(r[12])||0});
+  }
+  return {ok:true, list:L};
+}
+function moonVote(p){
+  var s = moonSheet(), v = s.getDataRange().getValues(), col = p.v==='diff' ? 13 : 12, d = Number(p.d)===-1 ? -1 : 1;
+  for(var i=1;i<v.length;i++){ if(String(v[i][0])===String(p.id)){ s.getRange(i+1,col).setValue(Math.max(0,(Number(v[i][col-1])||0)+d)); return {ok:true}; } }
+  return {ok:false, error:'사진을 찾을 수 없어요'};
+}
+/* 센터장(코드) 또는 올린 본인만 지울 수 있음 */
+function moonDel(p){
+  var s = moonSheet(), v = s.getDataRange().getValues(), t = pinOk(p);
+  for(var i=v.length-1;i>=1;i--){ if(String(v[i][0])===String(p.id)){
+    var own = String(v[i][4])===String(p.cls||'') && String(v[i][5])===String(p.num||'') && String(v[i][6])===String(p.name||'');
+    if(!t && !own) throw new Error('내가 올린 사진만 지울 수 있어요');
+    s.deleteRow(i+1); return {ok:true}; } }
+  return {ok:false, error:'이미 지워졌어요'};
 }

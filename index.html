@@ -598,6 +598,26 @@ table.sstab select{min-height:44px;padding:6px 8px;font-size:1rem}
 .actpre{margin:6px 0 14px;font-size:.98rem;line-height:1.7}
 .actpre ol{margin:6px 0 0;padding-left:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(440px,1fr));column-gap:28px}
 .cmdel{float:right;background:none;border:1px solid var(--line);border-radius:8px;color:var(--mut);font-size:.8rem;padding:2px 8px;cursor:pointer;min-height:28px}.cmdel:hover{color:#ff8f8f;border-color:#ff8f8f}
+.mcal{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px}
+.mcell{position:relative;text-align:left;background:#ffffff08;border:1.5px solid var(--line);border-radius:12px;padding:6px;display:flex;flex-direction:column;gap:4px;min-height:0;color:var(--fg);font-size:.8rem}
+.mcell.has{border-color:#5fd4e680;background:#5fd4e60f}.mcell.sel{border-color:var(--sun);box-shadow:0 0 0 2px #ffb13b55}.mcell.today .md b{color:var(--sun)}
+.mcell .md{display:flex;justify-content:space-between;gap:2px;color:var(--mut);white-space:nowrap}.mcell .md b{color:var(--fg)}.mcell .md i{font-style:normal;color:var(--sun);font-weight:700;font-size:.72rem}
+.mcell .mph{aspect-ratio:1;border-radius:8px;overflow:hidden;background:#02070c;display:grid;place-items:center;position:relative}
+.mcell .mph.g{grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:1px;place-items:stretch}
+.mcell .mph img{width:100%;height:100%;object-fit:cover;display:block}.mcell .mph svg{width:62%;opacity:.3}
+.mcell .mn{position:absolute;right:4px;bottom:4px;background:var(--sun);color:#1b1200;font-size:.72rem;font-weight:700;border-radius:99px;padding:0 6px}
+.mdet{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:10px}
+.mcard{display:flex;flex-direction:column;gap:6px;background:#ffffff08;border:1px solid var(--line);border-radius:12px;padding:10px;min-width:0}
+.mpair{display:grid;grid-template-columns:1fr 1fr;gap:8px}.mpair>div{display:flex;flex-direction:column;gap:3px;text-align:center;font-size:.78rem;color:var(--mut)}
+.mpair img,.mpair .mc{width:100%;aspect-ratio:1;border-radius:8px;object-fit:cover;background:#02070c;display:grid;place-items:center}.mpair .mc svg{width:70%}
+.mvote{display:flex;gap:6px}.mvote button{flex:1;min-height:36px;font-size:.85rem;background:#ffffff0d;border:1px solid var(--line);border-radius:8px;padding:4px;color:var(--fg)}.mvote button.on{border-color:var(--ok,#7be0a1);color:var(--ok,#7be0a1)}
+.mgal{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
+.mgi{background:#ffffff08;border:1px solid var(--line);border-radius:12px;padding:6px;display:flex;flex-direction:column;gap:3px;text-align:left;color:var(--fg);font-size:.8rem;min-height:0}.mgi img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px}
+.mup{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}@media(max-width:720px){.mup{grid-template-columns:1fr}}
+.mup label{display:flex;flex-direction:column;gap:3px;font-size:.88rem;color:var(--mut)}
+.mup input[type=text],.mup input[type=datetime-local],.mup select{font:inherit;color:var(--fg);background:#02070c;border:1.5px solid var(--line);border-radius:10px;padding:8px 10px;min-width:0}
+@media(max-width:560px){.mcal{grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}.mcell{padding:4px;font-size:.7rem}.mcell .md i{display:none}}
+#mCrop{width:100%;max-width:340px;aspect-ratio:1;border-radius:12px;background:#02070c;touch-action:none;cursor:grab;display:block}
 </style>
 </head>
 <body class="gate">
@@ -609,6 +629,7 @@ table.sstab select{min-height:44px;padding:6px 8px;font-size:1rem}
   <button data-v="crew"><span class="ic">🧑‍🚀</span>승무원실</button>
   <button data-v="learn"><span class="ic">📚</span>미션 학습</button>
   <button data-v="obs"><span class="ic">🔍</span>관측 추리</button>
+  <button data-v="moon"><span class="ic">🌙</span>달 앨범</button>
   <button data-v="comms"><span class="ic">📡</span>교신</button>
   <button data-v="teacher"><span class="ic">📋</span>센터장</button>
 </nav>
@@ -898,7 +919,7 @@ const SCHOOL_TAG = SCHOOL && SCHOOL!=='우리' ? SCHOOL+' ' : '';   // 보너스
 /* ───────── 서버 통신 (힘탐정과 같은 방식: 읽기 JSONP, 쓰기 POST) ───────── */
 let seq=0;
 function call(params){ return new Promise((done,fail)=>{
-  if(me&&me.guest&&params.action!=="qlist") return fail(GUEST_MSG);
+  if(me&&me.guest&&params.action!=="qlist"&&params.action!=="moonList") return fail(GUEST_MSG);
   if(!API) return fail('서버 미설정');
   const cb='cb_'+(++seq)+'_'+Date.now(); let s;
   const timer=setTimeout(()=>{clean();fail('시간 초과');},20000);
@@ -2527,8 +2548,8 @@ function render(){ grMigrate(S);
  document.querySelectorAll("#tabs button").forEach(b=>{b.classList.toggle("on",b.dataset.v===view);if(b.dataset.v==="teacher")b.hidden=isG();});
  if(isG()&&view==="teacher")view="home";
  if(deck){renderSlide();return;}
- if(!["home","crew","learn","obs","comms","teacher"].includes(view))view="home";
- ({home:renderHome,crew:renderCrew,learn:renderLearn,obs:renderObs,comms:renderComms,teacher:renderTeacher})[view]();
+ if(!["home","crew","learn","obs","moon","comms","teacher"].includes(view))view="home";
+ ({home:renderHome,crew:renderCrew,learn:renderLearn,obs:renderObs,moon:renderMoon,comms:renderComms,teacher:renderTeacher})[view]();
  showAI();
 }
 
@@ -2611,8 +2632,119 @@ function renderHome(){
  const goCrew=()=>{view=isT()?"teacher":"crew";render();}; document.getElementById("goCrew").onclick=goCrew; document.getElementById("avatarGo").onclick=goCrew;
 }
 
+/* ═══════ 🌙 달 관측 앨범 ═══════ */
+const MOON_FROM=new Date("2026-11-19T00:00:00+09:00"), LSM="araho2_moon_local", LSMV="araho2_moonv";
+let MOON=null, moonSel=null, moonTab="cal", moonUpOpen=false, MU=null, moonBusy=false;
+const kDay=d=>Math.floor((d.getTime()+9*36e5)/864e5);            /* 한국 날짜(일 번호) */
+function lunarDay(d){ /* 그 달의 삭이 든 날(한국 날짜)이 음력 1일 */
+ try{let t=new Date(d.getTime()-31*864e5), nm=Astronomy.SearchMoonPhase(0,t,40).date;
+  for(let i=0;i<3;i++){const nx=Astronomy.SearchMoonPhase(0,new Date(nm.getTime()+864e5),40); if(nx&&kDay(nx.date)<=kDay(d))nm=nx.date; else break;}
+  return Math.max(1,Math.min(30,kDay(d)-kDay(nm)+1));}catch(e){return Math.min(30,Math.floor(Astronomy.MoonPhase(d)/360*29.53)+1);}}
+const MOONNM={1:"삭",3:"초승달",8:"상현달",15:"보름달",23:"하현달",27:"그믐달"};
+function moonNear(n){if(n<=1||n>=30)return"삭 무렵";if(n<=6)return"초승달 무렵";if(n<=10)return"상현달 무렵";if(n<=13)return"상현달~보름달";if(n<=17)return"보름달 무렵";if(n<=20)return"보름달~하현달";if(n<=25)return"하현달 무렵";return"그믐달 무렵";}
+function moonSVG(p){const wax=p<180,q=wax?p:360-p,k=Math.cos(q*Math.PI/180)*44;
+ return `<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="44" fill="#2b3442"/><path d="M50 6A44 44 0 0 1 50 94A${Math.abs(k).toFixed(2)} 44 0 0 ${k>0?0:1} 50 6Z" fill="#f3ecd2" ${wax?"":'transform="translate(100 0) scale(-1 1)"'}/></svg>`;}
+const moonFmt=d=>`${d.getMonth()+1}/${d.getDate()} ${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`;
+const moonLocal=()=>{try{return JSON.parse(localStorage.getItem(LSM)||"[]");}catch(e){return[];}};
+const moonVotes=()=>{try{return JSON.parse(localStorage.getItem(LSMV)||"{}");}catch(e){return{};}};
+async function moonLoad(){
+ try{ if(API){const r=await call({action:"moonList",cls:me.cls,num:me.num,name:me.name,pin:isT()?TPIN:""});MOON=r.list||[];}
+  else MOON=moonLocal().map(x=>({...x,mine:true})); }
+ catch(e){MOON=MOON||[];toast("달 앨범을 불러오지 못했어요: "+e);}
+ MOON.forEach(x=>{x.d=new Date(x.t);x.lunar=lunarDay(x.d);}); MOON.sort((a,b)=>a.d-b.d);
+ if(view==="moon"&&!deck)renderMoon();}
+function moonByDay(){const m={};(MOON||[]).forEach(e=>{(m[e.lunar]=m[e.lunar]||[]).push(e);});return m;}
+function moonCard(e){const v=moonVotes()[e.id];
+ return `<div class="mcard"><div class="mpair"><div><img src="${e.img}" alt="달 사진" loading="lazy">찍은 달</div><div><div class="mc">${moonSVG(Astronomy.MoonPhase(e.d))}</div>계산한 달</div></div>
+  <div class="small" style="color:var(--fg)"><b>${esc(e.cls)}${e.cls?"반 ":""}${e.num?esc(e.num)+"번 ":""}${esc(e.name)}</b> · ${moonFmt(e.d)}${e.dir?" · "+esc(e.dir)+" 하늘":""}</div>
+  ${e.memo?`<div class="small">${esc(e.memo)}</div>`:""}
+  <div class="mvote"><button data-mv="same" data-id="${e.id}" class="${v==="same"?"on":""}">모양이 같아요 ${e.same||""}</button><button data-mv="diff" data-id="${e.id}" class="${v==="diff"?"on":""}">조금 달라요 ${e.diff||""}</button></div>
+  <div style="display:flex;gap:8px;align-items:center">${e.orig?`<a class="small" href="${esc(e.orig)}" target="_blank" rel="noopener" style="color:var(--cyan)">원본 사진 ↗</a>`:""}<span style="flex:1"></span>${(isT()||e.mine)?`<button class="cmdel" data-mdel="${e.id}" style="float:none">🗑 지우기</button>`:""}</div></div>`;}
+function renderMoon(){
+ if(MOON===null){app.innerHTML=`${hudBlock()}<h2 style="margin:18px 4px 4px;font-size:1.9rem">🌙 달 관측 앨범</h2><p class="small" style="margin:0 4px">불러오는 중…</p>`;drawHud();moonLoad();return;}
+ const m=moonByDay(), filled=Object.keys(m).length, now=new Date(), tl=lunarDay(now), who=new Set(MOON.map(e=>e.cls+"|"+e.name)).size;
+ if(moonSel===null)moonSel=tl;
+ const cal=Array.from({length:30},(_,i)=>{const n=i+1,L=m[n]||[],p=((n-.5)/29.53*360)%360;
+  return `<button class="mcell ${L.length?"has":""} ${moonSel===n?"sel":""} ${tl===n?"today":""}" data-md="${n}"><span class="md"><b>${n}일</b><i>${tl===n?"오늘":(MOONNM[n]||"")}</i></span>
+   <span class="mph ${L.length>1?"g":""}">${L.length?L.slice(-4).map(e=>`<img src="${e.img}" alt="" loading="lazy">`).join(""):moonSVG(p)}${L.length>4?`<span class="mn">${L.length}</span>`:""}</span></button>`;}).join("");
+ const L=m[moonSel]||[];
+ app.innerHTML=`${hudBlock()}
+ <div style="display:flex;gap:14px;align-items:flex-end;flex-wrap:wrap;margin:18px 4px 4px"><div style="flex:1;min-width:240px"><h2 style="font-size:1.9rem">🌙 달 관측 앨범</h2>
+   <p class="small" style="margin:2px 0 0">${esc(SCHOOL)} 1학년 전체가 함께 채우는 달 달력. 찍은 날짜로 음력 날짜를 계산해 그날 칸에 놓여요. (11월 19일 사진부터)</p></div>
+  <div style="min-width:220px"><div class="small">사진 <b style="color:var(--fg)">${MOON.length}</b>장 · 승무원 ${who}명 · 30칸 중 <b style="color:var(--sun)">${filled}</b>칸</div>
+   <div style="height:10px;border-radius:99px;background:#ffffff14;overflow:hidden;margin-top:4px"><i style="display:block;height:100%;width:${filled/30*100}%;background:linear-gradient(90deg,var(--cyan),var(--sun))"></i></div></div></div>
+ <div class="card" style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;padding:14px 18px"><div style="width:64px;flex:0 0 auto">${moonSVG(Astronomy.MoonPhase(now))}</div>
+  <div style="flex:1;min-width:200px"><b>오늘은 음력 ${tl}일 — ${moonNear(tl)}</b><div class="small">오늘 달은 이런 모양이에요. 밤하늘에서 찾아 찍어 올려 보세요!${(m[tl]||[]).length?"":" 오늘 칸은 아직 비어 있어요."}</div></div>
+  ${isG()?"":`<button class="btn-p" id="mUpBtn" style="min-height:46px">📷 달 사진 올리기</button>`}<button class="btn-g" id="mRe" style="min-height:46px">🔄 새로 고침</button></div>
+ ${moonUpOpen?moonUpHTML():""}
+ <div style="display:flex;gap:6px;margin:6px 0 10px"><button class="${moonTab==="cal"?"btn-s":"btn-g"}" data-mt="cal" style="min-height:40px">위상 달력</button><button class="${moonTab==="gal"?"btn-s":"btn-g"}" data-mt="gal" style="min-height:40px">날짜순 사진</button></div>
+ ${moonTab==="cal"?`<div class="small" style="margin:0 4px 8px">칸 = 음력 날짜 · 흐린 달 = 그날 계산한 모양 · <span style="color:var(--cyan)">파란 테두리 = 사진 있음</span></div>
+  <div class="mcal">${cal}</div>
+  <div class="card"><b style="font-family:var(--disp);font-size:1.3rem">음력 ${moonSel}일 · ${moonNear(moonSel)}</b> <span class="small">사진 ${L.length}장</span>
+   ${L.length?`<div class="mdet">${L.map(moonCard).join("")}</div>`:`<p class="small" style="margin-top:8px">이날 사진이 아직 없어요. 이 모양의 달을 찍으면 첫 사진이 돼요.</p><div style="width:110px">${moonSVG(((moonSel-.5)/29.53*360)%360)}</div>`}</div>`
+ :`<div class="mgal">${MOON.length?MOON.map(e=>`<button class="mgi" data-md="${e.lunar}"><img src="${e.img}" alt="" loading="lazy"><b>${moonFmt(e.d)} · 음력 ${e.lunar}일</b><span class="small" style="font-size:.78rem">${esc(e.cls)}${e.cls?"반 ":""}${esc(e.name)}</span></button>`).join(""):`<p class="small">아직 사진이 없어요. 첫 사진의 주인공이 되어 보세요!</p>`}</div>`}`;
+ drawHud();
+ const ub=document.getElementById("mUpBtn"); if(ub)ub.onclick=()=>{moonUpOpen=!moonUpOpen;MU=null;renderMoon();};
+ document.getElementById("mRe").onclick=()=>{MOON=null;renderMoon();};
+ app.querySelectorAll("[data-mt]").forEach(b=>b.onclick=()=>{moonTab=b.dataset.mt;renderMoon();});
+ app.querySelectorAll("[data-md]").forEach(b=>b.onclick=()=>{moonSel=+b.dataset.md;moonTab="cal";renderMoon();});
+ app.querySelectorAll("[data-mv]").forEach(b=>b.onclick=()=>{ if(isG()){toast("참관 모드에서는 볼 수만 있어요");return;}
+  const V=moonVotes(),e=MOON.find(x=>x.id===b.dataset.id),old=V[e.id],nv=b.dataset.mv; if(old){e[old]=Math.max(0,(e[old]||0)-1);if(API)post({action:"moonVote",id:e.id,v:old,d:-1}).catch(()=>{});}
+  if(old===nv)delete V[e.id]; else{V[e.id]=nv;e[nv]=(e[nv]||0)+1;if(API)post({action:"moonVote",id:e.id,v:nv,d:1}).catch(()=>{});}
+  try{localStorage.setItem(LSMV,JSON.stringify(V));}catch(x){} renderMoon();});
+ app.querySelectorAll("[data-mdel]").forEach(b=>b.onclick=async()=>{ if(b.dataset.sure!=="1"){b.dataset.sure="1";b.textContent="한 번 더 누르면 지워요";setTimeout(()=>{if(b.isConnected){b.dataset.sure="";b.textContent="🗑 지우기";}},3000);return;}
+  b.disabled=true; try{ if(API){const r=await post({action:"moonDel",id:b.dataset.mdel,cls:me.cls,num:me.num,name:me.name,pin:isT()?TPIN:""}); if(r&&r.ok===false)throw r.error;}
+   else{try{localStorage.setItem(LSM,JSON.stringify(moonLocal().filter(x=>x.id!==b.dataset.mdel)));}catch(x){}}
+   MOON=MOON.filter(x=>x.id!==b.dataset.mdel);toast("사진을 지웠어요");renderMoon();}catch(e){toast("지우기 실패: "+e);b.disabled=false;}});
+ if(moonUpOpen)moonUpBind();
+}
+function moonUpHTML(){const n=new Date(),p=x=>String(x).padStart(2,"0"),iso=d=>`${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}`;
+ return `<div class="card"><h3>📷 달 사진 올리기</h3><p class="small" style="margin:2px 0 12px">내가 직접 찍은 달 사진만 올려요. 인터넷에서 가져온 사진은 안 돼요. 사진의 위치 정보는 올릴 때 지워져요.</p>
+ <div class="mup"><div style="display:flex;flex-direction:column;gap:10px">
+   <label>① 사진 고르기<input type="file" id="mFile" accept="image/*" style="color:var(--fg)"></label>
+   <canvas id="mCrop" width="400" height="400"></canvas>
+   <label>② 달이 가운데에 크게 오도록 — 사진을 끌어 옮기고, 아래 막대로 확대<input type="range" id="mZoom" min="1" max="10" step="0.1" value="1"></label></div>
+  <div style="display:flex;flex-direction:column;gap:10px">
+   <label>③ 찍은 날짜와 시각<input type="datetime-local" id="mWhen" value="${iso(n)}" min="2026-11-19T00:00" max="${iso(n)}"></label>
+   ${isT()?`<div style="display:grid;grid-template-columns:1fr 2fr;gap:8px"><label>반<input type="text" id="mCls" placeholder="예) 3"></label><label>찍은 학생 이름<input type="text" id="mName" placeholder="카톡으로 받은 사진을 대신 올릴 때"></label></div>`:""}
+   <label>달이 있던 쪽<select id="mDir"><option value="">모르겠어요</option><option>동쪽</option><option>남쪽</option><option>서쪽</option></select></label>
+   <label>한마디 (선택)<input type="text" id="mMemo" maxlength="80" placeholder="예) 학원 끝나고 집에 가다가 찍었어요"></label>
+   <div style="display:flex;gap:12px;align-items:center"><div id="mCalc" style="width:84px;flex:0 0 auto"></div><div class="small" id="mCap"></div></div>
+   <button class="btn-p" id="mSend" style="min-height:48px">앨범에 올리기</button></div></div></div>`;}
+function moonUpBind(){
+ const cv=document.getElementById("mCrop"),x=cv.getContext("2d"),zm=document.getElementById("mZoom"),wh=document.getElementById("mWhen");
+ const draw=()=>{x.fillStyle="#02070c";x.fillRect(0,0,400,400); if(!MU){x.fillStyle="#9fb3c3";x.font="16px sans-serif";x.textAlign="center";x.fillText("사진을 고르면 여기에 보여요",200,205);return;}
+  const s=Math.min(MU.w,MU.h)/MU.z; MU.cx=Math.max(s/2,Math.min(MU.w-s/2,MU.cx)); MU.cy=Math.max(s/2,Math.min(MU.h-s/2,MU.cy)); x.drawImage(MU.im,MU.cx-s/2,MU.cy-s/2,s,s,0,0,400,400);};
+ const calc=()=>{const d=new Date(wh.value); if(isNaN(d))return; const n=lunarDay(d); document.getElementById("mCalc").innerHTML=moonSVG(Astronomy.MoonPhase(d));
+  document.getElementById("mCap").innerHTML=`<b style="color:var(--fg)">음력 ${n}일 · ${moonNear(n)}</b><br>그날 계산한 달 모양이에요. 내 사진과 같은지 비교해 보세요.`;};
+ wh.oninput=calc; calc(); draw();
+ document.getElementById("mFile").onchange=ev=>{const f=ev.target.files[0]; if(!f||!f.type.startsWith("image/"))return; const u=URL.createObjectURL(f),im=new Image();
+  im.onload=()=>{MU={im,w:im.naturalWidth,h:im.naturalHeight,z:1,cx:im.naturalWidth/2,cy:im.naturalHeight/2};zm.value=1;
+   if(f.lastModified){const d=new Date(f.lastModified); if(d>=MOON_FROM&&d<=new Date()){const p=n=>String(n).padStart(2,"0");wh.value=`${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}`;calc();}}
+   draw();}; im.onerror=()=>toast("이 사진은 열 수 없어요. 다른 사진을 골라 주세요"); im.src=u;};
+ zm.oninput=()=>{if(MU){MU.z=+zm.value;draw();}};
+ let drag=null; cv.onpointerdown=e=>{if(!MU)return;drag={x:e.clientX,y:e.clientY};cv.setPointerCapture(e.pointerId);};
+ cv.onpointermove=e=>{if(!drag||!MU)return;const k=(Math.min(MU.w,MU.h)/MU.z)/cv.getBoundingClientRect().width;MU.cx-=(e.clientX-drag.x)*k;MU.cy-=(e.clientY-drag.y)*k;drag={x:e.clientX,y:e.clientY};draw();};
+ cv.onpointerup=cv.onpointercancel=()=>{drag=null;};
+ document.getElementById("mSend").onclick=async()=>{ if(moonBusy)return; if(!MU){toast("먼저 달 사진을 골라 주세요");return;}
+  const d=new Date(wh.value); if(isNaN(d)){toast("찍은 날짜와 시각을 넣어 주세요");return;} if(d<MOON_FROM){toast("11월 19일 이후에 찍은 사진만 올릴 수 있어요");return;} if(d>new Date(Date.now()+6e5)){toast("아직 오지 않은 시각이에요");return;}
+  let q=.8,img=cv.toDataURL("image/jpeg",q); while(img.length>46000&&q>.3){q-=.08;img=cv.toDataURL("image/jpeg",q);}
+  const fc=document.createElement("canvas"),fs=Math.min(1,1280/Math.max(MU.w,MU.h));fc.width=Math.round(MU.w*fs);fc.height=Math.round(MU.h*fs);fc.getContext("2d").drawImage(MU.im,0,0,fc.width,fc.height);
+  const who=isT()?{cls:(document.getElementById("mCls").value||"").trim(),num:"",name:(document.getElementById("mName").value||"").trim()||"센터장"}:{cls:me.cls,num:me.num,name:me.name};
+  const row={t:d.toISOString(),lunar:lunarDay(d),dir:document.getElementById("mDir").value,memo:document.getElementById("mMemo").value.trim(),img,...who};
+  const bt=document.getElementById("mSend"); moonBusy=true; bt.disabled=true; bt.textContent="올리는 중…";
+  try{ let id; if(API){const r=await post({action:"moonUp",...row,full:fc.toDataURL("image/jpeg",.85)});id=r.id;}
+   else{id="L"+Date.now();const L=moonLocal();L.push({id,...row,same:0,diff:0});try{localStorage.setItem(LSM,JSON.stringify(L));}catch(e){}}
+   MOON.push({id,...row,mine:true,same:0,diff:0,d,name:isT()?who.name:maskName(who.name)}); MOON.sort((a,b)=>a.d-b.d);
+   moonSel=row.lunar; moonTab="cal"; moonUpOpen=false; MU=null; toast(`음력 ${row.lunar}일 칸에 올렸어요!`);
+   if(!isT()){S.moon=S.moon||{}; const k=String(kDay(new Date())); if(!S.moon[k]&&Object.keys(S.moon).length<10){S.moon[k]=1;addPts(3);} logSrv("달앨범","음력 "+row.lunar+"일",row.memo||"",3,"");}
+   renderMoon(); }
+  catch(e){toast("올리기 실패: "+e+" (Code.gs를 최신판으로 바꿔 새 버전 배포가 필요할 수 있어요)");bt.disabled=false;bt.textContent="앨범에 올리기";}
+  moonBusy=false; };
+}
+
 /* ═══════ 승무원실 — 캐릭터·장비·보급 ═══════ */
-const HOWPTS=[["카드 한 장 읽기",1],["시뮬레이터 열어 보기",1],["퀴즈 정답",2],["교과서 탐구 도우미 완료 (각도기·화살표·투명 종이·기록표·달 색칠·식의 진행)",4],["관측 보고 통과",5],["미션 요약 확인",2],["출발 전 교신",3],["귀환 교신 (질문 / 알게 된 점 각각)",3],["귀환 교신 둘 다 보내기 보너스",2],["다른 승무원 교신에 응답 (AI 확인 통과, 최대 50건)",2],["관측 추리 판독",4]];
+const HOWPTS=[["카드 한 장 읽기",1],["시뮬레이터 열어 보기",1],["퀴즈 정답",2],["교과서 탐구 도우미 완료 (각도기·화살표·투명 종이·기록표·달 색칠·식의 진행)",4],["관측 보고 통과",5],["미션 요약 확인",2],["출발 전 교신",3],["귀환 교신 (질문 / 알게 된 점 각각)",3],["귀환 교신 둘 다 보내기 보너스",2],["다른 승무원 교신에 응답 (AI 확인 통과, 최대 50건)",2],["관측 추리 판독",4],["달 관측 앨범에 사진 올리기 (하루 한 번, 최대 10일)",3]];
 function renderCrew(){
  if(isT()){
   app.innerHTML=`${hudBlock()}<h2 style="margin:18px 4px 4px;font-size:1.9rem">🧑‍🚀 승무원실 <span class="small">— 센터장 참고용</span></h2>
@@ -3076,7 +3208,7 @@ document.addEventListener("keydown",e=>{if(!deck)return;if(e.target.closest("tex
  if(e.key==="Escape"){deck=null;view="learn";render();}});
 (function(){const h=(location.hash||"").replace("#","");const m=h.match(/^(c[1-5])s(\d+)$/);
  if(m){const ci=CH.findIndex(c=>c.id===m[1]);if(ci>=0){deck={ch:ci,i:Math.min(+m[2]-1,CH[ci].slides.length-1)};view="learn";}}
- else if(["home","crew","learn","obs","comms","teacher"].includes(h))view=h;})();
+ else if(["home","crew","learn","obs","moon","comms","teacher"].includes(h))view=h;})();
 if(me){loadLocal(); if(API){call({action:'ping'}).then(r=>{AI_ON=!!r.ai;setSync('on');showAI();}).catch(()=>setSync('err'));}}
 render();
 </script>
