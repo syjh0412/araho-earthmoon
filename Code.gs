@@ -239,7 +239,7 @@ var ITEM_SHEETS = ITEM_SHEETS_S1;
 function itemSheetName(p){
   var it = String(p.item||''), ty = String(p.type||'');
   for(var k in ITEM_SHEETS){ if(it.indexOf(k)>=0) return ITEM_SHEETS[k]; }
-  if(S2){ if(ty==='관측추리') return 'S2 관측추리'; return ''; }
+  if(S2){ if(ty==='관측추리') return 'S2 관측추리'; if(ty==='시험연습') return 'S2 시험연습'; return ''; }
   var m = it.match(/문항\s*([123])/); if(m) return '시험 문항'+m[1];
   if(ty==='수배파일') return '수배파일';
   return '';
